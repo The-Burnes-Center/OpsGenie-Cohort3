@@ -14,6 +14,7 @@ export const NotificationProvider = ({ children }) => {
 
   const addNotification = (type, content) : String => {
     const id = uuidv4();  // Generate a UUID for each new notification
+    // type: "info" | "success" | "warning" | "error"
 
     setNotifications(prev => [...prev, {
       id: id,
@@ -23,7 +24,10 @@ export const NotificationProvider = ({ children }) => {
       dismissible: true,
       dismissLabel: "Hide notification",
       onDismiss: () => removeNotification(id)
-    }]);    
+    }]);  
+    // Automatically remove the notification after 5 seconds
+    setTimeout(() => removeNotification(id), 5000);  
+    
     console.log("Added notification", id);
     return id;
   };

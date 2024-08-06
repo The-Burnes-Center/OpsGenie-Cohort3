@@ -160,13 +160,14 @@ export class ChatBotApi extends Construct {
       authorizer: httpAuthorizer,
     })
     
-    const kendraLastSyncAPIIntegration = new HttpLambdaIntegration('KendraLastSyncAPIIntegration', lambdaFunctions.syncKendraFunction);
+    const chatInvocationsCounterAPIIntegration = new HttpLambdaIntegration('ChatInvocationsCounterAPIIntegration', lambdaFunctions.chatInvocationsCounterFunction);
     restBackend.restAPI.addRoutes({
-      path: "/kendra-sync/get-last-sync",
+      path: "/chat-invocations-count",
       methods: [apigwv2.HttpMethod.GET],
-      integration: kendraLastSyncAPIIntegration,
+      integration: chatInvocationsCounterAPIIntegration,
       authorizer: httpAuthorizer,
     })
+
 
       // this.wsAPI = websocketBackend.wsAPI;
 

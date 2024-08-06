@@ -9,20 +9,19 @@ import {
   Spinner,
 } from "@cloudscape-design/components";
 import { useCallback, useContext, useEffect, useState } from "react";
-import { AdminDataType } from "../../common/types";
+import RouterButton from "../../components/wrappers/router-button";
+import { RagDocumentType } from "../../common/types";
+import { TableEmptyState } from "../../components/table-empty-state";
 import { ApiClient } from "../../common/api-client/api-client";
 import { AppContext } from "../../common/app-context";
 import { getColumnDefinition } from "./columns";
 import { Utils } from "../../common/utils";
 import { useCollection } from "@cloudscape-design/collection-hooks";
-import { useNotifications } from "../../components/notif-manager";
+// import { DocumentsResult } from "../../../API";
 
 export interface DocumentsTabProps {
-  tabChangeFunction: () => void;
-  documentType: AdminDataType;
-  statusRefreshFunction: () => void;
-  lastSyncTime: string;
-  setShowUnsyncedAlert: React.Dispatch<React.SetStateAction<boolean>>;
+  // workspaceId?: string;
+  documentType: RagDocumentType;
 }
 
 export default function DocumentsTab(props: DocumentsTabProps) {
@@ -34,18 +33,13 @@ export default function DocumentsTab(props: DocumentsTabProps) {
   const [pages, setPages] = useState<any[]>([]);
   const [selectedItems, setSelectedItems] = useState<any[]>([]);
   const [showModalDelete, setShowModalDelete] = useState(false);
-  const { addNotification, removeNotification } = useNotifications();
 
-  /** Pagination, but this is currently not working.
-   * You will likely need to take the items object from useCollection in the
-   * Cloudscape component, but it currently just takes in pages directly.
-   */
   const { items, collectionProps, paginationProps } = useCollection(pages, {
     filtering: {
       empty: (
         <Box margin={{ vertical: "xs" }} textAlign="center" color="inherit">
           <SpaceBetween size="m">
-            <b>No files</b>
+            <b>No sessions</b>
           </SpaceBetween>
         </Box>
       ),
@@ -62,59 +56,14 @@ export default function DocumentsTab(props: DocumentsTabProps) {
     selection: {},
   });
 
-  useEffect(() => {
-    // Function to parse the lastSyncTime
-    const parseLastSyncTime = (timeString: string) => {
-      try {
-        const dateParts = timeString.split(', ');
-        const datePart = dateParts.slice(0, 2).join(', ');
-        const timePart = dateParts.slice(2).join(', ');
-      
-        const [month, day, year] = datePart.split(' ');
-        const [time, period] = timePart.split(' ');
-        const [hours, minutes] = time.split(':');
-      
-        const date = new Date(Date.UTC(
-          parseInt(year),
-          new Date(Date.parse(month + " 1, " + year)).getUTCMonth(),
-          parseInt(day),
-          parseInt(hours),
-          parseInt(minutes)
-        ));
-      
-        if (period.toLowerCase() === 'pm' && parseInt(hours) !== 12) {
-          date.setUTCHours(date.getUTCHours() + 12);
-        } else if (period.toLowerCase() === 'am' && parseInt(hours) === 12) {
-          date.setUTCHours(0);
-        }
-      
-        return date;
-      } catch (error) {
-        console.log(error)
-        return new Date();
-      }
-    };
-
-    const lastSyncDate = parseLastSyncTime(props.lastSyncTime);
-
-    // Check if any files have a LastModified date newer than the lastSyncTime
-    const hasUnsyncedFiles = pages.some((page) =>
-      page.Contents?.some((file) => {
-        const fileDate = new Date(file.LastModified);
-        return fileDate > lastSyncDate;
-      })
-    );
-
-    props.setShowUnsyncedAlert(hasUnsyncedFiles);
-  }, [pages, props.lastSyncTime, props.setShowUnsyncedAlert]);
-
-  /** Function to get documents */
   const getDocuments = useCallback(
     async (params: { continuationToken?: string; pageIndex?: number }) => {
       setLoading(true);
+
+
       try {
         const result = await apiClient.knowledgeManagement.getDocuments(params?.continuationToken, params?.pageIndex)
-        await props.statusRefreshFunction();
+
         setPages((current) => {
           if (typeof params.pageIndex !== "undefined") {
             current[params.pageIndex - 1] = result;
@@ -133,12 +82,11 @@ export default function DocumentsTab(props: DocumentsTabProps) {
     [appContext, props.documentType]
   );
 
-  /** Whenever the memoized function changes, call it again */
+
   useEffect(() => {
     getDocuments({});
   }, [getDocuments]);
 
-  /** Handle clicks on the next page button, as well as retrievals of new pages if needed*/
   const onNextPageClick = async () => {
     const continuationToken = pages[currentPageIndex - 1]?.NextContinuationToken;
 
@@ -150,14 +98,13 @@ export default function DocumentsTab(props: DocumentsTabProps) {
     }
   };
 
-  /** Handle clicks on the previous page button */
+
   const onPreviousPageClick = async () => {
     setCurrentPageIndex((current) =>
       Math.max(1, Math.min(pages.length - 1, current - 1))
     );
   };
 
-  /** Handle refreshes */
   const refreshPage = async () => {
     // console.log(pages[Math.min(pages.length - 1, currentPageIndex - 1)]?.Contents!)
     if (currentPageIndex <= 1) {
@@ -168,33 +115,23 @@ export default function DocumentsTab(props: DocumentsTabProps) {
     }
   };
 
+
   const columnDefinitions = getColumnDefinition(props.documentType);
 
-  /** Deletes selected files */
   const deleteSelectedFiles = async () => {
     if (!appContext) return;
+
     setLoading(true);
     setShowModalDelete(false);
-
     const apiClient = new ApiClient(appContext);
-    try {
-      await Promise.all(
-        selectedItems.map((s) => apiClient.knowledgeManagement.deleteFile(s.Key!))
-      );
-    } catch (e) {
-      addNotification("error", "Error deleting files")
-      console.error(e);
-    }
-    // refresh the documents after deletion
+    await Promise.all(
+      selectedItems.map((s) => apiClient.knowledgeManagement.deleteFile(s.Key!))
+    );
     await getDocuments({ pageIndex: currentPageIndex });
-
     setSelectedItems([])
     setLoading(false);
   };
 
-  /** Start a 10-second interval on which to check sync status and disable the button if 
-   * syncing is not completed
-   */
   useEffect(() => {
     if (!appContext) return;
     const apiClient = new ApiClient(appContext);
@@ -202,40 +139,29 @@ export default function DocumentsTab(props: DocumentsTabProps) {
     const getStatus = async () => {
       try {
         const result = await apiClient.knowledgeManagement.kendraIsSyncing();
-        console.log(result);
-        /** If the status is anything other than DONE SYNCING, then just
-         * keep the button disabled as if a sync is still running
-         */
-        setSyncing(result != "DONE SYNCING");
+        setSyncing(result == "STILL SYNCING");
       } catch (error) {
-        addNotification("error", "Error checking sync status, please try again later.")
         console.error(error);
       }
     };
 
-    const interval = setInterval(getStatus, 10000);
+    const interval = setInterval(getStatus, 5000);
     getStatus();
 
     return () => clearInterval(interval);
-  }, []);
+  });
 
-  /** Function to run a sync */
-  const syncKendra = async () => {
+  const syncKendra = async () => {    
     if (syncing) {
       // setSyncing(false)
       return;
     }
     setSyncing(true);
     try {
-      const state = await apiClient.knowledgeManagement.syncKendra();
-      console.log(state);
-      if (state != "STARTED SYNCING") {
-        addNotification("error", "Error running sync, please try again later.")
-        setSyncing(false)
-      }
+      await apiClient.knowledgeManagement.syncKendra();
+      
     } catch (error) {
       console.log(error);
-      addNotification("error", "Error running sync, please try again later.")
       setSyncing(false)
     }
   }
@@ -257,7 +183,7 @@ export default function DocumentsTab(props: DocumentsTabProps) {
           </SpaceBetween>{" "}
         </Box>
       }
-      header={"Delete file" + (selectedItems.length > 1 ? "s" : "")}
+      header={"Delete session" + (selectedItems.length > 1 ? "s" : "")}
     >
       Do you want to delete{" "}
       {selectedItems.length == 1
@@ -282,11 +208,12 @@ export default function DocumentsTab(props: DocumentsTabProps) {
             actions={
               <SpaceBetween direction="horizontal" size="xs">
                 <Button iconName="refresh" onClick={refreshPage} />
-                <Button
-                  onClick={props.tabChangeFunction}
+                <RouterButton
+                  // href={`/rag/workspaces/add-data?workspaceId=${props.workspaceId}&tab=${props.documentType}`}
+                  href={`/admin/add-data`}
                 >
                   {'Add Files'}
-                </Button>
+                </RouterButton>
                 <Button
                   variant="primary"
                   disabled={selectedItems.length == 0}
@@ -321,7 +248,12 @@ export default function DocumentsTab(props: DocumentsTabProps) {
           </Header>
         }
         empty={
-          <Box textAlign="center">No files available</Box>
+          <TableEmptyState
+            resourceName={"File"}
+            // createHref={`/rag/workspaces/add-data?workspaceId=${props.workspaceId}&tab=${props.documentType}`}
+            createHref={`/admin/add-data`}
+            createText={"Add Files"}
+          />
         }
         pagination={
           pages.length === 0 ? null : (

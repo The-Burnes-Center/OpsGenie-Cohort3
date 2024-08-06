@@ -6,7 +6,15 @@ export class FileUploader {
     type: string,
     onProgress: (uploaded: number) => void
   ): Promise<boolean> {
-    return new Promise((resolve, reject) => {      
+    return new Promise((resolve, reject) => {
+      const formData = new FormData();  
+      /*fields.split(",").forEach((f) => {
+        const sepIdx = f.indexOf("=");
+        const k = f.slice(0, sepIdx);
+        const v = f.slice(sepIdx + 1);
+        formData.append(k, v);
+      }); */ 
+      formData.append("file", file);
       const xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
         if (xhr.readyState === XMLHttpRequest.DONE) {

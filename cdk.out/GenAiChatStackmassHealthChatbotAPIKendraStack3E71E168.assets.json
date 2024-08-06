@@ -1,0 +1,19 @@
+{
+  "version": "36.0.0",
+  "files": {
+    "dc11f6feb1eaea38c91b12985cdf4ac9e09c74446af0a920ee91457cf7e69f5a": {
+      "source": {
+        "path": "GenAiChatStackmassHealthChatbotAPIKendraStack3E71E168.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "dc11f6feb1eaea38c91b12985cdf4ac9e09c74446af0a920ee91457cf7e69f5a.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

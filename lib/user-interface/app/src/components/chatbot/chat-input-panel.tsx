@@ -27,17 +27,19 @@ import { ReadyState } from "react-use-websocket";
 import { ApiClient } from "../../common/api-client/api-client";
 import { AppContext } from "../../common/app-context";
 import styles from "../../styles/chat.module.scss";
-
-import {  
-  ChatBotHistoryItem,  
+import {
+  ChatBotConfiguration,
+  ChatBotHistoryItem,
+  ChatBotMessageResponse,
   ChatBotMessageType,
-  ChatInputState,  
+  ChatInputState,
+  ImageFile,
 } from "./types";
-
-import {  
+import {
+  getSignedUrl,
+  updateMessageHistoryRef,
   assembleHistory
 } from "./utils";
-
 import { Utils } from "../../common/utils";
 import {SessionRefreshContext} from "../../common/session-refresh-context"
 import { useNotifications } from "../notif-manager";
@@ -47,7 +49,9 @@ export interface ChatInputPanelProps {
   setRunning: Dispatch<SetStateAction<boolean>>;
   session: { id: string; loading: boolean };
   messageHistory: ChatBotHistoryItem[];
-  setMessageHistory: (history: ChatBotHistoryItem[]) => void;  
+  setMessageHistory: (history: ChatBotHistoryItem[]) => void;
+  configuration: ChatBotConfiguration;
+  setConfiguration: Dispatch<React.SetStateAction<ChatBotConfiguration>>;
 }
 
 export abstract class ChatScrollState {
@@ -58,34 +62,43 @@ export abstract class ChatScrollState {
 
 export default function ChatInputPanel(props: ChatInputPanelProps) {
   const appContext = useContext(AppContext);
-  const {needsRefresh, setNeedsRefresh} = useContext(SessionRefreshContext);  
+  const {needsRefresh, setNeedsRefresh} = useContext(SessionRefreshContext);
+  const apiClient = new ApiClient(appContext);
+  const navigate = useNavigate();
   const { transcript, listening, browserSupportsSpeechRecognition } =
     useSpeechRecognition();
   const [state, setState] = useState<ChatInputState>({
     value: "",
-    
   });
-  const { notifications, addNotification } = useNotifications();
+  const [configDialogVisible, setConfigDialogVisible] = useState(false);
+  const [imageDialogVisible, setImageDialogVisible] = useState(false);
+  const [files, setFiles] = useState<ImageFile[]>([]);
   const [readyState, setReadyState] = useState<ReadyState>(
     ReadyState.OPEN
-  );  
+  );
+  // const [firstTime, setFirstTime] = useState<boolean>(false);
   const messageHistoryRef = useRef<ChatBotHistoryItem[]>([]);
 
+  const { addNotification } = useNotifications();
+
+  const prompt = "You are a considerate and helpful AI chatbot assistant for ALL MassHealth Enrollment Center workers. You are an INTERNAL tool to made ONLY to help MassHealth employees. You are an expert on ALL policies, procedural information, MassHealth enrollment, and internal traning materials. YOU CAN ONLY HELP USERS WITH MASSHEALTH RELATED QUESTIONS. If a user asks a non MassHealth related question quickly respond that you can only help with MassHealth related inquires. You will help call center workers respond to user complaints and queries about MassHealth enrollment and act as an integral resource for workers to refer and use when working on member cases. When you respond your answers should be efficient and straight to the point, only respond to directly what the user asks and quickly direct them to all the resources and FACTUAL knowledge they need to know to answer their question. Respond to their question and structure your response clearly each time so the direct answer to their question stands out immediately. If they are asking for help with a process or an action that has multiple steps clearly number and list out each step they need to take with explanations. If a user tries to input any sensitive personal information about members, such as their SSN, it will be redacted from the message, so you can very quickly remind them not to input any PII but continue to respond to their question unless more information is needed after the message has been redacted. If you do not have any given knowledge of the question, say that you do not have the neccessary information to answer the question and refer the user to the best resources for them to locate the answer themselves. Do not make up information outside of your given information, be honest and helpful always.";
+
   useEffect(() => {
-    messageHistoryRef.current = props.messageHistory;    
+    messageHistoryRef.current = props.messageHistory;
+    // // console.log(messageHistoryRef.current.length)
+    // if (messageHistoryRef.current.length < 3) {
+    //   setFirstTime(true);
+    // } else {
+    //   setFirstTime(false);
+    // }
   }, [props.messageHistory]);
-  
 
-
-  /** Speech recognition */
   useEffect(() => {
     if (transcript) {
       setState((state) => ({ ...state, value: transcript }));
     }
   }, [transcript]);
 
-
-  /**Some amount of auto-scrolling for convenience */
   useEffect(() => {
     const onWindowScroll = () => {
       if (ChatScrollState.skipNextScrollEvent) {
@@ -129,41 +142,54 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
     }
   }, [props.messageHistory]);
 
-  /**Sends a message to the chat API */
-  const handleSendMessage = async () => {    
+  
+  // THIS IS THE ALL-IMPORTANT MESSAGE SENDING FUNCTION
+  const handleSendMessage = async () => {
+    // if (!state.selectedModel) return;
     if (props.running) return;
     if (readyState !== ReadyState.OPEN) return;
     ChatScrollState.userHasScrolled = false;
 
     let username;
     await Auth.currentAuthenticatedUser().then((value) => username = value.username);
-    if (!username) return;    
+    if (!username) return;
+    // const readline = require('readline').createInterface({
+    //   input: process.stdin,
+    //   output: process.stdout
+    // });    
 
-    const messageToSend = state.value.trim();
+    let messageToSend = state.value.trim();
+    console.log(messageToSend);
+    const redactedMessage  = await apiClient.comprehendMedicalClient.redactText(messageToSend);
+    if (messageToSend !== redactedMessage) {
+      addNotification("warning", "Please do not attempt to share sensitive member information.")
+      messageToSend = redactedMessage;
+    }
     if (messageToSend.length === 0) {
       addNotification("error","Please do not submit blank text!");
       return;          
     }
-    setState({ value: "" });    
+    setState({ value: "" });
+    // let start = new Date().getTime() / 1000;
     
     try {
       props.setRunning(true);
       let receivedData = '';      
       
-      /**Add the user's query to the message history and a blank dummy message
-       * for the chatbot as the response loads
-       */
       messageHistoryRef.current = [
         ...messageHistoryRef.current,
 
         {
           type: ChatBotMessageType.Human,
           content: messageToSend,
-          metadata: {            
-          },          
+          metadata: {
+            ...props.configuration,
+          },
+          tokens: [],
         },
         {
-          type: ChatBotMessageType.AI,          
+          type: ChatBotMessageType.AI,
+          tokens: [],
           content: receivedData,
           metadata: {},
         },
@@ -174,26 +200,25 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
       if (messageHistoryRef.current.length < 3) {
         firstTime = true;
       }
-      // old non-auth url -> const wsUrl = 'wss://ngdpdxffy0.execute-api.us-east-1.amazonaws.com/test/'; 
-      // old shared url with auth -> wss://caoyb4x42c.execute-api.us-east-1.amazonaws.com/test/     
-      // first deployment URL 'wss://zrkw21d01g.execute-api.us-east-1.amazonaws.com/prod/';
+      // const wsUrl = 'wss://ngdpdxffy0.execute-api.us-east-1.amazonaws.com/test/';      
       const TEST_URL = appContext.wsEndpoint+"/"
-
-      // Get a JWT token for the API to authenticate on      
-      const TOKEN = await Utils.authenticate()
-                
+      // Create a new WebSocket connection
+      const TOKEN = (await Auth.currentSession()).getAccessToken().getJwtToken()  
+          
+      // console.log(TOKEN)
       const wsUrl = TEST_URL+'?Authorization='+TOKEN;
+      //const wsUrl = appContext.wsEndpoint+"/"
       const ws = new WebSocket(wsUrl);
 
       let incomingMetadata: boolean = false;
       let sources = {};
 
-      /**If there is no response after a minute, time out the response to try again. */
       setTimeout(() => {if (receivedData == '') {
         ws.close()
         messageHistoryRef.current.pop();
         messageHistoryRef.current.push({
-          type: ChatBotMessageType.AI,          
+          type: ChatBotMessageType.AI,
+          tokens: [],
           content: 'Response timed out!',
           metadata: {},
         })
@@ -201,60 +226,49 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
 
       // Event listener for when the connection is open
       ws.addEventListener('open', function open() {
-        console.log('Connected to the WebSocket server');        
+        console.log('Connected to the WebSocket server');
+        // readline.question('What is your question? ', question => {
         const message = JSON.stringify({
           "action": "getChatbotResponse",
           "data": {
             userMessage: messageToSend,
             chatHistory: assembleHistory(messageHistoryRef.current.slice(0, -2)),
-            systemPrompt: `You are an AI chatbot for the RIDE, an MBTA paratransit service. You will help customer service representatives respond to user complaints and queries.
-          Answer questions based on your Context and nothing more. If you are unable to decisively answer a question, direct them to customer service. Do not provide information outside of your given Context.
-          Customer service is needed if it is something you cannot answer. Requests for fare history require customer service, as do service complaints like a rude driver or late pickup.
-          Highly-specific situations will also require customer service to step in. Remember that RIDE Flex and RIDE are not the same service. 
-          Phone numbers:
-          TRAC (handles scheduling/booking, trip changes/cancellations, anything time-sensitive): 844-427-7433 (voice/relay) 857-206-6569 (TTY)
-          Mobility Center (handles eligibility questions, renewals, and changes to mobility status): 617-337-2727 (voice/relay)
-          MBTA Customer support (handles all other queries): 617-222-3200 (voice/relay)`,
-            projectId: 'rsrs111111',
-            user_id: username,
+            systemPrompt: prompt,
+            projectId: 'vgbt420420',
+            user_id : username,
             session_id: props.session.id
           }
         });
-        
+        // readline.close();
+        // Replace 'Hello, world!' with your message
         ws.send(message);
-        
+        // console.log('Message sent:', message);
+        // });
       });
       // Event listener for incoming messages
       ws.addEventListener('message', async function incoming(data) {
-        /**This is a custom tag from the API that denotes that an error occured
-         * and the next chunk will be an error message. */              
+        // console.log(data);        
         if (data.data.includes("<!ERROR!>:")) {
           addNotification("error",data.data);          
           ws.close();
           return;
         }
-        /**This is a custom tag from the API that denotes when the model response
-         * ends and when the sources are coming in
-         */
-        if (data.data == '!<|EOF_STREAM|>!') {          
+        if (data.data == '!<|EOF_STREAM|>!') {
+          
           incomingMetadata = true;
-          return;          
+          return;
+          // return;
         }
         if (!incomingMetadata) {
           receivedData += data.data;
         } else {
-          let sourceData = JSON.parse(data.data);
-          sourceData = sourceData.map((item) => {
-            if (item.title == "") {
-              return {title: item.uri.slice((item.uri as string).lastIndexOf("/") + 1), uri: item.uri}
-            } else {
-              return item
-            }
-          })
-          sources = { "Sources": sourceData}
+          sources = { "Sources": JSON.parse(data.data) }
           console.log(sources);
         }
 
+
+
+        // console.log(data.data);
         // Update the chat history state with the new message        
         messageHistoryRef.current = [
           ...messageHistoryRef.current.slice(0, -2),
@@ -263,16 +277,23 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
             type: ChatBotMessageType.Human,
             content: messageToSend,
             metadata: {
-              
-            },            
+              ...props.configuration,
+            },
+            tokens: [],
           },
           {
-            type: ChatBotMessageType.AI,            
+            type: ChatBotMessageType.AI,
+            tokens: [],
             content: receivedData,
             metadata: sources,
           },
-        ];        
-        props.setMessageHistory(messageHistoryRef.current);        
+        ];
+        // console.log(messageHistoryRef.current)
+        props.setMessageHistory(messageHistoryRef.current);
+        // if (data.data == '') {
+        //   ws.close()
+        // }
+
       });
       // Handle possible errors
       ws.addEventListener('error', function error(err) {
@@ -280,20 +301,22 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
       });
       // Handle WebSocket closure
       ws.addEventListener('close', async function close() {
-        // if this is a new session, the backend will update the session list, so
-        // we need to refresh        
-        if (firstTime) {             
+        // await apiClient.sessions.updateSession("0", props.session.id, messageHistoryRef.current);
+        if (firstTime) {   
+          // console.log("first time!", firstTime)
+          // console.log("did we also need a refresh?", needsRefresh)
           Utils.delay(1500).then(() => setNeedsRefresh(true));
         }
         props.setRunning(false);        
         console.log('Disconnected from the WebSocket server');
       });
 
-    } catch (error) {      
+    } catch (error) {
+      // setMessage('');
       console.error('Error sending message:', error);
       alert('Sorry, something has gone horribly wrong! Please try again or refresh the page.');
       props.setRunning(false);
-    }     
+    }
   };
 
   const connectionStatus = {
@@ -308,22 +331,8 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
     <SpaceBetween direction="vertical" size="l">
       <Container>
         <div className={styles.input_textarea_container}>
-          <SpaceBetween size="xxs" direction="horizontal" alignItems="center">
-            {browserSupportsSpeechRecognition ? (
-              <Button
-                iconName={listening ? "microphone-off" : "microphone"}
-                variant="icon"
-                ariaLabel="microphone-access"
-                onClick={() =>
-                  listening
-                    ? SpeechRecognition.stopListening()
-                    : SpeechRecognition.startListening()
-                }
-              />
-            ) : (
-              <Icon name="microphone-off" variant="disabled" />
-            )}
-          </SpaceBetween>          
+          <SpaceBetween size="xs" direction="horizontal" alignItems="center">
+          </SpaceBetween>
           <TextareaAutosize
             className={styles.input_textarea}
             maxRows={6}
@@ -342,10 +351,10 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
             value={state.value}
             placeholder={"Send a message"}
           />
-          <div style={{ marginLeft: "8px" }}>            
+          <div style={{ marginLeft: "8px" }}>
             <Button
               disabled={
-                readyState !== ReadyState.OPEN ||                
+                readyState !== ReadyState.OPEN ||
                 props.running ||
                 state.value.trim().length === 0 ||
                 props.session.loading
@@ -367,12 +376,89 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
           </div>
         </div>
       </Container>
-      <div className={styles.input_controls}>      
-        <div>
-        </div>  
+      <div className={styles.input_controls}>
+        <div
+        // className={
+        //   appContext?.config.rag_enabled
+        //     ? styles.input_controls_selects_2
+        //     : styles.input_controls_selects_1
+        // }
+        >
+          {/* <Select
+            disabled={props.running}
+            statusType={state.modelsStatus}
+            loadingText="Loading models (might take few seconds)..."
+            placeholder="Select a model"
+            empty={
+              <div>
+                No models available. Please make sure you have access to Amazon
+                Bedrock or alternatively deploy a self hosted model on SageMaker
+                or add API_KEY to Secrets Manager
+              </div>
+            }
+            filteringType="auto"
+            selectedOption={state.selectedModel}
+            onChange={({ detail }) => {
+              setState((state) => ({
+                ...state,
+                selectedModel: detail.selectedOption,
+                selectedModelMetadata: getSelectedModelMetadata(
+                  state.models,
+                  detail.selectedOption
+                ),
+              }));
+              if (detail.selectedOption?.value) {
+                StorageHelper.setSelectedLLM(detail.selectedOption.value);
+              }
+            }}
+            options={modelsOptions}
+          /> */}
+          {/* {appContext?.config.rag_enabled && (
+            <Select
+              disabled={
+                props.running || !state.selectedModelMetadata?.ragSupported
+              }
+              loadingText="Loading workspaces (might take few seconds)..."
+              statusType={state.workspacesStatus}
+              placeholder="Select a workspace (RAG data source)"
+              filteringType="auto"
+              selectedOption={state.selectedWorkspace}
+              options={workspaceOptions}
+              onChange={({ detail }) => {
+                if (detail.selectedOption?.value === "__create__") {
+                  navigate("/rag/workspaces/create");
+                } else {
+                  setState((state) => ({
+                    ...state,
+                    selectedWorkspace: detail.selectedOption,
+                  }));
+
+                  StorageHelper.setSelectedWorkspaceId(
+                    detail.selectedOption?.value ?? ""
+                  );
+                }
+              }}
+              empty={"No Workspaces available"}
+            />
+          )} */}
+        </div>
         <div className={styles.input_controls_right}>
           <SpaceBetween direction="horizontal" size="xxs" alignItems="center">
-            <div style={{ paddingTop: "1px" }}>              
+            <div style={{ paddingTop: "1px" }}>
+              {/* <ConfigDialog
+                sessionId={props.session.id}
+                visible={configDialogVisible}
+                setVisible={setConfigDialogVisible}
+                configuration={props.configuration}
+                setConfiguration={props.setConfiguration}
+              /> */}
+            
+              {/*<Button
+                iconName="settings"
+                variant="icon"
+                onClick={() => setConfigDialogVisible(true)}
+                
+              />*/}
             </div>
             <StatusIndicator
               type={
@@ -392,4 +478,3 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
     </SpaceBetween>
   );
 }
-

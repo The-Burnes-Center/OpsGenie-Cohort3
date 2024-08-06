@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import {  
+import {
+  ChatBotConfiguration,
   ChatBotHistoryItem,
-  ChatBotMessageType,  
-  FeedbackData
+  ChatBotMessageType,
+  FeedbackData,
 } from "./types";
 import { Auth } from "aws-amplify";
 import { SpaceBetween, StatusIndicator, Alert, Flashbar } from "@cloudscape-design/components";
@@ -15,32 +16,45 @@ import styles from "../../styles/chat.module.scss";
 import { CHATBOT_NAME } from "../../common/constants";
 import { useNotifications } from "../notif-manager";
 
-export default function Chat(props: { sessionId?: string}) {
+export default function Chat(props: { sessionId?: string, updateEmailFunction : React.Dispatch<React.SetStateAction<ChatBotHistoryItem[]>>}) {
   const appContext = useContext(AppContext);
   const [running, setRunning] = useState<boolean>(true);
   const [session, setSession] = useState<{ id: string; loading: boolean }>({
     id: props.sessionId ?? uuidv4(),
     loading: typeof props.sessionId !== "undefined",
-  });  
+  });
+
+  const [configuration, setConfiguration] = useState<ChatBotConfiguration>(
+    () => ({
+      streaming: true,
+      showMetadata: true,
+      maxTokens: 512,
+      temperature: 0.6,
+      topP: 0.9,
+      files: null,
+    })
+  );
 
   const { notifications, addNotification } = useNotifications();
 
   const [messageHistory, setMessageHistory] = useState<ChatBotHistoryItem[]>(
     []
   );
-  
 
-  /** Loads session history */
+  // // add useEffect that sets the isNewSession to true after the first message is sent and the stream is done.
+  // useEffect(() => {
+  //   if (messageHistory.length === 0 && !running) {
+  //     console.log("First message has been rendered");
+  //     setNewSession(true);
+  //     console.log("setNewSession to true in chat");
+  //   }
+  // }, [messageHistory]);  // Dependency on messageHistory and the handled flag
+
   useEffect(() => {
     if (!appContext) return;
     setMessageHistory([]);
 
     (async () => {
-      /** If there is no session ID, then this must be a new session
-       * and there is no need to load one from the backend.
-       * However, even if a session ID is set and there is no saved session in the 
-       * backend, there will be no errors - the API will simply return a blank session
-       */
       if (!props.sessionId) {
         setSession({ id: uuidv4(), loading: false });
         return;
@@ -56,10 +70,10 @@ export default function Chat(props: { sessionId?: string}) {
         const hist = await apiClient.sessions.getSession(props.sessionId,username);
 
         if (hist) {
-          
+          // console.log(hist);
           ChatScrollState.skipNextHistoryUpdate = true;
           ChatScrollState.skipNextScrollEvent = true;
-          
+          // console.log("History", result.data.getSession.history);
           setMessageHistory(
             hist
               .filter((x) => x !== null)
@@ -85,16 +99,18 @@ export default function Chat(props: { sessionId?: string}) {
     })();
   }, [appContext, props.sessionId]);
 
-  /** Adds some metadata to the user's feedback */
   const handleFeedback = (feedbackType: 1 | 0, idx: number, message: ChatBotHistoryItem, feedbackTopic? : string, feedbackProblem? : string, feedbackMessage? : string) => {
-    if (props.sessionId) {
+    // if (message.metadata.sessionId) {
       console.log("submitting feedback...")
-      
+      // let prompt = "";
+      // if (Array.isArray(message.metadata.prompts) && Array.isArray(message.metadata.prompts[0])) { 
+      //     prompt = message.metadata.prompts[0][0];
+      // }
       const prompt = messageHistory[idx - 1].content
       const completion = message.content;
-      
+      // const model = message.metadata.modelId;
       const feedbackData = {
-        sessionId: props.sessionId, 
+        sessionId: props.sessionId, //message.metadata.sessionId as string,        
         feedback: feedbackType,
         prompt: prompt,
         completion: completion,
@@ -104,14 +120,18 @@ export default function Chat(props: { sessionId?: string}) {
         sources: JSON.stringify(message.metadata.Sources)
       };
       addUserFeedback(feedbackData);
-    }
+    // }
   };
 
-  /** Makes the API call via the ApiClient to submit the feedback */
-  const addUserFeedback = async (feedbackData : FeedbackData) => {
+  const addUserFeedback = async (feedbackData) => {
     if (!appContext) return;
     const apiClient = new ApiClient(appContext);
     await apiClient.userFeedback.sendUserFeedback(feedbackData);
+  }
+
+  const handleUpdateMessageHistory = async () => {
+    console.log("updating history for email")
+    props.updateEmailFunction(messageHistory);
   }
 
   return (
@@ -123,16 +143,18 @@ export default function Chat(props: { sessionId?: string}) {
           statusIconAriaLabel="Info"
           header=""
        >
-        AI Models can make mistakes. Be mindful in validating important information.
+        Be mindful in validating important information. Please refrain from sending sensitive member information.
       </Alert> )}
 
-      
+      {/* <SpaceBetween direction="vertical" size="m"></SpaceBetween> */}
         {messageHistory.map((message, idx) => (
           <ChatMessage
             key={idx}
-            message={message}            
+            message={message}
+            showMetadata={configuration.showMetadata}
             onThumbsUp={() => handleFeedback(1,idx, message)}
-            onThumbsDown={(feedbackTopic : string, feedbackType : string, feedbackMessage: string) => handleFeedback(0,idx, message,feedbackTopic, feedbackType, feedbackMessage)}                        
+            onThumbsDown={(feedbackTopic : string, feedbackType : string, feedbackMessage: string) => handleFeedback(0,idx, message,feedbackTopic, feedbackType, feedbackMessage)}
+            onSendEmail={() => handleUpdateMessageHistory()}
           />
         ))}
       </SpaceBetween>
@@ -152,7 +174,9 @@ export default function Chat(props: { sessionId?: string}) {
           running={running}
           setRunning={setRunning}
           messageHistory={messageHistory}
-          setMessageHistory={(history) => setMessageHistory(history)}          
+          setMessageHistory={(history) => setMessageHistory(history)}
+          configuration={configuration}
+          setConfiguration={setConfiguration}
         />
       </div>
     </div>

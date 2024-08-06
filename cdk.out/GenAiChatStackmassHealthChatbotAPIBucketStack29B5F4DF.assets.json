@@ -1,0 +1,19 @@
+{
+  "version": "36.0.0",
+  "files": {
+    "0e2722ec02f2be86657384f03c88bfc51dece193af533373570bdbf339c12c16": {
+      "source": {
+        "path": "GenAiChatStackmassHealthChatbotAPIBucketStack29B5F4DF.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "0e2722ec02f2be86657384f03c88bfc51dece193af533373570bdbf339c12c16.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

@@ -16,10 +16,9 @@ import { useContext, useState, useEffect } from "react";
 import { ApiClient } from "../common/api-client/api-client";
 import { Auth } from "aws-amplify";
 import { v4 as uuidv4 } from "uuid";
-import { SessionRefreshContext } from "../common/session-refresh-context"
+import {SessionRefreshContext} from "../common/session-refresh-context"
 import { useNotifications } from "../components/notif-manager";
 import { Utils } from "../common/utils.js";
-
 
 export default function NavigationPanel() {
   const appContext = useContext(AppContext);
@@ -28,8 +27,8 @@ export default function NavigationPanel() {
   const [navigationPanelState, setNavigationPanelState] =
     useNavigationPanelState();
   const [items, setItems] = useState<SideNavigationProps.Item[]>([]);
-  const [loaded, setLoaded] = useState<boolean>(false);
-  const { needsRefresh, setNeedsRefresh } = useContext(SessionRefreshContext);
+  const [loaded,setLoaded] = useState<boolean>(false);
+  const {needsRefresh, setNeedsRefresh} = useContext(SessionRefreshContext);
   const [loadingSessions, setLoadingSessions] = useState(false);
   const { addNotification, removeNotification } = useNotifications();
   const [activeHref, setActiveHref] = useState(
@@ -37,45 +36,48 @@ export default function NavigationPanel() {
   );
 
 
-
-  // update the list of sessions
+  // update the list of sessions every now and then
   const loadSessions = async () => {
     let username;
     try {
-      await Auth.currentAuthenticatedUser().then((value) => username = value.username);
-      if (username && needsRefresh) {
-        const fetchedSessions = await apiClient.sessions.getSessions(username);
-        await updateItems(fetchedSessions);
-        console.log("fetched sessions")
-        // console.log(fetchedSessions);
-        if (!loaded) {
-          setLoaded(true);
-        }
-        setNeedsRefresh(false);
+    await Auth.currentAuthenticatedUser().then((value) => username = value.username);
+    if (username && needsRefresh) {
+      // let's wait for about half a second before refreshing the sessions      
+      const fetchedSessions = await apiClient.sessions.getSessions(username);  
+      await updateItems(fetchedSessions);
+      console.log("fetched sessions")
+      // console.log(fetchedSessions);
+      if (!loaded) {
+        setLoaded(true);
       }
-    } catch (error) {
-      console.error("Failed to load sessions:", error);
-      setLoaded(true);
-      addNotification("error", "Could not load sessions:".concat(error.message));
-      addNotification("info", "Please refresh the page");
-      // const delay = ms => new Promise(res => setTimeout(res, ms));
-      // delay(3000).then(() => removeNotification(id));
-
-    } finally {
-      setLoadingSessions(false);
+      setNeedsRefresh(false);
     }
+  }  catch (error) {
+    console.error("Failed to load sessions:", error);
+    setLoaded(true);
+    addNotification("error", "Could not load sessions:".concat(error.message));
+    addNotification("info", "Please refresh the page");    
+    // const delay = ms => new Promise(res => setTimeout(res, ms));
+    // delay(3000).then(() => removeNotification(id));
+    
+  } finally {
+    setLoadingSessions(false);
   }
-
-  // this hook allows other components (specifically the chat handler)
-  // to request a session refresh (such as if a chat has just been created)
+}
   useEffect(() => {
-    loadSessions();
+   
+
+    // const interval = setInterval(loadSessions, 1000);
+    // loadSessions();
+
+    // return () => clearInterval(interval);
+    loadSessions(); 
   }, [needsRefresh]);
 
 
   const onReloadClick = async () => {
     await loadSessions();
-    const id = addNotification("success", "Sessions reloaded successfully!");
+    const id =addNotification("success", "Sessions reloaded successfully!");
     Utils.delay(3000).then(() => removeNotification(id))
   };
 
@@ -91,35 +93,34 @@ export default function NavigationPanel() {
           href: `/chatbot/playground/${session.session_id}`,
         })).concat([{
           type: "link",
-          info: <Box margin="xxs" textAlign="center" >
-            <SpaceBetween size="xs">
-            <RouterButton href={"/chatbot/sessions"} loading={loadingSessions} variant="link">View All Sessions</RouterButton>
-            <Button onClick={onReloadClick} iconName="refresh" loading={loadingSessions} variant="link">Reload Sessions</Button>            
-            </SpaceBetween>
-            </Box>
+          info: <Box margin="xxs" textAlign="center" ><Button onClick={onReloadClick} iconName="refresh" loading={loadingSessions} variant="link">Reload Sessions</Button></Box>
         }]),
-      },
+      },      
     ];
     try {
-      const result = await Auth.currentAuthenticatedUser();
-      const admin = result?.signInUserSession?.idToken?.payload["custom:role"]
-      if (admin) {
-        const data = JSON.parse(admin);
-        if (data.includes("Admin")) {
-          console.log("admin found!")
-          newItems.push({
-            type: "section",
-            text: "Admin",
-            items: [
-              { type: "link", text: "Data", href: "/admin/data" },
-              { type: "link", text: "User Feedback", href: "/admin/user-feedback" }
-            ],
-          },)
-        }
+    const result = await Auth.currentAuthenticatedUser();
+    const admin = result?.signInUserSession?.idToken?.payload["custom:role"]
+    if (admin) {
+      const data = JSON.parse(admin);
+      if (data.includes("Admin")) {
+        const invocationCount = await apiClient.metrics.getInvocationCount();
+        console.log("admin found!")
+        newItems.push({
+          type: "section",
+          text: "Admin",
+          items: [
+            { type: "link", text: "Update Data", href: "/admin/add-data" },
+            { type: "link", text: "Data", href: "/admin/data" },
+            { type: "link", text: "User Feedback", href: "/admin/user-feedback" },            
+            invocationCount? { type: "link", text: `Message Count (past 24hrs): ${invocationCount}`, href: ""} 
+            : {type: "link", text: "Message Count (past 24hrs): unknown", href: ""}
+          ],
+        },)
       }
-    } catch (e) {
-      console.log(e)
     }
+  } catch (e) {
+    console.log(e)
+  }
     setItems(newItems);
   };
 
@@ -141,6 +142,24 @@ export default function NavigationPanel() {
 
   return (
     <div>
+      {/* <div style={{ justifyContent: 'center' }}>
+        <Header >
+          MBTA The RIDE Guide AI
+        </Header>
+      </div>
+
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <RouterButton
+          iconAlign="right"
+          iconSvg={<PencilSquareIcon />}
+          variant="primary"
+          href={`/chatbot/playground/${uuidv4()}`}
+        >
+          New session
+        </RouterButton>
+
+      </div>
+  <Header>*/}
       <Box margin="xs" padding={{ top: "l" }} textAlign="center">
         <RouterButton
           iconAlign="right"
@@ -152,25 +171,36 @@ export default function NavigationPanel() {
           style={{ textAlign: "right" }}
         >
           New session
+
         </RouterButton>
-      </Box>
+      </Box>            
       {loaded ?
-        <SideNavigation
-          activeHref={activeHref}
-          // onFollow={onFollow}
-          onFollow={event => {
-            if (!event.detail.external) {
-              event.preventDefault();
-              setActiveHref(event.detail.href);
-              onFollow(event);
-            }
-          }}
-          onChange={onChange}
-          items={items}
-        /> :
-        <Box margin="xs" padding="xs" textAlign="center">
-          <StatusIndicator type="loading">Loading sessions...</StatusIndicator>
-        </Box>}
+      <SideNavigation
+        activeHref={activeHref}
+        // onFollow={onFollow}
+        onFollow={event => {
+          if (!event.detail.external) {
+            event.preventDefault();
+            setActiveHref(event.detail.href);
+            onFollow(event);
+          }
+        }}
+        onChange={onChange}
+        // header={{ href: "/", text: "The Ride Guide AI" }}
+        // items={items.map((item, idx) => ({
+        //   ...item,
+        //   defaultExpanded: !navigationPanelState.collapsedSections[idx]
+        // }))}  
+        items={items}
+        // items={Array.isArray(items) ? items.map((item, idx) => ({
+        //   ...item,
+        //   defaultExpanded: !navigationPanelState.collapsedSections[idx]
+        // })) : []}
+        
+      /> : 
+      <Box margin="xs" padding="xs" textAlign="center">
+        <StatusIndicator type="loading">Loading sessions...</StatusIndicator>
+      </Box>}
     </div>
   );
 }

@@ -1,26 +1,31 @@
+import { Auth } from "aws-amplify";
+
 import {
   ChatBotHistoryItem,
   ChatBotMessageType,
 } from "../../components/chatbot/types";
 
 import {
+  assembleHistory
+} from "../../components/chatbot/utils"
+
+import {
   Utils
 } from "../utils"
 
-
-import { AppConfig } from "../types";
+import { AppConfig } from "../types"; 
 
 export class SessionsClient {
-
   private readonly API;
   constructor(protected _appConfig: AppConfig) {
-    this.API = _appConfig.httpEndpoint.slice(0, -1);
-  }
+    this.API = _appConfig.httpEndpoint.slice(0,-1);}
+    
+  
+
   // Gets all sessions tied to a given user ID
   // Return format: [{"session_id" : "string", "user_id" : "string", "time_stamp" : "dd/mm/yy", "title" : "string"}...]
   async getSessions(
-    userId: string,
-    all?: boolean
+    userId: string
   ) {
     const auth = await Utils.authenticate();
     let validData = false;
@@ -28,7 +33,7 @@ export class SessionsClient {
     let runs = 0;
     let limit = 3;
     let errorMessage = "Could not load sessions"
-    while (!validData && runs < limit) {
+    while (!validData && runs < limit ) {
       runs += 1;
       const response = await fetch(this.API + '/user-session', {
         method: 'POST',
@@ -36,16 +41,23 @@ export class SessionsClient {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + auth,
         },
-        body: JSON.stringify(all? { "operation": "list_all_sessions_by_user_id", "user_id": userId } : { "operation": "list_sessions_by_user_id", "user_id": userId })
+        body: JSON.stringify({ "operation": "list_sessions_by_user_id", "user_id": userId })
       });
       if (response.status != 200) {
         validData = false;
-        let jsonResponse = await response.json()        
-        errorMessage = jsonResponse;        
+        let jsonResponse = await response.json()
+        // console.log(jsonResponse);
+        errorMessage = jsonResponse;
+        // errorMessage = body.body;
         break;
-      }      
-      try {
-        output = await response.json();
+      }
+      const reader = response.body.getReader();
+      const { value, done } = await reader.read();
+      const decoder = new TextDecoder();
+      const parsed = decoder.decode(value)
+      console.log(parsed)
+      try{
+        output = JSON.parse(parsed);
         validData = true;
       } catch (e) {
         // just retry, we get 3 attempts!
@@ -55,12 +67,12 @@ export class SessionsClient {
     if (!validData) {
       throw new Error(errorMessage);
     }
-    // console.log(output);
+    console.log(output);
     return output;
   }
 
   // Returns a chat history given a specific user ID and session ID
-  // Return format: ChatBotHistoryItem[]
+  // Return format: a list of ChatBotHistoryItems
   async getSession(
     sessionId: string,
     userId: string,
@@ -71,9 +83,7 @@ export class SessionsClient {
     let runs = 0;
     let limit = 3;
     let errorMessage = "Could not load session";
-
-    /** Attempt to load a session up to 3 times or until it is validated */
-    while (!validData && runs < limit) {
+    while (!validData && runs < limit ) {
       runs += 1;
       const response = await fetch(this.API + '/user-session', {
         method: 'POST',
@@ -86,40 +96,26 @@ export class SessionsClient {
           "user_id": userId
         })
       });
-      /** Check for errors */
+      // console.log(response.body);
       if (response.status != 200) {
         validData = false;
         errorMessage = await response.json()
         break;
       }
       const reader = response.body.getReader();
-      let received = new Uint8Array(0);
-
-      /** Read the response stream */
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) {
-          break;
-        }
-        if (value) {
-          let temp = new Uint8Array(received.length + value.length);
-          temp.set(received);
-          temp.set(value, received.length);
-          received = temp;
-        }
-      }
-      // Decode the complete data
-      const decoder = new TextDecoder('utf-8');
-      const decoded = decoder.decode(received);
+      const { value, done } = await reader.read();
+      // console.log(value);
+      const decoder = new TextDecoder();
+      // console.log(decoder.decode(value));    
       try {
-        output = JSON.parse(decoded).chat_history! as any[];
+        output = JSON.parse(decoder.decode(value)).chat_history! as any[];
         validData = true;
       } catch (e) {
         console.log(e);
       }
     }
     if (!validData) {
-      throw new Error(errorMessage)
+      throw new Error(errorMessage)      
     }
     let history: ChatBotHistoryItem[] = [];
     // console.log(output);
@@ -136,17 +132,19 @@ export class SessionsClient {
         content: value.user,
         metadata: {
         },
+        tokens: [],
       },
         {
           type: ChatBotMessageType.AI,
+          tokens: [],
           content: value.chatbot,
           metadata: metadata,
         },)
     })
+    // console.log(history);
     return history;
   }
 
-  /**Deletes a given session but this is not exposed in the UI */
   async deleteSession(
     sessionId: string,
     userId: string,
