@@ -107,9 +107,9 @@ export abstract class Labels {
 }
 
 export const feedbackCategories = [
-  {label: "Eligibility", value:"eligibility", disabled: false},
-  {label: "Coverage Types", value:"coverage types", disabled: false},
-  {label: "Policy", value:"policy", disabled: false},
+  {label: "TRAC", value:"trac", disabled: false},
+  {label: "RIDE", value:"ride", disabled: false},
+  {label: "MBTA", value:"mbta", disabled: false},
   {label: "Other", value:"other", disabled: false}
 ]
 
