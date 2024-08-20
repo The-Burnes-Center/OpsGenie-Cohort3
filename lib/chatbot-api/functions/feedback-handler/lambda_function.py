@@ -1,3 +1,29 @@
+"""
+Purpose: Lambda functions to deal with requests surrounding user feedback 
+
+Overview:
+This file provides an AWS Lambda function designed to handle HTTP requests for managing user feedback in a DynamoDB table. 
+It supports operations for posting, retrieving, downloading, and deleting feedback. Admin users can access all functionalities, while non-admins have limited permissions.
+
+Environment variables:
+- `FEEDBACK_TABLE`: The name of the DynamoDB table storing feedback entries.
+- `FEEDBACK_S3_DOWNLOAD`: The S3 bucket used for storing downloadable feedback CSV files.
+
+Classes:
+- `DecimalEncoder`: A custom JSON encoder class to convert `Decimal` objects into strings.
+
+Functions:
+- `lambda_handler`: Main entry point for the Lambda function. Routes incoming requests to below functions based on the HTTP method and user role.
+
+- `post_feedback`: Handles POST requests to store user feedback in the DynamoDB table.
+- `download_feedback`: Handles POST requests to generate and return a downloadable CSV file of feedback entries within a specified date range.
+- `get_feedback`: Handles GET requests to retrieve feedback from the DynamoDB table with optional pagination support.
+- `delete_feedback`: Handles DELETE requests to remove specific feedback entries from the DynamoDB table.
+
+Usage:
+Deploy this file as part of an AWS Lambda function integrated with an API Gateway. 
+"""
+
 import json
 import uuid
 import boto3
