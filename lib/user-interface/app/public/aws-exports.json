@@ -1,9 +1,7 @@
-{"Auth":{"region":"us-east-1",
-"userPoolId":"us-east-1_PwX0m90qA",
-"userPoolWebClientId":"47u85daotr2qaem69gur3t4jn5",
-"oauth":{"domain":"genaimvp-auth-masshealth.auth.us-east-1.amazoncognito.com",
-"scope":["aws.cognito.signin.user.admin","email","openid","profile"],
-"redirectSignIn":"http://localhost:3000/","responseType":"code"}},
-"httpEndpoint":"https://agcpm2j25m.execute-api.us-east-1.amazonaws.com/",
-"wsEndpoint":"wss://oya7a2tkn7.execute-api.us-east-1.amazonaws.com/prod",
-"federatedSignInProvider":"Azure-OIDC"}
+{
+  "config": {
+    "api_endpoint": "https://undefined/api",
+    "websocket_endpoint": "wss://undefined/socket",
+    "rag_enabled": false
+  }
+}
