@@ -30,6 +30,7 @@ export class LambdaFunctionStack extends cdk.Stack {
   public readonly uploadS3Function : lambda.Function;
   public readonly syncKendraFunction : lambda.Function;
   public readonly chatInvocationsCounterFunction: lambda.Function;
+  public readonly comprehendMedicalFunction: lambda.Function;
 
 
   constructor(scope: Construct, id: string, props: LambdaFunctionStackProps) {
@@ -226,6 +227,23 @@ export class LambdaFunctionStack extends cdk.Stack {
     }));
 
     this.chatInvocationsCounterFunction = chatInvocationsCounterFunction;
+
+    const comprehendMedicalFunction = new lambda.Function(scope, 'comprehendMedicalFunction', {
+      runtime: lambda.Runtime.PYTHON_3_12,
+      code: lambda.Code.fromAsset(path.join(__dirname, 'comprehend-medical')),
+      handler: 'lambda_function.lambda_handler',
+      timeout: cdk.Duration.seconds(60),   
+    });
+
+    this.comprehendMedicalFunction = comprehendMedicalFunction;
+
+    comprehendMedicalFunction.addToRolePolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: ['comprehendmedical:DetectEntitiesV2'],
+      resources: ['*'], // Adjust if specific resources are used.
+    }));
+    
+
 
   }
 }
