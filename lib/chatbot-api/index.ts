@@ -172,7 +172,7 @@ export class ChatBotApi extends Construct {
     const comprehendMedicalAPIIntegration = new HttpLambdaIntegration('ComprehendMedicalAPIIntegration', lambdaFunctions.comprehendMedicalFunction);
     restBackend.restAPI.addRoutes({
       path: "/comprehend-medical-redact", 
-      methods: [apigwv2.HttpMethod.GET],
+      methods: [apigwv2.HttpMethod.POST],
       integration: comprehendMedicalAPIIntegration,
       authorizer: httpAuthorizer,
     })
