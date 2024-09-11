@@ -14,10 +14,10 @@ export class ComprehendMedicalClient {
       console.log("inside the comprehend medical client")
       const response = await fetch(this.API + "/comprehend-medical-redact", {
         method: 'POST',
-        mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + auth,
+          'Access-Control-Allow-Origin': '*',
         },
         body: JSON.stringify({
           "content": userInput,
