@@ -17,7 +17,6 @@ export class ComprehendMedicalClient {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + auth,
-          'Access-Control-Allow-Origin': '*',
         },
         body: JSON.stringify({
           "content": userInput,
