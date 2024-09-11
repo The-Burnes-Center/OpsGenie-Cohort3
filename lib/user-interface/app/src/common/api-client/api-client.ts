@@ -46,7 +46,7 @@ export class ApiClient {
 
   public get comprehendMedicalClient() {
     if (!this._comprehendMedicalClient) {
-      this._comprehendMedicalClient = new ComprehendMedicalClient();
+      this._comprehendMedicalClient = new ComprehendMedicalClient(this._appConfig);
     }
 
     return this._comprehendMedicalClient; //
