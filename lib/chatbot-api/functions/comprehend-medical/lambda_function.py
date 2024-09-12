@@ -135,7 +135,7 @@ def redact_text(prompt, entities):
         elif entity["Type"] == "NAME":
             name = entity.get('Text', 'Jake').lower() # if there is no name default to Jake
             print(f"Found name in the message{entity}")
-            if name in ["kaileigh mulligan"]:
+            if name in ["kaileigh mulligan", "shaffey"]:
                 redacted_text = redacted_text.replace(entity['Text'], name)
             else:
                 redacted_text = redacted_text.replace(entity['Text'], "[NAME]")
