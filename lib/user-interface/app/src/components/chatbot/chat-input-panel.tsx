@@ -43,7 +43,6 @@ import {
 import { Utils } from "../../common/utils";
 import {SessionRefreshContext} from "../../common/session-refresh-context"
 import { useNotifications } from "../notif-manager";
-import AWS from 'aws-sdk';
 
 
 export interface ChatInputPanelProps {
