@@ -121,6 +121,11 @@ export const feedbackTypes = [
   {label: "Other", value:"other", disabled: false}
 ]
 
+export const KPIMetrics = [
+  {label: "Chatbot Uses", value:"chatbot-uses", disabled: false},
+  {label: "AHT", value:"aht", disabled: false},
+]
+
 export const API = "https://u95wm1svh0.execute-api.us-east-1.amazonaws.com/test"
 
 export const CHATBOT_NAME = "MEC Knowledge Tool";
