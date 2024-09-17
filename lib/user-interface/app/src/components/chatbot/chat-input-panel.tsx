@@ -79,35 +79,35 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
     ReadyState.OPEN
   );
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
-AWS.config.update({
-  region: process.env.AWS_PROJECT_REGION,
-  accessKeyId: process.env.ACCESS_KEY_ID,
-  secretAccessKey: process.env.SECRET_ACCESS_KEY
-});
+// const dynamoDb = new AWS.DynamoDB.DocumentClient();
+// AWS.config.update({
+//   region: process.env.AWS_PROJECT_REGION,
+//   accessKeyId: process.env.ACCESS_KEY_ID,
+//   secretAccessKey: process.env.SECRET_ACCESS_KEY
+// });
 
-const logChatInteraction = async ({ userMessage, botResponse, responseTime, username, timestamp }) => {
-  const interactionId = `${username}-${new Date().getTime()}`; 
-  const params = {
-    TableName: 'mec-chatbot-logs',
-    Item: {
-      interactionId,
-      username,
-      userMessage,
-      botResponse,
-      responseTime,
-      timestamp,
-    },
-  };
+// const logChatInteraction = async ({ userMessage, botResponse, responseTime, username, timestamp }) => {
+//   const interactionId = `${username}-${new Date().getTime()}`; 
+//   const params = {
+//     TableName: 'mec-chatbot-logs',
+//     Item: {
+//       interactionId,
+//       username,
+//       userMessage,
+//       botResponse,
+//       responseTime,
+//       timestamp,
+//     },
+//   };
 
-  try {
-    // save to database
-    await dynamoDb.put(params).promise();
-    console.log("Interaction logged successfully!!!!!!! :", params.Item);
-  } catch (error) {
-    console.error("Error logging chat interaction to DynamoDB:", error);
-  }
-};
+//   try {
+//     // save to database
+//     await dynamoDb.put(params).promise();
+//     console.log("Interaction logged successfully!!!!!!! :", params.Item);
+//   } catch (error) {
+//     console.error("Error logging chat interaction to DynamoDB:", error);
+//   }
+// };
 
       
     
@@ -354,13 +354,13 @@ const logChatInteraction = async ({ userMessage, botResponse, responseTime, user
         const responseTime = (endTime - startTime) / 1000; // time in seconds
         console.log("Length of bot response in seconds: ", responseTime);
 
-        logChatInteraction({
-          userMessage: messageToSend,
-          botResponse: receivedData,
-          responseTime,
-          username,
-          timestamp: new Date().toISOString(),
-        });
+        // logChatInteraction({
+        //   userMessage: messageToSend,
+        //   botResponse: receivedData,
+        //   responseTime,
+        //   username,
+        //   timestamp: new Date().toISOString(),
+        // });
       });
 
       
