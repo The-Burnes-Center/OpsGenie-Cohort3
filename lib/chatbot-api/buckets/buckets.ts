@@ -19,7 +19,16 @@ export class S3BucketStack extends cdk.Stack {
         allowedMethods: [s3.HttpMethods.GET,s3.HttpMethods.POST,s3.HttpMethods.PUT,s3.HttpMethods.DELETE],
         allowedOrigins: ['*'],      
         allowedHeaders: ["*"]
-      }]
+      }],
+      publicReadAccess: true, // Enables public read access
+      blockPublicAccess: new s3.BlockPublicAccess({
+        blockPublicPolicy: false,
+        blockPublicAcls: false,
+        ignorePublicAcls: false,
+        restrictPublicBuckets: false,
+      }),
+      accessControl: s3.BucketAccessControl.PUBLIC_READ, // Public read access
+      objectOwnership: s3.ObjectOwnership.OBJECT_WRITER // Object writer ownership
     });
 
     this.feedbackBucket = new s3.Bucket(scope, 'FeedbackDownloadBucket', {
