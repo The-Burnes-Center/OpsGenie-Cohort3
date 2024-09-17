@@ -43,6 +43,8 @@ import {
 import { Utils } from "../../common/utils";
 import {SessionRefreshContext} from "../../common/session-refresh-context"
 import { useNotifications } from "../notif-manager";
+import AWS from 'aws-sdk';
+
 
 export interface ChatInputPanelProps {
   running: boolean;
@@ -76,6 +78,39 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
   const [readyState, setReadyState] = useState<ReadyState>(
     ReadyState.OPEN
   );
+
+const dynamoDb = new AWS.DynamoDB.DocumentClient();
+AWS.config.update({
+  region: process.env.AWS_PROJECT_REGION,
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY
+});
+
+const logChatInteraction = async ({ userMessage, botResponse, responseTime, username, timestamp }) => {
+  const interactionId = `${username}-${new Date().getTime()}`; 
+  const params = {
+    TableName: 'mec-chatbot-logs',
+    Item: {
+      interactionId,
+      username,
+      userMessage,
+      botResponse,
+      responseTime,
+      timestamp,
+    },
+  };
+
+  try {
+    // save to database
+    await dynamoDb.put(params).promise();
+    console.log("Interaction logged successfully!!!!!!! :", params.Item);
+  } catch (error) {
+    console.error("Error logging chat interaction to DynamoDB:", error);
+  }
+};
+
+      
+    
   // const [firstTime, setFirstTime] = useState<boolean>(false);
   const messageHistoryRef = useRef<ChatBotHistoryItem[]>([]);
 
@@ -169,6 +204,9 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
       addNotification("error","Please do not submit blank text!");
       return;          
     }
+
+    const startTime = new Date().getTime();
+    
     setState({ value: "" });
     // let start = new Date().getTime() / 1000;
     
@@ -266,6 +304,7 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
           console.log(sources);
         }
 
+        
 
 
         // console.log(data.data);
@@ -309,7 +348,22 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
         }
         props.setRunning(false);        
         console.log('Disconnected from the WebSocket server');
+
+        /* log chat response time */
+        const endTime = new Date().getTime();
+        const responseTime = (endTime - startTime) / 1000; // time in seconds
+        console.log("Length of bot response in seconds: ", responseTime);
+
+        logChatInteraction({
+          userMessage: messageToSend,
+          botResponse: receivedData,
+          responseTime,
+          username,
+          timestamp: new Date().toISOString(),
+        });
       });
+
+      
 
     } catch (error) {
       // setMessage('');
