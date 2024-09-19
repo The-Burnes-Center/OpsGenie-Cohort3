@@ -56,7 +56,8 @@ export class ChatBotApi extends Construct {
         kendraSource: kendra.kendraSource,
         feedbackTable: tables.feedbackTable,
         feedbackBucket: buckets.feedbackBucket,
-        knowledgeBucket: buckets.kendraBucket
+        knowledgeBucket: buckets.kendraBucket,
+
       })
 
     const wsAuthorizer = new WebSocketLambdaAuthorizer('WebSocketAuthorizer', props.authentication.lambdaAuthorizer, {identitySource: ['route.request.querystring.Authorization']});
@@ -94,6 +95,14 @@ export class ChatBotApi extends Construct {
       path: "/user-session",
       methods: [apigwv2.HttpMethod.GET, apigwv2.HttpMethod.POST, apigwv2.HttpMethod.DELETE],
       integration: sessionAPIIntegration,
+      authorizer: httpAuthorizer,
+    })
+
+    const kpiAPIIntegration = new HttpLambdaIntegration('KPIAPIIntegration', lambdaFunctions.kpiFunction);
+    restBackend.restAPI.addRoutes({
+      path: "/chatbot-use",
+      methods: [apigwv2.HttpMethod.GET, apigwv2.HttpMethod.POST, apigwv2.HttpMethod.DELETE],
+      integration: kpiAPIIntegration,
       authorizer: httpAuthorizer,
     })
 

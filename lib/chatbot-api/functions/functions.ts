@@ -19,6 +19,7 @@ interface LambdaFunctionStackProps {
   readonly feedbackTable : Table;
   readonly feedbackBucket : s3.Bucket;
   readonly knowledgeBucket : s3.Bucket;
+  //readonly kpiTable : Table;
 }
 
 export class LambdaFunctionStack extends cdk.Stack {  
@@ -31,6 +32,7 @@ export class LambdaFunctionStack extends cdk.Stack {
   public readonly syncKendraFunction : lambda.Function;
   public readonly chatInvocationsCounterFunction: lambda.Function;
   public readonly comprehendMedicalFunction: lambda.Function;
+  public readonly kpiFunction : lambda.Function;
 
 
   constructor(scope: Construct, id: string, props: LambdaFunctionStackProps) {
@@ -45,6 +47,32 @@ export class LambdaFunctionStack extends cdk.Stack {
       },
       timeout: cdk.Duration.seconds(30)
     });
+
+    const kpiAPIHandlerFunction = new lambda.Function(scope, 'KPIHandlerFunction', {
+      runtime: lambda.Runtime.NODEJS_20_X, // Choose any supported Node.js runtime
+      code: lambda.Code.fromAsset(path.join(__dirname, 'kpi-handler')), // Points to the lambda directory
+      handler: 'index.handler', // Points to the 'hello' file in the lambda directory
+      environment: {
+        //"DDB_TABLE_NAME" : props.sessionTable.tableName
+      },
+      timeout: cdk.Duration.seconds(30)
+    });
+
+    kpiAPIHandlerFunction.addToRolePolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: [
+        'dynamodb:GetItem',
+        'dynamodb:PutItem',
+        'dynamodb:UpdateItem',
+        'dynamodb:DeleteItem',
+        'dynamodb:Query',
+        'dynamodb:Scan'
+      ],
+      resources: ['arn:aws:dynamodb:us-east-1:807596108910:table/mec-chatbot-logs',
+        'arn:aws:dynamodb:us-east-1:807596108910:table/mec-chatbot-logs' + "/index/*"]
+    }));
+
+    this.kpiFunction = kpiAPIHandlerFunction;
     
     sessionAPIHandlerFunction.addToRolePolicy(new iam.PolicyStatement({
       effect: iam.Effect.ALLOW,
