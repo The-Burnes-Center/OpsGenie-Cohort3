@@ -107,7 +107,7 @@ export default function KPIsTab(props: KPIsTabProps) {
             current[params.pageIndex - 1] = result;
             return [...current];
           } else {
-            console.log("pages?")
+            //console.log("pages?")
             return [...current, result];
           }
         });
@@ -125,7 +125,6 @@ export default function KPIsTab(props: KPIsTabProps) {
     setCurrentPageIndex(1);    
     setSelectedItems([]);
     if (needsRefresh.current) {
-      // console.log("needs refresh!")
       getKPI({ pageIndex: 1 });      
     } else { 
       getKPI({ pageIndex: currentPageIndex }); 

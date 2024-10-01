@@ -48,6 +48,7 @@ export default function KPIsPage() {
       }
       catch (e){
         // const userName = result?.attributes?.email;
+        console.log('Did not authenticate user for some reason')
         console.log(e);
       }
     })();

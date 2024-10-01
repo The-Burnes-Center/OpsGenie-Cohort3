@@ -9,16 +9,17 @@ export class PerformanceClient {
   constructor(protected _appConfig: AppConfig) {
     this.API = _appConfig.httpEndpoint.slice(0,-1);}
 
-  // Takes in a piece of feedback (which has a prompt, completion, session ID, and the actual feedback (1 or 0))
+  // Takes in a piece of chatbbot use data
   async sendPerformance(performanceData) {
 
-    console.log(performanceData);
+    console.log('send function works');
     const auth = await Utils.authenticate();
-    const response = await fetch('https://b3ljauwcsrh3dfkkecfr3d7xy4.appsync-api.us-east-1.amazonaws.com/graphql', {
+    const response = await fetch(this.API + 'chatbot-use', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'auth'
+        'Authorization': 'auth',
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({ performanceData })
     });
@@ -27,11 +28,13 @@ export class PerformanceClient {
 
   async downloadPerformance(topic : string, startTime? : string, endTime? : string) {
     const auth = await Utils.authenticate();
-    const response = await fetch('https://b3ljauwcsrh3dfkkecfr3d7xy4.appsync-api.us-east-1.amazonaws.com/graphql', {
+    const response = await fetch(this.API + 'chatbot-use', {
+    //const response = await fetch('https://b3ljauwcsrh3dfkkecfr3d7xy4.appsync-api.us-east-1.amazonaws.com/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': auth
+        'Authorization': auth,
+        //"Access-Control-Allow-Origin": "*"
       },
       body: JSON.stringify({ topic, startTime, endTime })
     });
@@ -59,41 +62,52 @@ export class PerformanceClient {
   async getChatbotUses(startTime? : string, endTime? : string, nextPageToken? : string) {
     console.log('we made it this far');
     
-    const auth = await Utils.authenticate();
-    let params = new URLSearchParams({startTime, endTime, nextPageToken});
-    let keysForDel = [];
-    params.forEach((value, key) => {
-      if (value === undefined || value == "undefined") {
-        keysForDel.push(key);
-      }
-    });
+    try {
+      const auth = await Utils.authenticate();
+      let params = new URLSearchParams({startTime, endTime, nextPageToken});
+      let keysForDel = [];
+      params.forEach((value, key) => {
+        if (value === undefined || value == "undefined") {
+          keysForDel.push(key);
+        }
+      });
 
-    keysForDel.forEach(key => {
-      params.delete(key);
-    });
+      keysForDel.forEach(key => {
+        params.delete(key);
+      });
 
-    
-    const response = await fetch('https://b3ljauwcsrh3dfkkecfr3d7xy4.appsync-api.us-east-1.amazonaws.com/graphql' + params.toString(), {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': auth, 
-      },      
-    });
-    const result = await response.json();
-    return result;
+    // Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://56btacyw1a.execute-api.us-east-1.amazonaws.com/chatbot-use. (Reason: CORS header ‘Access-Control-Allow-Origin’ missing). Status code: 404.
+    // Cross-Origin Request Warning: The Same Origin Policy will disallow reading the remote resource at https://56btacyw1a.execute-api.us-east-1.amazonaws.com/chatbot-use soon. (Reason: When the `Access-Control-Allow-Headers` is `*`, the `Authorization` header is not covered. To include the `Authorization` header, it must be explicitly listed in CORS header `Access-Control-Allow-Headers`).
+
+      const response = await fetch(this.API + '/chatbot-use', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': auth, 
+          //"Access-Control-Allow-Origin": "*",
+        },      
+      });
+      const result = await response.json();
+      return result;
+    } catch (e) {
+      console.log('getChatbotuses failed')
+      console.log(e);
+      return;
+    }
+
   }
 
-  async deleteFeedback(topic : string, createdAt : string) {
-    const auth = await Utils.authenticate();
-    let params = new URLSearchParams({topic, createdAt});
-    await fetch(this.API + '/user-feedback?' + params.toString(), {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': auth
-      },      
-    });
+  // async deleteFeedback(topic : string, createdAt : string) {
+  //   const auth = await Utils.authenticate();
+  //   let params = new URLSearchParams({topic, createdAt});
+  //   await fetch(this.API + '/user-feedback?' + params.toString(), {
+  //     method: 'DELETE',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': auth,
+  //       //"Access-Control-Allow-Origin": "*"
+  //     },
+  //   });
     
-  }
+  // }
 }
