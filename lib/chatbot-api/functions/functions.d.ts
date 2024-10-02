@@ -22,6 +22,8 @@ export declare class LambdaFunctionStack extends cdk.Stack {
     readonly uploadS3Function: lambda.Function;
     readonly syncKendraFunction: lambda.Function;
     readonly chatInvocationsCounterFunction: lambda.Function;
+    readonly comprehendMedicalFunction: lambda.Function;
+    readonly kpiFunction: lambda.Function;
     constructor(scope: Construct, id: string, props: LambdaFunctionStackProps);
 }
 export {};
