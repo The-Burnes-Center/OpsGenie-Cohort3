@@ -18,7 +18,7 @@ export class MetricClient {
           'Authorization' : auth
         },        
       });
-      console.log(response);
+      //console.log(response);
       return await response.json()
     }
     catch (err) {
@@ -37,7 +37,7 @@ export class MetricClient {
           'Authorization' : auth
         },        
       });
-      console.log(response);
+      //console.log(response);
       return await response.json()
     }
     catch (err) {
