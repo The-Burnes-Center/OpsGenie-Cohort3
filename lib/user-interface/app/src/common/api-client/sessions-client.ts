@@ -55,7 +55,7 @@ export class SessionsClient {
       const { value, done } = await reader.read();
       const decoder = new TextDecoder();
       const parsed = decoder.decode(value)
-      console.log(parsed)
+      //console.log(parsed)
       try{
         output = JSON.parse(parsed);
         validData = true;
@@ -67,7 +67,7 @@ export class SessionsClient {
     if (!validData) {
       throw new Error(errorMessage);
     }
-    console.log(output);
+    //console.log(output);
     return output;
   }
 

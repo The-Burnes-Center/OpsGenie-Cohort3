@@ -71,6 +71,7 @@ export class UserFeedbackClient {
     keysForDel.forEach(key => {
       params.delete(key);
     });
+    console.log(this.API + '/user-feedback?' + params.toString())
     const response = await fetch(this.API + '/user-feedback?' + params.toString(), {
       method: 'GET',
       headers: {

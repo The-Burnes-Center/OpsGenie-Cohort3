@@ -58,7 +58,7 @@ export default function KPIsTab(props: KPIsTabProps) {
   ] = React.useState({label : "Chatbot Uses", value: "chatbot-uses", disabled: false});
   const [value, setValue] = React.useState<DateRangePickerProps.AbsoluteValue>({
     type: "absolute",
-    startDate: (new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 1)).toISOString(),
+    startDate: (new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 7)).toISOString(),
     endDate: (new Date()).toISOString()
   });
 
@@ -92,14 +92,10 @@ export default function KPIsTab(props: KPIsTabProps) {
     async (params: { pageIndex?, nextPageToken?}) => {
       setLoading(true);
       try {
-        
-        // console.log(selectedOption);
-        // console.log(value);
         const result = await apiClient.metrics.getChatbotUse(value.startDate, value.endDate, params.nextPageToken)
         // console.log(result);
         setPages((current) => {
           if (needsRefresh.current) {
-            // console.log("needed a refresh!")
             needsRefresh.current = false;
             return [result];
           }
@@ -107,12 +103,11 @@ export default function KPIsTab(props: KPIsTabProps) {
             current[params.pageIndex - 1] = result;
             return [...current];
           } else {
-            //console.log("pages?")
             return [...current, result];
           }
         });
       } catch (error) {
-        console.error("L it didnt work");
+        console.error("L get KPI failed");
         console.error(Utils.getErrorMessage(error));
       }
       setLoading(false);
@@ -227,33 +222,70 @@ export default function KPIsTab(props: KPIsTabProps) {
     },
   ]
 
+  /**
+   * id: ID for column in the table
+   * header: header text for that column
+   * cell: item is a piece of data and for item.x, it's getting the "x" field of the data item
+   */
   const columnDefinitions = [
     {
-      id: "problem",
-      header: "Problem",
-      cell: (item) => item.Problem,
+      id: "interactionId",
+      header: "Interaction ID",
+      cell: (item) => item.interactionId,
       isRowHeader: true,
     },
     {
-      id: "topic",
-      header: "Topic",
-      cell: (item) => item.Topic,
+      id: "timestamp",
+      header: "Timestamp",
+      cell: (item) => DateTime.fromISO(new Date(item.timestamp).toISOString()).toLocaleString(
+               DateTime.DATETIME_SHORT
+             ),
       isRowHeader: true,
     },
     {
-      id: "createdAt",
-      header: "Submission date",
-      cell: (item) =>
-        DateTime.fromISO(new Date(item.CreatedAt).toISOString()).toLocaleString(
-          DateTime.DATETIME_SHORT
-        ),
+      id: "responseTime",
+      header: "Response Time",
+      cell: (item) => item.responseTime,
+      isRowHeader: true,
     },
     {
-      id: "prompt",
-      header: "User Prompt",
-      cell: (item) => item.UserPrompt,
-      isRowHeader: true
+      id: "username",
+      header: "Username",
+      cell: (item) => item.username,
+      isRowHeader: true,
     },
+    {
+      id: "userMessage",
+      header: "User Message",
+      cell: (item) => item.userMessage,
+      isRowHeader: true,
+    },
+    {
+      id: "botResponse",
+      header: "Bot Response",
+      cell: (item) => item.botResponse,
+      isRowHeader: true,
+    },
+    // {
+    //   id: "topic",
+    //   header: "Topic",
+    //   cell: (item) => item.Topic,
+    //   isRowHeader: true,
+    // },
+    // {
+    //   id: "createdAt",
+    //   header: "Submission date",
+    //   cell: (item) =>
+    //     DateTime.fromISO(new Date(item.CreatedAt).toISOString()).toLocaleString(
+    //       DateTime.DATETIME_SHORT
+    //     ),
+    // },
+    // {
+    //   id: "prompt",
+    //   header: "User Prompt",
+    //   cell: (item) => item.UserPrompt,
+    //   isRowHeader: true
+    // },
 
   ];
   //getColumnDefinition(props.documentType);
@@ -300,7 +332,7 @@ export default function KPIsTab(props: KPIsTabProps) {
         : `${selectedItems.length} Metric?`}
     </Modal>
       <I18nProvider locale="en" messages={[messages]}>
-        <BarChart series={[]} />
+        {selectedOption.value !== 'chatbot-uses' && <BarChart series={[]} />}
 
         {selectedOption.value === 'chatbot-uses' &&
         <Table

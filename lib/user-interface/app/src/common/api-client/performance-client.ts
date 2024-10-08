@@ -1,3 +1,5 @@
+// THIS WHOLE FILE MIGHT BE USELESS LOL. CHECK LATER
+
 import {Utils} from "../utils"
 import { AppConfig } from "../types"; 
 
@@ -18,7 +20,7 @@ export class PerformanceClient {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'auth',
+        'Authorization': auth,
         "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({ performanceData })

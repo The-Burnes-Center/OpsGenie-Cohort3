@@ -43,6 +43,7 @@ import {
 import { Utils } from "../../common/utils";
 import {SessionRefreshContext} from "../../common/session-refresh-context"
 import { useNotifications } from "../notif-manager";
+import { timeStamp } from "console";
 
 
 export interface ChatInputPanelProps {
@@ -348,18 +349,20 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
         props.setRunning(false);        
         console.log('Disconnected from the WebSocket server');
 
-        /* log chat response time */
+        /* calculate response time */
         const endTime = new Date().getTime();
         const responseTime = (endTime - startTime) / 1000; // time in seconds
         console.log("Length of bot response in seconds: ", responseTime);
 
-        // logChatInteraction({
-        //   userMessage: messageToSend,
-        //   botResponse: receivedData,
-        //   responseTime,
-        //   username,
-        //   timestamp: new Date().toISOString(),
-        // });
+        const interactionData = {
+          username: "temp-username-figureitout",
+          userMessage: messageToSend,
+          botResponse: receivedData,
+          responseTime: responseTime,
+        }
+
+        apiClient.metrics.saveChatInteraction(interactionData);
+
       });
 
       
