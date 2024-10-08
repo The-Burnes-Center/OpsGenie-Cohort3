@@ -99,7 +99,6 @@ export class ChatBotApi extends Construct {
     })
 
     const kpiAPIIntegration = new HttpLambdaIntegration('KPIAPIIntegration', lambdaFunctions.kpiFunction);
-    console.log('we made it as far as being about to add routes for kpi api');
     restBackend.restAPI.addRoutes({
       path: "/chatbot-use",
       methods: [apigwv2.HttpMethod.GET, apigwv2.HttpMethod.POST, apigwv2.HttpMethod.DELETE],

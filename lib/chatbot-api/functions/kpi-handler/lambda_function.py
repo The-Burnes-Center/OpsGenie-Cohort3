@@ -6,8 +6,8 @@ This file provides an AWS Lambda function designed to handle HTTP requests for m
 It supports operations for posting, retrieving, downloading, and deleting KPIs. Admin users can access all functionalities, while non-admins have limited permissions.
 
 Environment variables:
-- `FEEDBACK_TABLE`: The name of the DynamoDB table storing feedback entries.
-- `FEEDBACK_S3_DOWNLOAD`: The S3 bucket used for storing downloadable feedback CSV files.
+- `INTERACTION_TABLE`: The name of the DynamoDB table storing interaction entries.
+- `INTERACTION_S3_DOWNLOAD`: The S3 bucket used for storing downloadable interaction data CSV files.
 
 Classes:
 - `DecimalEncoder`: A custom JSON encoder class to convert `Decimal` objects into strings.
@@ -33,8 +33,7 @@ from boto3.dynamodb.conditions import Key, Attr
 
 # Initialize DynamoDB client
 dynamodb = boto3.resource('dynamodb')
-#table = dynamodb.Table(os.environ.get('FEEDBACK_TABLE'))
-table = dynamodb.Table('mec-chatbot-logs')
+table = dynamodb.Table(os.environ.get('INTERACTION_TABLE'))
 
 from decimal import Decimal
 
@@ -69,8 +68,11 @@ def lambda_handler(event, context):
         """
         Set up download functionality later
         """
-        # if event.get('rawPath') == '/user-feedback/download-feedback' and admin:
-        #     return download_kpi(event)
+        print(http_method)
+        #if event.get('rawPath') == '/kpi/download' and admin: Idk what this means but it is not working. Unsure about RawPath
+        if http_method == 'POST /kpi/download' and admin:
+            print('we are downloading')
+            return download_kpi(event)
         return post_kpi(event)
     elif 'GET' in http_method and admin:
         return get_kpi(event)
@@ -82,6 +84,7 @@ def lambda_handler(event, context):
             'body': json.dumps('Method Not Allowed')
         }
 
+# works yasss
 def post_kpi(event):
     try:
         # Load JSON data from the event body
@@ -90,10 +93,9 @@ def post_kpi(event):
         interaction_id = str(uuid.uuid4())
         timestamp = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
         # Prepare the item to store in DynamoDB
-        print(interaction_data.__dict__)
         interaction_data = interaction_data['interaction_data']
         item = {
-            'interactionID': interaction_id,
+            'interactionId': interaction_id,
             'username': interaction_data['username'],
             'botMessage': interaction_data['botMessage'],
             'responseTime': interaction_data['responseTime'],
@@ -111,8 +113,7 @@ def post_kpi(event):
             'body': json.dumps({'interactionID': interaction_id})
         }
     except Exception as e:
-        print(e)
-        print("Caught error: DynamoDB error - could not add interaction to table")
+        print("Caught error: DynamoDB error - could not add interaction to table: " + e)
         return {
             'headers' : {
                 'Access-Control-Allow-Origin' : "*"
@@ -120,60 +121,55 @@ def post_kpi(event):
             'statusCode': 500,
             'body': json.dumps('Failed to store interaction: ' + str(e))
         }
-        
-    
+
 def download_kpi(event):
 
-    # load parameters
+    # Load parameters from request body
     data = json.loads(event['body'])
     start_time = data.get('startTime')
     end_time = data.get('endTime')
-    topic = "any" #data.get('topic')
-        
+
     response = None
 
-    # if topic is any, use the appropriate index
-    if not topic or topic=="any":                
-        query_kwargs = {
-            'IndexName': 'AnyIndex',
-            'KeyConditionExpression': Key('Any').eq("YES") & Key('CreatedAt').between(start_time, end_time)
-        }
-    else:
-        query_kwargs = {
-            'KeyConditionExpression': Key('CreatedAt').between(start_time, end_time) & Key('Topic').eq(topic),            
-        }   
+    # Query the interaction table using the timestamp range (No topic involved)
+    query_kwargs = {
+        'FilterExpression': Attr('timestamp').between(start_time, end_time)
+    }
 
     try:
-        response = table.query(**query_kwargs)
+        response = table.scan(**query_kwargs)
     except Exception as e:
-        print("Caught error: DynamoDB error - could not load feedback for download")
+        print("Caught error: DynamoDB error - could not load interaction data for download")
         return {
             'headers': {
                 'Access-Control-Allow-Origin': "*"
             },
             'statusCode': 500,
-            'body': json.dumps('Failed to retrieve feedback for download: ' + str(e))
+            'body': json.dumps('Failed to retrieve interaction data for download: ' + str(e))
         }
-    
-    
+
+    # Helper function to clean data for CSV
     def clean_csv(field):
-        print("working")
-        field = str(field).replace('"', '""')
-        field = field.replace('\n','').replace(',', '')
+        field = str(field)#.replace('"', '""')
+        #field = field.replace('\n', '').replace(',', '')
         return f'{field}'
     
-    csv_content = "FeedbackID, SessionID, UserPrompt, FeedbackComment, Topic, Problem, Feedback, ChatbotMessage, CreatedAt\n"
-    
+    # CSV header with relevant interaction data fields
+    csv_content = "Interaction ID, Username, User Message, Bot Response, Response Time, Timestamp\n"
+
+    # Build CSV content row by row
     for item in response['Items']:
-        csv_content += f"{clean_csv(item['FeedbackID'])}, {clean_csv(item['SessionID'])}, {clean_csv(item['UserPrompt'])}, {clean_csv(item['FeedbackComments'])}, {clean_csv(item['Topic'])}, {clean_csv(item['Problem'])}, {clean_csv(item['Feedback'])}, {clean_csv(item['ChatbotMessage'])}, {clean_csv(item['CreatedAt'])}\n"
-        print(csv_content)
+        csv_content += f"{clean_csv(item['interactionId'])}, {clean_csv(item['username'])}, {clean_csv(item['userMessage'])}, {clean_csv(item['botResponse'])}, {clean_csv(item['responseTime'])}, {clean_csv(item['timestamp'])}\n"
     
+    # Upload CSV to S3
     s3 = boto3.client('s3')
-    S3_DOWNLOAD_BUCKET = os.environ["FEEDBACK_S3_DOWNLOAD"]
+    S3_DOWNLOAD_BUCKET = os.environ["INTERACTION_S3_DOWNLOAD"]
 
     try:
-        file_name = f"feedback-{start_time}-{end_time}.csv"
+        file_name = f"interaction-data-{start_time}-{end_time}.csv"
         s3.put_object(Bucket=S3_DOWNLOAD_BUCKET, Key=file_name, Body=csv_content)
+        
+        # Generate a presigned URL for download
         presigned_url = s3.generate_presigned_url('get_object', Params={'Bucket': S3_DOWNLOAD_BUCKET, 'Key': file_name}, ExpiresIn=3600)
 
     except Exception as e:
@@ -183,47 +179,68 @@ def download_kpi(event):
                 'Access-Control-Allow-Origin': "*"
             },
             'statusCode': 500,
-            'body': json.dumps('Failed to retrieve feedback for download: ' + str(e))
+            'body': json.dumps('Failed to generate download link: ' + str(e))
         }
+
     return {
         'headers': {
-                'Access-Control-Allow-Origin': "*"
-            },
+            'Access-Control-Allow-Origin': "*"
+        },
         'statusCode': 200,
         'body': json.dumps({'download_url': presigned_url})
     }
-        
-
+    
+# wooo it works
 def get_kpi(event):
     try:
         # Extract query parameters
         query_params = event.get('queryStringParameters', {})
-        timestamp = query_params.get('timestamp')
-        # start_time = query_params.get('startTime')
-        # end_time = query_params.get('endTime')
+        start_time = query_params.get('startTime')
+        end_time = query_params.get('endTime')
+        #interaction_id = query_params.get('interactionId')
         # topic = query_params.get('topic')
         exclusive_start_key = query_params.get('nextPageToken')  # Pagination token
+        
+        start_time = datetime.strptime(start_time, '%Y-%m-%dT%H:%M:%S.%fZ')
+        end_time = datetime.strptime(end_time, '%Y-%m-%dT%H:%M:%S.%fZ')
+        
+        start_time = start_time.isoformat(timespec='milliseconds') + 'Z'
+        end_time = end_time.isoformat(timespec='milliseconds') + 'Z'
 
         # Validate required parameters
-        if not timestamp:
+        if not start_time or not end_time:
             return {
                 'statusCode': 400,
                 'body': json.dumps({'error': 'Missing required query parameters'})
             }
 
         # Set up the query conditions for DynamoDB
-        query_kwargs = {
-            'KeyConditionExpression': Key('timestamp') == timestamp, #between(start_time, end_time) & Key('topic').eq(topic),
-            'ScanIndexForward': False,  # Sort results in descending order by timestamp
-            'Limit': 10  # Limit to 10 items per request
-        }
+        # query_kwargs = {
+        #     'KeyConditionExpression': Key('interactionId').eq(interaction_id),
+        #     'FilterExpression': Attr('timestamp').between(start_time, end_time),
+        #     #'KeyConditionExpression': Key("timestamp").between(start_time, end_time),
+        #     'ScanIndexForward': False,  # Sort results in descending order by timestamp
+        #     'Limit': 10  # Limit to 10 items per request
+        # }
+        
 
+
+        
+        # Perform the query on DynamoDB
+        #response = table.query(**query_kwargs)
+        
+        scan_kwargs = {
+            'FilterExpression': Attr('timestamp').between(start_time, end_time),
+            'Limit': 10  # Limit to 10 items per request (can be adjusted as needed)
+        }
+        
         # Handle pagination if nextPageToken is provided
         if exclusive_start_key:
             query_kwargs['ExclusiveStartKey'] = json.loads(exclusive_start_key)
 
-        # Perform the query on DynamoDB
-        response = table.query(**query_kwargs)
+        # Perform the scan operation
+        response = table.scan(**scan_kwargs)
+
 
         # Prepare the response body
         body = {
@@ -240,7 +257,7 @@ def get_kpi(event):
                 'Access-Control-Allow-Origin': "*"
             },
             'statusCode': 200,
-            'body': json.dumps(body)
+            'body': json.dumps(body, cls=DecimalEncoder)
         }
 
     except Exception as e:
@@ -253,28 +270,26 @@ def get_kpi(event):
             'body': json.dumps({'error': f"Failed to retrieve data: {str(e)}"})
         }
     
-# FIX!!!!        
+# WORKS
 def delete_kpi(event):
     try:
-        # Extract FeedbackID from the event
-        # feedback_id = json.loads(event['body']).get('FeedbackID')
         query_params = event.get('queryStringParameters', {})
-        topic = query_params.get('topic')
-        created_at = query_params.get('createdAt')
-        
-        if not topic:
-            return {
-                'headers': {
-                    'Access-Control-Allow-Origin': '*'
-                },
-                'statusCode': 400,
-                'body': json.dumps('Missing FeedbackID')
-            }
+        interaction_id = query_params.get('interactionId')
+        # timestamp = query_params.get('timestamp')
+
+        # if not timestamp:
+        #     return {
+        #         'headers': {
+        #             'Access-Control-Allow-Origin': '*'
+        #         },
+        #         'statusCode': 400,
+        #         'body': json.dumps('Missing id')
+        #     }
+            
         # Delete the item from the DynamoDB table
         response = table.delete_item(
             Key={
-                'Topic': topic,
-                'CreatedAt' : created_at
+                'interactionId': interaction_id,
             }
         )
         return {
@@ -282,14 +297,14 @@ def delete_kpi(event):
                 'Access-Control-Allow-Origin': '*'
             },
             'statusCode': 200,
-            'body': json.dumps({'message': 'Feedback deleted successfully'})
+            'body': json.dumps({'message': 'Interaction item deleted successfully'})
         }
     except Exception as e:
-        print("Caught error: DynamoDB error - could not delete feedback")
+        print("Caught error: DynamoDB error - could not delete interaction item")
         return {
             'headers': {
                 'Access-Control-Allow-Origin': '*'
             },
             'statusCode': 500,
-            'body': json.dumps('Failed to delete feedback: ' + str(e))
+            'body': json.dumps('Failed to delete interaction item: ' + str(e))
         }
