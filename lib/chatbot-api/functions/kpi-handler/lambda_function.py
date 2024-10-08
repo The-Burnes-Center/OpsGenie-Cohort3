@@ -87,18 +87,38 @@ def lambda_handler(event, context):
 # works yasss
 def post_kpi(event):
     try:
-        # Load JSON data from the event body
-        interaction_data = json.loads(event['body'])
-        # Generate a unique feedback ID and current timestamp
-        interaction_id = str(uuid.uuid4())
-        timestamp = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
-        # Prepare the item to store in DynamoDB
-        interaction_data = interaction_data['interaction_data']
+        # # Load JSON data from the event body
+        # interaction_data = json.loads(event['body'])
+        # print("the post request has received this to add to the table")
+        # print(interaction_data)
+        # # Generate a unique feedback ID and current timestamp
+        # interaction_id = str(uuid.uuid4())
+        # timestamp = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+        # # Prepare the item to store in DynamoDB
+        # interaction_data = interaction_data['interaction_data']
+        # Parse the body from the event
+        body = json.loads(event['body'])
+
+        # Extract the 'interaction_data' from the parsed body
+        interaction_data = body.get('interaction_data')
+
+        # Check if interaction_data is present
+        if not interaction_data:
+            return {
+                'statusCode': 400,
+                'body': json.dumps({'error': 'Missing interaction_data'})
+            }        
+        
+        username = interaction_data.get('username')
+        user_message = interaction_data.get('userMessage')
+        bot_response = interaction_data.get('botResponse')
+        response_time = interaction_data.get('responseTime')
         item = {
             'interactionId': interaction_id,
             'username': interaction_data['username'],
-            'botMessage': interaction_data['botMessage'],
+            'botResponse': interaction_data['botResponse'],
             'responseTime': interaction_data['responseTime'],
+            'userMessage': interaction_data['userMessage'],
             'timestamp': timestamp
         }
         # Put the item into the DynamoDB table

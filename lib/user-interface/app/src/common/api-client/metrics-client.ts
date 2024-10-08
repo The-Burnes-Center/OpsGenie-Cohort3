@@ -60,8 +60,13 @@ export class MetricClient {
         },
         body: JSON.stringify({interaction_data: interactionData}),
       })
-
-      console.log('CHAT INTERACTION SAVED')
+      console.log(JSON.stringify({interaction_data: interactionData}));
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.log('Error response:', response.status, errorText);
+      } else {
+        console.log('CHAT INTERACTION SAVED');
+      }
     } catch (e) {
       console.log('Chat interaction not saved - ' + e);
     }
