@@ -115,10 +115,10 @@ def post_kpi(event):
         response_time = interaction_data.get('responseTime')
         item = {
             'interactionId': interaction_id,
-            'username': interaction_data['username'],
-            'botResponse': interaction_data['botResponse'],
-            'responseTime': interaction_data['responseTime'],
-            'userMessage': interaction_data['userMessage'],
+            'username': username,
+            'botResponse': bot_response,
+            'responseTime': response_time,
+            'userMessage': user_message,
             'timestamp': timestamp
         }
         # Put the item into the DynamoDB table
