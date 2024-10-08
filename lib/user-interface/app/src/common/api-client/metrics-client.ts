@@ -58,9 +58,9 @@ export class MetricClient {
           'Content-Type': 'application/json',
           'Authorization' : auth,
         },
-        body: JSON.stringify(interactionData),
+        body: JSON.stringify({interaction_data: interactionData}),
       })
-      console.log(JSON.stringify(interactionData));
+
       console.log('CHAT INTERACTION SAVED')
     } catch (e) {
       console.log('Chat interaction not saved - ' + e);
