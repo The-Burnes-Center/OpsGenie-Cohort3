@@ -92,12 +92,14 @@ def post_kpi(event):
         # print("the post request has received this to add to the table")
         # print(interaction_data)
         # # Generate a unique feedback ID and current timestamp
-        # interaction_id = str(uuid.uuid4())
-        # timestamp = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+        interaction_id = str(uuid.uuid4())
+        timestamp = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
         # # Prepare the item to store in DynamoDB
         # interaction_data = interaction_data['interaction_data']
         # Parse the body from the event
         body = json.loads(event['body'])
+
+        print("hey it's me the lambda function . this is the body we have rn " + body)
 
         # Extract the 'interaction_data' from the parsed body
         interaction_data = body.get('interaction_data')
