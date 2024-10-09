@@ -97,13 +97,17 @@ def post_kpi(event):
         # # Prepare the item to store in DynamoDB
         # interaction_data = interaction_data['interaction_data']
         # Parse the body from the event
+        
+        print(event["body"])
         body = json.loads(event['body'])
+        print(body)
 
+        interaction_data = body.get('interaction_data')
         print("hey it's me the lambda function . this is the body we have rn " + body)
 
         # Extract the 'interaction_data' from the parsed body
-        interaction_data = body.get('interaction_data')
-
+        
+        
         # Check if interaction_data is present
         if not interaction_data:
             return {
@@ -123,6 +127,8 @@ def post_kpi(event):
             'userMessage': user_message,
             'timestamp': timestamp
         }
+        
+        #print("item: " + item)
         # Put the item into the DynamoDB table
         table.put_item(Item=item)
         if interaction_data == 0:
@@ -135,7 +141,7 @@ def post_kpi(event):
             'body': json.dumps({'interactionID': interaction_id})
         }
     except Exception as e:
-        print("Caught error: DynamoDB error - could not add interaction to table: " + e)
+        print("Caught error: DynamoDB error - could not add interaction to table: " + str(e))
         return {
             'headers' : {
                 'Access-Control-Allow-Origin' : "*"
