@@ -36,6 +36,7 @@ import React from 'react';
 import { useNotifications } from "../../components/notif-manager";
 import {feedbackCategories, feedbackTypes, KPIMetrics} from '../../common/constants'
 //import { FeedbackResult } from "../../../API";
+import { fetchWeeklyFeedback, sendFeedbackEmail } from "../../../../../chatbot-api/functions/email-feedback/email-feedback"
 export interface KPIsTabProps {
   updateSelectedMetrics: React.Dispatch<any>;
 }
@@ -93,6 +94,7 @@ export default function KPIsTab(props: KPIsTabProps) {
       setLoading(true);
       try {
         const result = await apiClient.metrics.getChatbotUse(value.startDate, value.endDate, params.nextPageToken)
+
         // console.log(result);
         setPages((current) => {
           if (needsRefresh.current) {
@@ -150,7 +152,7 @@ export default function KPIsTab(props: KPIsTabProps) {
 
   const refreshPage = async () => {
     // console.log(pages[Math.min(pages.length - 1, currentPageIndex - 1)]?.Contents!)
-
+    //sendFeedbackEmail("", "");
     if (currentPageIndex <= 1) {
       await getKPI({ pageIndex: currentPageIndex });
     } else {
