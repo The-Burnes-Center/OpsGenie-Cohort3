@@ -91,8 +91,7 @@ def post_kpi(event):
         # interaction_data = json.loads(event['body'])
         # print("the post request has received this to add to the table")
         # print(interaction_data)
-        # # Generate a unique feedback ID and current timestamp
-        interaction_id = str(uuid.uuid4())
+        # Generat current timestamp
         timestamp = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
         # # Prepare the item to store in DynamoDB
         # interaction_data = interaction_data['interaction_data']
@@ -101,9 +100,11 @@ def post_kpi(event):
         print(event["body"])
         body = json.loads(event['body'])
         print(body)
-
+        
+        print("here")
         interaction_data = body.get('interaction_data')
-        print("hey it's me the lambda function . this is the body we have rn " + body)
+        print("there")
+        print("hey it's me the lambda function . this is the body we have rn " + json.dumps(body))
 
         # Extract the 'interaction_data' from the parsed body
         
@@ -115,17 +116,16 @@ def post_kpi(event):
                 'body': json.dumps({'error': 'Missing interaction_data'})
             }        
         
-        username = interaction_data.get('username')
-        user_message = interaction_data.get('userMessage')
-        bot_response = interaction_data.get('botResponse')
-        response_time = interaction_data.get('responseTime')
+        username = interaction_data.get('Username')
+        user_message = interaction_data.get('UserPrompt')
+        bot_response = interaction_data.get('BotMessage')
+        response_time = interaction_data.get('ResponseTime')
         item = {
-            'interactionId': interaction_id,
-            'username': username,
-            'botResponse': bot_response,
-            'responseTime': response_time,
-            'userMessage': user_message,
-            'timestamp': timestamp
+            'Username': username,
+            'BotMessage': bot_response,
+            'ResponseTime': response_time,
+            'UserPrompt': user_message,
+            'Timestamp': timestamp
         }
         
         #print("item: " + item)
@@ -138,7 +138,7 @@ def post_kpi(event):
                 'Access-Control-Allow-Origin' : "*"
             },
             'statusCode': 200,
-            'body': json.dumps({'interactionID': interaction_id})
+            'body': json.dumps('POST successful')
         }
     except Exception as e:
         print("Caught error: DynamoDB error - could not add interaction to table: " + str(e))
@@ -165,7 +165,7 @@ def download_kpi(event):
     }
 
     try:
-        response = table.scan(**query_kwargs)
+        response = table.query(**query_kwargs)
     except Exception as e:
         print("Caught error: DynamoDB error - could not load interaction data for download")
         return {
@@ -183,11 +183,11 @@ def download_kpi(event):
         return f'{field}'
     
     # CSV header with relevant interaction data fields
-    csv_content = "Interaction ID, Username, User Message, Bot Response, Response Time, Timestamp\n"
+    csv_content = "Timestamp, Username, User Prompt, Bot Message, Response Time\n"
 
     # Build CSV content row by row
     for item in response['Items']:
-        csv_content += f"{clean_csv(item['interactionId'])}, {clean_csv(item['username'])}, {clean_csv(item['userMessage'])}, {clean_csv(item['botResponse'])}, {clean_csv(item['responseTime'])}, {clean_csv(item['timestamp'])}\n"
+        csv_content += f"{clean_csv(item['Timestamp'])}, {clean_csv(item['Username'])}, {clean_csv(item['UserPrompt'])}, {clean_csv(item['BotMessage'])}, {clean_csv(item['ResponseTime'])}\n"
     
     # Upload CSV to S3
     s3 = boto3.client('s3')
@@ -225,7 +225,6 @@ def get_kpi(event):
         query_params = event.get('queryStringParameters', {})
         start_time = query_params.get('startTime')
         end_time = query_params.get('endTime')
-        #interaction_id = query_params.get('interactionId')
         # topic = query_params.get('topic')
         exclusive_start_key = query_params.get('nextPageToken')  # Pagination token
         
@@ -243,31 +242,18 @@ def get_kpi(event):
             }
 
         # Set up the query conditions for DynamoDB
-        # query_kwargs = {
-        #     'KeyConditionExpression': Key('interactionId').eq(interaction_id),
-        #     'FilterExpression': Attr('timestamp').between(start_time, end_time),
-        #     #'KeyConditionExpression': Key("timestamp").between(start_time, end_time),
-        #     'ScanIndexForward': False,  # Sort results in descending order by timestamp
-        #     'Limit': 10  # Limit to 10 items per request
-        # }
-        
-
-
-        
-        # Perform the query on DynamoDB
-        #response = table.query(**query_kwargs)
-        
-        scan_kwargs = {
-            'FilterExpression': Attr('timestamp').between(start_time, end_time),
-            'Limit': 10  # Limit to 10 items per request (can be adjusted as needed)
+        query_kwargs = {
+            'KeyConditionExpression': Key("timestamp").between(start_time, end_time),
+            'ScanIndexForward': False,  # Sort results in descending order by timestamp
+            'Limit': 10  # Limit to 10 items per request
         }
         
         # Handle pagination if nextPageToken is provided
         if exclusive_start_key:
             query_kwargs['ExclusiveStartKey'] = json.loads(exclusive_start_key)
 
-        # Perform the scan operation
-        response = table.scan(**scan_kwargs)
+        # Perform the query operation
+        response = table.query(**query_kwargs)
 
 
         # Prepare the response body
@@ -302,22 +288,21 @@ def get_kpi(event):
 def delete_kpi(event):
     try:
         query_params = event.get('queryStringParameters', {})
-        interaction_id = query_params.get('interactionId')
-        # timestamp = query_params.get('timestamp')
+        timestamp = query_params.get('Timestamp')
 
-        # if not timestamp:
-        #     return {
-        #         'headers': {
-        #             'Access-Control-Allow-Origin': '*'
-        #         },
-        #         'statusCode': 400,
-        #         'body': json.dumps('Missing id')
-        #     }
+        if not timestamp:
+            return {
+                'headers': {
+                    'Access-Control-Allow-Origin': '*'
+                },
+                'statusCode': 400,
+                'body': json.dumps('Missing timestamp')
+            }
             
         # Delete the item from the DynamoDB table
         response = table.delete_item(
             Key={
-                'interactionId': interaction_id,
+                'Timestamp': timestamp,
             }
         )
         return {
