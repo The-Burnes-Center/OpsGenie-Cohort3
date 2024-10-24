@@ -90,7 +90,7 @@ def post_kpi(event):
         # load JSON data from the event body
         timestamp = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
         
-        body = json.loads(event['body'])
+        body = json.loads(event['body'], parse_float=Decimal)
 
         interaction_data = body.get('interaction_data')
         print(interaction_data)
