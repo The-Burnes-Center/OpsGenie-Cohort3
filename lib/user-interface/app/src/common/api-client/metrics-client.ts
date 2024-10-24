@@ -50,8 +50,9 @@ export class MetricClient {
 
   async saveChatInteraction(interactionData) {
     // timestamp and interactionID are generated in lambda function
-    console.log(interactionData.get["interaction_data"]);//.interaction_data);
+    console.log(interactionData["interaction_data"]);//.interaction_data);
     console.log("hi hi")
+    console.log(JSON.stringify({interaction_data: interactionData}));
     try {
       const auth = await Utils.authenticate();      
       const response = await fetch(this.API + '/chatbot-use', {
