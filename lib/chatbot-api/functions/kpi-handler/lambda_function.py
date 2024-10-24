@@ -87,27 +87,13 @@ def lambda_handler(event, context):
 # works yasss
 def post_kpi(event):
     try:
-        # # Load JSON data from the event body
-        # interaction_data = json.loads(event['body'])
-        # print("the post request has received this to add to the table")
-        # print(interaction_data)
-        # Generat current timestamp
+        # load JSON data from the event body
         timestamp = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
-        # # Prepare the item to store in DynamoDB
-        # interaction_data = interaction_data['interaction_data']
-        # Parse the body from the event
         
-        print(event["body"])
         body = json.loads(event['body'])
-        print(body)
-        
-        print("here")
-        interaction_data = body.get('interaction_data')
-        print("there")
-        print("hey it's me the lambda function . this is the body we have rn " + json.dumps(body))
 
-        # Extract the 'interaction_data' from the parsed body
-        
+        interaction_data = body.get('interaction_data')
+        print(interaction_data)
         
         # Check if interaction_data is present
         if not interaction_data:
