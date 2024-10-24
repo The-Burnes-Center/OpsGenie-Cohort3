@@ -237,7 +237,7 @@ export default function KPIsTab(props: KPIsTabProps) {
     {
       id: "timestamp",
       header: "Timestamp",
-      cell: (item) => DateTime.fromISO(new Date(item.timestamp).toISOString()).toLocaleString(
+      cell: (item) => DateTime.fromISO(new Date(item.Timestamp).toISOString()).toLocaleString(
                DateTime.DATETIME_SHORT
              ),
       isRowHeader: true,
@@ -245,25 +245,25 @@ export default function KPIsTab(props: KPIsTabProps) {
     {
       id: "responseTime",
       header: "Response Time",
-      cell: (item) => item.responseTime,
+      cell: (item) => item.ResponseTime,
       isRowHeader: true,
     },
     {
       id: "username",
       header: "Username",
-      cell: (item) => item.username,
+      cell: (item) => item.Username,
       isRowHeader: true,
     },
     {
-      id: "userMessage",
-      header: "User Message",
-      cell: (item) => item.userMessage,
+      id: "UserPrompt",
+      header: "User Prompt",
+      cell: (item) => item.UserPrompt,
       isRowHeader: true,
     },
     {
-      id: "botResponse",
-      header: "Bot Response",
-      cell: (item) => item.botResponse,
+      id: "BotMessage",
+      header: "Bot Message",
+      cell: (item) => item.BotMessage,
       isRowHeader: true,
     },
     // {

@@ -204,7 +204,6 @@ def download_kpi(event):
         'body': json.dumps({'download_url': presigned_url})
     }
     
-# wooo it works
 def get_kpi(event):
     try:
         # Extract query parameters
@@ -229,7 +228,7 @@ def get_kpi(event):
 
         # Set up the query conditions for DynamoDB
         query_kwargs = {
-            'KeyConditionExpression': Key("timestamp").between(start_time, end_time),
+            'KeyConditionExpression': Key("Timestamp").between(start_time, end_time),
             'ScanIndexForward': False,  # Sort results in descending order by timestamp
             'Limit': 10  # Limit to 10 items per request
         }
