@@ -39,7 +39,7 @@ jobs:
     # Step 8: Fetch CloudFormation outputs and save to a file
     - name: Fetch CloudFormation Outputs
       run: |
-        aws cloudformation describe-stacks --stack-name MECKnowledgeStack --query “Stacks[0].Outputs” > stack-outputs.json
+        aws cloudformation describe-stacks --stack-name MECKnowledgeStack --query "Stacks[0].Outputs" > stack-outputs.json
         cat stack-outputs.json  # Just to verify in logs if needed
     # Step 9: Upload the output file as an artifact (optional)
     - name: Upload Outputs as Artifact
