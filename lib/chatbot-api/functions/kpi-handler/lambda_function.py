@@ -105,7 +105,7 @@ def post_kpi(event):
         username = interaction_data.get('Username')
         user_message = interaction_data.get('UserPrompt')
         bot_response = interaction_data.get('BotMessage')
-        response_time = interaction_data.get('ResponseTime')
+        response_time = interaction_data.get('ResponseTime', Decimal(0))
         item = {
             'Username': username,
             'BotMessage': bot_response,
