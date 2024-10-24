@@ -4,7 +4,6 @@ import { KnowledgeManagementClient } from "./knowledge-management-client";
 import { UserFeedbackClient } from "./user-feedback-client";
 import { ComprehendMedicalClient } from "./comprehend-medical-client";
 import { MetricClient } from "./metrics-client";
-import { PerformanceClient } from "./performance-client";
 
 export class ApiClient {
 
@@ -13,16 +12,6 @@ export class ApiClient {
   private _userFeedbackClient: UserFeedbackClient | undefined;
   private _comprehendMedicalClient: ComprehendMedicalClient | undefined;
   private _metricClient: MetricClient | undefined;
-  private _performanceClient: PerformanceClient | undefined;
-
- 
-  public get performance() {
-    if (!this._performanceClient) {
-      this._performanceClient = new PerformanceClient(this._appConfig);
-    }
-
-    return this._performanceClient;
-  }
 
   public get knowledgeManagement() {
     if (!this._knowledgeManagementClient) {
