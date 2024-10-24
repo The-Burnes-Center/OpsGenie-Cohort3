@@ -208,10 +208,12 @@ def get_kpi(event):
     try:
         # Extract query parameters
         query_params = event.get('queryStringParameters', {})
+        print("Query params:", query_params)
         start_time = query_params.get('startTime')
         end_time = query_params.get('endTime')
         # topic = query_params.get('topic')
-        exclusive_start_key = query_params.get('nextPageToken')  # Pagination token
+        exclusive_start_key = query_params.get('nextPageToken') # pagination token
+        print(f"startTime: {start_time}, endTime: {end_time}, nextPageToken: {exclusive_start_key}")
         
         start_time = datetime.strptime(start_time, '%Y-%m-%dT%H:%M:%S.%fZ')
         end_time = datetime.strptime(end_time, '%Y-%m-%dT%H:%M:%S.%fZ')

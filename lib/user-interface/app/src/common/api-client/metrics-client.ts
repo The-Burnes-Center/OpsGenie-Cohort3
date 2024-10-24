@@ -80,13 +80,6 @@ export class MetricClient {
   async getChatbotUse(startTime? : string, endTime? : string, nextPageToken? : string) {
     try {
       const auth = await Utils.authenticate();
-      // function decodeToken(token) {
-      //   const payloadBase64 = token.split('.')[1]; // JWT has three parts, split by '.'
-      //   const decodedPayload = atob(payloadBase64); // Decode the Base64 payload
-      //   return JSON.parse(decodedPayload).toString(); // Parse it to an object
-      // }
-
-      //console.log("DECODED TOKEN: " + decodeToken(auth));
       console.log(startTime + endTime + nextPageToken);
       let params = new URLSearchParams({startTime,endTime,nextPageToken});
       let keysForDel = [];
@@ -111,7 +104,7 @@ export class MetricClient {
           //'Access-Control-Allow-Origin': '*',
         },        
       });
-      console.log(response);
+      console.log("Response: " + response);
       return await response.json()
     } catch (e) {
       console.log(e);
