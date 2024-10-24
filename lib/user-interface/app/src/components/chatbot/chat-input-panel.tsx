@@ -322,12 +322,11 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
         const endTime = new Date().getTime();
         const responseTime = (endTime - startTime) / 1000; // time in seconds
         console.log("Length of bot response in seconds: ", responseTime);
-
         const interactionData = {
-          username: "temp-username-figureitout",
-          userMessage: messageToSend,
-          botResponse: receivedData,
-          responseTime: responseTime,
+          Username: username,
+          BotMessage: receivedData,
+          UserPrompt: messageToSend,
+          ResponseTime: responseTime,
         }
 
         apiClient.metrics.saveChatInteraction(interactionData);
