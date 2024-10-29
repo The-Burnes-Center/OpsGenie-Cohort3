@@ -444,13 +444,15 @@ export default function KPIsTab(props: KPIsTabProps) {
 
                   <Button iconName="refresh" onClick={refreshPage} />
                   <Button 
-                variant="primary"
-                onClick={() => {
-                  apiClient.metrics.downloadChatbotUses(value.startDate, value.endDate);
-                  const id = addNotification("success", "Your files have been downloaded.")
-                  Utils.delay(3000).then(() => removeNotification(id));
-                }}
-                >Download</Button>
+                    variant="primary"
+                    onClick={() => {
+                      apiClient.metrics.downloadChatbotUses(value.startDate, value.endDate);
+                      const id = addNotification("success", "Your files have been downloaded.")
+                      Utils.delay(3000).then(() => removeNotification(id));
+                    }}
+                  >
+                    Download
+                  </Button>
                   <Button
                     variant="primary"
                     disabled={selectedItems.length == 0}

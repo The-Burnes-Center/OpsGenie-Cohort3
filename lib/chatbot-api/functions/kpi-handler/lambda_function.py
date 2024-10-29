@@ -153,10 +153,12 @@ def download_kpi(event):
     try:
         response = table.query(**query_kwargs)
     except Exception as e:
-        print("Caught error: DynamoDB error - could not load interaction data for download")
+        print("Caught error: DynamoDB error - could not lollowd interaction data for download")
         return {
             'headers': {
-                'Access-Control-Allow-Origin': "*"
+                'Access-Control-Allow-Origin': "*",
+                'Access-Control-Allow-Headers': "*",
+                'Access-Control-Allow-Methods': "GET,POST"
             },
             'statusCode': 500,
             'body': json.dumps('Failed to retrieve interaction data for download: ' + str(e))
@@ -190,7 +192,9 @@ def download_kpi(event):
         print("Caught error: S3 error - could not generate download link")
         return {
             'headers': {
-                'Access-Control-Allow-Origin': "*"
+                'Access-Control-Allow-Origin': "*",
+                'Access-Control-Allow-Headers': "*",
+                'Access-Control-Allow-Methods': "GET,POST"
             },
             'statusCode': 500,
             'body': json.dumps('Failed to generate download link: ' + str(e))
@@ -198,7 +202,9 @@ def download_kpi(event):
 
     return {
         'headers': {
-            'Access-Control-Allow-Origin': "*"
+            'Access-Control-Allow-Origin': "*",
+            'Access-Control-Allow-Headers': "*",
+            'Access-Control-Allow-Methods': "GET,POST"
         },
         'statusCode': 200,
         'body': json.dumps({'download_url': presigned_url})

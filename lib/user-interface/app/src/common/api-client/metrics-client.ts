@@ -113,34 +113,43 @@ export class MetricClient {
     
   }
 
-  async downloadChatbotUses(startTime? : string, endTime? : string) {
-    const auth = await Utils.authenticate();
-    const response = await fetch(this.API + '/chatbot-uses/download', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': auth
-      },
-      body: JSON.stringify({ startTime, endTime })
-    });
-    const result = await response.json();
-  
-    fetch(result.download_url, {
-      method: 'GET',
-      headers: {
-        'Content-Disposition': 'attachment',
-      }
-      
-    }).then(response => response.blob())
-    .then(blob => {
+  async downloadChatbotUses(startTime?: string, endTime?: string) {
+    try {
+        const auth = await Utils.authenticate();
+        const response = await fetch(this.API + '/chatbot-uses/download', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': auth
+            },
+            body: JSON.stringify({ startTime, endTime })
+        });
+
+        // Check if the response is OK, else throw an error
+        if (!response.ok) {
+            throw new Error(`Failed to fetch download URL: ${response.statusText}`);
+        }
+
+        const result = await response.json();
+
+        // Fetch the actual file for download
+        const fileResponse = await fetch(result.download_url);
+        if (!fileResponse.ok) {
+            throw new Error("Failed to download the file.");
+        }
+
+        const blob = await fileResponse.blob();
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
         a.download = "data.csv";
-        document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+        document.body.appendChild(a);
         a.click();
-        a.remove();  //afterwards we remove the element again
-    });    
-
+        a.remove();
+    } catch (error) {
+        console.error("Download failed:", error);
+        alert("An error occurred while downloading the file. Please try again.");
+    }
   }
+
 }
