@@ -215,11 +215,12 @@ def get_kpi(event):
         exclusive_start_key = query_params.get('nextPageToken') # pagination token
         print(f"startTime: {start_time}, endTime: {end_time}, nextPageToken: {exclusive_start_key}")
         
-       start_time = datetime.strptime(start_time, '%Y-%m-%dT%H:%M:%S%z')
-        end_time = datetime.strptime(end_time, '%Y-%m-%dT%H:%M:%S%z')
-        
-        start_time = start_time.astimezone(datetime.timezone.utc).isoformat(timespec='milliseconds').replace('+00:00', 'Z')
-        end_time = end_time.astimezone(datetime.timezone.utc).isoformat(timespec='milliseconds').replace('+00:00', 'Z')
+        start_time = datetime.strptime(start_time, '%Y-%m-%dT%H:%M:%S.%fZ')
+        end_time = datetime.strptime(end_time, '%Y-%m-%dT%H:%M:%S.%fZ')
+
+        # Convert back to ISO format with milliseconds and UTC suffix 'Z'
+        start_time = start_time.isoformat(timespec='milliseconds') + 'Z'
+        end_time = end_time.isoformat(timespec='milliseconds') + 'Z'
 
         # Validate required parameters
         if not start_time or not end_time:
