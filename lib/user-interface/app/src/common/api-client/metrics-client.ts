@@ -99,4 +99,48 @@ export class MetricClient {
       console.log(e);
     }
 }
+
+  async deleteChatbotUses(timestamp: string) {
+    const auth = await Utils.authenticate();
+    let params = new URLSearchParams({timestamp});
+    await fetch(this.API + '/chatbot-use?' + params.toString(), {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': auth
+      },      
+    });
+    
+  }
+
+  async downloadChatbotUses(startTime? : string, endTime? : string) {
+    const auth = await Utils.authenticate();
+    const response = await fetch(this.API + '/chatbot-uses/download', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': auth
+      },
+      body: JSON.stringify({ startTime, endTime })
+    });
+    const result = await response.json();
+  
+    fetch(result.download_url, {
+      method: 'GET',
+      headers: {
+        'Content-Disposition': 'attachment',
+      }
+      
+    }).then(response => response.blob())
+    .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = "data.csv";
+        document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+        a.click();
+        a.remove();  //afterwards we remove the element again
+    });    
+
+  }
 }

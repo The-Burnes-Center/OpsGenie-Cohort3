@@ -229,12 +229,6 @@ export default function KPIsTab(props: KPIsTabProps) {
    */
   const columnDefinitions = [
     {
-      id: "interactionId",
-      header: "Interaction ID",
-      cell: (item) => item.interactionId,
-      isRowHeader: true,
-    },
-    {
       id: "timestamp",
       header: "Timestamp",
       cell: (item) => DateTime.fromISO(new Date(item.Timestamp).toISOString()).toLocaleString(
@@ -290,14 +284,14 @@ export default function KPIsTab(props: KPIsTabProps) {
   ];
   //getColumnDefinition(props.documentType);
 
-  const deleteSelectedFeedback = async () => {
+  const deleteSelectedChatbotUses = async () => {
     if (!appContext) return;
 
     setLoading(true);
     setShowModalDelete(false);
     const apiClient = new ApiClient(appContext);
     await Promise.all(
-      selectedItems.map((s) => apiClient.userFeedback.deleteFeedback(s.Topic, s.CreatedAt))
+      selectedItems.map((s) => apiClient.metrics.deleteChatbotUses(s.Timestamp))
     );
     await getKPI({ pageIndex: currentPageIndex });
     setSelectedItems([])
@@ -318,7 +312,7 @@ export default function KPIsTab(props: KPIsTabProps) {
             <Button variant="link" onClick={() => setShowModalDelete(false)}>
               Cancel
             </Button>
-            <Button variant="primary" onClick={deleteSelectedFeedback}>
+            <Button variant="primary" onClick={deleteSelectedChatbotUses}>
               Ok
             </Button>
           </SpaceBetween>{" "}
@@ -328,7 +322,7 @@ export default function KPIsTab(props: KPIsTabProps) {
     >
       Do you want to delete{" "}
       {selectedItems.length == 1
-        ? `Metrics ${selectedItems[0].FeedbackID!}?`
+        ? `Metrics ${selectedItems[0].Timestamp!}?`
         : `${selectedItems.length} Metric?`}
     </Modal>
       <I18nProvider locale="en" messages={[messages]}>
