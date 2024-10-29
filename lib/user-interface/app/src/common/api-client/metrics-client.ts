@@ -78,21 +78,14 @@ export class MetricClient {
   async getChatbotUse(startTime? : string, endTime? : string, nextPageToken? : string) {
     try {
       const auth = await Utils.authenticate();
-      console.log(startTime + endTime + nextPageToken);
-      let params = new URLSearchParams({startTime,endTime,nextPageToken});
-      let keysForDel = [];
-      params.forEach((value, key) => { // this'll delete the nextPageToken if it's null
-        // console.log(value, key)
-        if (value === undefined || value == "undefined") {
-          keysForDel.push(key);
-        }
-      });
-  
-      keysForDel.forEach(key => {
-        params.delete(key);
-      });
+      console.log("Parameters: " + {startTime,endTime,nextPageToken});
+      let params = new URLSearchParams();
+      if (startTime) params.append("startTime", startTime);
+      if (endTime) params.append("endTime", endTime);
+      if (nextPageToken) params.append("nextPageToken", nextPageToken);
 
-      console.log("This is the link we're using to fetch response: " + this.API + '/chatbot-use' + params.toString());
+      const url = `${this.API}/chatbot-use?${params.toString()}`;
+      console.log("This is the link we're using to fetch response:", url);
     
       const response = await fetch(this.API + '/chatbot-use?' + params.toString(), {
         method: 'GET',
@@ -101,12 +94,9 @@ export class MetricClient {
           'Authorization' : auth,
         },        
       });
-      await response.json();
-      console.log("Response on the handler end: " + response.json());
-      return response.json();
+      return await response.json()
     } catch (e) {
       console.log(e);
     }
-    
 }
 }
