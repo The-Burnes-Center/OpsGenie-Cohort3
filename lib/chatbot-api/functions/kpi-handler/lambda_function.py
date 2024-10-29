@@ -65,11 +65,9 @@ def lambda_handler(event, context):
             }
     http_method = event.get('routeKey')
     if 'POST' in http_method:
-        """
-        Set up download functionality later
-        """
+
         print(http_method)
-        #if event.get('rawPath') == '/kpi/download' and admin: Idk what this means but it is not working. Unsure about RawPath
+        #if event.get('rawPath') == '/kpi/download' and admin: #Idk what this means but it is not working. Unsure about RawPath
         if http_method == 'POST /chatbot-uses/download' and admin:
             print('we are downloading')
             return download_kpi(event)
