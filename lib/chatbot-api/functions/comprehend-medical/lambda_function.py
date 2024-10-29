@@ -72,7 +72,7 @@ def find_state(address):
 
     
 
-client = boto3.client(service_name='comprehendmedical', region_name='us-east-1')
+client = boto3.client(service_name='comprehend', region_name='us-east-1')
 
 def lambda_handler(event, context):
     try:
@@ -87,8 +87,10 @@ def lambda_handler(event, context):
                 'Access-Control-Allow-Origin': '*'
                 },'statusCode': 400, 'body': json.dumps("Error: No content provided")}
 
-        results = client.detect_phi(Text=content)
-        detectedPHI = results['Entities']
+
+        results = client.detect_pii_entities(Text=content, LanguageCode='en')
+        detectedPII = results['Entities']
+
 
     except Exception as e:
         print(e)
@@ -103,45 +105,99 @@ def lambda_handler(event, context):
                 'Access-Control-Allow-Origin': '*'
                 },
         'statusCode': 200,
-        'body': json.dumps({"redacted_text": redact_text(content, detectedPHI)})
+        'body': json.dumps({"redacted_text": redact_text(content, detectedPII)})
     }
 
 def redact_text(prompt, entities):
+    
+    confidence_thresholds = {
+        "NAME": 0.01,     
+        "ADDRESS": 0.01,   
+        "AGE": 0.01,       
+        "OTHER": 0.01     
+    }
+    
     redacted_text = prompt
+    offset_shift = 0
+    
     for entity in entities:
+        
+        replacement = ''
+        adjusted_begin = entity['BeginOffset'] + offset_shift
+        adjusted_end = entity['EndOffset'] + offset_shift
+        pii_text = redacted_text[adjusted_begin:adjusted_end]
+        
+        confidence = entity.get("Score", 0)  # Extract confidence score, default to 0 if missing
+        entity_type = entity["Type"]
+        print(entity_type, round(confidence, 2))
+
+        # Get the appropriate threshold for the entity type, default to "OTHER" if not specified
+        threshold = confidence_thresholds.get(entity_type, confidence_thresholds["OTHER"])
+    
+        # Only redact if the confidence is greater than the threshold
+        if confidence < threshold:
+            continue  # Skip this entity, do not redact
+    
+    
         if entity["Type"] == "PROFESSION" or entity["Type"] == "URL":
             continue  # Skip redaction for professions and URLs
         elif entity["Type"] == "AGE":
             age = float(entity.get('Text', '0'))  # Default to 0 if no age found
             if age > 89:
-                redacted_text = redacted_text.replace(entity['Text'], "[AGE OVER 89]")
+                replacement = "[AGE OVER 89]"
+                redacted_text = redacted_text.replace(pii_text, replacement)
             else: 
-                redacted_text = redacted_text.replace(entity['Text'], "[AGE]")
+                replacement = "[AGE]"
+                redacted_text = redacted_text.replace(pii_text, replacement)
+                
         elif entity["Type"] == "ADDRESS":
             print(f"Found address in the message{entity}")
-            if contains_state(entity['Text']):
-                print(f"contains state was true for {entity['Text']}")
-                address_without_state = find_state(entity['Text'])
+            address = entity.get('Text', '4th Street').lower() # Default to 4th Street if no address
+            
+            if contains_state(pii_text):
+                print(f"contains state was true for {pii_text}")
+                address_without_state = find_state(pii_text)
                 print(f"address_without_state: {address_without_state}")
                 if address_without_state != "":
-                    redacted_text = redacted_text.replace(address_without_state, "[ADDRESS]")
+                    replacement = "[ADDRESS]"
+                    redacted_text = redacted_text.replace(address_without_state, replacement)
                     print(f"Redacted Text after replace: {redacted_text}")
                 else: 
                     print(f"Contains only state")
+                
+            elif address in ['masshealth']:
+                replacement = address
+                redacted_text = redacted_text.replace(pii_text, replacement)
+                
             else:
-                redacted_text = redacted_text.replace(entity['Text'], "[ADDRESS]")
+                replacement = "[ADDRESS]"
+                redacted_text = redacted_text.replace(pii_text, replacement)
                 
                 
         elif entity["Type"] == "NAME":
-            name = entity.get('Text', 'Jake').lower() # if there is no name default to Jake
             print(f"Found name in the message{entity}")
-            if name in ["kaileigh mulligan", "chaffee"]:
-                redacted_text = redacted_text.replace(entity['Text'], name)
+            
+            # check if the name is an approved work
+            name = entity.get('Text', 'Jake').lower() # Default to Jake if no name 
+            if name in ["kaileigh mulligan", "chaffee", 'masshealth', 'chafee']:
+                replacement = name
+                redacted_text = redacted_text.replace(pii_text, replacement)
             else:
-                redacted_text = redacted_text.replace(entity['Text'], "[NAME]")
+                replacement = "[NAME]"
+                redacted_text = redacted_text.replace(pii_text, replacement)
                     
         else:
             entity_text = entity.get('Text', '')
-            redacted_text = redacted_text.replace(entity_text, "[" + entity["Type"] + "]")
+            replacement = "[" + entity["Type"] + "]"
+            
+            redacted_text = redacted_text.replace(pii_text, replacement)
+            
+            
+        # Calculate the shift in length caused by this replacement
+        length_diff = len(replacement) - len(pii_text)
+        # Update the offset shift for subsequent replacements
+        offset_shift += length_diff
+        
+        
     return redacted_text
 

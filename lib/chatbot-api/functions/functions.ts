@@ -267,7 +267,7 @@ export class LambdaFunctionStack extends cdk.Stack {
 
     comprehendMedicalFunction.addToRolePolicy(new iam.PolicyStatement({
       effect: iam.Effect.ALLOW,
-      actions: ['comprehendmedical:DetectPHI', 'comprehendmedical:DetectEntitiesV2'],
+      actions: ['comprehend:DetectPiiEntities'],
       resources: ['*'], // Adjust if specific resources are used.
     }));
     
