@@ -34,8 +34,7 @@ import { Utils } from "../../common/utils";
 import { useCollection } from "@cloudscape-design/collection-hooks";
 import React from 'react';
 import { useNotifications } from "../../components/notif-manager";
-import {feedbackCategories, feedbackTypes, KPIMetrics} from '../../common/constants'
-//import { FeedbackResult } from "../../../API";
+import {KPIMetrics} from '../../common/constants'
 export interface KPIsTabProps {
   updateSelectedMetrics: React.Dispatch<any>;
 }
@@ -80,7 +79,7 @@ export default function KPIsTab(props: KPIsTabProps) {
     sorting: {
       defaultState: {
         sortingColumn: {
-          sortingField: "FeedbackID",
+          sortingField: "Timestamp",
         },
         isDescending: true,
       },
@@ -343,15 +342,24 @@ export default function KPIsTab(props: KPIsTabProps) {
           }}
           selectedItems={selectedItems}
           items={pages[Math.min(pages.length - 1, currentPageIndex - 1)]?.Items!}
-          trackBy="InteractionID"
+          trackBy="Timestamp"
           header={
             <Header
               actions={
                 <SpaceBetween direction="horizontal" size="xs">
                   <DateRangePicker
                     onChange={({ detail }) => {
-                      // console.log(detail);
-                      setValue(detail.value as DateRangePickerProps.AbsoluteValue)
+                      // Check if the value is an AbsoluteValue, which contains startDate and endDate
+                      if ('startDate' in detail.value && 'endDate' in detail.value) {
+                          const formattedDate = {
+                              startDate: new Date(detail.value.startDate).toISOString(),
+                              endDate: new Date(detail.value.endDate).toISOString(),
+                          };
+
+                          setValue(formattedDate as DateRangePickerProps.AbsoluteValue);
+                      } else {
+                          console.warn("not an AbsoluteValue");
+                      }
                     }}
                     value={value as DateRangePickerProps.AbsoluteValue}
                     relativeOptions={[
@@ -460,12 +468,6 @@ export default function KPIsTab(props: KPIsTabProps) {
             </Header>
           }
           empty={
-            /*<TableEmptyState
-              resourceName={"Feedback"}
-              // createHref={`/rag/workspaces/add-data?workspaceId=${props.workspaceId}&tab=${props.documentType}`}
-              // createHref={`/admin/add-data`}
-              // createText={"Add Feedback"}
-            />*/
             <Box textAlign="center">No more metrics</Box>
           }
           pagination={
