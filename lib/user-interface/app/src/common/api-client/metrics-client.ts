@@ -74,8 +74,6 @@ export class MetricClient {
       console.log('Chat interaction not saved - ' + e);
     }
   }
-      
-  
 
   async getChatbotUse(startTime? : string, endTime? : string, nextPageToken? : string) {
     try {
@@ -103,10 +101,12 @@ export class MetricClient {
           'Authorization' : auth,
         },        
       });
+      await response.json();
       console.log("Response on the handler end: " + response.json());
-      return await response.json()
+      return response.json();
     } catch (e) {
       console.log(e);
     }
+    
 }
 }
