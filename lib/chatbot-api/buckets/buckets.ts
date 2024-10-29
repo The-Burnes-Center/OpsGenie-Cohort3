@@ -20,23 +20,10 @@ export class S3BucketStack extends cdk.Stack {
         allowedMethods: [s3.HttpMethods.GET,s3.HttpMethods.POST,s3.HttpMethods.PUT,s3.HttpMethods.DELETE],
         allowedOrigins: ['*'],      
         allowedHeaders: ["*"]
-      }],
-      blockPublicAccess: new s3.BlockPublicAccess({
-        blockPublicPolicy: false,
-        blockPublicAcls: false,
-        ignorePublicAcls: false,
-        restrictPublicBuckets: false,
-      })
+      }]
     });
 
-    // Add the policy allowing public read access to the Kendra bucket
-    this.kendraBucket.addToResourcePolicy(new iam.PolicyStatement({
-      effect: iam.Effect.ALLOW,
-      principals: [new iam.AnyPrincipal()], // Allow access to anyone
-      actions: ['s3:GetObject'],
-      resources: [`${this.kendraBucket.bucketArn}/*`] // Apply to all objects in the bucket
-    }))   
-
+      
     this.feedbackBucket = new s3.Bucket(scope, 'FeedbackDownloadBucket', {
       // bucketName: 'feedback-download',
       versioned: true,
