@@ -67,8 +67,8 @@ def lambda_handler(event, context):
     if 'POST' in http_method:
 
         print(http_method)
-        #if event.get('rawPath') == '/kpi/download' and admin: #Idk what this means but it is not working. Unsure about RawPath
-        if http_method == 'POST /chatbot-uses/download' and admin:
+        #if event.get('rawPath') == '/chatbot-use/download' and admin: #Idk what this means but it is not working. Unsure about RawPath
+        if http_method == 'POST /chatbot-use/download' and admin:
             print('we are downloading')
             return download_kpi(event)
         return post_kpi(event)
@@ -140,16 +140,30 @@ def download_kpi(event):
     data = json.loads(event['body'])
     start_time = data.get('startTime')
     end_time = data.get('endTime')
+    
+    start_time = datetime.strptime(start_time, '%Y-%m-%dT%H:%M:%S.%fZ')
+    end_time = datetime.strptime(end_time, '%Y-%m-%dT%H:%M:%S.%fZ')
 
-    response = None
+    # Convert back to ISO format with milliseconds and UTC suffix 'Z'
+    start_time = start_time.isoformat(timespec='milliseconds') + 'Z'
+    end_time = end_time.isoformat(timespec='milliseconds') + 'Z'
 
-    # Query the interaction table using the timestamp range (No topic involved)
-    query_kwargs = {
-        'FilterExpression': Attr('timestamp').between(start_time, end_time)
+    # Validate required parameters
+    if not start_time or not end_time:
+        return {
+            'statusCode': 400,
+            'body': json.dumps({'error': 'Missing required query parameters'})
+        }
+
+    scan_kwargs = {
+        'FilterExpression': Attr("Timestamp").between(start_time, end_time),
+        #'Limit': 10  # Limit to 10 items per request
     }
 
+    response = None
     try:
-        response = table.query(**query_kwargs)
+        response = table.scan(**scan_kwargs)
+        
     except Exception as e:
         print("Caught error: DynamoDB error - could not lollowd interaction data for download")
         return {

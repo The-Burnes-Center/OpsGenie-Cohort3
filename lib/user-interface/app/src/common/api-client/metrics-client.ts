@@ -116,7 +116,7 @@ export class MetricClient {
   async downloadChatbotUses(startTime?: string, endTime?: string) {
     try {
         const auth = await Utils.authenticate();
-        const response = await fetch(this.API + '/chatbot-uses/download', {
+        const response = await fetch(this.API + '/chatbot-use/download', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
