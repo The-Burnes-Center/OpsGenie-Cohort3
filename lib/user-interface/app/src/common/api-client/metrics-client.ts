@@ -94,17 +94,16 @@ export class MetricClient {
         params.delete(key);
       });
 
-      console.log(this.API + '/chatbot-use' + params.toString());
+      console.log("This is the link we're using to fetch response: " + this.API + '/chatbot-use' + params.toString());
     
       const response = await fetch(this.API + '/chatbot-use?' + params.toString(), {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           'Authorization' : auth,
-          //'Access-Control-Allow-Origin': '*',
         },        
       });
-      console.log("Response: " + response);
+      console.log("Response on the handler end: " + response.json());
       return await response.json()
     } catch (e) {
       console.log(e);

@@ -228,19 +228,17 @@ def get_kpi(event):
                 'body': json.dumps({'error': 'Missing required query parameters'})
             }
 
-        # Set up the query conditions for DynamoDB
-        query_kwargs = {
-            'KeyConditionExpression': Key("Timestamp").between(start_time, end_time),
-            'ScanIndexForward': False,  # Sort results in descending order by timestamp
+        scan_kwargs = {
+            'FilterExpression': Attr("Timestamp").between(start_time, end_time),
             'Limit': 10  # Limit to 10 items per request
         }
         
         # Handle pagination if nextPageToken is provided
         if exclusive_start_key:
-            query_kwargs['ExclusiveStartKey'] = json.loads(exclusive_start_key)
+            scan_kwargs['ExclusiveStartKey'] = json.loads(exclusive_start_key)
 
         # Perform the query operation
-        response = table.query(**query_kwargs)
+        response = table.scan(**scan_kwargs)
 
 
         # Prepare the response body
