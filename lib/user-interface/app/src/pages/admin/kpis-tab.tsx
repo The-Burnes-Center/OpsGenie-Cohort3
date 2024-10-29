@@ -446,8 +446,8 @@ export default function KPIsTab(props: KPIsTabProps) {
                   <Button 
                 variant="primary"
                 onClick={() => {
-                  //apiClient.metrics.getChatbotUse(selectedOption.value, value.startDate, value.endDate);
-                  const id = addNotification("success","Your files have been downloaded.")
+                  apiClient.metrics.downloadChatbotUses(value.startDate, value.endDate);
+                  const id = addNotification("success", "Your files have been downloaded.")
                   Utils.delay(3000).then(() => removeNotification(id));
                 }}
                 >Download</Button>
