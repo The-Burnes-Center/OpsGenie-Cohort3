@@ -142,12 +142,9 @@ def redact_text(prompt, entities):
         if entity["Type"] == "PROFESSION" or entity["Type"] == "URL":
             continue  # Skip redaction for professions and URLs
         elif entity["Type"] == "AGE":
-            age = float(entity.get('Text', '0'))  # Default to 0 if no age found
+            age = float([int(word) for word in pii_text.split() if word.isdigit()][0])
             if age > 89:
                 replacement = "[AGE OVER 89]"
-                redacted_text = redacted_text.replace(pii_text, replacement)
-            else: 
-                replacement = "[AGE]"
                 redacted_text = redacted_text.replace(pii_text, replacement)
                 
         elif entity["Type"] == "ADDRESS":
