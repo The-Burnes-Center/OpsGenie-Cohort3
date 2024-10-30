@@ -1,0 +1,594 @@
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/* stylelint-disable @cloudscape-design/no-motion-outside-of-mixin, selector-combinator-disallowed-list, selector-pseudo-class-no-unknown, selector-class-pattern */
+/* stylelint-enable @cloudscape-design/no-motion-outside-of-mixin, selector-combinator-disallowed-list, selector-pseudo-class-no-unknown, selector-class-pattern */
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/* Style used for links in slots/components that are text heavy, to help links stand out among
+surrounding text. (WCAG F73) https://www.w3.org/WAI/WCAG21/Techniques/failures/F73#description */
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+.awsui_icon_k5dlb_11sum_149:not(#\9) {
+  transition: transform var(--motion-duration-rotate-90-bpnkq9, 135ms) var(--motion-easing-rotate-90-c61wiy, cubic-bezier(0.165, 0.84, 0.44, 1));
+}
+@media (prefers-reduced-motion: reduce) {
+  .awsui_icon_k5dlb_11sum_149:not(#\9) {
+    animation: none;
+    transition: none;
+  }
+}
+.awsui-motion-disabled .awsui_icon_k5dlb_11sum_149:not(#\9), .awsui-mode-entering .awsui_icon_k5dlb_11sum_149:not(#\9) {
+  animation: none;
+  transition: none;
+}
+
+.awsui_top-navigation_k5dlb_11sum_163:not(#\9) {
+  border-collapse: separate;
+  border-spacing: 0;
+  box-sizing: border-box;
+  caption-side: top;
+  cursor: auto;
+  direction: inherit;
+  empty-cells: show;
+  font-family: serif;
+  font-size: medium;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  line-height: normal;
+  -webkit-hyphens: none;
+          hyphens: none;
+  letter-spacing: normal;
+  list-style: disc outside none;
+  tab-size: 8;
+  text-align: start;
+  text-indent: 0;
+  text-shadow: none;
+  text-transform: none;
+  visibility: visible;
+  white-space: normal;
+  word-spacing: normal;
+  font-size: var(--font-size-body-m-6wxxs5, 14px);
+  line-height: var(--line-height-body-m-gw0130, 22px);
+  color: var(--color-text-body-default-agk00h, #16191f);
+  font-weight: 400;
+  font-family: var(--font-family-base-pxn2ad, "Noto Sans", "Helvetica Neue", Roboto, Arial, sans-serif);
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+  background: var(--color-background-container-content-myy7cn, #ffffff);
+}
+.awsui_top-navigation_k5dlb_11sum_163 > .awsui_padding-box_k5dlb_11sum_198:not(#\9) {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  block-size: calc(var(--space-xxxl-vkrt7p, 40px) + var(--space-scaled-m-3uxq9h, 16px));
+  padding-inline-start: var(--space-xxl-thzxkv, 32px);
+}
+.awsui_top-navigation_k5dlb_11sum_163.awsui_medium_k5dlb_11sum_208 > .awsui_padding-box_k5dlb_11sum_198:not(#\9), .awsui_top-navigation_k5dlb_11sum_163.awsui_narrow_k5dlb_11sum_208 > .awsui_padding-box_k5dlb_11sum_198:not(#\9) {
+  padding-inline-start: var(--space-l-eenfqd, 20px);
+}
+.awsui_top-navigation_k5dlb_11sum_163.awsui_medium_k5dlb_11sum_208 > .awsui_padding-box_k5dlb_11sum_198:not(#\9) {
+  block-size: calc(var(--space-xxxl-vkrt7p, 40px) + var(--space-scaled-xs-t3am3w, 8px));
+  padding-inline-end: 0;
+}
+.awsui_top-navigation_k5dlb_11sum_163.awsui_narrow_k5dlb_11sum_208 > .awsui_padding-box_k5dlb_11sum_198:not(#\9) {
+  block-size: var(--space-xxxl-vkrt7p, 40px);
+}
+
+.awsui_virtual_k5dlb_11sum_219:not(#\9) {
+  inline-size: 9000px;
+}
+
+.awsui_hidden_k5dlb_11sum_223:not(#\9) {
+  position: absolute !important;
+  inset-block-start: -9999px !important;
+  inset-inline-start: -9999px !important;
+  visibility: hidden;
+}
+
+/* stylelint-disable-next-line selector-combinator-disallowed-list, selector-max-universal */
+.awsui_hidden_k5dlb_11sum_223 *:not(#\9):not(#awsui_\9 _k5dlb_11sum_1) {
+  visibility: hidden;
+}
+
+.awsui_identity_k5dlb_11sum_235:not(#\9) {
+  min-inline-size: 0;
+}
+.awsui_identity_k5dlb_11sum_235 > .awsui_identity-link_k5dlb_11sum_238:not(#\9) {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-text-top-navigation-title-e4w0av, #16191f);
+}
+.awsui_identity_k5dlb_11sum_235 > .awsui_identity-link_k5dlb_11sum_238:not(#\9):hover {
+  color: var(--color-text-accent-b3retj, #0073bb);
+}
+body[data-awsui-focus-visible=true] .awsui_identity_k5dlb_11sum_235 > .awsui_identity-link_k5dlb_11sum_238:not(#\9):focus {
+  outline: thin dotted;
+  outline: var(--border-link-focus-ring-outline-bptw2p, 5px auto Highlight);
+  outline-offset: 2px;
+  outline-color: var(--color-border-item-focused-q68bgg, #0073bb);
+  border-start-start-radius: var(--border-radius-control-default-focus-ring-vy2hlh, 2px);
+  border-start-end-radius: var(--border-radius-control-default-focus-ring-vy2hlh, 2px);
+  border-end-start-radius: var(--border-radius-control-default-focus-ring-vy2hlh, 2px);
+  border-end-end-radius: var(--border-radius-control-default-focus-ring-vy2hlh, 2px);
+  box-shadow: 0 0 0 var(--border-link-focus-ring-shadow-spread-yrkso1, 0px) var(--color-border-item-focused-q68bgg, #0073bb);
+}
+.awsui_identity_k5dlb_11sum_235.awsui_no-logo_k5dlb_11sum_258:not(#\9) {
+  min-inline-size: 100px;
+}
+
+.awsui_logo_k5dlb_11sum_262:not(#\9) {
+  display: block;
+  max-block-size: var(--space-xxl-thzxkv, 32px);
+  margin-inline-end: var(--space-s-vmutj3, 12px);
+  inline-size: auto;
+  flex-shrink: 0;
+  min-inline-size: 10px;
+}
+.awsui_logo_k5dlb_11sum_262.awsui_narrow_k5dlb_11sum_208:not(#\9) {
+  max-block-size: var(--space-xl-vss8pc, 24px);
+}
+
+.awsui_title_k5dlb_11sum_274:not(#\9) {
+  font-size: var(--font-size-heading-m-abxcoe, 18px);
+  line-height: var(--line-height-heading-m-v86qsm, 22px);
+  letter-spacing: var(--letter-spacing-heading-m-790tuq, normal);
+  font-weight: var(--font-weight-heading-m-v51xls, 400);
+  -webkit-font-smoothing: var(--font-smoothing-webkit-trr1e8, auto);
+  -moz-osx-font-smoothing: var(--font-smoothing-moz-osx-hyxkxc, auto);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.awsui_no-logo_k5dlb_11sum_258 > .awsui_identity-link_k5dlb_11sum_238 > .awsui_title_k5dlb_11sum_274:not(#\9) {
+  font-weight: 700;
+}
+
+.awsui_inputs_k5dlb_11sum_289:not(#\9) {
+  display: flex;
+  flex: 1;
+  padding-block: 0;
+  padding-inline: var(--space-m-u91ipm, 16px);
+  justify-content: center;
+}
+
+.awsui_search_k5dlb_11sum_297:not(#\9) {
+  inline-size: 100%;
+  max-inline-size: 340px;
+}
+.awsui_search-expanded_k5dlb_11sum_301:not(#\9) {
+  max-inline-size: none;
+}
+
+.awsui_utilities_k5dlb_11sum_305:not(#\9) {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: row;
+  align-items: stretch;
+  block-size: 100%;
+}
+.awsui_medium_k5dlb_11sum_208 > .awsui_padding-box_k5dlb_11sum_198 > .awsui_utilities_k5dlb_11sum_305:not(#\9), .awsui_narrow_k5dlb_11sum_208 > .awsui_padding-box_k5dlb_11sum_198 > .awsui_utilities_k5dlb_11sum_305:not(#\9) {
+  padding-inline-start: 0;
+}
+
+.awsui_utility-wrapper_k5dlb_11sum_316:not(#\9) {
+  display: flex;
+  position: relative;
+  flex-shrink: 0;
+  align-items: center;
+  padding-block: 0;
+  padding-inline: var(--space-m-u91ipm, 16px);
+}
+.awsui_utility-wrapper_k5dlb_11sum_316:not(#\9)::after {
+  display: block;
+  position: absolute;
+  content: "";
+  inline-size: 1px;
+  inset-inline-end: 0;
+  inset-block: var(--space-s-vmutj3, 12px);
+  background: var(--color-border-divider-default-u5ytia, #eaeded);
+}
+.awsui_utility-wrapper_k5dlb_11sum_316:not(#\9):last-of-type::after {
+  display: none;
+}
+
+.awsui_utility-type-button-link_k5dlb_11sum_337:not(#\9) {
+  padding-block: 0;
+  padding-inline: var(--space-l-eenfqd, 20px);
+}
+
+.awsui_utility-type-menu-dropdown_k5dlb_11sum_342:not(#\9) {
+  padding-block: 0;
+  padding-inline: var(--space-s-vmutj3, 12px);
+  align-items: stretch;
+}
+.awsui_utility-type-menu-dropdown_k5dlb_11sum_342:not(#\9):not(.awsui_narrow_k5dlb_11sum_208):last-of-type, .awsui_utility-type-menu-dropdown_k5dlb_11sum_342:not(#\9):not(.awsui_medium_k5dlb_11sum_208):last-of-type {
+  padding-inline-end: 0;
+}
+
+.awsui_utility-type-button-primary-button_k5dlb_11sum_351:not(#\9) {
+  inset-inline-start: -1px;
+  border-inline-start: 1px solid var(--color-background-container-content-myy7cn, #ffffff);
+}
+.awsui_utility-type-button-primary-button_k5dlb_11sum_351:not(#\9)::after {
+  display: none;
+}
+
+.awsui_utility-link-icon_k5dlb_11sum_359:not(#\9) {
+  margin-inline-start: var(--space-xxs-y2432o, 4px);
+}
+
+.awsui_utility-button-external-icon_k5dlb_11sum_363:not(#\9) {
+  display: inline-block;
+}
+
+.awsui_offset-right-none_k5dlb_11sum_367:not(#\9) {
+  margin-inline-end: 0;
+}
+
+.awsui_offset-right-l_k5dlb_11sum_371:not(#\9) {
+  margin-inline-end: var(--space-xxs-y2432o, 4px);
+}
+
+.awsui_offset-right-xxl_k5dlb_11sum_375:not(#\9) {
+  margin-inline-end: var(--space-m-u91ipm, 16px);
+}
+
+/* Overflow Menu */
+.awsui_overflow-menu-drawer_k5dlb_11sum_380:not(#\9) {
+  position: fixed;
+  block-size: 100%;
+  inline-size: 100%;
+  z-index: 1001;
+}
+
+.awsui_overflow-menu_k5dlb_11sum_380:not(#\9) {
+  border-collapse: separate;
+  border-spacing: 0;
+  box-sizing: border-box;
+  caption-side: top;
+  cursor: auto;
+  direction: inherit;
+  empty-cells: show;
+  font-family: serif;
+  font-size: medium;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  line-height: normal;
+  -webkit-hyphens: none;
+          hyphens: none;
+  letter-spacing: normal;
+  list-style: disc outside none;
+  tab-size: 8;
+  text-align: start;
+  text-indent: 0;
+  text-shadow: none;
+  text-transform: none;
+  visibility: visible;
+  white-space: normal;
+  word-spacing: normal;
+  font-size: var(--font-size-body-m-6wxxs5, 14px);
+  line-height: var(--line-height-body-m-gw0130, 22px);
+  color: var(--color-text-body-default-agk00h, #16191f);
+  font-weight: 400;
+  font-family: var(--font-family-base-pxn2ad, "Noto Sans", "Helvetica Neue", Roboto, Arial, sans-serif);
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+  background: var(--color-background-container-content-myy7cn, #ffffff);
+  block-size: 100%;
+}
+
+.awsui_overflow-menu-header_k5dlb_11sum_424:not(#\9) {
+  display: flex;
+  align-items: center;
+  min-block-size: var(--font-panel-header-line-height-av95ns, 22px);
+  padding-block: var(--space-scaled-m-3uxq9h, 16px);
+  padding-inline: var(--space-scaled-m-3uxq9h, 16px);
+  border-block-end: var(--border-divider-section-width-iueskx, 1px) solid var(--color-border-divider-default-u5ytia, #eaeded);
+}
+.awsui_overflow-menu-header-text_k5dlb_11sum_432:not(#\9) {
+  font-size: var(--font-panel-header-size-197c0y, 18px);
+  line-height: var(--font-panel-header-line-height-av95ns, 22px);
+  font-weight: var(--font-weight-heading-l-ypbqtk, 700);
+  -webkit-font-smoothing: var(--font-smoothing-webkit-trr1e8, auto);
+  -moz-osx-font-smoothing: var(--font-smoothing-moz-osx-hyxkxc, auto);
+  color: var(--color-text-heading-default-8wpkvf, #16191f);
+  flex: 1;
+  margin-block: 0;
+  margin-inline: 0;
+  text-align: center;
+}
+.awsui_overflow-menu-header-text--secondary_k5dlb_11sum_444:not(#\9) {
+  font-size: var(--font-header-h2-description-size-jr9dz3, 12px);
+  line-height: var(--font-header-h2-description-line-height-mth7kd, 16px);
+  font-weight: 400;
+}
+
+.awsui_overflow-menu-header-text--title_k5dlb_11sum_450:not(#\9) {
+  /* used in test-utils */
+}
+
+.awsui_overflow-menu-back-button_k5dlb_11sum_454:not(#\9) {
+  /* used in test-utils */
+}
+
+.awsui_overflow-menu-dismiss-button_k5dlb_11sum_458:not(#\9) {
+  /* used in test-utils */
+}
+
+.awsui_overflow-menu-control_k5dlb_11sum_462:not(#\9) {
+  border-collapse: separate;
+  border-spacing: 0;
+  box-sizing: border-box;
+  caption-side: top;
+  cursor: auto;
+  direction: inherit;
+  empty-cells: show;
+  font-family: serif;
+  font-size: medium;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  line-height: normal;
+  -webkit-hyphens: none;
+          hyphens: none;
+  letter-spacing: normal;
+  list-style: disc outside none;
+  tab-size: 8;
+  text-align: start;
+  text-indent: 0;
+  text-shadow: none;
+  text-transform: none;
+  visibility: visible;
+  white-space: normal;
+  word-spacing: normal;
+  font-size: var(--font-size-body-m-6wxxs5, 14px);
+  line-height: var(--line-height-body-m-gw0130, 22px);
+  color: var(--color-text-body-default-agk00h, #16191f);
+  font-weight: 400;
+  font-family: var(--font-family-base-pxn2ad, "Noto Sans", "Helvetica Neue", Roboto, Arial, sans-serif);
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+  display: flex;
+  inline-size: 100%;
+  padding-block: 0;
+  padding-inline: 0;
+  background: none;
+  border-block: none;
+  border-inline: none;
+}
+.awsui_overflow-menu-list-item-utility_k5dlb_11sum_503 > .awsui_overflow-menu-control_k5dlb_11sum_462:not(#\9) {
+  padding-block: var(--space-scaled-m-3uxq9h, 16px);
+  padding-inline: var(--space-scaled-m-3uxq9h, 16px);
+}
+.awsui_overflow-menu-control_k5dlb_11sum_462:not(#\9):hover {
+  color: var(--color-text-accent-b3retj, #0073bb);
+  cursor: pointer;
+}
+.awsui_overflow-menu-control-link_k5dlb_11sum_511:not(#\9) {
+  text-decoration: none;
+}
+.awsui_overflow-menu-control-expandable-menu-trigger_k5dlb_11sum_514:not(#\9) {
+  color: var(--color-text-dropdown-group-label-h1uzwg, #545b64);
+  font-weight: bold;
+}
+.awsui_overflow-menu-control-expandable-menu-trigger_k5dlb_11sum_514:not(#\9):hover {
+  color: var(--color-text-accent-b3retj, #0073bb);
+}
+body[data-awsui-focus-visible=true] .awsui_overflow-menu-control_k5dlb_11sum_462:not(#\9):focus {
+  position: relative;
+}
+body[data-awsui-focus-visible=true] .awsui_overflow-menu-control_k5dlb_11sum_462:not(#\9):focus {
+  outline: 2px dotted transparent;
+  outline-offset: calc(var(--space-button-focus-outline-gutter-90p0io, 3px) - 1px);
+}
+body[data-awsui-focus-visible=true] .awsui_overflow-menu-control_k5dlb_11sum_462:not(#\9):focus::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  inset-inline-start: calc(-1 * var(--space-button-focus-outline-gutter-90p0io, 3px));
+  inset-block-start: calc(-1 * var(--space-button-focus-outline-gutter-90p0io, 3px));
+  inline-size: calc(100% + var(--space-button-focus-outline-gutter-90p0io, 3px) + var(--space-button-focus-outline-gutter-90p0io, 3px));
+  block-size: calc(100% + var(--space-button-focus-outline-gutter-90p0io, 3px) + var(--space-button-focus-outline-gutter-90p0io, 3px));
+  border-start-start-radius: var(--border-radius-control-default-focus-ring-vy2hlh, 2px);
+  border-start-end-radius: var(--border-radius-control-default-focus-ring-vy2hlh, 2px);
+  border-end-start-radius: var(--border-radius-control-default-focus-ring-vy2hlh, 2px);
+  border-end-end-radius: var(--border-radius-control-default-focus-ring-vy2hlh, 2px);
+  box-shadow: 0 0 0 2px var(--color-border-item-focused-q68bgg, #0073bb);
+}
+
+.awsui_overflow-menu-list_k5dlb_11sum_503:not(#\9) {
+  list-style: none;
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: 0;
+  padding-inline: 0;
+}
+.awsui_overflow-menu-list-submenu_k5dlb_11sum_550:not(#\9) {
+  margin-block: var(--space-scaled-xxs-krq5fq, 4px);
+  margin-inline: 0;
+}
+
+.awsui_overflow-menu-list-item_k5dlb_11sum_503:not(#\9) {
+  box-sizing: border-box;
+  letter-spacing: var(--font-button-letter-spacing-47n0nr, 0.25px);
+}
+.awsui_overflow-menu-list-item-icon_k5dlb_11sum_559:not(#\9) {
+  margin-inline-end: var(--space-xxs-y2432o, 4px);
+}
+.awsui_overflow-menu-list-item-text_k5dlb_11sum_562:not(#\9) {
+  flex: 1;
+}
+.awsui_overflow-menu-list-item-utility_k5dlb_11sum_503:not(#\9) {
+  font-weight: var(--font-button-weight-6haenw, 700);
+  -webkit-font-smoothing: var(--font-smoothing-webkit-trr1e8, auto);
+  -moz-osx-font-smoothing: var(--font-smoothing-moz-osx-hyxkxc, auto);
+  border-block-end: var(--border-divider-section-width-iueskx, 1px) solid var(--color-border-divider-default-u5ytia, #eaeded);
+}
+.awsui_overflow-menu-list-item-submenu_k5dlb_11sum_571:not(#\9) {
+  border-block-start: var(--border-divider-section-width-iueskx, 1px) solid transparent;
+  border-block-end: var(--border-divider-section-width-iueskx, 1px) solid transparent;
+  padding-block: var(--space-scaled-xxs-krq5fq, 4px);
+  padding-inline: var(--space-scaled-l-7e51pg, 20px);
+}
+.awsui_overflow-menu-list-item-dropdown-menu_k5dlb_11sum_577:not(#\9) {
+  padding-block: var(--space-scaled-xxs-krq5fq, 4px);
+  padding-inline: var(--space-scaled-s-8j7izy, 12px);
+}
+.awsui_overflow-menu-list-item-expandable_k5dlb_11sum_581:not(#\9) {
+  border-block-start-color: var(--color-border-divider-default-u5ytia, #eaeded);
+  border-block-end-color: var(--color-border-divider-default-u5ytia, #eaeded);
+}
+
+.awsui_icon_k5dlb_11sum_149:not(#\9) {
+  transform: rotate(-180deg);
+}
+.awsui_icon_k5dlb_11sum_149.awsui_expanded_k5dlb_11sum_589:not(#\9) {
+  transform: rotate(0deg);
+}

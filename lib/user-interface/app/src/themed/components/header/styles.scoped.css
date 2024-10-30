@@ -1,0 +1,429 @@
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/* stylelint-disable @cloudscape-design/no-motion-outside-of-mixin, selector-combinator-disallowed-list, selector-pseudo-class-no-unknown, selector-class-pattern */
+/* stylelint-enable @cloudscape-design/no-motion-outside-of-mixin, selector-combinator-disallowed-list, selector-pseudo-class-no-unknown, selector-class-pattern */
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/* Style used for links in slots/components that are text heavy, to help links stand out among
+surrounding text. (WCAG F73) https://www.w3.org/WAI/WCAG21/Techniques/failures/F73#description */
+.awsui_root_2qdw9_x0puo_177:not(#\9) {
+  border-collapse: separate;
+  border-spacing: 0;
+  box-sizing: border-box;
+  caption-side: top;
+  cursor: auto;
+  direction: inherit;
+  empty-cells: show;
+  font-family: serif;
+  font-size: medium;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  line-height: normal;
+  -webkit-hyphens: none;
+          hyphens: none;
+  letter-spacing: normal;
+  list-style: disc outside none;
+  tab-size: 8;
+  text-align: start;
+  text-indent: 0;
+  text-shadow: none;
+  text-transform: none;
+  visibility: visible;
+  white-space: normal;
+  word-spacing: normal;
+  font-size: var(--font-size-body-m-6wxxs5, 14px);
+  line-height: var(--line-height-body-m-gw0130, 22px);
+  color: var(--color-text-body-default-agk00h, #16191f);
+  font-weight: 400;
+  font-family: var(--font-family-base-pxn2ad, "Noto Sans", "Helvetica Neue", Roboto, Arial, sans-serif);
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+  cursor: inherit;
+  display: flex;
+  inline-size: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.awsui_root_2qdw9_x0puo_177.awsui_refresh_2qdw9_x0puo_216:not(#\9), .awsui_root_2qdw9_x0puo_177:not(#\9):not(.awsui_root-no-actions_2qdw9_x0puo_216) {
+  row-gap: var(--space-scaled-xxs-krq5fq, 4px);
+}
+.awsui_root-no-actions_2qdw9_x0puo_216.awsui_root-variant-h2_2qdw9_x0puo_219:not(#\9):not(.awsui_refresh_2qdw9_x0puo_216), .awsui_root-no-actions_2qdw9_x0puo_216.awsui_root-variant-h3_2qdw9_x0puo_219:not(#\9):not(.awsui_refresh_2qdw9_x0puo_216), .awsui_root-has-description_2qdw9_x0puo_219.awsui_root-variant-h2_2qdw9_x0puo_219:not(#\9):not(.awsui_refresh_2qdw9_x0puo_216), .awsui_root-has-description_2qdw9_x0puo_219.awsui_root-variant-h3_2qdw9_x0puo_219:not(#\9):not(.awsui_refresh_2qdw9_x0puo_216) {
+  padding-block-end: var(--space-scaled-xxs-krq5fq, 4px);
+}
+.awsui_root-no-actions_2qdw9_x0puo_216:not(#\9):not(.awsui_root-has-description_2qdw9_x0puo_219):not(.awsui_refresh_2qdw9_x0puo_216) {
+  padding-block-end: calc(var(--space-scaled-xs-t3am3w, 8px) + var(--space-xxxs-gn3248, 2px));
+}
+.awsui_root-no-actions_2qdw9_x0puo_216.awsui_refresh_2qdw9_x0puo_216.awsui_root-variant-h2_2qdw9_x0puo_219:not(#\9), .awsui_root-no-actions_2qdw9_x0puo_216.awsui_refresh_2qdw9_x0puo_216.awsui_root-variant-h3_2qdw9_x0puo_219:not(#\9) {
+  row-gap: var(--space-scaled-xxxs-6vyqo7, 2px);
+}
+.awsui_root_2qdw9_x0puo_177.awsui_root-variant-h1_2qdw9_x0puo_228:not(#\9):not(.awsui_refresh_2qdw9_x0puo_216) {
+  row-gap: var(--space-scaled-xxs-krq5fq, 4px);
+}
+.awsui_root-no-actions_2qdw9_x0puo_216:not(#\9):not(.awsui_root-has-description_2qdw9_x0puo_219).awsui_refresh_2qdw9_x0puo_216.awsui_root-variant-h3_2qdw9_x0puo_219 {
+  padding-block-end: var(--space-scaled-xs-t3am3w, 8px);
+}
+.awsui_root_2qdw9_x0puo_177.awsui_root-variant-h1_2qdw9_x0puo_228.awsui_root-has-description_2qdw9_x0puo_219:not(#\9):not(.awsui_refresh_2qdw9_x0puo_216) {
+  padding-block-end: var(--space-scaled-2x-xxs-b0ph6q, 4px);
+}
+
+.awsui_main_2qdw9_x0puo_238:not(#\9) {
+  word-wrap: break-word;
+  max-inline-size: 100%;
+  display: flex;
+  justify-content: space-between;
+  inline-size: 100%;
+  flex-wrap: wrap;
+  column-gap: var(--space-xs-6dgkww, 8px);
+  row-gap: calc(var(--space-scaled-xxs-krq5fq, 4px) + var(--space-scaled-xxxs-6vyqo7, 2px));
+}
+.awsui_main_2qdw9_x0puo_238.awsui_no-wrap_2qdw9_x0puo_248:not(#\9) {
+  flex-wrap: nowrap;
+}
+.awsui_main_2qdw9_x0puo_238.awsui_refresh_2qdw9_x0puo_216:not(#\9) {
+  row-gap: var(--space-xxs-y2432o, 4px);
+}
+.awsui_main-variant-h1_2qdw9_x0puo_254:not(#\9) {
+  row-gap: var(--space-scaled-2x-xxs-b0ph6q, 4px);
+}
+
+.awsui_root-has-description_2qdw9_x0puo_219 > .awsui_main_2qdw9_x0puo_238:not(#\9) {
+  row-gap: var(--space-scaled-2x-xxs-b0ph6q, 4px);
+}
+
+.awsui_actions_2qdw9_x0puo_262:not(#\9) {
+  display: flex;
+  align-items: flex-start;
+  min-block-size: var(--size-vertical-input-t2p4dg, 32px);
+}
+.awsui_actions-centered_2qdw9_x0puo_267:not(#\9) {
+  align-items: center;
+}
+.awsui_actions-variant-h1_2qdw9_x0puo_270.awsui_refresh_2qdw9_x0puo_216:not(#\9) {
+  padding-block: calc((var(--line-height-heading-xl-66u22x, 36px) - var(--size-vertical-input-t2p4dg, 32px)) / 2);
+  padding-inline: 0;
+}
+.awsui_actions-variant-h2_2qdw9_x0puo_274.awsui_refresh_2qdw9_x0puo_216:not(#\9) {
+  padding-block: calc((var(--line-height-heading-l-643aq3, 22px) - var(--size-vertical-input-t2p4dg, 32px)) / 2);
+  padding-inline: 0;
+}
+.awsui_actions-variant-h3_2qdw9_x0puo_278.awsui_refresh_2qdw9_x0puo_216:not(#\9) {
+  padding-block: calc((var(--line-height-heading-m-v86qsm, 22px) - var(--size-vertical-input-t2p4dg, 32px)) / 2);
+  padding-inline: 0;
+}
+.awsui_actions-variant-h1_2qdw9_x0puo_270:not(#\9):not(.awsui_refresh_2qdw9_x0puo_216) {
+  padding-block: var(--space-scaled-xs-t3am3w, 8px);
+  padding-inline: 0;
+}
+.awsui_actions-variant-h2_2qdw9_x0puo_274:not(#\9):not(.awsui_refresh_2qdw9_x0puo_216), .awsui_actions-variant-h3_2qdw9_x0puo_278:not(#\9):not(.awsui_refresh_2qdw9_x0puo_216) {
+  padding-block: var(--space-scaled-xxs-krq5fq, 4px);
+  padding-inline: 0;
+}
+.awsui_root-has-description_2qdw9_x0puo_219 > .awsui_main_2qdw9_x0puo_238 > .awsui_actions_2qdw9_x0puo_262:not(#\9) {
+  padding-block-end: 0;
+}
+
+.awsui_title_2qdw9_x0puo_294:not(#\9) {
+  min-inline-size: 0;
+  word-break: break-word;
+  color: var(--color-text-heading-default-8wpkvf, #16191f);
+}
+.awsui_title-variant-h1_2qdw9_x0puo_299:not(#\9) {
+  font-size: var(--font-size-heading-xl-93wrkf, 28px);
+  padding-block-start: var(--space-scaled-2x-xxs-b0ph6q, 4px);
+}
+.awsui_title-variant-h1_2qdw9_x0puo_299.awsui_refresh_2qdw9_x0puo_216:not(#\9) {
+  padding-block-start: calc((var(--size-vertical-input-t2p4dg, 32px) - var(--line-height-heading-xl-66u22x, 36px)) / 2);
+}
+.awsui_title-variant-h2_2qdw9_x0puo_306:not(#\9) {
+  font-size: var(--font-size-heading-l-51gng7, 18px);
+}
+.awsui_title-variant-h2_2qdw9_x0puo_306.awsui_refresh_2qdw9_x0puo_216:not(#\9) {
+  padding-block-start: calc((var(--size-vertical-input-t2p4dg, 32px) - var(--line-height-heading-l-643aq3, 22px)) / 2);
+}
+.awsui_title-variant-h3_2qdw9_x0puo_312:not(#\9) {
+  font-size: var(--font-size-heading-m-abxcoe, 18px);
+}
+.awsui_title-variant-h3_2qdw9_x0puo_312.awsui_refresh_2qdw9_x0puo_216:not(#\9) {
+  padding-block-start: calc((var(--size-vertical-input-t2p4dg, 32px) - var(--line-height-heading-m-v86qsm, 22px)) / 2);
+}
+.awsui_title-variant-h2_2qdw9_x0puo_306:not(#\9):not(.awsui_refresh_2qdw9_x0puo_216), .awsui_title-variant-h3_2qdw9_x0puo_312:not(#\9):not(.awsui_refresh_2qdw9_x0puo_216) {
+  padding-block-start: var(--space-scaled-xs-t3am3w, 8px);
+}
+.awsui_no-wrap_2qdw9_x0puo_248 > .awsui_title_2qdw9_x0puo_294:not(#\9):not(.awsui_refresh_2qdw9_x0puo_216) {
+  padding-block-end: calc(var(--space-scaled-xxs-krq5fq, 4px) + var(--space-scaled-xxxs-6vyqo7, 2px));
+}
+
+.awsui_root-no-actions_2qdw9_x0puo_216.awsui_root-has-description_2qdw9_x0puo_219 > .awsui_main_2qdw9_x0puo_238 > :not(#\9):not(.awsui_refresh_2qdw9_x0puo_216).awsui_title-variant-h2_2qdw9_x0puo_306, .awsui_root-no-actions_2qdw9_x0puo_216.awsui_root-has-description_2qdw9_x0puo_219 > .awsui_main_2qdw9_x0puo_238 > :not(#\9):not(.awsui_refresh_2qdw9_x0puo_216).awsui_title-variant-h3_2qdw9_x0puo_312 {
+  padding-block-end: var(--space-scaled-xxs-krq5fq, 4px);
+}
+
+.awsui_root-variant-h1_2qdw9_x0puo_228.awsui_root-no-actions_2qdw9_x0puo_216:not(#\9):not(.awsui_root-has-description_2qdw9_x0puo_219):not(.awsui_refresh_2qdw9_x0puo_216) {
+  padding-block-end: var(--space-scaled-2x-xxs-b0ph6q, 4px);
+}
+
+.awsui_virtual-space_2qdw9_x0puo_333:not(#\9) {
+  position: absolute !important;
+  inset-block-start: -9999px !important;
+  inset-inline-start: -9999px !important;
+}
+
+.awsui_info_2qdw9_x0puo_339:not(#\9) {
+  padding-inline-end: var(--space-s-vmutj3, 12px);
+}
+
+.awsui_description_2qdw9_x0puo_343:not(#\9) {
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: 0;
+  padding-inline: 0;
+  color: var(--color-text-heading-secondary-4zbyer, #545b64);
+}
+.awsui_description-variant-h1_2qdw9_x0puo_350:not(#\9) {
+  font-size: var(--font-size-body-m-6wxxs5, 14px);
+  line-height: var(--line-height-body-m-gw0130, 22px);
+}
+.awsui_description-variant-h2_2qdw9_x0puo_354:not(#\9) {
+  font-size: var(--font-header-h2-description-size-jr9dz3, 12px);
+  line-height: var(--font-header-h2-description-line-height-mth7kd, 16px);
+}
+.awsui_description-variant-h2_2qdw9_x0puo_354:not(#\9):not(.awsui_refresh_2qdw9_x0puo_216) {
+  padding-block-end: var(--space-scaled-xxs-krq5fq, 4px);
+}
+.awsui_description-variant-h3_2qdw9_x0puo_361:not(#\9) {
+  font-size: var(--font-size-body-s-4dzx5q, 12px);
+  line-height: var(--line-height-body-s-egzl4q, 16px);
+  letter-spacing: var(--letter-spacing-body-s-cbaxyl, normal);
+}
+.awsui_description-variant-h3_2qdw9_x0puo_361:not(#\9):not(.awsui_refresh_2qdw9_x0puo_216) {
+  padding-block-end: var(--space-scaled-xxs-krq5fq, 4px);
+}
+
+.awsui_heading_2qdw9_x0puo_370:not(#\9) {
+  margin-block: 0;
+  margin-inline: 0;
+  display: inline;
+  font-size: inherit;
+  margin-inline-end: var(--space-xs-6dgkww, 8px);
+}
+.awsui_heading_2qdw9_x0puo_370:not(#\9):only-child {
+  margin-block: 0;
+  margin-inline: 0;
+}
+.awsui_heading-variant-h1_2qdw9_x0puo_381:not(#\9) {
+  font-size: var(--font-size-heading-xl-93wrkf, 28px);
+  line-height: var(--line-height-heading-xl-66u22x, 36px);
+  letter-spacing: var(--letter-spacing-heading-xl-oxckqz, normal);
+}
+.awsui_heading-variant-h2_2qdw9_x0puo_386:not(#\9) {
+  font-size: var(--font-size-heading-l-51gng7, 18px);
+  line-height: var(--line-height-heading-l-643aq3, 22px);
+  letter-spacing: var(--letter-spacing-heading-l-ty6arx, normal);
+}
+.awsui_heading-variant-h3_2qdw9_x0puo_391:not(#\9) {
+  font-size: var(--font-size-heading-m-abxcoe, 18px);
+  line-height: var(--line-height-heading-m-v86qsm, 22px);
+  letter-spacing: var(--letter-spacing-heading-m-790tuq, normal);
+}
+
+.awsui_heading-text_2qdw9_x0puo_397:not(#\9) {
+  /* used in test-utils */
+}
+.awsui_heading-text-variant-h1_2qdw9_x0puo_400:not(#\9) {
+  font-size: var(--font-size-heading-xl-93wrkf, 28px);
+  line-height: var(--line-height-heading-xl-66u22x, 36px);
+  letter-spacing: var(--letter-spacing-heading-xl-oxckqz, normal);
+  font-weight: var(--font-weight-heading-xl-79jd8z, 400);
+  -webkit-font-smoothing: var(--font-smoothing-webkit-trr1e8, auto);
+  -moz-osx-font-smoothing: var(--font-smoothing-moz-osx-hyxkxc, auto);
+}
+.awsui_heading-text-variant-h2_2qdw9_x0puo_408:not(#\9) {
+  font-size: var(--font-size-heading-l-51gng7, 18px);
+  line-height: var(--line-height-heading-l-643aq3, 22px);
+  letter-spacing: var(--letter-spacing-heading-l-ty6arx, normal);
+  font-weight: var(--font-weight-heading-l-ypbqtk, 700);
+  -webkit-font-smoothing: var(--font-smoothing-webkit-trr1e8, auto);
+  -moz-osx-font-smoothing: var(--font-smoothing-moz-osx-hyxkxc, auto);
+}
+.awsui_heading-text-variant-h3_2qdw9_x0puo_416:not(#\9) {
+  font-size: var(--font-size-heading-m-abxcoe, 18px);
+  line-height: var(--line-height-heading-m-v86qsm, 22px);
+  letter-spacing: var(--letter-spacing-heading-m-790tuq, normal);
+  font-weight: var(--font-weight-heading-m-v51xls, 400);
+  -webkit-font-smoothing: var(--font-smoothing-webkit-trr1e8, auto);
+  -moz-osx-font-smoothing: var(--font-smoothing-moz-osx-hyxkxc, auto);
+}
+
+.awsui_counter_2qdw9_x0puo_425:not(#\9) {
+  color: var(--color-text-counter-zu2mb7, #687078);
+  font-weight: 400;
+}

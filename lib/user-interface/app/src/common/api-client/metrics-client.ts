@@ -71,21 +71,21 @@ export class MetricClient {
         console.log('CHAT INTERACTION SAVED');
       }
     } catch (e) {
-      console.log('Chat interaction not saved - ' + e);
+      console.log('Error saving chatbot interaction - ' + e);
     }
   }
 
   async getChatbotUse(startTime? : string, endTime? : string, nextPageToken? : string) {
     try {
       const auth = await Utils.authenticate();
-      console.log("Parameters: " + {startTime,endTime,nextPageToken});
+      //console.log("Parameters: " + {startTime,endTime,nextPageToken});
       let params = new URLSearchParams();
       if (startTime) params.append("startTime", startTime);
       if (endTime) params.append("endTime", endTime);
       if (nextPageToken) params.append("nextPageToken", nextPageToken);
 
       const url = `${this.API}/chatbot-use?${params.toString()}`;
-      console.log("This is the link we're using to fetch response:", url);
+      //console.log("This is the link we're using to fetch response:", url);
     
       const response = await fetch(this.API + '/chatbot-use?' + params.toString(), {
         method: 'GET',
@@ -96,20 +96,24 @@ export class MetricClient {
       });
       return await response.json()
     } catch (e) {
-      console.log(e);
+      console.log("Error retrieving chatbot use data - " + e);
     }
 }
 
   async deleteChatbotUses(timestamp: string) {
-    const auth = await Utils.authenticate();
-    let params = new URLSearchParams({timestamp});
-    await fetch(this.API + '/chatbot-use?' + params.toString(), {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': auth
-      },      
-    });
+    try {
+      const auth = await Utils.authenticate();
+      let params = new URLSearchParams({Timestamp: timestamp});
+      await fetch(this.API + '/chatbot-use?' + params.toString(), {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': auth
+        },      
+      });
+    } catch (e) {
+      console.log("Error deleting chatbot use datapoints - " + e);
+    }
     
   }
 
@@ -148,7 +152,7 @@ export class MetricClient {
         a.remove();
     } catch (error) {
         console.error("Download failed:", error);
-        alert("An error occurred while downloading the file. Please try again.");
+        throw error;
     }
   }
 

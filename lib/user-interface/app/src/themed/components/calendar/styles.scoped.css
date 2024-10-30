@@ -1,0 +1,409 @@
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/* stylelint-disable @cloudscape-design/no-motion-outside-of-mixin, selector-combinator-disallowed-list, selector-pseudo-class-no-unknown, selector-class-pattern */
+/* stylelint-enable @cloudscape-design/no-motion-outside-of-mixin, selector-combinator-disallowed-list, selector-pseudo-class-no-unknown, selector-class-pattern */
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/* Style used for links in slots/components that are text heavy, to help links stand out among
+surrounding text. (WCAG F73) https://www.w3.org/WAI/WCAG21/Techniques/failures/F73#description */
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+.awsui_calendar_1ykar_1dyw7_149:not(#\9) {
+  animation: awsui_awsui-motion-fade-in-0_1ykar_1dyw7_1 var(--motion-duration-show-quick-fo1fgn, 135ms) var(--motion-easing-show-quick-014od6, ease-out);
+  animation-fill-mode: both;
+}
+@keyframes awsui_awsui-motion-fade-in-0_1ykar_1dyw7_1 {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .awsui_calendar_1ykar_1dyw7_149:not(#\9) {
+    animation: none;
+    transition: none;
+  }
+}
+.awsui-motion-disabled .awsui_calendar_1ykar_1dyw7_149:not(#\9), .awsui-mode-entering .awsui_calendar_1ykar_1dyw7_149:not(#\9) {
+  animation: none;
+  transition: none;
+}
+
+/*
+ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+.awsui_root_1ykar_1dyw7_176:not(#\9) {
+  /* used in test-utils */
+}
+
+.awsui_calendar_1ykar_1dyw7_149:not(#\9) {
+  border-collapse: separate;
+  border-spacing: 0;
+  box-sizing: border-box;
+  caption-side: top;
+  cursor: auto;
+  direction: inherit;
+  empty-cells: show;
+  font-family: serif;
+  font-size: medium;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  line-height: normal;
+  -webkit-hyphens: none;
+          hyphens: none;
+  letter-spacing: normal;
+  list-style: disc outside none;
+  tab-size: 8;
+  text-align: start;
+  text-indent: 0;
+  text-shadow: none;
+  text-transform: none;
+  visibility: visible;
+  white-space: normal;
+  word-spacing: normal;
+  font-size: var(--font-size-body-m-6wxxs5, 14px);
+  line-height: var(--line-height-body-m-gw0130, 22px);
+  color: var(--color-text-body-default-agk00h, #16191f);
+  font-weight: 400;
+  font-family: var(--font-family-base-pxn2ad, "Noto Sans", "Helvetica Neue", Roboto, Arial, sans-serif);
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+  display: block;
+  inline-size: var(--size-calendar-grid-width-arud77, 234px);
+  overflow: auto;
+}
+.awsui_calendar-inner_1ykar_1dyw7_217:not(#\9) {
+  margin-block: var(--space-xs-6dgkww, 8px);
+  margin-inline: var(--space-xs-6dgkww, 8px);
+}
+.awsui_calendar-header_1ykar_1dyw7_221:not(#\9) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.awsui_calendar-header-title_1ykar_1dyw7_226:not(#\9) {
+  font-size: var(--font-size-body-m-6wxxs5, 14px);
+  line-height: var(--line-height-body-m-gw0130, 22px);
+  font-weight: 700;
+  color: var(--color-text-dropdown-item-default-o6jy8o, #16191f);
+  margin-block: 0;
+  margin-inline: 0;
+}
+.awsui_calendar-next-btn_1ykar_1dyw7_234:not(#\9) {
+  /* used for identifying element */
+}
+.awsui_calendar-prev-btn_1ykar_1dyw7_237:not(#\9) {
+  /* used for identifying element */
+}
+.awsui_calendar-grid_1ykar_1dyw7_240:not(#\9) {
+  inline-size: 100%;
+  table-layout: fixed;
+}
+.awsui_calendar-grid_1ykar_1dyw7_240:not(#\9):not(.awsui_calendar-grid-dense_1ykar_1dyw7_244) {
+  border-spacing: var(--space-calendar-grid-gutter-e7wbso, 0px);
+  padding-block: var(--space-xs-6dgkww, 8px);
+  padding-inline: var(--space-xs-6dgkww, 8px);
+}
+.awsui_calendar-grid-dense_1ykar_1dyw7_244:not(#\9) {
+  border-spacing: 0;
+}
+.awsui_calendar-grid-cell_1ykar_1dyw7_252:not(#\9) {
+  word-break: break-word;
+  text-align: center;
+  font-weight: unset;
+}
+.awsui_calendar-date-header_1ykar_1dyw7_257:not(#\9) {
+  padding-block-start: var(--space-s-vmutj3, 12px);
+  padding-block-end: var(--space-xxs-y2432o, 4px);
+  padding-inline: 0;
+  color: var(--color-text-calendar-month-cv9ryf, #545b64);
+  font-size: var(--font-size-body-s-4dzx5q, 12px);
+  line-height: var(--line-height-body-s-egzl4q, 16px);
+  letter-spacing: var(--letter-spacing-body-s-cbaxyl, normal);
+}
+.awsui_calendar-date_1ykar_1dyw7_257:not(#\9) {
+  border-block-end: 1px solid var(--color-border-calendar-grid-3f7bvh, #eaeded);
+  border-inline-end: 1px solid var(--color-border-calendar-grid-3f7bvh, #eaeded);
+  padding-block: var(--space-xxs-y2432o, 4px);
+  padding-inline: 0;
+  color: var(--color-text-dropdown-item-disabled-gk1x2u, #aab7b8);
+  position: relative;
+}
+.awsui_calendar-date_1ykar_1dyw7_257:not(#\9):first-child {
+  border-inline-start: 1px solid var(--color-border-calendar-grid-3f7bvh, #eaeded);
+}
+.awsui_calendar-date-enabled_1ykar_1dyw7_277:not(#\9) {
+  cursor: pointer;
+  color: var(--color-text-dropdown-item-secondary-e9qaxj, #687078);
+}
+.awsui_calendar-date-enabled_1ykar_1dyw7_277:not(#\9)::after {
+  border-start-start-radius: var(--border-radius-item-q4wr0w, 0px);
+  border-start-end-radius: var(--border-radius-item-q4wr0w, 0px);
+  border-end-start-radius: var(--border-radius-item-q4wr0w, 0px);
+  border-end-end-radius: var(--border-radius-item-q4wr0w, 0px);
+}
+.awsui_calendar-date-enabled_1ykar_1dyw7_277.awsui_calendar-date-current-page_1ykar_1dyw7_287:not(#\9) {
+  color: var(--color-text-dropdown-item-default-o6jy8o, #16191f);
+}
+.awsui_calendar-date-enabled_1ykar_1dyw7_277.awsui_calendar-date-current-page_1ykar_1dyw7_287:not(#\9):hover {
+  border-start-start-radius: var(--border-radius-item-q4wr0w, 0px);
+  border-start-end-radius: var(--border-radius-item-q4wr0w, 0px);
+  border-end-start-radius: var(--border-radius-item-q4wr0w, 0px);
+  border-end-end-radius: var(--border-radius-item-q4wr0w, 0px);
+  color: var(--color-text-calendar-date-hover-tw9220, #16191f);
+  background-color: var(--color-background-dropdown-item-hover-r5jqv1, #f2f3f3);
+}
+.awsui_calendar-date-enabled_1ykar_1dyw7_277.awsui_calendar-date-current-page_1ykar_1dyw7_287:not(#\9):hover:not(.awsui_calendar-date-selected_1ykar_1dyw7_298)::after {
+  border-block: var(--border-item-width-bjacxs, 1px) solid var(--color-border-dropdown-item-hover-69t7jr, #879596);
+  border-inline: var(--border-item-width-bjacxs, 1px) solid var(--color-border-dropdown-item-hover-69t7jr, #879596);
+}
+.awsui_calendar-date-current_1ykar_1dyw7_287:not(#\9) {
+  border-start-start-radius: var(--border-radius-item-q4wr0w, 0px);
+  border-start-end-radius: var(--border-radius-item-q4wr0w, 0px);
+  border-end-start-radius: var(--border-radius-item-q4wr0w, 0px);
+  border-end-end-radius: var(--border-radius-item-q4wr0w, 0px);
+  background-color: var(--color-background-calendar-current-date-du8mmf, #f2f3f3);
+  font-weight: 700;
+}
+.awsui_calendar-date_1ykar_1dyw7_257:not(#\9)::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  background-color: transparent;
+  inset-block-start: calc(-1 * var(--border-item-width-bjacxs, 1px));
+  inset-inline-start: calc(-1 * var(--border-item-width-bjacxs, 1px));
+  inset-inline-end: calc(-1 * var(--border-item-width-bjacxs, 1px));
+}
+.awsui_calendar-date_1ykar_1dyw7_257:not(#\9):not(.awsui_calendar-date-dense_1ykar_1dyw7_319)::after {
+  inset-block-end: calc(-1 * var(--border-item-width-bjacxs, 1px));
+  inset-inline-start: calc(-1 * var(--border-item-width-bjacxs, 1px));
+}
+.awsui_calendar-date-dense_1ykar_1dyw7_319:not(#\9)::after {
+  inset-block-end: -1px;
+  inset-inline-start: -1px;
+}
+.awsui_calendar-date_1ykar_1dyw7_257 > .awsui_date-inner_1ykar_1dyw7_327:not(#\9) {
+  position: relative;
+  z-index: 1;
+}
+.awsui_calendar-date_1ykar_1dyw7_257:not(#\9):focus {
+  outline: none;
+}
+body[data-awsui-focus-visible=true] .awsui_calendar-date_1ykar_1dyw7_257:not(#\9):focus:focus {
+  position: relative;
+}
+body[data-awsui-focus-visible=true] .awsui_calendar-date_1ykar_1dyw7_257:not(#\9):focus:focus {
+  outline: 2px dotted transparent;
+  outline-offset: calc(var(--space-calendar-grid-focus-outline-gutter-xwymmd, 0px) - 1px);
+}
+body[data-awsui-focus-visible=true] .awsui_calendar-date_1ykar_1dyw7_257:not(#\9):focus:focus::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  inset-inline-start: calc(-1 * var(--space-calendar-grid-focus-outline-gutter-xwymmd, 0px));
+  inset-block-start: calc(-1 * var(--space-calendar-grid-focus-outline-gutter-xwymmd, 0px));
+  inline-size: calc(100% + var(--space-calendar-grid-focus-outline-gutter-xwymmd, 0px) + var(--space-calendar-grid-focus-outline-gutter-xwymmd, 0px));
+  block-size: calc(100% + var(--space-calendar-grid-focus-outline-gutter-xwymmd, 0px) + var(--space-calendar-grid-focus-outline-gutter-xwymmd, 0px));
+  border-start-start-radius: var(--border-radius-calendar-day-focus-ring-wmrhyj, 2px);
+  border-start-end-radius: var(--border-radius-calendar-day-focus-ring-wmrhyj, 2px);
+  border-end-start-radius: var(--border-radius-calendar-day-focus-ring-wmrhyj, 2px);
+  border-end-end-radius: var(--border-radius-calendar-day-focus-ring-wmrhyj, 2px);
+  box-shadow: 0 0 0 2px var(--color-border-item-focused-q68bgg, #0073bb);
+}
+body[data-awsui-focus-visible=true] .awsui_calendar-date_1ykar_1dyw7_257:not(#\9):focus:focus::before {
+  z-index: 2;
+}
+.awsui_calendar-date-selected_1ykar_1dyw7_298:not(#\9) {
+  border-color: transparent;
+  position: relative;
+  z-index: 2;
+  font-weight: 700;
+}
+body[data-awsui-focus-visible=true] .awsui_calendar-date-selected_1ykar_1dyw7_298:not(#\9):focus:focus {
+  position: relative;
+}
+body[data-awsui-focus-visible=true] .awsui_calendar-date-selected_1ykar_1dyw7_298:not(#\9):focus:focus {
+  outline: 2px dotted transparent;
+  outline-offset: calc(var(--space-calendar-grid-focus-outline-gutter-xwymmd, 0px) - 1px);
+}
+body[data-awsui-focus-visible=true] .awsui_calendar-date-selected_1ykar_1dyw7_298:not(#\9):focus:focus::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  inset-inline-start: calc(-1 * var(--space-calendar-grid-focus-outline-gutter-xwymmd, 0px));
+  inset-block-start: calc(-1 * var(--space-calendar-grid-focus-outline-gutter-xwymmd, 0px));
+  inline-size: calc(100% + var(--space-calendar-grid-focus-outline-gutter-xwymmd, 0px) + var(--space-calendar-grid-focus-outline-gutter-xwymmd, 0px));
+  block-size: calc(100% + var(--space-calendar-grid-focus-outline-gutter-xwymmd, 0px) + var(--space-calendar-grid-focus-outline-gutter-xwymmd, 0px));
+  border-start-start-radius: var(--border-radius-calendar-day-focus-ring-wmrhyj, 2px);
+  border-start-end-radius: var(--border-radius-calendar-day-focus-ring-wmrhyj, 2px);
+  border-end-start-radius: var(--border-radius-calendar-day-focus-ring-wmrhyj, 2px);
+  border-end-end-radius: var(--border-radius-calendar-day-focus-ring-wmrhyj, 2px);
+  box-shadow: 0 0 0 2px var(--color-border-calendar-grid-selected-focus-ring-faye0i, #0073bb);
+}
+body[data-awsui-focus-visible=true] .awsui_calendar-date-selected_1ykar_1dyw7_298:not(#\9):focus:focus::before {
+  z-index: 2;
+}
+.awsui_calendar-date-selected_1ykar_1dyw7_298:not(#\9)::after {
+  border-start-start-radius: var(--border-radius-item-q4wr0w, 0px);
+  border-start-end-radius: var(--border-radius-item-q4wr0w, 0px);
+  border-end-start-radius: var(--border-radius-item-q4wr0w, 0px);
+  border-end-end-radius: var(--border-radius-item-q4wr0w, 0px);
+  background-color: var(--color-background-control-checked-aeun6h, #0073bb);
+  border-block: var(--border-item-width-bjacxs, 1px) solid var(--color-background-control-checked-aeun6h, #0073bb);
+  border-inline: var(--border-item-width-bjacxs, 1px) solid var(--color-background-control-checked-aeun6h, #0073bb);
+}
+.awsui_calendar-date-selected_1ykar_1dyw7_298 > .awsui_date-inner_1ykar_1dyw7_327:not(#\9) {
+  z-index: 2;
+  color: var(--color-background-control-default-mfefru, #ffffff);
+  position: relative;
+}
+.awsui_calendar-row_1ykar_1dyw7_402:not(#\9):first-child > .awsui_calendar-date_1ykar_1dyw7_257 {
+  border-block-start: 1px solid var(--color-border-calendar-grid-3f7bvh, #eaeded);
+}
+
+.awsui_disabled-reason-tooltip_1ykar_1dyw7_406:not(#\9) {
+  /* used in test-utils or tests */
+}

@@ -14,6 +14,7 @@ import {
   TextContent,
   DateRangePickerProps,
   BarChart,
+  Link,
 } from "@cloudscape-design/components";
 import { I18nProvider } from '@cloudscape-design/components/i18n';
 import messages from '@cloudscape-design/components/i18n/messages/all.all';
@@ -50,6 +51,14 @@ export default function KPIsTab(props: KPIsTabProps) {
   const [showModalDelete, setShowModalDelete] = useState(false); // hook for the 'Do you want to delete?' pop-up
   const needsRefresh = useRef<boolean>(false);
 
+  const [showTextModal, setShowTextModal] = useState(false);
+  const [modalText, setModalText] = useState("");
+
+  // Function to open the modal with full text
+  const handleShowMore = (text) => {
+    setModalText(text);
+    setShowTextModal(true);
+  };
 
   const [
     selectedOption,
@@ -188,43 +197,12 @@ export default function KPIsTab(props: KPIsTabProps) {
     },
   ]
 
-  const columnDefinitionsInteractions = [
-    {
-      id: "timestamp",
-      header: "Timestamp",
-      cell: (item) => item.Timestamp,
-      isRowHeader: true,
-    },
-    {
-      id: "user",
-      header: "User",
-      cell: (item) => item.User,
-      isRowHeader: true,
-    },
-    {
-      id: "prompt",
-      header: "Prompt",
-      cell: (item) => item.Prompt,
-      isRowHeader: true,
-    },
-    {
-      id: "response",
-      header: "Response",
-      cell: (item) => item.Response,
-      isRowHeader: true,
-    },
-    {
-      id: "response-time",
-      header: "Response Time",
-      cell: (item) => item.ResponseTime,
-      isRowHeader: true,
-    },
-  ]
-
   /**
    * id: ID for column in the table
    * header: header text for that column
    * cell: item is a piece of data and for item.x, it's getting the "x" field of the data item
+   * 
+   * BotMessage and UserPrompt wrap and user has to select "Show More" if they're longer than 50 characters
    */
   const columnDefinitions = [
     {
@@ -244,44 +222,43 @@ export default function KPIsTab(props: KPIsTabProps) {
     {
       id: "username",
       header: "Username",
-      cell: (item) => item.Username,
+      cell: (item) => item.Username.slice(0, 15) + "...",
       isRowHeader: true,
     },
     {
       id: "UserPrompt",
       header: "User Prompt",
-      cell: (item) => item.UserPrompt,
+      cell: (item) => (
+        <Box>
+          <TextContent>{item.UserPrompt.slice(0, 75)}{item.UserPrompt.length > 75 && "..."}</TextContent>
+          {item.UserPrompt.length > 75 && (
+            <Link
+            onFollow={() => handleShowMore(item.UserPrompt)}>
+            Show More
+          </Link>
+
+          )}
+        </Box>
+      ),
       isRowHeader: true,
     },
     {
       id: "BotMessage",
       header: "Bot Message",
-      cell: (item) => item.BotMessage,
+      cell: (item) => (
+        <Box>
+          <TextContent>{item.BotMessage.slice(0, 75)}{item.BotMessage.length > 75 && "..."}</TextContent>
+          {item.BotMessage.length > 75 && (
+            <Link
+            onFollow={() => handleShowMore(item.BotMessage)}>
+            Show More
+          </Link>
+          )}
+        </Box>
+      ),
       isRowHeader: true,
     },
-    // {
-    //   id: "topic",
-    //   header: "Topic",
-    //   cell: (item) => item.Topic,
-    //   isRowHeader: true,
-    // },
-    // {
-    //   id: "createdAt",
-    //   header: "Submission date",
-    //   cell: (item) =>
-    //     DateTime.fromISO(new Date(item.CreatedAt).toISOString()).toLocaleString(
-    //       DateTime.DATETIME_SHORT
-    //     ),
-    // },
-    // {
-    //   id: "prompt",
-    //   header: "User Prompt",
-    //   cell: (item) => item.UserPrompt,
-    //   isRowHeader: true
-    // },
-
   ];
-  //getColumnDefinition(props.documentType);
 
   const deleteSelectedChatbotUses = async () => {
     if (!appContext) return;
@@ -333,7 +310,7 @@ export default function KPIsTab(props: KPIsTabProps) {
           loading={loading}
           loadingText={`Loading Metrics`}
           columnDefinitions={columnDefinitions}
-          selectionType="single"
+          selectionType="multi"
           onSelectionChange={({ detail }) => {
             // console.log(detail);
             // needsRefresh.current = true;
@@ -445,10 +422,16 @@ export default function KPIsTab(props: KPIsTabProps) {
                   <Button iconName="refresh" onClick={refreshPage} />
                   <Button 
                     variant="primary"
-                    onClick={() => {
-                      apiClient.metrics.downloadChatbotUses(value.startDate, value.endDate);
-                      const id = addNotification("success", "Your files have been downloaded.")
-                      Utils.delay(3000).then(() => removeNotification(id));
+                    onClick={async () => {
+                      try {
+                        await apiClient.metrics.downloadChatbotUses(value.startDate, value.endDate);
+                        const id = addNotification("success", "Your file has been downloaded.")
+                        Utils.delay(3000).then(() => removeNotification(id));
+                      } catch (e) {
+                        console.log("Error downloading chatbot uses spreadhseet: " + e)
+                        const id = addNotification("error", "There was an error downloading the file.");
+                        Utils.delay(3000).then(() => removeNotification(id));
+                      }
                     }}
                   >
                     Download
@@ -483,8 +466,21 @@ export default function KPIsTab(props: KPIsTabProps) {
               />
             )
           }
+          
         />
-}
+        
+}         <Modal
+      onDismiss={() => setShowTextModal(false)}
+      visible={showTextModal}
+      header="Full Text"
+      footer={
+        <Box float="right">
+          <Button onClick={() => setShowTextModal(false)}>Close</Button>
+        </Box>
+      }
+    >
+      <TextContent>{modalText}</TextContent>
+    </Modal>
       </I18nProvider>
     </>
 
