@@ -233,6 +233,8 @@ def get_kpi(event):
         # Convert back to ISO format with milliseconds and UTC suffix 'Z'
         start_time = start_time.isoformat(timespec='milliseconds') + 'Z'
         end_time = end_time.isoformat(timespec='milliseconds') + 'Z'
+        
+        print(start_time)
 
         # Validate required parameters
         if not start_time or not end_time:
@@ -250,9 +252,9 @@ def get_kpi(event):
         if exclusive_start_key:
             scan_kwargs['ExclusiveStartKey'] = json.loads(exclusive_start_key)
 
-        # Perform the query operation
+        # perform the query and sort table 
         response = table.scan(**scan_kwargs)
-
+        response['Items'].sort(key=lambda x: datetime.strptime(x['Timestamp'], '%Y-%m-%dT%H:%M:%SZ'), reverse=True)
 
         # Prepare the response body
         body = {
@@ -282,7 +284,6 @@ def get_kpi(event):
             'body': json.dumps({'error': f"Failed to retrieve data: {str(e)}"})
         }
     
-# WORKS
 def delete_kpi(event):
     try:
         query_params = event.get('queryStringParameters', {})

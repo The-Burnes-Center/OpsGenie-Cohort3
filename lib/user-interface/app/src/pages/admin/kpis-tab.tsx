@@ -326,16 +326,19 @@ export default function KPIsTab(props: KPIsTabProps) {
                 <SpaceBetween direction="horizontal" size="xs">
                   <DateRangePicker
                     onChange={({ detail }) => {
-                      // Check if the value is an AbsoluteValue, which contains startDate and endDate
                       if ('startDate' in detail.value && 'endDate' in detail.value) {
-                          const formattedDate = {
-                              startDate: new Date(detail.value.startDate).toISOString(),
-                              endDate: new Date(detail.value.endDate).toISOString(),
-                          };
-
-                          setValue(formattedDate as DateRangePickerProps.AbsoluteValue);
+                        setValue({
+                          type: "absolute",
+                          startDate: detail.value.startDate,
+                          endDate: detail.value.endDate,
+                        });
+                          // const formattedDate = {
+                          //     startDate: new Date(detail.value.startDate).toISOString(),
+                          //     endDate: new Date(detail.value.endDate).toISOString(),
+                          // };
+                          // setValue(formattedDate as DateRangePickerProps.AbsoluteValue);
                       } else {
-                          console.warn("not an AbsoluteValue");
+                          console.log("not an AbsoluteValue");
                       }
                     }}
                     value={value as DateRangePickerProps.AbsoluteValue}

@@ -1,13 +1,13 @@
 """
-Purpose: Lambda functions to deal with requests surrounding KPIs (currently just chatbot uses/interctions)
+Purpose: Lambda functions to deal with requests surrounding user feedback 
 
 Overview:
-This file provides an AWS Lambda function designed to handle HTTP requests for managing KPIs in a DynamoDB table. 
-It supports operations for posting, retrieving, downloading, and deleting KPIs. Admin users can access all functionalities, while non-admins have limited permissions.
+This file provides an AWS Lambda function designed to handle HTTP requests for managing user feedback in a DynamoDB table. 
+It supports operations for posting, retrieving, downloading, and deleting feedback. Admin users can access all functionalities, while non-admins have limited permissions.
 
 Environment variables:
-- `INTERACTION_TABLE`: The name of the DynamoDB table storing interaction entries.
-- `INTERACTION_S3_DOWNLOAD`: The S3 bucket used for storing downloadable interaction data CSV files.
+- `FEEDBACK_TABLE`: The name of the DynamoDB table storing feedback entries.
+- `FEEDBACK_S3_DOWNLOAD`: The S3 bucket used for storing downloadable feedback CSV files.
 
 Classes:
 - `DecimalEncoder`: A custom JSON encoder class to convert `Decimal` objects into strings.
@@ -15,10 +15,10 @@ Classes:
 Functions:
 - `lambda_handler`: Main entry point for the Lambda function. Routes incoming requests to below functions based on the HTTP method and user role.
 
-- `post_kpi`: Handles POST requests to store KPIs in the DynamoDB table.
-- `download_kpi`: Handles POST requests to generate and return a downloadable CSV file of KPIs within a specified date range.
-- `get_kpi`: Handles GET requests to retrieve KPIs from the DynamoDB table with optional pagination support.
-- `delete_kpi`: Handles DELETE requests to remove specific KPI entries from the DynamoDB table.
+- `post_feedback`: Handles POST requests to store user feedback in the DynamoDB table.
+- `download_feedback`: Handles POST requests to generate and return a downloadable CSV file of feedback entries within a specified date range.
+- `get_feedback`: Handles GET requests to retrieve feedback from the DynamoDB table with optional pagination support.
+- `delete_feedback`: Handles DELETE requests to remove specific feedback entries from the DynamoDB table.
 
 Usage:
 Deploy this file as part of an AWS Lambda function integrated with an API Gateway. 
@@ -33,7 +33,7 @@ from boto3.dynamodb.conditions import Key, Attr
 
 # Initialize DynamoDB client
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table(os.environ.get('INTERACTION_TABLE'))
+table = dynamodb.Table(os.environ.get('FEEDBACK_TABLE'))
 
 from decimal import Decimal
 
@@ -51,7 +51,7 @@ def lambda_handler(event, context):
         claims = event["requestContext"]["authorizer"]["jwt"]["claims"]
         roles = json.loads(claims['custom:role'])
         if "Admin" in roles:                        
-            #print("admin granted!")
+            print("admin granted!")
             admin = True
         else:
             print("Caught error: attempted unauthorized admin access")
@@ -65,206 +65,173 @@ def lambda_handler(event, context):
             }
     http_method = event.get('routeKey')
     if 'POST' in http_method:
-
-        print(http_method)
-        #if event.get('rawPath') == '/chatbot-use/download' and admin: #Idk what this means but it is not working. Unsure about RawPath
-        if http_method == 'POST /chatbot-use/download' and admin:
-            print('we are downloading')
-            return download_kpi(event)
-        return post_kpi(event)
+        if event.get('rawPath') == '/user-feedback/download-feedback' and admin:
+            return download_feedback(event)
+        return post_feedback(event)
     elif 'GET' in http_method and admin:
-        return get_kpi(event)
+        return get_feedback(event)
     elif 'DELETE' in http_method and admin:
-        return delete_kpi(event)
+        return delete_feedback(event)
     else:
         return {
             'statusCode': 405,
             'body': json.dumps('Method Not Allowed')
         }
 
-# works yasss
-def post_kpi(event):
+def post_feedback(event):
     try:
-        # load JSON data from the event body
+        # Load JSON data from the event body
+        feedback_data = json.loads(event['body'])
+        # Generate a unique feedback ID and current timestamp
+        feedback_id = str(uuid.uuid4())
         timestamp = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
-        
-        body = json.loads(event['body'], parse_float=Decimal)
-
-        interaction_data = body.get('interaction_data')
-        print(interaction_data)
-        
-        # Check if interaction_data is present
-        if not interaction_data:
-            return {
-                'statusCode': 400,
-                'body': json.dumps({'error': 'Missing interaction_data'})
-            }        
-        
-        username = interaction_data.get('Username')
-        user_message = interaction_data.get('UserPrompt')
-        bot_response = interaction_data.get('BotMessage')
-        response_time = interaction_data.get('ResponseTime', Decimal(0))
+        # Prepare the item to store in DynamoDB
+        feedback_data = feedback_data['feedbackData']
         item = {
-            'Username': username,
-            'BotMessage': bot_response,
-            'ResponseTime': response_time,
-            'UserPrompt': user_message,
-            'Timestamp': timestamp
+            'FeedbackID': feedback_id,
+            'SessionID': feedback_data['sessionId'],
+            'UserPrompt': feedback_data['prompt'],
+            'FeedbackComments': feedback_data.get('comment',''),
+            'Topic': feedback_data.get('topic','N/A (Good Response)'),
+            'Problem': feedback_data.get("problem",''),
+            'Feedback': feedback_data["feedback"],
+            'ChatbotMessage': feedback_data['completion'],
+            'Sources' : feedback_data['sources'],
+            'CreatedAt': timestamp,
+            'Any' : "YES"
         }
-        
-        #print("item: " + item)
         # Put the item into the DynamoDB table
         table.put_item(Item=item)
-        if interaction_data == 0:
+        if feedback_data["feedback"] == 0:
             print("Negative feedback placed")
         return {
             'headers' : {
                 'Access-Control-Allow-Origin' : "*"
             },
             'statusCode': 200,
-            'body': json.dumps('POST successful')
+            'body': json.dumps({'FeedbackID': feedback_id})
         }
     except Exception as e:
-        print("Caught error: DynamoDB error - could not add interaction to table: " + str(e))
+        print(e)
+        print("Caught error: DynamoDB error - could not add feedback")
         return {
             'headers' : {
                 'Access-Control-Allow-Origin' : "*"
             },
             'statusCode': 500,
-            'body': json.dumps('Failed to store interaction: ' + str(e))
+            'body': json.dumps('Failed to store feedback: ' + str(e))
         }
+        
+    
+def download_feedback(event):
 
-def download_kpi(event):
-
-    # Load parameters from request body
+    # load parameters
     data = json.loads(event['body'])
     start_time = data.get('startTime')
     end_time = data.get('endTime')
-    
-    start_time = datetime.strptime(start_time, '%Y-%m-%dT%H:%M:%S.%fZ')
-    end_time = datetime.strptime(end_time, '%Y-%m-%dT%H:%M:%S.%fZ')
-
-    # Convert back to ISO format with milliseconds and UTC suffix 'Z'
-    start_time = start_time.isoformat(timespec='milliseconds') + 'Z'
-    end_time = end_time.isoformat(timespec='milliseconds') + 'Z'
-
-    # Validate required parameters
-    if not start_time or not end_time:
-        return {
-            'statusCode': 400,
-            'body': json.dumps({'error': 'Missing required query parameters'})
-        }
-
-    scan_kwargs = {
-        'FilterExpression': Attr("Timestamp").between(start_time, end_time),
-        #'Limit': 10  # Limit to 10 items per request
-    }
-
-    response = None
-    try:
-        response = table.scan(**scan_kwargs)
+    topic = data.get('topic')
         
+    response = None
+
+    # if topic is any, use the appropriate index
+    if not topic or topic=="any":                
+        query_kwargs = {
+            'IndexName': 'AnyIndex',
+            'KeyConditionExpression': Key('Any').eq("YES") & Key('CreatedAt').between(start_time, end_time)
+        }
+    else:
+        query_kwargs = {
+            'KeyConditionExpression': Key('CreatedAt').between(start_time, end_time) & Key('Topic').eq(topic),            
+        }   
+
+    try:
+        response = table.query(**query_kwargs)
     except Exception as e:
-        print("Caught error: DynamoDB error - could not lollowd interaction data for download")
+        print("Caught error: DynamoDB error - could not load feedback for download")
         return {
             'headers': {
-                'Access-Control-Allow-Origin': "*",
+                'Access-Control-Allow-Origin': "*"
             },
             'statusCode': 500,
-            'body': json.dumps('Failed to retrieve interaction data for download: ' + str(e))
+            'body': json.dumps('Failed to retrieve feedback for download: ' + str(e))
         }
-
-    # Helper function to clean data for CSV
+    
+    
     def clean_csv(field):
-        field = str(field)#.replace('"', '""')
-        #field = field.replace('\n', '').replace(',', '')
+        print("working")
+        field = str(field).replace('"', '""')
+        field = field.replace('\n','').replace(',', '')
         return f'{field}'
     
-    # CSV header with relevant interaction data fields
-    csv_content = "Timestamp, Username, User Prompt, Bot Message, Response Time\n"
-
-    # Build CSV content row by row
-    for item in response['Items']:
-        csv_content += f"{clean_csv(item['Timestamp'])}, {clean_csv(item['Username'])}, {clean_csv(item['UserPrompt'])}, {clean_csv(item['BotMessage'])}, {clean_csv(item['ResponseTime'])}\n"
+    csv_content = "FeedbackID, SessionID, UserPrompt, FeedbackComment, Topic, Problem, Feedback, ChatbotMessage, CreatedAt\n"
     
-    # Upload CSV to S3
+    for item in response['Items']:
+        csv_content += f"{clean_csv(item['FeedbackID'])}, {clean_csv(item['SessionID'])}, {clean_csv(item['UserPrompt'])}, {clean_csv(item['FeedbackComments'])}, {clean_csv(item['Topic'])}, {clean_csv(item['Problem'])}, {clean_csv(item['Feedback'])}, {clean_csv(item['ChatbotMessage'])}, {clean_csv(item['CreatedAt'])}\n"
+        print(csv_content)
+    
     s3 = boto3.client('s3')
-    S3_DOWNLOAD_BUCKET = os.environ["INTERACTION_S3_DOWNLOAD"]
+    S3_DOWNLOAD_BUCKET = os.environ["FEEDBACK_S3_DOWNLOAD"]
 
     try:
-        file_name = f"interaction-data-{start_time}-{end_time}.csv"
+        file_name = f"feedback-{start_time}-{end_time}.csv"
         s3.put_object(Bucket=S3_DOWNLOAD_BUCKET, Key=file_name, Body=csv_content)
-        
-        # Generate a presigned URL for download
         presigned_url = s3.generate_presigned_url('get_object', Params={'Bucket': S3_DOWNLOAD_BUCKET, 'Key': file_name}, ExpiresIn=3600)
 
     except Exception as e:
         print("Caught error: S3 error - could not generate download link")
         return {
             'headers': {
-                'Access-Control-Allow-Origin': "*",
+                'Access-Control-Allow-Origin': "*"
             },
             'statusCode': 500,
-            'body': json.dumps('Failed to generate download link: ' + str(e))
+            'body': json.dumps('Failed to retrieve feedback for download: ' + str(e))
         }
-
     return {
         'headers': {
-            'Access-Control-Allow-Origin': "*",
-        },
+                'Access-Control-Allow-Origin': "*"
+            },
         'statusCode': 200,
         'body': json.dumps({'download_url': presigned_url})
     }
-    
-def get_kpi(event):
+        
+
+def get_feedback(event):
     try:
         # Extract query parameters
         query_params = event.get('queryStringParameters', {})
-        print("Query params:", query_params)
         start_time = query_params.get('startTime')
         end_time = query_params.get('endTime')
-        # topic = query_params.get('topic')
-        exclusive_start_key = query_params.get('nextPageToken') # pagination token
-        print(f"startTime: {start_time}, endTime: {end_time}, nextPageToken: {exclusive_start_key}")
+        topic = query_params.get('topic')
+        exclusive_start_key = query_params.get('nextPageToken')  # Pagination token        
         
-        start_time = datetime.strptime(start_time, '%Y-%m-%dT%H:%M:%S.%fZ')
-        end_time = datetime.strptime(end_time, '%Y-%m-%dT%H:%M:%S.%fZ')
-
-        # Convert back to ISO format with milliseconds and UTC suffix 'Z'
-        start_time = start_time.isoformat(timespec='milliseconds') + 'Z'
-        end_time = end_time.isoformat(timespec='milliseconds') + 'Z'
-
-        # Validate required parameters
-        if not start_time or not end_time:
-            return {
-                'statusCode': 400,
-                'body': json.dumps({'error': 'Missing required query parameters'})
+        response = None        
+        
+        if not topic or topic=="any":        
+            query_kwargs = {
+                'IndexName' : 'AnyIndex',
+                'KeyConditionExpression': Key('Any').eq("YES") & Key('CreatedAt').between(start_time, end_time),
+                'ScanIndexForward' : False,
+                'Limit' : 10
+            } 
+        else:
+            query_kwargs = {
+                'KeyConditionExpression': Key('CreatedAt').between(start_time, end_time) & Key('Topic').eq(topic),
+                'ScanIndexForward' : False,
+                'Limit' : 10
             }
 
-        scan_kwargs = {
-            'FilterExpression': Attr("Timestamp").between(start_time, end_time),
-            'Limit': 10  # Limit to 10 items per request
+        if exclusive_start_key:
+            query_kwargs['ExclusiveStartKey'] = json.loads(exclusive_start_key)
+        
+        response = table.query(**query_kwargs)
+        
+        body = {
+            'Items':  response['Items'],            
         }
         
-        # Handle pagination if nextPageToken is provided
-        if exclusive_start_key:
-            scan_kwargs['ExclusiveStartKey'] = json.loads(exclusive_start_key)
-
-        # Perform the query operation
-        response = table.scan(**scan_kwargs)
-        items = response.get('Items', [])
-        items.sort(key=lambda x: datetime.strptime(x['Timestamp'], '%Y-%m-%dT%H:%M:%S.%fZ'))
-
-        # Prepare the response body
-        body = {
-            'Items': items
-        }
-
-        # If DynamoDB returns a pagination token, include it in the response
         if 'LastEvaluatedKey' in response:
             body['NextPageToken'] = json.dumps(response['LastEvaluatedKey'])
 
-        # Return the successful response
         return {
             'headers': {
                 'Access-Control-Allow-Origin': "*"
@@ -272,35 +239,37 @@ def get_kpi(event):
             'statusCode': 200,
             'body': json.dumps(body, cls=DecimalEncoder)
         }
-
     except Exception as e:
-        print(f"Caught error: {str(e)}")
+        print("Caught error: DynamoDB error - could not get feedback")
         return {
             'headers': {
                 'Access-Control-Allow-Origin': "*"
             },
             'statusCode': 500,
-            'body': json.dumps({'error': f"Failed to retrieve data: {str(e)}"})
+            'body': json.dumps('Failed to retrieve feedback: ' + str(e))
         }
-    
-def delete_kpi(event):
+        
+def delete_feedback(event):
     try:
+        # Extract FeedbackID from the event
+        # feedback_id = json.loads(event['body']).get('FeedbackID')
         query_params = event.get('queryStringParameters', {})
-        timestamp = query_params.get('Timestamp')
-
-        if not timestamp:
+        topic = query_params.get('topic')
+        created_at = query_params.get('createdAt')
+        
+        if not topic:
             return {
                 'headers': {
                     'Access-Control-Allow-Origin': '*'
                 },
                 'statusCode': 400,
-                'body': json.dumps('Missing timestamp')
+                'body': json.dumps('Missing FeedbackID')
             }
-            
         # Delete the item from the DynamoDB table
         response = table.delete_item(
             Key={
-                'Timestamp': timestamp,
+                'Topic': topic,
+                'CreatedAt' : created_at
             }
         )
         return {
@@ -308,14 +277,14 @@ def delete_kpi(event):
                 'Access-Control-Allow-Origin': '*'
             },
             'statusCode': 200,
-            'body': json.dumps({'message': 'Interaction item deleted successfully'})
+            'body': json.dumps({'message': 'Feedback deleted successfully'})
         }
     except Exception as e:
-        print("Caught error: DynamoDB error - could not delete interaction item")
+        print("Caught error: DynamoDB error - could not delete feedback")
         return {
             'headers': {
                 'Access-Control-Allow-Origin': '*'
             },
             'statusCode': 500,
-            'body': json.dumps('Failed to delete interaction item: ' + str(e))
+            'body': json.dumps('Failed to delete feedback: ' + str(e))
         }
