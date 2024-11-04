@@ -332,11 +332,6 @@ export default function KPIsTab(props: KPIsTabProps) {
                           startDate: detail.value.startDate,
                           endDate: detail.value.endDate,
                         });
-                          // const formattedDate = {
-                          //     startDate: new Date(detail.value.startDate).toISOString(),
-                          //     endDate: new Date(detail.value.endDate).toISOString(),
-                          // };
-                          // setValue(formattedDate as DateRangePickerProps.AbsoluteValue);
                       } else {
                           console.log("not an AbsoluteValue");
                       }
@@ -431,7 +426,6 @@ export default function KPIsTab(props: KPIsTabProps) {
                         const id = addNotification("success", "Your file has been downloaded.")
                         Utils.delay(3000).then(() => removeNotification(id));
                       } catch (e) {
-                        console.log("Error downloading chatbot uses spreadhseet: " + e)
                         const id = addNotification("error", "There was an error downloading the file.");
                         Utils.delay(3000).then(() => removeNotification(id));
                       }

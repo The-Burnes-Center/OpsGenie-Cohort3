@@ -176,23 +176,37 @@ def download_kpi(event):
 
     # Helper function to clean data for CSV
     def clean_csv(field):
-        field = str(field)#.replace('"', '""')
-        #field = field.replace('\n', '').replace(',', '')
-        return f'{field}'
+        field = str(field).replace('"', '""')
+        
+        # this is needed cuz a lot of the bot messages contain commas which will mess up the file
+        if ',' in field or '\n' in field or '"' in field:
+            field = f'"{field}"'
+        
+        return field
     
     # CSV header with relevant interaction data fields
-    csv_content = "Timestamp, Username, User Prompt, Bot Message, Response Time\n"
+    csv_content = "Timestamp,Username,User Prompt,Bot Message,Response Time\n"
 
     # Build CSV content row by row
     for item in response['Items']:
-        csv_content += f"{clean_csv(item['Timestamp'])}, {clean_csv(item['Username'])}, {clean_csv(item['UserPrompt'])}, {clean_csv(item['BotMessage'])}, {clean_csv(item['ResponseTime'])}\n"
-    
+        csv_content += (
+            f"{clean_csv(item['Timestamp'])},"
+            f"{clean_csv(item['Username'])},"
+            f"{clean_csv(item['UserPrompt'])},"
+            f"{clean_csv(item['BotMessage'])},"
+            f"{clean_csv(item['ResponseTime'])}\n"
+        )    
+        
     # Upload CSV to S3
     s3 = boto3.client('s3')
     S3_DOWNLOAD_BUCKET = os.environ["INTERACTION_S3_DOWNLOAD"]
 
+    # readable dates
+    start_date = datetime.strptime(start_time, '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%Y-%m-%d')
+    end_date = datetime.strptime(end_time, '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%Y-%m-%d')
+
     try:
-        file_name = f"interaction-data-{start_time}-{end_time}.csv"
+        file_name = f"interaction-data-{start_time}_to_{end_time}.csv"
         s3.put_object(Bucket=S3_DOWNLOAD_BUCKET, Key=file_name, Body=csv_content)
         
         # Generate a presigned URL for download

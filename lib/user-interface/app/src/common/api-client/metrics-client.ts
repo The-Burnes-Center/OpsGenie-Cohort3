@@ -146,7 +146,7 @@ export class MetricClient {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = "data.csv";
+        //a.download = `chatbotUses-${}-.csv`;
         document.body.appendChild(a);
         a.click();
         a.remove();
