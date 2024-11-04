@@ -329,8 +329,8 @@ export default function KPIsTab(props: KPIsTabProps) {
                       if ('startDate' in detail.value && 'endDate' in detail.value) {
                         setValue({
                           type: "absolute",
-                          startDate: detail.value.startDate,
-                          endDate: detail.value.endDate,
+                          startDate: new Date(detail.value.startDate).toISOString(),
+                          endDate: new Date(detail.value.endDate).toISOString(),
                         });
                       } else {
                           console.log("not an AbsoluteValue");
