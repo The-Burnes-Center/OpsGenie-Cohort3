@@ -156,6 +156,9 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
 
     let username;
     await Auth.currentAuthenticatedUser().then((value) => username = value.username);
+    
+    // so that we can later retrieve the email address of user for the logs table
+    const result = await Auth.currentAuthenticatedUser();
     if (!username) return;
     // const readline = require('readline').createInterface({
     //   input: process.stdin,
@@ -323,7 +326,7 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
         const responseTime = (endTime - startTime) / 1000; // time in seconds
         console.log("Length of bot response in seconds: ", responseTime);
         const interactionData = {
-          Username: username,
+          Username: result?.attributes?.email || username,
           BotMessage: receivedData,
           UserPrompt: messageToSend,
           ResponseTime: responseTime,

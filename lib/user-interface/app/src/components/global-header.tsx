@@ -27,6 +27,9 @@ export default function GlobalHeader() {
       // const userName = result?.attributes?.email;
       const userName = result?.signInUserSession?.idToken?.payload?.name;
       setUserName(userName);
+      // const userName =  result?.attributes?.email;
+      // setUserName(userName);
+      // console.log(userName);
     })();
   }, []);
 

@@ -222,7 +222,7 @@ export default function KPIsTab(props: KPIsTabProps) {
     {
       id: "username",
       header: "Username",
-      cell: (item) => item.Username.slice(0, 15) + "...",
+      cell: (item) => item.Username,
       isRowHeader: true,
     },
     {
@@ -230,7 +230,7 @@ export default function KPIsTab(props: KPIsTabProps) {
       header: "User Prompt",
       cell: (item) => (
         <Box>
-          <TextContent>{item.UserPrompt.slice(0, 75)}{item.UserPrompt.length > 75 && "..."}</TextContent>
+          <TextContent>{item.UserPrompt.slice(0, 90)}{item.UserPrompt.length > 90 && "..."}</TextContent>
           {item.UserPrompt.length > 75 && (
             <Link
             onFollow={() => handleShowMore(item.UserPrompt)}>
@@ -247,7 +247,7 @@ export default function KPIsTab(props: KPIsTabProps) {
       header: "Bot Message",
       cell: (item) => (
         <Box>
-          <TextContent>{item.BotMessage.slice(0, 75)}{item.BotMessage.length > 75 && "..."}</TextContent>
+          <TextContent>{item.BotMessage.slice(0, 90)}{item.BotMessage.length > 90 && "..."}</TextContent>
           {item.BotMessage.length > 75 && (
             <Link
             onFollow={() => handleShowMore(item.BotMessage)}>
