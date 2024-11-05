@@ -44,7 +44,7 @@ function App() {
              <Route path="add-data" element={<AddData />} />          
              <Route path="data" element={<WorkspacePane />} />   
              <Route path="user-feedback" element={<UserFeedbackPage />} />
-             <Route path="kpis" element={<KPIsPage />} />                           
+             <Route path="kpis" element={<KPIsPage />} />                          
             </Route>
             <Route path="*" element={<Navigate to={`/chatbot/playground/${uuidv4()}`} replace />} />
           </Routes>
