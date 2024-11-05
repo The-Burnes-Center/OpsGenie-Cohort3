@@ -18,7 +18,6 @@ import SessionPage from "./pages/chatbot/sessions/sessions"
 import { v4 as uuidv4 } from "uuid";
 import "./styles/app.scss";
 import KPIsPage from "./pages/admin/kpis";
-import Evaluation from "./pages/admin/evaluation";
 
 
 function App() {
@@ -45,8 +44,7 @@ function App() {
              <Route path="add-data" element={<AddData />} />          
              <Route path="data" element={<WorkspacePane />} />   
              <Route path="user-feedback" element={<UserFeedbackPage />} />
-             <Route path="kpis" element={<KPIsPage />} />
-             <Route path="evaluation" element={<Evaluation />} />                            
+             <Route path="kpis" element={<KPIsPage />} />                          
             </Route>
             <Route path="*" element={<Navigate to={`/chatbot/playground/${uuidv4()}`} replace />} />
           </Routes>
