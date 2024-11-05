@@ -142,12 +142,13 @@ def redact_text(prompt, entities):
         if entity["Type"] == "PROFESSION" or entity["Type"] == "URL":
             continue  # Skip redaction for professions and URLs
 
-        elif entity_type == "DATE":
+        elif entity_type == "DATE_TIME":
             # Check if the date is year-only by confirming it has exactly four digits
             if len(pii_text) == 4 and pii_text.isdigit():
                 continue  # Skip redaction for year-only dates
             else:
-                replacement = "[DATE]"
+                replacement = "[DATE_TIME]"
+                redacted_text = redacted_text.replace(pii_text, replacement)
 
         elif entity["Type"] == "AGE":
             age = float([int(word) for word in pii_text.split() if word.isdigit()][0])
