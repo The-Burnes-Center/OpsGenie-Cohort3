@@ -7,6 +7,6 @@ export const kendraIndexName = 'prod-mec'
 export const cognitoDomainName = "mec-chatbot-auth"
 // this can be anything that would be understood easily, but you must use the same name
 // when setting up a sign-in provider in Cognito
-export const OIDCIntegrationName = ""
+export const OIDCIntegrationName = "AzureAD-OIDC-MEC"
 // this MUST be unique to your account
 export const stackName = "MECKnowledgeStack"
