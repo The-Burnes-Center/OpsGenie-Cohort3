@@ -207,7 +207,7 @@ export default function DocumentsTab(props: DocumentsTabProps) {
           <Header
             actions={
               <SpaceBetween direction="horizontal" size="xs">
-                <Button iconName="refresh" onClick={refreshPage} />
+                <Button iconName="refresh" onClick={refreshPage} ariaLabel="Refresh page" />
                 <RouterButton
                   // href={`/rag/workspaces/add-data?workspaceId=${props.workspaceId}&tab=${props.documentType}`}
                   href={`/admin/add-data`}

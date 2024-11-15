@@ -73,6 +73,7 @@ export default function GlobalHeader() {
   
           {
             type: "menu-dropdown",
+            ariaLabel: "Dropdown menu",
             description: userName ?? "",
             iconName: "user-profile",
             onItemClick: onUserProfileClick,

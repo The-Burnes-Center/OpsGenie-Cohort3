@@ -156,4 +156,28 @@ export class MetricClient {
     }
   }
 
+  async incrementLogin() {
+    //console.log(JSON.stringify({interaction_data: interactionData}));
+    try {
+      const auth = await Utils.authenticate();      
+      const response = await fetch(this.API + '/daily-logins', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization' : auth,
+        },
+        //body: JSON.stringify({date: date}), // does something need to be here?
+      })
+      //console.log(JSON.stringify({interaction_data: interactionData}));
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.log('Error response:', response.status, errorText);
+      } else {
+        //console.log('Incremented the logins on ' + date);
+      }
+    } catch (e) {
+      console.log('Error incrementing daily logins - ' + e);
+    }
+  }
+
 }

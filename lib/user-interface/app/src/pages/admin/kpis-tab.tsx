@@ -15,11 +15,12 @@ import {
   DateRangePickerProps,
   BarChart,
   Link,
+  Icon,
 } from "@cloudscape-design/components";
 import { I18nProvider } from '@cloudscape-design/components/i18n';
 import messages from '@cloudscape-design/components/i18n/messages/all.all';
 import { DateTime } from "luxon";
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import RouterButton from "../../components/wrappers/router-button";
 import { RagDocumentType } from "../../common/types";
 import { TableEmptyState } from "../../components/table-empty-state";
@@ -54,6 +55,8 @@ export default function KPIsTab(props: KPIsTabProps) {
   const [showTextModal, setShowTextModal] = useState(false);
   const [modalText, setModalText] = useState("");
 
+  const FLAG_RESPONSE = 20; // chatbot interactions with response times longer than this will be flagged
+  
   // Function to open the modal with full text
   const handleShowMore = (text) => {
     setModalText(text);
@@ -70,11 +73,28 @@ export default function KPIsTab(props: KPIsTabProps) {
     endDate: (new Date()).toISOString()
   });
 
-
   const { addNotification, removeNotification } = useNotifications();
 
-  // pages of the table
-  const { items, collectionProps, paginationProps } = useCollection(pages, {
+  const [sortingColumn, setSortingColumn] = useState({ sortingField: "Timestamp" });
+  const [isDescending, setIsDescending] = useState(true);
+
+  const onSortingChange = ({ detail }) => {
+    setSortingColumn(detail.sortingColumn);
+    setIsDescending(detail.isDescending);
+  };
+
+  // sorts table items by the sorting column
+  const currentPageItems = pages[0]?.Items || [];
+  const sortedItems = [...currentPageItems].sort((a, b) => {
+    const { sortingField } = sortingColumn;
+    const direction = isDescending ? 1 : -1;
+
+    if (a[sortingField] < b[sortingField]) return -1 * direction;
+    if (a[sortingField] > b[sortingField]) return 1 * direction;
+    return 0;
+  });
+  
+  const { items, collectionProps, paginationProps, } = useCollection(pages, {
     filtering: {
       empty: (
         <Box margin={{ vertical: "xs" }} textAlign="center" color="inherit">
@@ -85,16 +105,11 @@ export default function KPIsTab(props: KPIsTabProps) {
       ),
     },
     pagination: { pageSize: 5 },
-    sorting: {
-      defaultState: {
-        sortingColumn: {
-          sortingField: "Timestamp",
-        },
-        isDescending: true,
-      },
-    },
+    //sorting: { defaultState: sortingState },
     selection: {},
   });
+
+
 
   const getKPI = useCallback(
     async (params: { pageIndex?, nextPageToken?}) => {
@@ -204,7 +219,7 @@ export default function KPIsTab(props: KPIsTabProps) {
    * 
    * BotMessage and UserPrompt wrap and user has to select "Show More" if they're longer than 50 characters
    */
-  const columnDefinitions = [
+  const columnDefinitionsInteractions = [
     {
       id: "timestamp",
       header: "Timestamp",
@@ -212,18 +227,23 @@ export default function KPIsTab(props: KPIsTabProps) {
                DateTime.DATETIME_SHORT
              ),
       isRowHeader: true,
+      sortingField: "Timestamp",
     },
     {
       id: "responseTime",
       header: "Response Time",
-      cell: (item) => item.ResponseTime,
+      cell: (item) => (
+        <>{item.ResponseTime} {item.ResponseTime >= FLAG_RESPONSE && <Icon name="flag" size="normal" variant="error" />}</>
+      ),
       isRowHeader: true,
+      sortingField: "ResponseTime",
     },
     {
       id: "username",
       header: "Username",
       cell: (item) => item.Username,
       isRowHeader: true,
+      sortingField: "Username",
     },
     {
       id: "UserPrompt",
@@ -309,7 +329,7 @@ export default function KPIsTab(props: KPIsTabProps) {
           {...collectionProps}
           loading={loading}
           loadingText={`Loading Metrics`}
-          columnDefinitions={columnDefinitions}
+          columnDefinitions={columnDefinitionsInteractions}
           selectionType="multi"
           onSelectionChange={({ detail }) => {
             // console.log(detail);
@@ -317,8 +337,18 @@ export default function KPIsTab(props: KPIsTabProps) {
             props.updateSelectedMetrics(detail.selectedItems[0])
             setSelectedItems(detail.selectedItems);
           }}
+          // onSortingChange={({ detail }) => {handleSortingChange(detail.sortingColumn.sortingField)
+          //   // why is it one update behind????
+          //   console.log("sorting field is now: " + sortingState.sortingColumn.sortingField)
+          // }}
+
+          onSortingChange={onSortingChange} // Attach the onSortingChange handler
+          sortingColumn={sortingColumn} // Pass the current sorting state to the Table
+          sortingDescending={isDescending}
           selectedItems={selectedItems}
-          items={pages[Math.min(pages.length - 1, currentPageIndex - 1)]?.Items!}
+          //items={pages[Math.min(pages.length - 1, currentPageIndex - 1)]?.Items!}
+          items={sortedItems}
+          //pagination={paginationProps}
           trackBy="Timestamp"
           header={
             <Header
@@ -399,6 +429,7 @@ export default function KPIsTab(props: KPIsTabProps) {
                     showClearButton={false}
                     timeInputFormat="hh:mm:ss"
                     rangeSelectorMode="absolute-only"
+                    
                   />
                   {/* <FormField label="Filter Topic"> */}
                     <Select
@@ -417,7 +448,7 @@ export default function KPIsTab(props: KPIsTabProps) {
                     />
                   {/* </FormField> */}
 
-                  <Button iconName="refresh" onClick={refreshPage} />
+                  <Button iconName="refresh" onClick={refreshPage} ariaLabel="Refresh page"/>
                   <Button 
                     variant="primary"
                     onClick={async () => {
@@ -484,3 +515,4 @@ export default function KPIsTab(props: KPIsTabProps) {
 
   );
 }
+

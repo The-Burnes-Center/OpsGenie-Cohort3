@@ -330,6 +330,7 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
           BotMessage: receivedData,
           UserPrompt: messageToSend,
           ResponseTime: responseTime,
+          //Flagged: responseTime >= 20,
         }
 
         apiClient.metrics.saveChatInteraction(interactionData);
