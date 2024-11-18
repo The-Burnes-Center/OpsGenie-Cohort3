@@ -351,7 +351,7 @@ export class LambdaFunctionStack extends cdk.Stack {
     props.evalSummariesTable.grantReadWriteData(evalResultsAPIHandlerFunction);
 
     this.stepFunctionsStack = new StepFunctionsStack(scope, 'StepFunctionsStack', {
-      knowledgeBase: props.knowledgeBase,
+      knowledgeBase: props.kendraIndex,
       evalSummariesTable: props.evalSummariesTable,
       evalResutlsTable: props.evalResutlsTable,
       evalTestCasesBucket: props.evalTestCasesBucket,

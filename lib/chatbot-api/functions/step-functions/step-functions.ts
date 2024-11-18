@@ -7,14 +7,14 @@ import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import { Table } from 'aws-cdk-lib/aws-dynamodb';
 import * as s3 from "aws-cdk-lib/aws-s3";
-import * as bedrock from "aws-cdk-lib/aws-bedrock";
+import * as kendra from 'aws-cdk-lib/aws-kendra';
 import { Platform } from 'aws-cdk-lib/aws-ecr-assets';
 import { StateMachine } from 'aws-cdk-lib/aws-stepfunctions';
 import * as stepfunctions from 'aws-cdk-lib/aws-stepfunctions';
 import * as tasks from 'aws-cdk-lib/aws-stepfunctions-tasks';
 
 interface StepFunctionsStackProps {
-    readonly knowledgeBase : bedrock.CfnKnowledgeBase;
+    readonly knowledgeBase : kendra.CfnIndex;
     readonly evalSummariesTable : Table;
     readonly evalResutlsTable : Table;
     readonly evalTestCasesBucket : s3.Bucket;
@@ -104,7 +104,7 @@ export class StepFunctionsStack extends Construct {
             environment : {
                 "PROMPT" : `You are a helpful AI chatbot that will answer questions based on your knowledge. 
                 You have access to a search tool that you will use to look up answers to questions.`,
-                'KB_ID' : props.knowledgeBase.attrKnowledgeBaseId,
+                'KB_ID' : props.knowledgeBase.attrId,
                 'SYSTEM_PROMPTS_HANDLER_ARN' : props.systemPromptsHandlerName
               },
             timeout: cdk.Duration.seconds(30)
@@ -121,9 +121,9 @@ export class StepFunctionsStack extends Construct {
         generateResponseFunction.addToRolePolicy(new iam.PolicyStatement({
             effect: iam.Effect.ALLOW,
             actions: [
-              'bedrock:Retrieve'
+              'kendra:Retrieve'
             ],
-            resources: [props.knowledgeBase.attrKnowledgeBaseArn]
+            resources: [props.knowledgeBase.attrArn]
         }));
         this.generateResponseFunction = generateResponseFunction;
 
