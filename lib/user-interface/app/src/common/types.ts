@@ -33,3 +33,11 @@ export type RagDocumentType =
   | "website"
   | "rssfeed"
   | "rsspost";
+export type AdminDataType =
+  | "file"
+  | "feedback"
+  | "evaluationSummary"
+  | "detailedEvaluation";
+  
+
+

@@ -15,6 +15,8 @@ import AddData from "./pages/admin/add-data";
 import WorkspacePane from "./pages/admin/workspace";
 import UserFeedbackPage from "./pages/admin/user-feedback";
 import SessionPage from "./pages/chatbot/sessions/sessions"
+import LlmEvaluationPage from "./pages/admin/llm-evaluation-page.tsx"; 
+import DetailedEvaluationPage from "./pages/admin/detailed-evaluation-page.tsx";
 import { v4 as uuidv4 } from "uuid";
 import "./styles/app.scss";
 import KPIsPage from "./pages/admin/kpis";
@@ -44,7 +46,18 @@ function App() {
              <Route path="add-data" element={<AddData />} />          
              <Route path="data" element={<WorkspacePane />} />   
              <Route path="user-feedback" element={<UserFeedbackPage />} />
-             <Route path="kpis" element={<KPIsPage />} />                          
+             <Route path="kpis" element={<KPIsPage />} />  
+             <Route path="llm-evaluation" element={<Outlet />}>
+            <Route index element={<LlmEvaluationPage />} />
+            <Route
+              path=":evaluationId"
+              element={
+                <DetailedEvaluationPage
+                  documentType="detailedEvaluation" 
+                />
+              }
+            />
+          </Route>                          
             </Route>
             <Route path="*" element={<Navigate to={`/chatbot/playground/${uuidv4()}`} replace />} />
           </Routes>

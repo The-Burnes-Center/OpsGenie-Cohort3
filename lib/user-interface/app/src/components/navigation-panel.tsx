@@ -112,6 +112,7 @@ export default function NavigationPanel() {
             { type: "link", text: "Update Data", href: "/admin/add-data" },
             { type: "link", text: "Data", href: "/admin/data" },
             { type: "link", text: "User Feedback", href: "/admin/user-feedback" },
+            { type: "link", text: "LLM Evaluation", href: "/admin/llm-evaluation" },
             { type: "link", text: "KPIs", href: "/admin/kpis" },
             invocationCount? { type: "link", text: `Message Count (past 24hrs): ${invocationCount}`, href: ""} 
             : {type: "link", text: "Message Count (past 24hrs): unknown", href: ""}
