@@ -18,7 +18,6 @@ interface StepFunctionsStackProps {
     readonly evalSummariesTable : Table;
     readonly evalResutlsTable : Table;
     readonly evalTestCasesBucket : s3.Bucket;
-    systemPromptsHandlerName: string;
 }
 
 export class StepFunctionsStack extends Construct {
@@ -105,7 +104,6 @@ export class StepFunctionsStack extends Construct {
                 "PROMPT" : `You are a helpful AI chatbot that will answer questions based on your knowledge. 
                 You have access to a search tool that you will use to look up answers to questions.`,
                 'KB_ID' : props.knowledgeBase.attrId,
-                'SYSTEM_PROMPTS_HANDLER_ARN' : props.systemPromptsHandlerName
               },
             timeout: cdk.Duration.seconds(30)
         });

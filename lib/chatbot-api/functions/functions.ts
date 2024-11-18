@@ -100,79 +100,54 @@ export class LambdaFunctionStack extends cdk.Stack {
     this.sessionFunction = sessionAPIHandlerFunction;
 
 
-    const systemPromptsAPIHandlerFunction = new lambda.Function(scope, 'SystemPromptsHandlerFunction', {
-      runtime: lambda.Runtime.PYTHON_3_12, // Choose any supported Node.js runtime
-      code: lambda.Code.fromAsset(path.join(__dirname, 'knowledge-management/system-prompt-handler')), // Points to the lambda directory
-      handler: 'lambda_function.lambda_handler', // Points to the 'hello' file in the lambda directory
-      environment: {
-        "SYSTEM_PROMPTS_TABLE" : props.systemPromptsTable.tableName
-      }
+
+    // Define the Lambda function resource
+    const websocketAPIFunction = new lambda.Function(scope, 'ChatHandlerFunction', {
+      runtime: lambda.Runtime.NODEJS_20_X, // Choose any supported Node.js runtime
+      code: lambda.Code.fromAsset(path.join(__dirname, 'websocket-chat')), // Points to the lambda directory
+      handler: 'index.handler', // Points to the 'hello' file in the lambda directory
+      environment : {
+        "mvp_websocket__api_endpoint_test" : props.wsApiEndpoint.replace("wss","https"),
+        "INDEX_ID" : props.kendraIndex.attrId,
+        'SESSION_HANDLER' : sessionAPIHandlerFunction.functionName,
+      },
+      timeout: cdk.Duration.seconds(300)
     });
-    // Add permissions to the lambda function to read/write to the table
-    systemPromptsAPIHandlerFunction.addToRolePolicy(new iam.PolicyStatement({
+    websocketAPIFunction.addToRolePolicy(new iam.PolicyStatement({
       effect: iam.Effect.ALLOW,
       actions: [
-        'dynamodb:GetItem',
-        'dynamodb:PutItem',
-        'dynamodb:UpdateItem',
-        'dynamodb:DeleteItem',
-        'dynamodb:Query',
-        'dynamodb:Scan'
+        'bedrock:InvokeModelWithResponseStream',
+        'bedrock:InvokeModel'
       ],
-      resources: [props.systemPromptsTable.tableArn, props.systemPromptsTable.tableArn + "/index/*"]
+      resources: ["*"]
     }));
-    this.systemPromptsFunction = systemPromptsAPIHandlerFunction;
-    props.systemPromptsTable.grantReadWriteData(systemPromptsAPIHandlerFunction);
-
-
-        // Define the Lambda function resource
-        const websocketAPIFunction = new lambda.Function(scope, 'ChatHandlerFunction', {
-          runtime: lambda.Runtime.NODEJS_20_X, // Choose any supported Node.js runtime
-          code: lambda.Code.fromAsset(path.join(__dirname, 'websocket-chat')), // Points to the lambda directory
-          handler: 'index.handler', // Points to the 'hello' file in the lambda directory
-          environment : {
-            "mvp_websocket__api_endpoint_test" : props.wsApiEndpoint.replace("wss","https"),
-            "INDEX_ID" : props.kendraIndex.attrId,
-            'SESSION_HANDLER' : sessionAPIHandlerFunction.functionName,
-            'SYSTEM_PROMPTS_HANDLER' : systemPromptsAPIHandlerFunction.functionName
-          },
-          timeout: cdk.Duration.seconds(300)
-        });
-        websocketAPIFunction.addToRolePolicy(new iam.PolicyStatement({
-          effect: iam.Effect.ALLOW,
-          actions: [
-            'bedrock:InvokeModelWithResponseStream',
-            'bedrock:InvokeModel'
-          ],
-          resources: ["*"]
-        }));
 
         
-        websocketAPIFunction.addToRolePolicy(new iam.PolicyStatement({
-          effect: iam.Effect.ALLOW,
-          actions: [
-            'kendra:Retrieve'
-          ],
-          resources: [props.kendraIndex.attrArn]
-        }));
+    websocketAPIFunction.addToRolePolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: [
+        'kendra:Retrieve'
+      ],
+      resources: [props.kendraIndex.attrArn]
+    }));
 
-        websocketAPIFunction.addToRolePolicy(new iam.PolicyStatement({
-          effect: iam.Effect.ALLOW,
-          actions: [
-            'lambda:InvokeFunction'
-          ],
-          resources: [this.sessionFunction.functionArn, this.systemPromptsFunction.functionArn]
-        }));
+    websocketAPIFunction.addToRolePolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: [
+        'lambda:InvokeFunction'
+      ],
+      resources: [this.sessionFunction.functionArn, this.systemPromptsFunction.functionArn]
+    }));
 
-        websocketAPIFunction.addToRolePolicy(new iam.PolicyStatement({
-          effect: iam.Effect.ALLOW,
-          actions: [
-            's3:GetObject'
-          ],
-          resources: ['arn:aws:iam::807596108910:role/MECKnowledgeStack-ChatbotAPIKendraIndexRole0A5CCA00-mOwqNPZz42yg/*']
-        }));
+    websocketAPIFunction.addToRolePolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: [
+        's3:GetObject'
+      ],
+      resources: ['arn:aws:iam::807596108910:role/MECKnowledgeStack-ChatbotAPIKendraIndexRole0A5CCA00-mOwqNPZz42yg/*']
+    }));
         
-        this.chatFunction = websocketAPIFunction;
+    this.chatFunction = websocketAPIFunction;
 
     const feedbackAPIHandlerFunction = new lambda.Function(scope, 'FeedbackHandlerFunction', {
       runtime: lambda.Runtime.PYTHON_3_12, // Choose any supported Node.js runtime
@@ -354,8 +329,7 @@ export class LambdaFunctionStack extends cdk.Stack {
       knowledgeBase: props.kendraIndex,
       evalSummariesTable: props.evalSummariesTable,
       evalResutlsTable: props.evalResutlsTable,
-      evalTestCasesBucket: props.evalTestCasesBucket,
-      systemPromptsHandlerName: systemPromptsAPIHandlerFunction.functionName
+      evalTestCasesBucket: props.evalTestCasesBucket
     });
 
     const chatInvocationsCounterFunction = new lambda.Function(scope, 'ChatInvocationsCounterFunction', {
