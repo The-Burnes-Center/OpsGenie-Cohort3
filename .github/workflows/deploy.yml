@@ -2,7 +2,7 @@ name: Deploy Chatbot
 on:
   push:
     branches:
-      - main  # or ‘master’ if you’re using the master branch
+      - evaluation  # or ‘master’ if you’re using the master branch
 jobs:
   deploy:
     runs-on: ubuntu-latest
