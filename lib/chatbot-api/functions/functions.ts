@@ -42,7 +42,7 @@ export class LambdaFunctionStack extends cdk.Stack {
   public readonly kpiFunction : lambda.Function;
   public readonly handleEvalResultsFunction : lambda.Function;
   public readonly stepFunctionsStack : StepFunctionsStack;
-  public readonly systemPromptsFunction : lambda.Function;
+
 
 
   constructor(scope: Construct, id: string, props: LambdaFunctionStackProps) {
@@ -136,7 +136,7 @@ export class LambdaFunctionStack extends cdk.Stack {
       actions: [
         'lambda:InvokeFunction'
       ],
-      resources: [this.sessionFunction.functionArn, this.systemPromptsFunction.functionArn]
+      resources: [this.sessionFunction.functionArn]
     }));
 
     websocketAPIFunction.addToRolePolicy(new iam.PolicyStatement({
