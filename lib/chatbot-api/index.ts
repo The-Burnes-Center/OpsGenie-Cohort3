@@ -228,18 +228,6 @@ export class ChatBotApi extends Construct {
       authorizer: httpAuthorizer,
     })
 
-    const systemPromptsAPIIntegration = new HttpLambdaIntegration(
-      'SystemPromptsAPIIntegration', 
-      lambdaFunctions.systemPromptsFunction
-    );
-    restBackend.restAPI.addRoutes({
-      path: "/system-prompts-handler",
-      methods: [apigwv2.HttpMethod.GET, apigwv2.HttpMethod.POST],
-      integration: systemPromptsAPIIntegration,
-      authorizer: httpAuthorizer,
-    });
-
-
       // this.wsAPI = websocketBackend.wsAPI;
 
 
