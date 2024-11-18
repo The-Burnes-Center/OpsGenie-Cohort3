@@ -378,6 +378,7 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
             }}
             value={state.value}
             placeholder={"Send a message"}
+            aria-label="Message to send"
           />
           <div style={{ marginLeft: "8px" }}>
             <Button
@@ -389,6 +390,7 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
               }
               onClick={handleSendMessage}
               iconAlign="right"
+              ariaLabel="Send message"
               iconName={!props.running ? "angle-right-double" : undefined}
               variant="primary"
             >

@@ -19,6 +19,13 @@ export default function EmailPanel(props: EmailPanelProps) {
   const firstRender = useRef(true);
 
   useEffect(() => {
+    const arrow = document.querySelector('.awsui_open-button_rjqu5_zu8o5_7');
+    arrow.setAttribute('aria-label', 'Click to expand or collapse');
+    
+
+  }, []);
+  
+  useEffect(() => {
     const handleGenerateEmail = async () => {
       setGeneratedEmail('');
       console.log("generating email!")

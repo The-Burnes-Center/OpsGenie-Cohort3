@@ -15,6 +15,11 @@ export default function GlobalHeader() {
   const [theme, setTheme] = useState<Mode>(StorageHelper.getTheme());
 
   useEffect(() => {
+    const txt = document.querySelector('textarea');
+    txt.setAttribute('aria-hidden', 'false');
+    txt.setAttribute('name', 'Generated email');
+  })
+  useEffect(() => {
     (async () => {
       const result = await Auth.currentAuthenticatedUser();    
       // console.log(result);  
