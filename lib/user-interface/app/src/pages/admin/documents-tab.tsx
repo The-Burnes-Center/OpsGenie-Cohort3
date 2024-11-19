@@ -21,11 +21,7 @@ import { useCollection } from "@cloudscape-design/collection-hooks";
 // import { DocumentsResult } from "../../../API";
 
 export interface DocumentsTabProps {
-  tabChangeFunction: () => void;
   documentType: AdminDataType;
-  statusRefreshFunction: () => void;
-  lastSyncTime: string;
-  setShowUnsyncedAlert: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function DocumentsTab(props: DocumentsTabProps) {

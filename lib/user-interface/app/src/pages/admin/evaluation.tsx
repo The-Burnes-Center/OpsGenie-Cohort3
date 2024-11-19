@@ -147,11 +147,7 @@ import {
                     id: "file",
                     content: (
                       <DocumentsTab
-                        tabChangeFunction={() => setActiveTab("add-data")}
                         documentType="file"
-                        statusRefreshFunction={refreshSyncTime}
-                        lastSyncTime={lastSyncTime}
-                        setShowUnsyncedAlert={setShowUnsyncedAlert}
                       />
                     ),
                   },
