@@ -102,7 +102,10 @@ def lambda_handler(event, context):
     total_questions = data.get('total_questions')
     test_cases_key = data.get('test_cases_key')
 
-    if not all([average_similarity, average_relevance, average_correctness, total_questions, detailed_results_s3_key, test_cases_key]):
+
+    vals = [average_similarity, average_relevance, average_correctness, total_questions, detailed_results_s3_key, test_cases_key] 
+    flags = [elem if elem != 0 else 1 for elem in vals]
+    if not all(flags): 
         return {
             'statusCode': 400,
             'headers': {'Access-Control-Allow-Origin': '*'},
