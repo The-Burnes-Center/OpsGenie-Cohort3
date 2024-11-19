@@ -9,6 +9,9 @@ def lambda_handler(event, context):
     s3_client = boto3.client('s3')
     data = event.get("body", {})
     print(data)
+    # if data is string, make json dict
+    if isinstance(data, str):
+        data = json.loads(data)
     evaluation_id = data.get("evaluation_id")
     if not evaluation_id:
         raise ValueError("evaluation_id parameter is required in the event.")
