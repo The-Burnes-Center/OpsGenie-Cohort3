@@ -122,8 +122,8 @@ export const feedbackTypes = [
 ]
 
 export const KPIMetrics = [
-  {label: "Chatbot Uses", value:"chatbot-uses", disabled: false},
-  {label: "AHT", value:"aht", disabled: false},
+  {label: "Chatbot Uses", value: "chatbot-uses", disabled: false},
+  {label: "Daily Users", value:"daily-users", disabled: false},
 ]
 
 export const API = "https://u95wm1svh0.execute-api.us-east-1.amazonaws.com/test"

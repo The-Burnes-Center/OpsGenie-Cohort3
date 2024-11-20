@@ -81,6 +81,7 @@ export class MetricClient {
       //console.log("Parameters: " + {startTime,endTime,nextPageToken});
       let params = new URLSearchParams();
       if (startTime) params.append("startTime", startTime);
+      console.log(startTime)
       if (endTime) params.append("endTime", endTime);
       if (nextPageToken) params.append("nextPageToken", nextPageToken);
 
@@ -94,6 +95,8 @@ export class MetricClient {
           'Authorization' : auth,
         },        
       });
+      const r = await response.json();
+      console.log(r);
       return await response.json()
     } catch (e) {
       console.log("Error retrieving chatbot use data - " + e);
@@ -178,6 +181,63 @@ export class MetricClient {
     } catch (e) {
       console.log('Error incrementing daily logins - ' + e);
     }
+  }
+
+  async getDailyLogins(startDate? : string, endDate? : string) {
+    try {
+      const auth = await Utils.authenticate();
+      let params = new URLSearchParams();
+      if (startDate) params.append("startDate", startDate);
+      if (endDate) params.append("endDate", endDate);
+
+      const url = `${this.API}/daily-logins?${params.toString()}`;
+      console.log(url);
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization' : auth,
+        },        
+      });
+      const data = await response.json();
+      // return the data part of the series BarChart
+      const chartData = data['logins'].map((item) => ({x: item['Timestamp'], y: parseInt(item['Count'])}));
+      //console.log(chartData);
+    
+      return chartData;
+    } catch (e) {
+      console.log("Error retrieving daily logins - " + e);
+      return [];
+    }
+  }
+
+  async getDailyUses(startDate?: string, endDate?: string) {
+    const uses = await this.getChatbotUse(startDate, endDate);
+    const objs = uses.Items;
+    let dict: {string: number};
+    objs.array.forEach(obj => {
+      console.log(obj)
+      const date = obj['Timestamp'].split('T')[0];
+
+      if (dict[date]) {
+        dict[date] += 1;
+      } else {
+          dict[date] = 1;
+      }
+    });
+    console.log(dict);
+  }
+
+  async getAvgUsesPerUsers(startDate: string, endDate: string) {
+    // calculates the average daily usage in the last week
+
+    const logins = await this.getDailyLogins(startDate.split('T')[0], endDate.split('T')[0]);
+    const users = logins.length;
+    console.log(users, "users over the timeframe");
+
+    const uses = await this.getChatbotUse(startDate, endDate);
+    console.log(uses['Items'].length / users);
+    return uses['Items'].length / users;
   }
 
 }

@@ -16,6 +16,7 @@ import {
   BarChart,
   Link,
   Icon,
+  BarChartProps,
 } from "@cloudscape-design/components";
 import { I18nProvider } from '@cloudscape-design/components/i18n';
 import messages from '@cloudscape-design/components/i18n/messages/all.all';
@@ -48,6 +49,7 @@ export default function KPIsTab(props: KPIsTabProps) {
   const [loading, setLoading] = useState(true); // if the page is loading or not
   const [currentPageIndex, setCurrentPageIndex] = useState(1); // the page index
   const [pages, setPages] = useState<any[]>([]);
+  const [chartData, setChartData] = useState([]); // daily logins data
   const [selectedItems, setSelectedItems] = useState<any[]>([]);
   const [showModalDelete, setShowModalDelete] = useState(false); // hook for the 'Do you want to delete?' pop-up
   const needsRefresh = useRef<boolean>(false);
@@ -131,7 +133,6 @@ export default function KPIsTab(props: KPIsTabProps) {
           }
         });
       } catch (error) {
-        console.error("L get KPI failed");
         console.error(Utils.getErrorMessage(error));
       }
       setLoading(false);
@@ -139,16 +140,40 @@ export default function KPIsTab(props: KPIsTabProps) {
     [appContext, selectedOption, value, needsRefresh]
   );
 
+  const getDailyLogins = useCallback(
+    async() => {
+      setLoading(true);
+      try {
+        const data = await apiClient.metrics.getDailyLogins(value.startDate.split("T")[0], value.endDate.split("T")[0]);
+        setChartData(data);
+        console.log("updated chart data, new date", value);
+        console.log("new chart data:", chartData);
+      } catch (e) {
+        setChartData([]);
+      }
+      setLoading(false)
+    },
+    [appContext, selectedOption, value, needsRefresh, apiClient]
+  );
+  
 
   useEffect(() => {
     setCurrentPageIndex(1);    
     setSelectedItems([]);
+    setChartData([]); // lesson learnt the hard way but this must be here
+    getDailyLogins();
     if (needsRefresh.current) {
-      getKPI({ pageIndex: 1 });      
+      getKPI({ pageIndex: 1 });
     } else { 
       getKPI({ pageIndex: currentPageIndex }); 
     }
   }, [getKPI]);
+
+  // useEffect(() => {
+  //   if (needsRefresh.current) {
+  //     getDailyLogins(); 
+  //   }
+  // }, [getDailyLogins]);
 
   const onNextPageClick = async () => {
     // console.log(pages);
@@ -322,7 +347,142 @@ export default function KPIsTab(props: KPIsTabProps) {
         : `${selectedItems.length} Metric?`}
     </Modal>
       <I18nProvider locale="en" messages={[messages]}>
-        {selectedOption.value !== 'chatbot-uses' && <BarChart series={[]} />}
+        {selectedOption.value === 'daily-users' && 
+        <>
+          <Header
+              actions={
+                <SpaceBetween direction="horizontal" size="xs">
+                  <DateRangePicker
+                    onChange={({ detail }) => {
+                      if ('startDate' in detail.value && 'endDate' in detail.value) {
+                        setValue({
+                          type: "absolute",
+                          startDate: new Date(detail.value.startDate).toISOString(),
+                          endDate: new Date(detail.value.endDate).toISOString(),
+                        });
+
+                      } else {
+                          console.log("not an AbsoluteValue");
+                      }
+                    }}
+                    value={{
+                      ...value,
+                      startDate: value.startDate.split("T")[0],
+                      endDate: value.endDate.split("T")[0],
+                    } as DateRangePickerProps.AbsoluteValue}
+                    relativeOptions={[
+                      {
+                        key: "previous-5-minutes",
+                        amount: 5,
+                        unit: "minute",
+                        type: "relative"
+                      },
+                      {
+                        key: "previous-30-minutes",
+                        amount: 30,
+                        unit: "minute",
+                        type: "relative"
+                      },
+                      {
+                        key: "previous-1-hour",
+                        amount: 1,
+                        unit: "hour",
+                        type: "relative"
+                      },
+                      {
+                        key: "previous-6-hours",
+                        amount: 6,
+                        unit: "hour",
+                        type: "relative"
+                      }
+                    ]}
+                    
+                    isValidRange={range => {
+                      if (range.type === "absolute") {
+                        const [
+                          startDateWithoutTime
+                        ] = range.startDate.split("T");
+                        const [
+                          endDateWithoutTime
+                        ] = range.endDate.split("T");
+                        if (
+                          !startDateWithoutTime ||
+                          !endDateWithoutTime
+                        ) {
+                          return {
+                            valid: false,
+                            errorMessage:
+                              "The selected date range is incomplete. Select a start and end date for the date range."
+                          };
+                        }
+                        if (
+                          +new Date(range.startDate) - +new Date(range.endDate) > 0
+                        ) {
+                          return {
+                            valid: false,
+                            errorMessage:
+                              "The selected date range is invalid. The start date must be before the end date."
+                          };
+                        }
+                      }
+                      return { valid: true };
+                    }}
+                    i18nStrings={{}}
+                    placeholder="Filter by a date and time range"
+                    showClearButton={false}
+                    timeInputFormat="hh:mm:ss"
+                    rangeSelectorMode="absolute-only"
+                    
+                  />
+                  {/* <FormField label="Filter Topic"> */}
+                    <Select
+                      selectedOption={selectedOption}
+                      onChange={({ detail }) => {
+  
+                        // console.log(detail);
+                        needsRefresh.current = true;
+                        setSelectedOption({ label: detail.selectedOption.label!, value: detail.selectedOption.value, disabled: false });
+                        // setTopic(detail.selectedOption.value); 
+                      }}
+                      
+                      options={[...KPIMetrics]}
+                    />
+                  {/* </FormField> */}
+
+                  <Button iconName="refresh" onClick={refreshPage} ariaLabel="Refresh page"/>
+                  <Button 
+                    variant="primary"
+                    onClick={() => {
+                      apiClient.metrics.getDailyUses(value.startDate, value.endDate);
+                      console.log("idk if they want downloading")
+                    }}
+                  >
+                    Download
+                  </Button>
+                </SpaceBetween>
+              }
+              description="Please expect a delay for your changes to be reflected. Press the refresh button to see the latest changes."
+            >
+              {"KPIs"}
+            </Header>
+          
+            <BarChart
+              series={chartData.length > 0 ?
+                      [{title: "Users",
+                        type: "bar",
+                        data: chartData
+                      }]
+                      : [] // goes to empty prop in this case
+                    }
+              ariaLabel="Bar chart of the tool's daily users"
+              empty={<Box textAlign="center" color="inherit">
+                      <b>No data available</b>
+                      <Box variant="p" color="inherit">
+                        There is no data available in the selected timeframe
+                      </Box>
+                    </Box>}
+            />
+        </>}
 
         {selectedOption.value === 'chatbot-uses' &&
         <Table
@@ -435,9 +595,6 @@ export default function KPIsTab(props: KPIsTabProps) {
                     <Select
                       selectedOption={selectedOption}
                       onChange={({ detail }) => {
-                        // Ensure label and value are defined, or set default
-                        const label = detail.selectedOption.label ?? "Default Label";
-                        const value = detail.selectedOption.value ?? "Default Value";
                         // console.log(detail);
                         needsRefresh.current = true;
                         setSelectedOption({ label: detail.selectedOption.label!, value: detail.selectedOption.value, disabled: false });
