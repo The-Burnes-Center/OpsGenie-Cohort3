@@ -387,8 +387,6 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
                 props.session.loading
               }
               onClick={handleSendMessage}
-              iconAlign="right"
-              iconName={!props.running ? "angle-right-double" : undefined}
               variant="primary"
             >
               {props.running ? (

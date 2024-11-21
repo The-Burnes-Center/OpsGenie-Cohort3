@@ -8,6 +8,7 @@ import { StorageHelper } from "../common/helpers/storage-helper";
 import { Auth } from "aws-amplify";
 import useOnFollow from "../common/hooks/use-on-follow";
 import { CHATBOT_NAME } from "../common/constants";
+import styles from "../styles/global-header.module.scss";
 
 export default function GlobalHeader() {
   const onFollow = useOnFollow();
@@ -52,13 +53,15 @@ export default function GlobalHeader() {
 
   return (
     <div
+      className={styles.navLogo} 
       style={{ zIndex: 1002, top: 0, left: 0, right: 0, position: "fixed" }}
       id="awsui-top-navigation"
     >
       <TopNavigation
         identity={{
           href: "/",
-          logo: { src: "/images/icon.png", alt: { CHATBOT_NAME } + " Logo" },
+          logo: { src: "/images/mayflower/stateseal-white.png", alt: CHATBOT_NAME + " Logo" },
+          title: "MECA InsightChat",
         }}
         utilities={[
           // {
@@ -73,6 +76,7 @@ export default function GlobalHeader() {
   
           {
             type: "menu-dropdown",
+            ariaLabel: "User profile dropdown menu",
             description: userName ?? "",
             iconName: "user-profile",
             onItemClick: onUserProfileClick,
