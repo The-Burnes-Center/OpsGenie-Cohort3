@@ -60,7 +60,6 @@ export class ChatBotApi extends Construct {
         evalSummariesTable : tables.evalSummaryTable,
         evalResutlsTable : tables.evalResultsTable,
         evalTestCasesBucket : buckets.evalTestCasesBucket,
-        systemPromptsTable : tables.systemPromptsTable,
 
       })
 

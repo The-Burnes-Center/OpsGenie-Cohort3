@@ -23,7 +23,6 @@ interface LambdaFunctionStackProps {
   readonly evalSummariesTable : Table;
   readonly evalResutlsTable : Table;
   readonly evalTestCasesBucket : s3.Bucket;
-  readonly systemPromptsTable : Table;
   //readonly kpiTable : Table;
 }
 
