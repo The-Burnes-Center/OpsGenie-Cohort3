@@ -42,7 +42,8 @@ def add_evaluation(evaluation_id, evaluation_name, average_similarity,
             'average_correctness': Decimal(str(average_correctness)),
             'total_questions': total_questions,
             'evaluation_name': evaluation_name.strip() if evaluation_name else None,
-            'test_cases_key': test_cases_key
+            'test_cases_key': test_cases_key,
+            'PartitionKey': "Evaluation" 
         }
         print("summary_item: ", summary_item)
 
@@ -83,13 +84,13 @@ def add_evaluation(evaluation_id, evaluation_name, average_similarity,
             'headers': {'Access-Control-Allow-Origin': '*'},
             'body': json.dumps(str(error))
         }
-
+    
 def read_detailed_results_from_s3(detailed_results_s3_key):
     s3_client = boto3.client('s3')
     response = s3_client.get_object(Bucket=TEST_CASES_BUCKET, Key=detailed_results_s3_key)
     content = response['Body'].read().decode('utf-8')
     return json.loads(content)
-
+    
 def lambda_handler(event, context):
     data = json.loads(event['body']) if 'body' in event else event
     evaluation_id = data.get('evaluation_id')
@@ -102,16 +103,13 @@ def lambda_handler(event, context):
     total_questions = data.get('total_questions')
     test_cases_key = data.get('test_cases_key')
 
-
-    vals = [average_similarity, average_relevance, average_correctness, total_questions, detailed_results_s3_key, test_cases_key] 
-    flags = [elem if elem != 0 else 1 for elem in vals]
-    if not all(flags): 
+    if not all([average_similarity, average_relevance, average_correctness, total_questions, detailed_results_s3_key, test_cases_key]):
         return {
             'statusCode': 400,
             'headers': {'Access-Control-Allow-Origin': '*'},
             'body': json.dumps('Missing required parameters for adding evaluation.')
         }
-
+    
     detailed_results = read_detailed_results_from_s3(detailed_results_s3_key)
     return add_evaluation(
         evaluation_id,

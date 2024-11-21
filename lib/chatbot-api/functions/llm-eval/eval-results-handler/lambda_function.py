@@ -2,6 +2,7 @@ import os
 import boto3
 from botocore.exceptions import ClientError
 import json
+from boto3.dynamodb.conditions import Key
 from datetime import datetime
 from decimal import Decimal
 
@@ -83,17 +84,33 @@ def convert_from_decimal(item):
 # function to retrieve all summaries from DynamoDB
 def get_evaluation_summaries(continuation_token=None, limit=10):
     try: 
-        scan_params = {'Limit': limit}
+        query_params = {
+            "KeyConditionExpression": Key("PartitionKey").eq("Evaluation"),  # Match all evaluations
+            "ProjectionExpression": "#eid, #ts, #as, #ar, #ac, #tq, #en, #tk",
+            "ExpressionAttributeNames": {
+                "#eid": "EvaluationId",
+                "#ts": "Timestamp",  # Reserved keyword
+                "#as": "average_similarity",
+                "#ar": "average_relevance",
+                "#ac": "average_correctness",
+                "#tq": "total_questions",
+                "#en": "evaluation_name",
+                "#tk": "test_cases_key"
+            },
+            "Limit": limit,
+            "ScanIndexForward": False  # Get the most recent evaluations first
+        }
+        # Add continuation token if provided
         if continuation_token:
-            scan_params['ExclusiveStartKey'] = continuation_token
-        response = summaries_table.scan(**scan_params)
+            query_params["ExclusiveStartKey"] = continuation_token
+        response = summaries_table.query(**query_params)
         items = response.get('Items', [])
         last_evaluated_key = response.get('LastEvaluatedKey')
 
-        # Sort items by timestamp in descending order and build response
-        sorted_items = sorted(items, key=lambda x: x['Timestamp'], reverse=True)
+        # Sort items to return most recent evaluations first
+        #sorted_items = sorted(items, key=lambda x: x['Timestamp'], reverse=False)
         response_body = {
-            'Items': convert_from_decimal(sorted_items),
+            'Items': convert_from_decimal(items),
             'NextPageToken': last_evaluated_key
         }
 
@@ -104,6 +121,7 @@ def get_evaluation_summaries(continuation_token=None, limit=10):
         }
     except ClientError as error:
         print("Caught error: DynamoDB error - could not retrieve evaluation summaries")
+        print("error: ", error)
         return {
             'statusCode': 500,
             'headers': {'Access-Control-Allow-Origin': '*'},
@@ -119,7 +137,7 @@ def get_evaluation_results(evaluation_id, continuation_token=None, limit=10):
         }
         if continuation_token:
             query_params['ExclusiveStartKey'] = continuation_token
-
+        
         # Query the results table for the given evaluation_id
         response = results_table.query(**query_params)
         print("response from eval handler: ", response)
