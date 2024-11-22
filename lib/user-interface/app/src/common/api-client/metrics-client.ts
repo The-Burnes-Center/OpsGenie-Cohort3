@@ -95,8 +95,6 @@ export class MetricClient {
           'Authorization' : auth,
         },        
       });
-      const r = await response.json();
-      console.log(r);
       return await response.json()
     } catch (e) {
       console.log("Error retrieving chatbot use data - " + e);
@@ -191,7 +189,7 @@ export class MetricClient {
       if (endDate) params.append("endDate", endDate);
 
       const url = `${this.API}/daily-logins?${params.toString()}`;
-      console.log(url);
+
       const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -202,7 +200,6 @@ export class MetricClient {
       const data = await response.json();
       // return the data part of the series BarChart
       const chartData = data['logins'].map((item) => ({x: item['Timestamp'], y: parseInt(item['Count'])}));
-      //console.log(chartData);
     
       return chartData;
     } catch (e) {

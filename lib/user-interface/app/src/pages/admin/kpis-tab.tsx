@@ -146,8 +146,8 @@ export default function KPIsTab(props: KPIsTabProps) {
       try {
         const data = await apiClient.metrics.getDailyLogins(value.startDate.split("T")[0], value.endDate.split("T")[0]);
         setChartData(data);
-        console.log("updated chart data, new date", value);
-        console.log("new chart data:", chartData);
+        // console.log("updated chart data, new date", value);
+        // console.log("new chart data:", chartData);
       } catch (e) {
         setChartData([]);
       }

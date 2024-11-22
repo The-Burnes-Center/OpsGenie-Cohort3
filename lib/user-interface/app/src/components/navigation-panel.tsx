@@ -106,7 +106,7 @@ export default function NavigationPanel() {
         const startDate = (new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 1)).toISOString();
         const endDate = (new Date()).toISOString();
         const invocationCount = await apiClient.metrics.getInvocationCount();
-        const usesPerUsers = await apiClient.metrics.getAvgUsesPerUsers(startDate, endDate);
+        const usesPerUsers = 1;//await apiClient.metrics.getAvgUsesPerUsers(startDate, endDate);
 
         console.log("admin found!")
         newItems.push({
@@ -119,8 +119,8 @@ export default function NavigationPanel() {
             { type: "link", text: "KPIs", href: "/admin/kpis" },
             invocationCount? { type: "link", text: `Message Count (past 24hrs): ${invocationCount}`, href: ""} 
             : {type: "link", text: "Message Count (past 24hrs): unknown", href: ""},
-            usesPerUsers? { type: "link", text: `Avg use per users (past 7days): ${usesPerUsers}`, href: ""} 
-            : {type: "link", text: "Avg use per users (past 7days): unknown", href: ""}
+            usesPerUsers? { type: "link", text: `Avg usage per users (past 7days): ${usesPerUsers}`, href: ""} 
+            : {type: "link", text: "Avg usage per users (past 7days): unknown", href: ""}
           ],
         },)
       }

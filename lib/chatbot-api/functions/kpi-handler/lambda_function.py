@@ -2,7 +2,7 @@
 Purpose: Lambda functions to deal with requests surrounding KPIs (currently just chatbot uses/interctions)
 
 Overview:
-This file provides an AWS Lambda function designed to handle HTTP requests for managing KPIs in a DynamoDB table. 
+This file provides an AWS Lambda function designed to handle HTTP requests for managing KPIs in DynamoDB tables.
 It supports operations for posting, retrieving, downloading, and deleting KPIs. Admin users can access all functionalities, while non-admins have limited permissions.
 
 Environment variables:
@@ -15,10 +15,12 @@ Classes:
 Functions:
 - `lambda_handler`: Main entry point for the Lambda function. Routes incoming requests to below functions based on the HTTP method and user role.
 
-- `post_kpi`: Handles POST requests to store KPIs in the DynamoDB table.
-- `download_kpi`: Handles POST requests to generate and return a downloadable CSV file of KPIs within a specified date range.
-- `get_kpi`: Handles GET requests to retrieve KPIs from the DynamoDB table with optional pagination support.
-- `delete_kpi`: Handles DELETE requests to remove specific KPI entries from the DynamoDB table.
+- `post_interactions`: Handles POST requests to store chatbot uses in the DynamoDB table.
+- `download_interactiosn`: Handles POST requests to generate and return a downloadable CSV file of chatbot uses within a specified date range.
+- `get_interactions`: Handles GET requests to retrieve chatbot uses from the DynamoDB table with optional pagination support.
+- `delete_interactions`: Handles DELETE requests to remove specific chatbot uses entries from the DynamoDB table.
+- `increment_login`: Handles POST requests to store daily logins in the DynamoDB table. This is scheduled to run every weekday evening.
+- `get_daily_logins`: Handles GET requests to retrieve daily logins.
 
 Usage:
 Deploy this file as part of an AWS Lambda function integrated with an API Gateway. 
@@ -34,6 +36,7 @@ from boto3.dynamodb.conditions import Key, Attr
 # Initialize DynamoDB client
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table(os.environ.get('INTERACTION_TABLE'))
+daily_login_table = dynamodb.Table(os.environ.get('DAILY_LOGIN_TABLE'))
 
 from decimal import Decimal
 
@@ -64,26 +67,102 @@ def lambda_handler(event, context):
                 'body': json.dumps('Unable to check user role, please ensure you have Cognito configured correctly with a custom:role attribute.')
             }
     http_method = event.get('routeKey')
-    if 'POST' in http_method:
-
+    if http_method == "POST /daily-logins":
+        return increment_login(event)
+    elif http_method == "GET /daily-logins": 
+        return get_daily_logins(event)
+    elif 'POST' in http_method:
         print(http_method)
         #if event.get('rawPath') == '/chatbot-use/download' and admin: #Idk what this means but it is not working. Unsure about RawPath
         if http_method == 'POST /chatbot-use/download' and admin:
             print('we are downloading')
-            return download_kpi(event)
-        return post_kpi(event)
+            return download_interactiosn(event)
+        return post_interactions(event)
     elif 'GET' in http_method and admin:
-        return get_kpi(event)
+        return get_interactions(event)
     elif 'DELETE' in http_method and admin:
-        return delete_kpi(event)
+        return delete_interactions(event)
     else:
         return {
             'statusCode': 405,
             'body': json.dumps('Method Not Allowed')
         }
 
-# works yasss
-def post_kpi(event):
+def get_daily_logins(event):
+    try:
+        query_params = event.get('queryStringParameters', {})
+        # format: 2024-11-19
+        start_date = query_params.get('startDate')
+        end_date = query_params.get('endDate')
+        start_date = datetime.strptime(start_date, "%Y-%m-%d").strftime("%Y-%m-%d")
+        end_date = datetime.strptime(end_date, "%Y-%m-%d").strftime("%Y-%m-%d")
+        print(end_date)
+
+        scan_kwargs = {}
+        if start_date and end_date:
+            scan_kwargs['FilterExpression'] = Attr('Timestamp').gte(start_date) & Attr('Timestamp').lte(end_date)
+        response = daily_login_table.scan(**scan_kwargs)
+
+        logins = response.get('Items', [])
+        logins.sort(key=lambda x: x['Timestamp'])
+
+        return {
+            'headers': {
+                'Access-Control-Allow-Origin': "*"
+            },
+            'statusCode': 200,
+            'body': json.dumps({'logins': logins}, cls=DecimalEncoder)
+        }
+
+    except Exception as e:
+        print(f"Error retrieving daily logins: {str(e)}")
+        return {
+            'headers': {
+                'Access-Control-Allow-Origin': "*"
+            },
+            'statusCode': 500,
+            'body': json.dumps({'error': f"Failed to retrieve daily logins: {str(e)}"})
+        }
+        
+def increment_login(event):
+    # this runs every evening to update the date's count
+    date = datetime.utcnow().strftime('%Y-%m-%d')
+    try:
+        response = table.scan(
+            FilterExpression=Attr("Timestamp").begins_with(date),
+            ProjectionExpression="Username"
+        )
+        
+        # calculate daily logins by creating a set of the unique users
+        unique_usernames = set(item['Username'] for item in response.get('Items', []))
+        unique_user_count = len(unique_usernames)
+        daily_login_table.put_item(
+            Item={
+                'Timestamp': date,
+                'Count': unique_user_count
+            }
+        )
+
+        return {
+            'headers': {
+                'Access-Control-Allow-Origin': "*"
+            },
+            'statusCode': 200,
+            'body': json.dumps(f'Login count updated for {date}')
+        }
+            
+    except Exception as e:
+        print("error")
+        return {
+            'headers' : {
+                'Access-Control-Allow-Origin' : "*"
+            },
+            'statusCode': 500,
+            'body': json.dumps('Failed to increment logins: ' + str(e))
+        }
+        
+
+def post_interactions(event):
     try:
         # load JSON data from the event body
         timestamp = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
@@ -93,13 +172,14 @@ def post_kpi(event):
         interaction_data = body.get('interaction_data')
         print(interaction_data)
         
-        # Check if interaction_data is present
+        # return error if can't access data for some reason
         if not interaction_data:
             return {
                 'statusCode': 400,
                 'body': json.dumps({'error': 'Missing interaction_data'})
             }        
         
+        # make item and add to table
         username = interaction_data.get('Username')
         user_message = interaction_data.get('UserPrompt')
         bot_response = interaction_data.get('BotMessage')
@@ -112,8 +192,6 @@ def post_kpi(event):
             'Timestamp': timestamp
         }
         
-        #print("item: " + item)
-        # Put the item into the DynamoDB table
         table.put_item(Item=item)
         if interaction_data == 0:
             print("Negative feedback placed")
@@ -124,6 +202,7 @@ def post_kpi(event):
             'statusCode': 200,
             'body': json.dumps('POST successful')
         }
+        
     except Exception as e:
         print("Caught error: DynamoDB error - could not add interaction to table: " + str(e))
         return {
@@ -134,9 +213,8 @@ def post_kpi(event):
             'body': json.dumps('Failed to store interaction: ' + str(e))
         }
 
-def download_kpi(event):
+def download_interactiosn(event):
 
-    # Load parameters from request body
     data = json.loads(event['body'])
     start_time = data.get('startTime')
     end_time = data.get('endTime')
@@ -144,11 +222,10 @@ def download_kpi(event):
     start_time = datetime.strptime(start_time, '%Y-%m-%dT%H:%M:%S.%fZ')
     end_time = datetime.strptime(end_time, '%Y-%m-%dT%H:%M:%S.%fZ')
 
-    # Convert back to ISO format with milliseconds and UTC suffix 'Z'
+    # convert time to right time
     start_time = start_time.isoformat(timespec='milliseconds') + 'Z'
     end_time = end_time.isoformat(timespec='milliseconds') + 'Z'
 
-    # Validate required parameters
     if not start_time or not end_time:
         return {
             'statusCode': 400,
@@ -157,7 +234,6 @@ def download_kpi(event):
 
     scan_kwargs = {
         'FilterExpression': Attr("Timestamp").between(start_time, end_time),
-        #'Limit': 10  # Limit to 10 items per request
     }
 
     response = None
@@ -174,7 +250,6 @@ def download_kpi(event):
             'body': json.dumps('Failed to retrieve interaction data for download: ' + str(e))
         }
 
-    # Helper function to clean data for CSV
     def clean_csv(field):
         field = str(field).replace('"', '""')
         
@@ -184,10 +259,9 @@ def download_kpi(event):
         
         return field
     
-    # CSV header with relevant interaction data fields
+    # header column
     csv_content = "Timestamp,Username,User Prompt,Bot Message,Response Time\n"
 
-    # Build CSV content row by row
     for item in response['Items']:
         csv_content += (
             f"{clean_csv(item['Timestamp'])},"
@@ -197,7 +271,6 @@ def download_kpi(event):
             f"{clean_csv(item['ResponseTime'])}\n"
         )    
         
-    # Upload CSV to S3
     s3 = boto3.client('s3')
     S3_DOWNLOAD_BUCKET = os.environ["INTERACTION_S3_DOWNLOAD"]
 
@@ -209,7 +282,6 @@ def download_kpi(event):
         file_name = f"interaction-data-{start_time}_to_{end_time}.csv"
         s3.put_object(Bucket=S3_DOWNLOAD_BUCKET, Key=file_name, Body=csv_content)
         
-        # Generate a presigned URL for download
         presigned_url = s3.generate_presigned_url('get_object', Params={'Bucket': S3_DOWNLOAD_BUCKET, 'Key': file_name}, ExpiresIn=3600)
 
     except Exception as e:
@@ -230,27 +302,21 @@ def download_kpi(event):
         'body': json.dumps({'download_url': presigned_url})
     }
     
-def get_kpi(event):
+def get_interactions(event):
     try:
-        # Extract query parameters
         query_params = event.get('queryStringParameters', {})
         print("Query params:", query_params)
         start_time = query_params.get('startTime')
         end_time = query_params.get('endTime')
-        # topic = query_params.get('topic')
         exclusive_start_key = query_params.get('nextPageToken') # pagination token
         print(f"startTime: {start_time}, endTime: {end_time}, nextPageToken: {exclusive_start_key}")
         
         start_time = datetime.strptime(start_time, '%Y-%m-%dT%H:%M:%S.%fZ')
         end_time = datetime.strptime(end_time, '%Y-%m-%dT%H:%M:%S.%fZ')
-
-        # Convert back to ISO format with milliseconds and UTC suffix 'Z'
+        # dates in right format
         start_time = start_time.isoformat(timespec='milliseconds') + 'Z'
         end_time = end_time.isoformat(timespec='milliseconds') + 'Z'
         
-        print(start_time)
-
-        # Validate required parameters
         if not start_time or not end_time:
             return {
                 'statusCode': 400,
@@ -259,10 +325,8 @@ def get_kpi(event):
 
         scan_kwargs = {
             'FilterExpression': Attr("Timestamp").between(start_time, end_time),
-            'Limit': 10  # Limit to 10 items per request
         }
         
-        # Handle pagination if nextPageToken is provided
         if exclusive_start_key:
             scan_kwargs['ExclusiveStartKey'] = json.loads(exclusive_start_key)
 
@@ -270,16 +334,13 @@ def get_kpi(event):
         response = table.scan(**scan_kwargs)
         response['Items'].sort(key=lambda x: datetime.strptime(x['Timestamp'], '%Y-%m-%dT%H:%M:%SZ'), reverse=True)
 
-        # Prepare the response body
         body = {
             'Items': response.get('Items', [])
         }
 
-        # If DynamoDB returns a pagination token, include it in the response
         if 'LastEvaluatedKey' in response:
             body['NextPageToken'] = json.dumps(response['LastEvaluatedKey'])
 
-        # Return the successful response
         return {
             'headers': {
                 'Access-Control-Allow-Origin': "*"
@@ -298,7 +359,7 @@ def get_kpi(event):
             'body': json.dumps({'error': f"Failed to retrieve data: {str(e)}"})
         }
     
-def delete_kpi(event):
+def delete_interactions(event):
     try:
         query_params = event.get('queryStringParameters', {})
         timestamp = query_params.get('Timestamp')
@@ -312,7 +373,6 @@ def delete_kpi(event):
                 'body': json.dumps('Missing timestamp')
             }
             
-        # Delete the item from the DynamoDB table
         response = table.delete_item(
             Key={
                 'Timestamp': timestamp,
