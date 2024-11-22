@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { applyTheme } from "@cloudscape-design/components/theming";
 import {
   ThemeProvider,
   defaultDarkModeOverride,
@@ -124,6 +125,85 @@ export default function AppConfigured() {
       </div>
     );
   }
+  
+    // Dynamically add Google fonts link to the document head.
+  const link = document.createElement('link');
+  link.href = 'https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap';
+  link.rel = 'stylesheet';
+  document.head.appendChild(link);
+
+  applyTheme({
+    theme: {
+      tokens: {
+        // Background Colors
+        colorBackgroundLayoutMain: {
+          light: 'white',
+//          dark: '#2a2a2a',
+        },
+        colorBackgroundContainerContent: {
+          light: '#f7f8f9',
+//          dark: '#333333',
+        },
+
+        // Primary Button Styling
+        colorTextButtonPrimaryDefault: '#ffffff', 
+        colorBackgroundButtonPrimaryDefault: {
+          light: '#0055a5', // Mayflower's primary blue color for buttons
+//          dark: '#66b3ff',
+        },
+        colorBackgroundButtonPrimaryHover: {
+          light: '#004080', // darker blue for hover effect
+//          dark: '#004080',
+        },
+        colorBackgroundButtonPrimaryActive: {
+          light: '#003C61', // Active state for primary button in light mode
+//          dark: '#002A44', 
+        },
+
+        borderRadiusButton: '4px', // slightly rounded corners for Mayflower style
+
+        // Border Colors
+        colorBorderInputDefault: {
+          light: '#d9d9d9',
+//          dark: '#4a4a4a',
+        },
+        colorBorderControlDefault: {
+          light: '#e1e1e1',
+//          dark: '#4a4a4a',
+        },
+        colorBorderDividerDefault: {
+          light: '#e1e1e1',
+//          dark: '#4a4a4a',
+        },
+        
+        // Text Colors
+        colorTextBodyDefault: {
+          light: '#333333',
+//          dark: '#eaeaea',
+        },
+        colorTextHeadingDefault: {
+          light: '#1a1a1a',
+//          dark: '#ffffff',
+        },
+        colorTextLinkDefault: {
+          light: '#0055a5',
+//            dark: '#66b3ff',
+        },
+
+        // Font settings
+        fontFamilyBase: "'Noto Sans', sans-serif", // Using Noto Sans for consistency with Mayflower
+        fontSizeBodyM: '16px',
+        fontSizeBodyS: '16px',
+        fontSizeHeadingM: '24px',
+        fontSizeHeadingL: '32px',
+
+        // Spacing adjustments
+//      spaceScaledM: '16px',
+//      spaceScaledL: '24px',
+      },
+    },
+  });
+
   // the main app - only display it when authenticated
   return (
     <AppContext.Provider value={config}>
