@@ -17,7 +17,7 @@ export class KnowledgeManagementClient {
 
     try {
       const auth = await Utils.authenticate();
-      const response = await fetch(this.API + '/signed-url', {
+      const response = await fetch(this.API + '/signed-url-knowledge', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,10 +38,23 @@ export class KnowledgeManagementClient {
     }
   }
 
+   // Checks the last time Kendra was synced
+   async lastKendraSync() : Promise<string> {
+    const auth = await Utils.authenticate();
+    const response = await fetch(this.API + '/kb-sync/get-last-sync', {headers: {
+      'Content-Type': 'application/json',
+      'Authorization' : auth
+    }})
+    if (!response.ok) {
+      throw new Error('Failed to check last status');
+    }
+    return await response.json()
+  }
+
   // Returns a list of documents in the S3 bucket (hard-coded on the backend)
   async getDocuments(continuationToken?: string, pageIndex?: number) {
     const auth = await Utils.authenticate();
-    const response = await fetch(this.API + '/s3-bucket-data', {
+    const response = await fetch(this.API + '/s3-knowledge-bucket-data', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -91,4 +104,64 @@ export class KnowledgeManagementClient {
     }})
     return await response.json()
   }
+
+// get's the current system prompt
+async getCurrentSystemPrompt() : Promise<string> {
+  const auth = await Utils.authenticate();
+  const response = await fetch(this.API + '/system-prompts-handler', {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'Authorization' : auth
+    },
+    body: JSON.stringify({
+      "operation": "get_active_prompt"
+    })
+  })
+  if (!response.ok) {
+    throw new Error('Failed to get system prompt');
+  }
+  return await response.json()
+}
+
+// Sets the system prompt by adding a new prompt into the ddb table
+async setSystemPrompt(prompt: string) : Promise<string> {
+  const auth = await Utils.authenticate();
+  const response = await fetch(this.API + '/system-prompts-handler', {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'Authorization' : auth
+    },
+    body: JSON.stringify({
+      "operation": "set_prompt",
+      "prompt": prompt
+    })
+  })
+  if (!response.ok) {
+    throw new Error('Failed to set system prompt');
+  }
+  return await response.json()
+}
+
+// Returns a list of system prompts and the timestamp they were uploaded as the active prompt
+async listSystemPrompts(continuationToken?: string, pageIndex?: number) : Promise<string> {
+  const auth = await Utils.authenticate();
+  const response = await fetch(this.API + '/system-prompts-handler', {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json', 
+    'Authorization' : auth
+    },
+    body: JSON.stringify({
+      "operation": "get_prompts",
+      continuationToken: continuationToken,
+      pageIndex: pageIndex,
+    })
+  })
+  if (!response.ok) {
+    throw new Error('Failed to list system prompts');
+  }
+  return await response.json()
+}
 }
