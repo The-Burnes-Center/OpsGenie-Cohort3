@@ -31,32 +31,32 @@ export default function AppConfigured() {
 
   // }, []);
 
-  useEffect(() => {
-    const removeTextareas = () => {
-      const textareas = document.querySelectorAll('textarea');
-      textareas.forEach((textarea) => {
-        textarea.remove();
-      });
-    };
-    removeTextareas();
+  // useEffect(() => {
+  //   const removeTextareas = () => {
+  //     const textareas = document.querySelectorAll('textarea');
+  //     textareas.forEach((textarea) => {
+  //       textarea.remove();
+  //     });
+  //   };
+  //   removeTextareas();
   
-    const observer = new MutationObserver((mutationsList) => {
-      mutationsList.forEach((mutation) => {
-        if (mutation.type === 'childList') {
-          removeTextareas();
-        }
-      });
-    });
+  //   const observer = new MutationObserver((mutationsList) => {
+  //     mutationsList.forEach((mutation) => {
+  //       if (mutation.type === 'childList') {
+  //         removeTextareas();
+  //       }
+  //     });
+  //   });
   
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
+  //   observer.observe(document.body, {
+  //     childList: true,
+  //     subtree: true,
+  //   });
 
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+  //   return () => {
+  //     observer.disconnect();
+  //   };
+  // }, []);
 
   useEffect(() => {
     (async () => {
