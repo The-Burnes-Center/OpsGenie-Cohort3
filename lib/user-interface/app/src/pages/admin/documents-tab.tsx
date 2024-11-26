@@ -11,6 +11,7 @@ import {
 import { useCallback, useContext, useEffect, useState } from "react";
 import RouterButton from "../../components/wrappers/router-button";
 import { RagDocumentType } from "../../common/types";
+import { AdminDataType } from "../../common/types";
 import { TableEmptyState } from "../../components/table-empty-state";
 import { ApiClient } from "../../common/api-client/api-client";
 import { AppContext } from "../../common/app-context";
@@ -20,8 +21,7 @@ import { useCollection } from "@cloudscape-design/collection-hooks";
 // import { DocumentsResult } from "../../../API";
 
 export interface DocumentsTabProps {
-  // workspaceId?: string;
-  documentType: RagDocumentType;
+  documentType: AdminDataType;
 }
 
 export default function DocumentsTab(props: DocumentsTabProps) {

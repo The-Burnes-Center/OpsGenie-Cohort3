@@ -4,6 +4,7 @@ import { KnowledgeManagementClient } from "./knowledge-management-client";
 import { UserFeedbackClient } from "./user-feedback-client";
 import { ComprehendMedicalClient } from "./comprehend-medical-client";
 import { MetricClient } from "./metrics-client";
+import { EvaluationsClient } from "./evaluations-client.ts";
 
 export class ApiClient {
 
@@ -12,6 +13,7 @@ export class ApiClient {
   private _userFeedbackClient: UserFeedbackClient | undefined;
   private _comprehendMedicalClient: ComprehendMedicalClient | undefined;
   private _metricClient: MetricClient | undefined;
+  private _evaluationsClient: EvaluationsClient | undefined;
 
   public get knowledgeManagement() {
     if (!this._knowledgeManagementClient) {
@@ -56,6 +58,15 @@ export class ApiClient {
 
     return this._metricClient; //
   }
+
+    /** Construct the Evaluations sub-client */
+    public get evaluations() {
+      if (!this._evaluationsClient) {
+        this._evaluationsClient = new EvaluationsClient(this._appConfig);
+      }
+  
+      return this._evaluationsClient;
+    }git
 
 
   constructor(protected _appConfig: AppConfig) {}
