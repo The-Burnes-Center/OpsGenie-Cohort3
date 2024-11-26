@@ -1,5 +1,5 @@
 import "regenerator-runtime/runtime";
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import AppConfigured from "./components/app-configured";
 import { StorageHelper } from "./common/helpers/storage-helper";
@@ -12,7 +12,9 @@ const root = ReactDOM.createRoot(
 const theme = StorageHelper.getTheme();
 StorageHelper.applyTheme(theme);
 
+
 root.render(
+  
   <React.StrictMode>
     <AppConfigured />
   </React.StrictMode>

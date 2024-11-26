@@ -1,7 +1,7 @@
 import { AppLayout, AppLayoutProps, Flashbar } from "@cloudscape-design/components";
 import { useNavigationPanelState } from "../common/hooks/use-navigation-panel-state";
 import NavigationPanel from "./navigation-panel";
-import { ReactElement, useState, useContext } from "react";
+import { ReactElement, useState, useContext, useEffect } from "react";
 import {SessionRefreshContext} from "../common/session-refresh-context"
 import { NotificationProvider, useNotifications } from "./notif-manager";
 import NotificationBar from "./notif-flashbar"
@@ -15,7 +15,49 @@ export default function BaseAppLayout(
   // const {needsRefreshContext, setNeedsRefreshContext} = useContext(SessionRefreshContext);
   const [needsRefresh, setNeedsRefresh] = useState(true);
   const { notifications, addNotification } = useNotifications();
+
+  // add button text to help panel icon
+  useEffect(() => {
+    const aside = document.querySelector('aside.awsui_show-tools_hyvsj_17ek5_1091.awsui_has-tools-form_hyvsj_17ek5_1069')
+    const div = aside?.querySelector('.awsui_trigger-wrapper_hyvsj_17ek5_1266.awsui_remove-high-contrast-header_hyvsj_17ek5_669');
+    const btn = div?.querySelector('button');
+    
+    if (btn) {
+      const hiddenSpan = document.createElement('span');
+      hiddenSpan.innerText = 'Help';
   
+      // makes text invisible
+      hiddenSpan.style.position = 'absolute';
+      hiddenSpan.style.width = '1px';
+      hiddenSpan.style.height = '1px';
+      hiddenSpan.style.padding = '0';
+      hiddenSpan.style.margin = '-1px';
+      hiddenSpan.style.overflow = 'hidden';
+      hiddenSpan.style.whiteSpace = 'nowrap';
+      hiddenSpan.style.border = '0';
+  
+      btn.appendChild(hiddenSpan);
+    }
+  
+  }, []);
+
+  // adding text to a button
+  useEffect(() => {
+    const menuTriggerDiv = document.querySelector('.awsui_trigger-wrapper_hyvsj_17ek5_1266.awsui_remove-high-contrast-header_hyvsj_17ek5_669');
+    const menuTriggerButton = menuTriggerDiv?.querySelector('button');
+    if (menuTriggerButton ) {
+      menuTriggerButton.innerHTML = 'Toggle sidebar navigation';
+      menuTriggerButton.setAttribute('aria-label', 'Click to open sidebar navigation')
+    }
+
+    // const menuCloseNavDiv = document.querySelector('.awsui_hide-navigation_hyvsj_17ek5_827');
+    // const menuCloseNavButton = menuCloseNavDiv?.querySelector('button');
+    // if (menuCloseNavButton) {
+    //   //menuTriggerButton.innerHTML = 'Click to close sidebar navigation';
+    //   menuTriggerButton.setAttribute('aria-label', 'Click to close sidebar navigation')
+    //   console.log("boyyyy");
+    // }
+  }, []);
 
   return (
     <SessionRefreshContext.Provider value={{needsRefresh,setNeedsRefresh}}>

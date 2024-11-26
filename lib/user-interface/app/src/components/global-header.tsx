@@ -34,6 +34,77 @@ export default function GlobalHeader() {
     })();
   }, []);
 
+  useEffect(() => {
+    // Locate the menu (<ul>)
+    const menu = document.querySelector('.awsui_options-list_19gcf_1hl2l_141.awsui_decrease-block-margin_19gcf_1hl2l_197');
+  
+    if (menu) {
+      // Function to apply ARIA roles when children are added
+      const applyRolesToChildren = () => {
+        const childNodes = Array.from(menu.childNodes).filter(
+          (node) => node.nodeType === Node.ELEMENT_NODE
+        );
+  
+        // Add ARIA roles to each child node
+        childNodes.forEach((node) => {
+          const el = node as HTMLElement;
+          el.setAttribute('role', 'menuitem');
+          el.setAttribute('tabindex', '-1');
+        });
+      };
+  
+      // Create a MutationObserver to monitor for child changes
+      const observer = new MutationObserver((mutationsList) => {
+        for (const mutation of mutationsList) {
+          if (mutation.type === 'childList') {
+            applyRolesToChildren(); // Apply roles whenever children are added
+          }
+        }
+      });
+  
+      // Start observing the menu for child changes
+      observer.observe(menu, { childList: true });
+  
+      // Cleanup the observer when the component unmounts
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, []);
+
+  // this is where i left off it's not freakinggggg working
+  
+
+  // useEffect(() => {
+  //   // Find the menu element rendered by Cloudscape
+  //   const menu = document.querySelector('.awsui_options-list_19gcf_1hl2l_141.awsui_decrease-block-margin_19gcf_1hl2l_197');
+    
+  //   if (menu) {
+  //     console.log('looking @ menu');
+  //     const elementNodes = Array.from(menu.childNodes).filter(
+  //       (node) => node.nodeType === Node.ELEMENT_NODE
+  //     );
+  
+  //     // Iterate over each element node and add attributes
+  //     elementNodes.forEach((element) => {
+  //       const el = element as HTMLElement; // Ensure TypeScript recognizes it as an element
+  //       el.setAttribute('role', 'menuitem'); // Add ARIA role
+  //       el.setAttribute('tabindex', '-1'); // Make it keyboard-focusable
+  //     });
+  
+  //   }
+  // }, []);
+  
+
+  // add button text
+  useEffect(() => {
+    const menuTriggerDiv = document.querySelector('[data-utility-special="menu-trigger"]');
+    const menuTriggerButton = menuTriggerDiv?.querySelector('button');
+    if (menuTriggerButton) {
+      menuTriggerButton.innerHTML = 'Open Profile';
+    }
+  }, []);
+
   const onChangeThemeClick = () => {
     if (theme === Mode.Dark) {
       setTheme(StorageHelper.applyTheme(Mode.Light));
@@ -76,7 +147,7 @@ export default function GlobalHeader() {
   
           {
             type: "menu-dropdown",
-            ariaLabel: "User profile dropdown menu",
+            ariaLabel: "Click to open user profile dropdown menu",
             description: userName ?? "",
             iconName: "user-profile",
             onItemClick: onUserProfileClick,

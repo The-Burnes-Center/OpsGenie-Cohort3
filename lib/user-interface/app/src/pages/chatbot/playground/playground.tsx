@@ -15,7 +15,31 @@ export default function Playground() {
   useEffect(() => {
     console.log("email history updated")
     console.log(messageHistoryForEmail);
-  },[messageHistoryForEmail])
+  },[messageHistoryForEmail]);
+  // add button text to sidebar nav collapse button
+  useEffect(() => {
+    const div = document.querySelector('.awsui_hide-tools_hyvsj_17ek5_1079');
+    const btn = div?.querySelector('button');
+    
+    if (btn) {
+      const hiddenSpan = document.createElement('span');
+      hiddenSpan.innerText = '[ADD ACCURATE TEXT]';
+  
+      // makes text invisible
+      hiddenSpan.style.position = 'absolute';
+      hiddenSpan.style.width = '1px';
+      hiddenSpan.style.height = '1px';
+      hiddenSpan.style.padding = '0';
+      hiddenSpan.style.margin = '-1px';
+      hiddenSpan.style.overflow = 'hidden';
+      hiddenSpan.style.whiteSpace = 'nowrap';
+      hiddenSpan.style.border = '0';
+  
+      btn.appendChild(hiddenSpan);
+    }
+  
+  }, []);
+
   return (    
     <BaseAppLayout
       info={

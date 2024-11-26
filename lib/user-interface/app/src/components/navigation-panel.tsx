@@ -35,6 +35,29 @@ export default function NavigationPanel() {
     window.location.pathname
   );
 
+  // add button text to sidebar nav collapse button
+  useEffect(() => {
+    const div = document.querySelector('.awsui_hide-navigation_hyvsj_17ek5_827');
+    const btn = div?.querySelector('button');
+    
+    if (btn) {
+      const hiddenSpan = document.createElement('span');
+      hiddenSpan.innerText = 'Collapse sidebar navigation panel';
+  
+      // makes text invisible
+      hiddenSpan.style.position = 'absolute';
+      hiddenSpan.style.width = '1px';
+      hiddenSpan.style.height = '1px';
+      hiddenSpan.style.padding = '0';
+      hiddenSpan.style.margin = '-1px';
+      hiddenSpan.style.overflow = 'hidden';
+      hiddenSpan.style.whiteSpace = 'nowrap';
+      hiddenSpan.style.border = '0';
+  
+      btn.appendChild(hiddenSpan);
+    }
+  
+  }, []);
 
   // update the list of sessions every now and then
   const loadSessions = async () => {
@@ -133,8 +156,8 @@ export default function NavigationPanel() {
 
   // adds aria label to collapse button. Sadly most efficient way to do this
   useEffect(() => {
-    const arrow = document.querySelector('.awsui_navigation-close_1fj9k_ghfh2_17');
-    arrow.setAttribute('aria-label', 'Click to collapse navigation panel');
+    // const arrow = document.querySelector('.awsui_navigation-close_1fj9k_ghfh2_17');
+    // arrow.setAttribute('aria-label', 'Click to collapse navigation panel');
   }, []);
 
   const onChange = ({

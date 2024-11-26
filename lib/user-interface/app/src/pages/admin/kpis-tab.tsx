@@ -454,7 +454,7 @@ export default function KPIsTab(props: KPIsTabProps) {
                     variant="primary"
                     onClick={() => {
                       apiClient.metrics.getDailyUses(value.startDate, value.endDate);
-                      console.log("idk if they want downloading")
+                      //console.log("idk if they want downloading")
                     }}
                   >
                     Download
