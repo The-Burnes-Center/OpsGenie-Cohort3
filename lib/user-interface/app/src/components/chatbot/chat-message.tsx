@@ -315,6 +315,7 @@ export default function ChatMessage(props: ChatMessageProps) {
             >
               <img
                 src={file.url as string}
+                alt={`Attachment ${idx + 1}`}
                 className={styles.img_chabot_message}
               />
             </a>

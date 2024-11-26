@@ -6,7 +6,7 @@ import {
   FeedbackData,
 } from "./types";
 import { Auth } from "aws-amplify";
-import { SpaceBetween, StatusIndicator, Alert, Flashbar } from "@cloudscape-design/components";
+import { SpaceBetween, StatusIndicator, Alert, Flashbar, Box } from "@cloudscape-design/components";
 import { v4 as uuidv4 } from "uuid";
 import { AppContext } from "../../common/app-context";
 import { ApiClient } from "../../common/api-client/api-client";
@@ -143,7 +143,14 @@ export default function Chat(props: { sessionId?: string, updateEmailFunction : 
           statusIconAriaLabel="Info"
           header=""
        >
-        Be mindful in validating important information. Please refrain from sending sensitive member information.
+        <Box textAlign="center">
+            This is an AI tool that may not always be accurate. Verify key information using the tool’s provided sources before giving a response to residents.
+            <br />
+            <br />
+            Please refrain from sending sensitive member information.
+        </Box>
+
+
       </Alert> )}
 
       {/* <SpaceBetween direction="vertical" size="m"></SpaceBetween> */}

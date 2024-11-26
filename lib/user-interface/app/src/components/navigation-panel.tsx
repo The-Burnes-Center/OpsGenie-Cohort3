@@ -141,10 +141,10 @@ export default function NavigationPanel() {
             { type: "link", text: "User Feedback", href: "/admin/user-feedback" },
             { type: "link", text: "LLM Evaluation", href: "/admin/llm-evaluation" },
             { type: "link", text: "KPIs", href: "/admin/kpis" },
-            invocationCount? { type: "link", text: `Message Count (past 24hrs): ${invocationCount}`, href: ""} 
-            : {type: "link", text: "Message Count (past 24hrs): unknown", href: ""},
-            usesPerUsers? { type: "link", text: `Avg usage per users (past 7days): ${usesPerUsers}`, href: ""} 
-            : {type: "link", text: "Avg usage per users (past 7days): unknown", href: ""}
+            invocationCount? { type: "link", text: `Total Message Count (past 24hrs): ${invocationCount}`, href: ""} 
+            : {type: "link", text: "Total Message Count (past 24hrs): unknown", href: ""},
+            usesPerUsers? { type: "link", text: `Avg usage per user (past 7 days): ${usesPerUsers}`, href: ""} 
+            : {type: "link", text: "Avg usage per user (past 7 days): unknown", href: ""}
           ],
         },)
       }
