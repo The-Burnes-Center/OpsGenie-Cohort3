@@ -19,44 +19,39 @@ export default function AppConfigured() {
   const [theme, setTheme] = useState(StorageHelper.getTheme());
   const [configured, setConfigured] = useState<boolean>(false);
   // trigger authentication state when needed
-  // useEffect(() => {
-  //   // Locate the textarea element by its class, id, or tag  
-  //   const textareas = document.querySelectorAll('textarea');
-  //   console.log('there are this many textarea: ' + textareas.length);
-  //   // Loop through each textarea and remove it
-  //   textareas.forEach((textarea) => {
-  //     textarea.remove();
-  //     // console.log('deleted one')
-  //   });
 
-  // }, []);
-
-  // useEffect(() => {
-  //   const removeTextareas = () => {
-  //     const textareas = document.querySelectorAll('textarea');
-  //     textareas.forEach((textarea) => {
-  //       textarea.remove();
-  //     });
-  //   };
-  //   removeTextareas();
+  useEffect(() => {
+    const removeTextareas = () => {
+      // the random useless textarea that's rendered
+        const textarea = document.querySelector(
+          'textarea[aria-hidden="true"][tabindex="-1"][style*="visibility: hidden"][style*="position: absolute"]'
+        );
+      
+        if (textarea) {
+          textarea.remove();
+        } else {
+          console.log('NO TEXTAREA FOUND to delete')
+        }
+    };
+    removeTextareas();
   
-  //   const observer = new MutationObserver((mutationsList) => {
-  //     mutationsList.forEach((mutation) => {
-  //       if (mutation.type === 'childList') {
-  //         removeTextareas();
-  //       }
-  //     });
-  //   });
+    const observer = new MutationObserver((mutationsList) => {
+      mutationsList.forEach((mutation) => {
+        if (mutation.type === 'childList') {
+          removeTextareas();
+        }
+      });
+    });
   
-  //   observer.observe(document.body, {
-  //     childList: true,
-  //     subtree: true,
-  //   });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
 
-  //   return () => {
-  //     observer.disconnect();
-  //   };
-  // }, []);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     (async () => {

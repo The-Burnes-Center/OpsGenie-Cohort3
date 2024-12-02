@@ -71,29 +71,19 @@ export default function GlobalHeader() {
       };
     }
   }, []);
-
-  // this is where i left off it's not freakinggggg working
   
-
-  // useEffect(() => {
-  //   // Find the menu element rendered by Cloudscape
-  //   const menu = document.querySelector('.awsui_options-list_19gcf_1hl2l_141.awsui_decrease-block-margin_19gcf_1hl2l_197');
-    
-  //   if (menu) {
-  //     console.log('looking @ menu');
-  //     const elementNodes = Array.from(menu.childNodes).filter(
-  //       (node) => node.nodeType === Node.ELEMENT_NODE
-  //     );
+  //
+  useEffect(() => {
+    const menu = document.querySelectorAll('.awsui_options-list_19gcf_1hl2l_141.awsui_decrease-block-margin_19gcf_1hl2l_197');
   
-  //     // Iterate over each element node and add attributes
-  //     elementNodes.forEach((element) => {
-  //       const el = element as HTMLElement; // Ensure TypeScript recognizes it as an element
-  //       el.setAttribute('role', 'menuitem'); // Add ARIA role
-  //       el.setAttribute('tabindex', '-1'); // Make it keyboard-focusable
-  //     });
-  
-  //   }
-  // }, []);
+    if (menu) { 
+      for (const m of menu) {
+        m.innerHTML = `
+          <li role="menuitem" tabindex="-1">Sign out</li>
+        `;
+      }
+    }
+  }, []);
   
 
   // add button text
@@ -155,6 +145,7 @@ export default function GlobalHeader() {
               {
                 id: "signout",
                 text: "Sign out",
+                ariaLabel: "Sign out option"
               },
             ],
             onItemFollow: onFollow,
