@@ -32,15 +32,6 @@ const FILES_COLUMN_DEFINITIONS = [
     cell: (item) => item.Key!,
     isRowHeader: true,
   },
-  // {
-  //   id: "status",
-  //   header: "Status",
-  //   cell: (item: Document) => (
-  //     <StatusIndicator type={Labels.statusTypeMap[item.status!]}>
-  //       {Labels.statusMap[item.status!]}
-  //     </StatusIndicator>
-  //   ),
-  // },
   {
     id: "createdAt",
     header: "Upload date",

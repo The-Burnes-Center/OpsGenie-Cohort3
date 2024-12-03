@@ -9,9 +9,11 @@ import {
 } from "@cloudscape-design/components";
 import BaseAppLayout from "../components/base-app-layout";
 import { CHATBOT_NAME } from "../common/constants";
+import { useEffect } from "react";
 
 export default function NotFound() {
   const onFollow = useOnFollow();
+
 
   return (
     <BaseAppLayout

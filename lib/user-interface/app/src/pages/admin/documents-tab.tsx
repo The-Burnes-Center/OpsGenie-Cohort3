@@ -34,6 +34,99 @@ export default function DocumentsTab(props: DocumentsTabProps) {
   const [selectedItems, setSelectedItems] = useState<any[]>([]);
   const [showModalDelete, setShowModalDelete] = useState(false);
 
+  // make table accessible by adding text to checkbox column
+  useEffect(() => {
+    const updateLabels = () => {
+      // select all labels of checkbox inputs
+      const labels = document.querySelectorAll('label.awsui_label_1s55x_1iop1_145');
+  
+      labels.forEach((label, index) => {
+        const labelElement = label as HTMLLabelElement;
+        const checkbox = label.querySelector('input[type="checkbox"]'); // finds checkbox input under label
+    
+        if (checkbox instanceof HTMLInputElement) {
+          // add a span of hidden text
+          let hiddenSpan = label.querySelector('.hidden-span') as HTMLSpanElement;
+          if (!hiddenSpan) {
+            hiddenSpan = document.createElement('span');
+            hiddenSpan.className = 'hidden-span';
+            hiddenSpan.innerText = checkbox.checked
+              ? `Unselect row ${index + 1}`
+              : `Select row ${index + 1}`;
+  
+            hiddenSpan.style.position = 'absolute';
+            hiddenSpan.style.width = '1px';
+            hiddenSpan.style.height = '1px';
+            hiddenSpan.style.padding = '0';
+            hiddenSpan.style.margin = '-1px';
+            hiddenSpan.style.overflow = 'hidden';
+            hiddenSpan.style.whiteSpace = 'nowrap';
+            hiddenSpan.style.border = '0';
+  
+            labelElement.appendChild(hiddenSpan);
+          }
+  
+          // handles checkbox status changes
+          const onChangeHandler = () => {
+            hiddenSpan.innerText = checkbox.checked
+              ? `Unselect row ${index + 1}`
+              : `Select row ${index + 1}`;
+          };
+  
+          if (!checkbox.dataset.listenerAdded) {
+            checkbox.addEventListener('change', onChangeHandler);
+            checkbox.dataset.listenerAdded = 'true';
+          }
+        }
+      });
+    };
+  
+    // first call
+    updateLabels();
+  
+    // monitor changes to table (table items render after the header does)
+    const table = document.querySelector('table');
+    if (table) {
+      const observer = new MutationObserver(() => {
+        console.log('Mutation detected, updating labels');
+        updateLabels();
+      });
+  
+      observer.observe(table, {
+        childList: true,
+        subtree: true,
+      });
+  
+      return () => observer.disconnect();
+    }
+  }, []);
+  
+  // add text to delete button
+  useEffect(() => {
+    const d1 = document.querySelector('div.awsui_root_18582_1wlz1_141.awsui_horizontal_18582_1wlz1_156.awsui_horizontal-xs_18582_1wlz1_166');
+    const btn = d1?.querySelector('button')
+    
+    if (btn) {
+      console.log('found delete')
+      const hiddenSpan = document.createElement('span');
+      hiddenSpan.innerText = 'Delete selected files';
+  
+      // makes text invisible
+      hiddenSpan.style.position = 'absolute';
+      hiddenSpan.style.width = '1px';
+      hiddenSpan.style.height = '1px';
+      hiddenSpan.style.padding = '0';
+      hiddenSpan.style.margin = '-1px';
+      hiddenSpan.style.overflow = 'hidden';
+      hiddenSpan.style.whiteSpace = 'nowrap';
+      hiddenSpan.style.border = '0';
+  
+      btn.appendChild(hiddenSpan);
+    }
+  
+  }, []);
+  
+  
   const { items, collectionProps, paginationProps } = useCollection(pages, {
     filtering: {
       empty: (

@@ -42,6 +42,7 @@ export default function BaseAppLayout(
   }, []);
 
   // adding text to a button
+  // ISSUE: shows text instead of icon
   useEffect(() => {
     const menuTriggerDiv = document.querySelector('.awsui_trigger-wrapper_hyvsj_17ek5_1266.awsui_remove-high-contrast-header_hyvsj_17ek5_669');
     const menuTriggerButton = menuTriggerDiv?.querySelector('button');
@@ -49,14 +50,6 @@ export default function BaseAppLayout(
       menuTriggerButton.innerHTML = 'Toggle sidebar navigation';
       menuTriggerButton.setAttribute('aria-label', 'Click to open sidebar navigation')
     }
-
-    // const menuCloseNavDiv = document.querySelector('.awsui_hide-navigation_hyvsj_17ek5_827');
-    // const menuCloseNavButton = menuCloseNavDiv?.querySelector('button');
-    // if (menuCloseNavButton) {
-    //   //menuTriggerButton.innerHTML = 'Click to close sidebar navigation';
-    //   menuTriggerButton.setAttribute('aria-label', 'Click to close sidebar navigation')
-    //   console.log("boyyyy");
-    // }
   }, []);
 
   return (

@@ -25,7 +25,6 @@ export default function AddData() {
   useEffect(() => {
     (async () => {
       const result = await Auth.currentAuthenticatedUser();
-      // console.log(result);  
       if (!result || Object.keys(result).length === 0) {
         console.log("Signed out!")
         Auth.signOut();
@@ -43,7 +42,6 @@ export default function AddData() {
         }
       }
       catch (e){
-        // const userName = result?.attributes?.email;
         console.log(e);
       }
     })();
@@ -83,6 +81,7 @@ export default function AddData() {
               href: "/admin/add-data",
             },
           ]}
+          ariaLabel="Breadcrumbs"
         />
       }
       content={

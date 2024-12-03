@@ -72,7 +72,7 @@ export default function GlobalHeader() {
     }
   }, []);
   
-  //
+  // fix broken aria menu
   useEffect(() => {
     const menu = document.querySelectorAll('.awsui_options-list_19gcf_1hl2l_141.awsui_decrease-block-margin_19gcf_1hl2l_197');
   
