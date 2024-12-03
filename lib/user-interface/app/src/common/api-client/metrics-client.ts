@@ -147,7 +147,15 @@ export class MetricClient {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `interaction-data-${startTime}_to_${endTime}.csv`;
+
+        // readable dates yyyy-mm-dd
+        const [startYear, startMonth, startDayTime] = startTime.split('-');
+        const startDay = startDayTime.split('T')[0];
+        const newStart = `${startYear}-${startMonth}-${startDay}`;
+        const [endYear, endtMonth, endDayTime] = startTime.split('-');
+        const endDay = startDayTime.split('T')[0];
+        const newEnd = `${endYear}-${endtMonth}-${endDay}`;
+        a.download = `interaction-data-${newStart}_to_${newEnd}.csv`;
         document.body.appendChild(a);
         a.click();
         a.remove();
