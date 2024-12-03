@@ -153,7 +153,7 @@ export class MetricClient {
         const startDay = startDayTime.split('T')[0];
         const newStart = `${startYear}-${startMonth}-${startDay}`;
         const [endYear, endtMonth, endDayTime] = startTime.split('-');
-        const endDay = startDayTime.split('T')[0];
+        const endDay = endDayTime.split('T')[0];
         const newEnd = `${endYear}-${endtMonth}-${endDay}`;
         a.download = `interaction-data-${newStart}_to_${newEnd}.csv`;
         document.body.appendChild(a);
