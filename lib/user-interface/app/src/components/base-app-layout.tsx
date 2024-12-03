@@ -46,9 +46,26 @@ export default function BaseAppLayout(
   useEffect(() => {
     const menuTriggerDiv = document.querySelector('.awsui_trigger-wrapper_hyvsj_17ek5_1266.awsui_remove-high-contrast-header_hyvsj_17ek5_669');
     const menuTriggerButton = menuTriggerDiv?.querySelector('button');
-    if (menuTriggerButton ) {
-      menuTriggerButton.innerHTML = 'Toggle sidebar navigation';
-      menuTriggerButton.setAttribute('aria-label', 'Click to open sidebar navigation')
+  
+    if (menuTriggerButton) {
+      // Ensure the button has an icon (already assumed to be present) and hidden text
+      const hiddenSpan = document.createElement('span');
+      hiddenSpan.innerText = 'Toggle sidebar navigation';
+  
+      // Makes text invisible for accessibility
+      hiddenSpan.style.position = 'absolute';
+      hiddenSpan.style.width = '1px';
+      hiddenSpan.style.height = '1px';
+      hiddenSpan.style.padding = '0';
+      hiddenSpan.style.margin = '-1px';
+      hiddenSpan.style.overflow = 'hidden';
+      hiddenSpan.style.whiteSpace = 'nowrap';
+      hiddenSpan.style.border = '0';
+  
+      menuTriggerButton.appendChild(hiddenSpan);
+  
+      // Set an appropriate aria-label for accessibility
+      menuTriggerButton.setAttribute('aria-label', 'Toggle sidebar navigation');
     }
   }, []);
 
