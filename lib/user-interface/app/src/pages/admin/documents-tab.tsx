@@ -34,6 +34,63 @@ export default function DocumentsTab(props: DocumentsTabProps) {
   const [selectedItems, setSelectedItems] = useState<any[]>([]);
   const [showModalDelete, setShowModalDelete] = useState(false);
 
+  // fix "empty" close modal buttons
+  useEffect(() => {
+    const fixEmptyButtons = () => {
+      const buttons = document.querySelectorAll('button.awsui_dismiss-control_1d2i7_11r6m_431.awsui_button_vjswe_1tt9v_153');
+  
+      buttons.forEach((button) => {
+        if (!button.hasAttribute('aria-label')) {
+          button.setAttribute('aria-label', 'Close modal'); 
+        }
+      });
+    };
+  
+    // runs it initiailly
+    fixEmptyButtons();
+  
+    const observer = new MutationObserver(() => {
+      fixEmptyButtons();
+    });
+  
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  
+    return () => observer.disconnect();
+  }, []);
+  
+  
+  // fix broken aria menu
+  useEffect(() => {
+    const fixAriaMenus = () => {
+      const problematicMenus = document.querySelectorAll('ul.awsui_options-list_19gcf_1hl2l_141');
+  
+      problematicMenus.forEach((menu) => {
+        if (menu.getAttribute('role') === 'menu') {
+          menu.removeAttribute('role');
+        }
+      });
+    };
+  
+    // runs this initally
+    fixAriaMenus();
+  
+    const observer = new MutationObserver(() => {
+      fixAriaMenus();
+    });
+  
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   // make table accessible by adding text to checkbox column
   useEffect(() => {
     const updateLabels = () => {
@@ -68,9 +125,15 @@ export default function DocumentsTab(props: DocumentsTabProps) {
   
           // handles checkbox status changes
           const onChangeHandler = () => {
-            hiddenSpan.innerText = checkbox.checked
-              ? `Unselect row ${index + 1}`
-              : `Select row ${index + 1}`;
+            if (index === 0) {
+              hiddenSpan.innerText = checkbox.checked
+                ? `Unselect all rows`
+                : `Select all rows`;
+            } else {
+              hiddenSpan.innerText = checkbox.checked
+                ? `Unselect row ${index + 1}`
+                : `Select row ${index + 1}`;
+            }
           };
   
           if (!checkbox.dataset.listenerAdded) {
@@ -100,32 +163,6 @@ export default function DocumentsTab(props: DocumentsTabProps) {
       return () => observer.disconnect();
     }
   }, []);
-  
-  // add text to delete button
-  useEffect(() => {
-    const d1 = document.querySelector('div.awsui_root_18582_1wlz1_141.awsui_horizontal_18582_1wlz1_156.awsui_horizontal-xs_18582_1wlz1_166');
-    const btn = d1?.querySelector('button')
-    
-    if (btn) {
-      console.log('found delete')
-      const hiddenSpan = document.createElement('span');
-      hiddenSpan.innerText = 'Delete selected files';
-  
-      // makes text invisible
-      hiddenSpan.style.position = 'absolute';
-      hiddenSpan.style.width = '1px';
-      hiddenSpan.style.height = '1px';
-      hiddenSpan.style.padding = '0';
-      hiddenSpan.style.margin = '-1px';
-      hiddenSpan.style.overflow = 'hidden';
-      hiddenSpan.style.whiteSpace = 'nowrap';
-      hiddenSpan.style.border = '0';
-  
-      btn.appendChild(hiddenSpan);
-    }
-  
-  }, []);
-  
   
   const { items, collectionProps, paginationProps } = useCollection(pages, {
     filtering: {

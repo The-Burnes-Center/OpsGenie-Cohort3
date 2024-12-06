@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Link, Modal, TextContent } from "@cloudscape-design/components";
 
 export function TruncatedTextCell({ text, maxLength = 50 }) {
@@ -14,6 +14,24 @@ export function TruncatedTextCell({ text, maxLength = 50 }) {
 
   const truncatedText = text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const dismissButtons = document.querySelectorAll('button.awsui_dismiss-control_1d2i7_11r6m_431');
+  
+      dismissButtons.forEach((button) => {
+        if (!button.hasAttribute('aria-label')) {
+          button.setAttribute('aria-label', 'Close modal');
+        }
+      });
+  
+      if (dismissButtons.length > 0) {
+        clearInterval(interval);
+      }
+    }, 500); // check every 500ms
+  
+    return () => clearInterval(interval);
+  }, []);
+  
   return (
     <>
       <Box>

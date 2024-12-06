@@ -10,7 +10,7 @@ import {
   ProgressBarProps,
   SpaceBetween,
 } from "@cloudscape-design/components";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../common/app-context";
 import { ApiClient } from "../../common/api-client/api-client";
 import { Utils } from "../../common/utils";
@@ -79,7 +79,36 @@ export default function DataFileUpload() {
   const [currentFileName, setCurrentFileName] = useState<string>("");
   const [uploadPanelDismissed, setUploadPanelDismissed] =
     useState<boolean>(false);
-
+    
+  // fix broken aria menu
+  useEffect(() => {
+    const fixAriaMenus = () => {
+      const problematicMenus = document.querySelectorAll('ul.awsui_options-list_19gcf_1hl2l_141');
+  
+      problematicMenus.forEach((menu) => {
+        if (menu.getAttribute('role') === 'menu') {
+          menu.removeAttribute('role');
+        }
+      });
+    };
+  
+    // runs this initally
+    fixAriaMenus();
+  
+    const observer = new MutationObserver(() => {
+      fixAriaMenus();
+    });
+  
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+  
   const onSetFiles = (files: File[]) => {
     const errors: string[] = [];
     const filesToUpload: File[] = [];

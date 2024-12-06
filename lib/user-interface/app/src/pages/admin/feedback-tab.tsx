@@ -59,6 +59,181 @@ export default function FeedbackTab(props: FeedbackTabProps) {
     endDate: (new Date()).toISOString()
   });
 
+  // fix "empty" close modal buttons
+  useEffect(() => {
+    const fixEmptyButtons = () => {
+      const buttons = document.querySelectorAll('button.awsui_dismiss-control_1d2i7_11r6m_431.awsui_button_vjswe_1tt9v_153');
+  
+      buttons.forEach((button) => {
+        if (!button.hasAttribute('aria-label')) {
+          button.setAttribute('aria-label', 'Close modal'); 
+        }
+      });
+    };
+  
+    // runs it initiailly
+    fixEmptyButtons();
+  
+    const observer = new MutationObserver(() => {
+      fixEmptyButtons();
+    });
+  
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  
+    return () => observer.disconnect();
+  }, []);
+
+  // fix broken aria menu
+  useEffect(() => {
+    const fixAriaMenus = () => {
+      const problematicMenus = document.querySelectorAll('ul.awsui_options-list_19gcf_1hl2l_141');
+  
+      problematicMenus.forEach((menu) => {
+        if (menu.getAttribute('role') === 'menu') {
+          menu.removeAttribute('role');
+        }
+      });
+    };
+  
+    // runs this initally
+    fixAriaMenus();
+  
+    const observer = new MutationObserver(() => {
+      fixAriaMenus();
+    });
+  
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  // make table accessible by adding text to checkbox column
+  useEffect(() => {
+    const updateLabels = () => {
+      // select all labels of checkbox inputs
+      const labels = document.querySelectorAll('label.awsui_label_1s55x_1iop1_145');
+  
+      labels.forEach((label, index) => {
+        const labelElement = label as HTMLLabelElement;
+        const checkbox = label.querySelector('input[type="radio"]'); // finds radio input under label tag
+    
+        if (checkbox instanceof HTMLInputElement) {
+          // add a span of hidden text
+          let hiddenSpan = label.querySelector('.hidden-span') as HTMLSpanElement;
+          if (!hiddenSpan) {
+            hiddenSpan = document.createElement('span');
+            hiddenSpan.className = 'hidden-span';
+            hiddenSpan.innerText = checkbox.checked
+              ? `Unselect row ${index + 1}`
+              : `Select row ${index + 1}`;
+  
+            hiddenSpan.style.position = 'absolute';
+            hiddenSpan.style.width = '1px';
+            hiddenSpan.style.height = '1px';
+            hiddenSpan.style.padding = '0';
+            hiddenSpan.style.margin = '-1px';
+            hiddenSpan.style.overflow = 'hidden';
+            hiddenSpan.style.whiteSpace = 'nowrap';
+            hiddenSpan.style.border = '0';
+  
+            labelElement.appendChild(hiddenSpan);
+          }
+  
+          // handles checkbox status changes
+          const onChangeHandler = () => {
+            if (index === 0) {
+              hiddenSpan.innerText = checkbox.checked
+                ? `Unselect all rows`
+                : `Select all rows`;
+            } else {
+              hiddenSpan.innerText = checkbox.checked
+                ? `Unselect row ${index + 1}`
+                : `Select row ${index + 1}`;
+            }
+          };
+  
+          if (!checkbox.dataset.listenerAdded) {
+            checkbox.addEventListener('change', onChangeHandler);
+            checkbox.dataset.listenerAdded = 'true';
+          }
+        }
+      });
+    };
+  
+    // first call
+    updateLabels();
+  
+    // monitor changes to table (table items render after the header does)
+    const table = document.querySelector('table');
+    if (table) {
+      const observer = new MutationObserver(() => {
+        console.log('Mutation detected, updating labels');
+        updateLabels();
+      });
+  
+      observer.observe(table, {
+        childList: true,
+        subtree: true,
+      });
+  
+      return () => observer.disconnect();
+    }
+  }, []);
+
+  // add text to header column for radio inputs
+  useEffect(() => {
+    const btn = document.querySelector('th.awsui_header-cell_1spae_r2f6t_145');
+    
+    if (btn) {
+      const hiddenSpan = document.createElement('span');
+      hiddenSpan.innerText = 'Selection';
+  
+      // makes text invisible
+      hiddenSpan.style.position = 'absolute';
+      hiddenSpan.style.width = '1px';
+      hiddenSpan.style.height = '1px';
+      hiddenSpan.style.padding = '0';
+      hiddenSpan.style.margin = '-1px';
+      hiddenSpan.style.overflow = 'hidden';
+      hiddenSpan.style.whiteSpace = 'nowrap';
+      hiddenSpan.style.border = '0';
+  
+      btn.appendChild(hiddenSpan);
+    }
+  
+  }, []);
+
+  // add text to footer icon that expands the feedback view piece
+  useEffect(() => {
+    const div = document.querySelector('div.awsui_header-actions_1r9lg_189so_413');
+    const btn = div?.querySelector('button');
+    
+    if (btn) {
+      const hiddenSpan = document.createElement('span');
+      hiddenSpan.innerText = 'Toggle expanded selected feedback view';
+  
+      // makes text invisible
+      hiddenSpan.style.position = 'absolute';
+      hiddenSpan.style.width = '1px';
+      hiddenSpan.style.height = '1px';
+      hiddenSpan.style.padding = '0';
+      hiddenSpan.style.margin = '-1px';
+      hiddenSpan.style.overflow = 'hidden';
+      hiddenSpan.style.whiteSpace = 'nowrap';
+      hiddenSpan.style.border = '0';
+  
+      btn.appendChild(hiddenSpan);
+    }
+  
+  }, []);
 
   const { addNotification, removeNotification } = useNotifications();
 
@@ -166,7 +341,11 @@ export default function FeedbackTab(props: FeedbackTabProps) {
     {
       id: "problem",
       header: "Problem",
-      cell: (item) => item.Problem,
+      cell: (item) => {
+        return item.Problem.length > 0
+          ? item.Problem
+          : "No problem specified";
+      },
       isRowHeader: true,
     },
     {

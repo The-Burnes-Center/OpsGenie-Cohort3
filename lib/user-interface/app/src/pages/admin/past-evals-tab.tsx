@@ -53,6 +53,32 @@ export default function PastEvalsTab(props: PastEvalsTabProps) {
     }
   );
 
+  // add text to refresh btn
+  useEffect(() => {
+    const divs = document.querySelectorAll('div.awsui_child_18582_1wlz1_145');
+    let btn;
+    for (const div of divs) {
+      btn = div.querySelector('button.awsui_button_vjswe_1tt9v_153');
+      if (btn) {
+        const hiddenSpan = document.createElement('span');
+        hiddenSpan.innerText = 'Refresh past evaluations';
+    
+        // makes text invisible
+        hiddenSpan.style.position = 'absolute';
+        hiddenSpan.style.width = '1px';
+        hiddenSpan.style.height = '1px';
+        hiddenSpan.style.padding = '0';
+        hiddenSpan.style.margin = '-1px';
+        hiddenSpan.style.overflow = 'hidden';
+        hiddenSpan.style.whiteSpace = 'nowrap';
+        hiddenSpan.style.border = '0';
+    
+        btn.appendChild(hiddenSpan);
+        break;
+      }
+    }
+  }, []);
+
   /** Function to get evaluations from api*/
   const getEvaluations = useCallback(
     async (params : { pageIndex?: number, nextPageToken? }) => {

@@ -26,6 +26,35 @@ export default function KPIsPage() {
   const [metrics, setMetrics] = useState<any>({});
   const [admin, setAdmin] = useState<boolean>(false);
 
+  // fix broken aria menu
+  useEffect(() => {
+    const fixAriaMenus = () => {
+      const problematicMenus = document.querySelectorAll('ul.awsui_options-list_19gcf_1hl2l_141');
+  
+      problematicMenus.forEach((menu) => {
+        if (menu.getAttribute('role') === 'menu') {
+          menu.removeAttribute('role');
+        }
+      });
+    };
+  
+    // runs this initally
+    fixAriaMenus();
+  
+    const observer = new MutationObserver(() => {
+      fixAriaMenus();
+    });
+  
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   useEffect(() => {
     (async () => {
       const result = await Auth.currentAuthenticatedUser();

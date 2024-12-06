@@ -20,7 +20,7 @@ export default function AppConfigured() {
   const [configured, setConfigured] = useState<boolean>(false);
   // trigger authentication state when needed
 
-  useEffect(() => {
+  useEffect(() => { // this might be an issue
     const removeTextareas = () => {
       // the random useless textarea that's rendered
         const textarea = document.querySelector(
@@ -29,8 +29,6 @@ export default function AppConfigured() {
       
         if (textarea) {
           textarea.remove();
-        } else {
-          console.log('NO TEXTAREA FOUND to delete')
         }
     };
     removeTextareas();

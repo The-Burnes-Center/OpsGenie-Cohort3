@@ -67,6 +67,130 @@ export default function ChatMessage(props: ChatMessageProps) {
   const [selectedFeedbackType, setSelectedFeedbackType] = React.useState({label: "Select a Problem", value: "1"});
   const [value, setValue] = useState("");
 
+  // fix broken aria menu
+  useEffect(() => {
+    const fixAriaMenus = () => {
+      const problematicMenus = document.querySelectorAll('ul.awsui_options-list_19gcf_1hl2l_141');
+  
+      problematicMenus.forEach((menu) => {
+        if (menu.getAttribute('role') === 'menu') {
+          menu.removeAttribute('role');
+        }
+      });
+    };
+  
+    // runs this initally
+    fixAriaMenus();
+  
+    const observer = new MutationObserver(() => {
+      fixAriaMenus();
+    });
+  
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+  
+
+  // add text to copy btn
+  useEffect(() => {
+    const divs = document.querySelectorAll('div.awsui_content-inner_14iqq_1kla9_492');
+    let btn;
+    for (const div of divs) {
+      btn = div.querySelector('button.awsui_button_vjswe_1tt9v_153');
+      if (btn) {
+        if (!btn.querySelector('.hidden-span')) {
+          const hiddenSpan = document.createElement('span');
+          hiddenSpan.className = 'hidden-span';
+          hiddenSpan.innerText = 'Copy text';
+      
+          // makes text invisible
+          hiddenSpan.style.position = 'absolute';
+          hiddenSpan.style.width = '1px';
+          hiddenSpan.style.height = '1px';
+          hiddenSpan.style.padding = '0';
+          hiddenSpan.style.margin = '-1px';
+          hiddenSpan.style.overflow = 'hidden';
+          hiddenSpan.style.whiteSpace = 'nowrap';
+          hiddenSpan.style.border = '0';
+      
+          btn.appendChild(hiddenSpan);
+        }
+      }
+    }
+  }, []);
+
+  // add text to those weird modals
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const dismissButtons = document.querySelectorAll('button.awsui_dismiss-control_1d2i7_11r6m_431');
+  
+      dismissButtons.forEach((button) => {
+        if (!button.hasAttribute('aria-label')) {
+          button.setAttribute('aria-label', 'Close modal');
+        }
+      });
+  
+      if (dismissButtons.length > 0) {
+        clearInterval(interval);
+      }
+    }, 500); // check every 500ms
+  
+    return () => clearInterval(interval);
+  }, []);
+
+  // add text to thumbs btns
+  useEffect(() => {
+    const divs = document.querySelectorAll('div._thumbsContainer_1nrwp_159');
+    for (const div of divs) {
+      const btns = div?.querySelectorAll('button');
+      console.log(btns.length)
+      const thumbsUp = btns[0];
+      if (!thumbsUp.querySelector('thumbs-up')) {
+        const upSpan = document.createElement('span');
+        upSpan.className = 'thumbs-up';
+        upSpan.innerText = 'Thumbs Up';    
+        
+        // makes text invisible
+        upSpan.style.position = 'absolute';
+        upSpan.style.width = '1px';
+        upSpan.style.height = '1px';
+        upSpan.style.padding = '0';
+        upSpan.style.margin = '-1px';
+        upSpan.style.overflow = 'hidden';
+        upSpan.style.whiteSpace = 'nowrap';
+        upSpan.style.border = '0';
+        
+        thumbsUp.appendChild(upSpan);
+      }
+
+      const thumbsDown = btns[1];
+      if (!thumbsDown.querySelector('thumbs-down')) {
+        const downSpan = document.createElement('span');
+        downSpan.className = 'thumbs-down';
+        downSpan.innerText = 'Thumbs Down';    
+        
+        // makes text invisible
+        downSpan.style.position = 'absolute';
+        downSpan.style.width = '1px';
+        downSpan.style.height = '1px';
+        downSpan.style.padding = '0';
+        downSpan.style.margin = '-1px';
+        downSpan.style.overflow = 'hidden';
+        downSpan.style.whiteSpace = 'nowrap';
+        downSpan.style.border = '0';
+        
+        thumbsDown.appendChild(downSpan);
+      }
+    }
+  }, []);
+
+
   useEffect(() => {
     const getSignedUrls = async () => {
       setLoading(true);
