@@ -31,7 +31,7 @@ export class SessionsClient {
     let validData = false;
     let output = [];
     let runs = 0;
-    let limit = 3;
+    const limit = 3;
     let errorMessage = "Could not load sessions"
     while (!validData && runs < limit ) {
       runs += 1;
@@ -45,7 +45,7 @@ export class SessionsClient {
       });
       if (response.status != 200) {
         validData = false;
-        let jsonResponse = await response.json()
+        const jsonResponse = await response.json()
         // console.log(jsonResponse);
         errorMessage = jsonResponse;
         // errorMessage = body.body;
@@ -81,7 +81,7 @@ export class SessionsClient {
     let validData = false;
     let output;
     let runs = 0;
-    let limit = 3;
+    const limit = 3;
     let errorMessage = "Could not load session";
     while (!validData && runs < limit ) {
       runs += 1;
@@ -117,7 +117,7 @@ export class SessionsClient {
     if (!validData) {
       throw new Error(errorMessage)      
     }
-    let history: ChatBotHistoryItem[] = [];
+    const history: ChatBotHistoryItem[] = [];
     // console.log(output);
     if (output === undefined) {
       return history;

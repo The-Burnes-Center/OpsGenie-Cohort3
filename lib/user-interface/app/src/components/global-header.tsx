@@ -74,15 +74,31 @@ export default function GlobalHeader() {
   
   // fix broken aria menu
   useEffect(() => {
-    const menu = document.querySelectorAll('.awsui_options-list_19gcf_1hl2l_141.awsui_decrease-block-margin_19gcf_1hl2l_197');
+    const fixAriaMenus = () => {
+      const problematicMenus = document.querySelectorAll('ul.awsui_options-list_19gcf_1hl2l_141');
   
-    if (menu) { 
-      for (const m of menu) {
-        m.innerHTML = `
-          <li role="menuitem" tabindex="-1">Sign out</li>
-        `;
-      }
-    }
+      problematicMenus.forEach((menu) => {
+        if (menu.getAttribute('role') === 'menu') {
+          menu.removeAttribute('role');
+        }
+      });
+    };
+  
+    // runs this initally
+    fixAriaMenus();
+  
+    const observer = new MutationObserver(() => {
+      fixAriaMenus();
+    });
+  
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  
+    return () => {
+      observer.disconnect();
+    };
   }, []);
   
 

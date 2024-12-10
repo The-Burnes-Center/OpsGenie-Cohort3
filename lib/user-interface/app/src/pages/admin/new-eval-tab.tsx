@@ -72,7 +72,51 @@ import {
       }
     }
   }, []);
+
+  // add text to refresh btn
+  useEffect(() => {
+    const divs = document.querySelectorAll('div.awsui_child_18582_1wlz1_145');
+    let btn;
+    for (const div of divs) {
+      btn = div.querySelector('button.awsui_button_vjswe_1tt9v_153');
+      if (btn) {
+        btn.setAttribute('aria-label', 'Refresh test case documents');
+      }
+    }
+  }, []);  
   
+  // add text to arrow buttons that navigate through the pages
+  useEffect(() => {
+    const addPaginationLabels = () => {
+      const ls = document.querySelector('ul.awsui_root_fvjdu_chz9p_141');
+      if (ls) {
+        const listItems = ls.querySelectorAll('li');
+        
+        // all the buttons in between are the page numbers and already have text
+        if (listItems.length !== 0) {
+          const leftArrow = listItems[0].querySelector('button');
+          const rightArrow = listItems[listItems.length - 1].querySelector('button');
+          rightArrow.setAttribute('aria-label', 'Go to next page');
+          leftArrow.setAttribute('aria-label', 'Go to previous page');
+        }
+      }
+    };
+  
+    // iniital run
+    addPaginationLabels();
+  
+    const observer = new MutationObserver(() => {
+      addPaginationLabels();
+    });
+  
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  
+    return () => observer.disconnect();
+  }, []);
+
   // make table accessible by adding text to checkbox column
   useEffect(() => {
     const updateLabels = () => {
@@ -133,7 +177,6 @@ import {
     const table = document.querySelector('table');
     if (table) {
       const observer = new MutationObserver(() => {
-        console.log('Mutation detected, updating labels');
         updateLabels();
       });
   

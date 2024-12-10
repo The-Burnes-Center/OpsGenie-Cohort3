@@ -76,6 +76,34 @@ import {
   
   );
   
+  // add text to dropdown
+  useEffect(() => {
+    const addAriaLabelToButton = () => {
+      // Selects all buttons within the parent container
+      const buttons = document.querySelectorAll('div.awsui_child_18582_1wlz1_145 button');
+  
+      buttons.forEach((button) => {
+        if (!button.hasAttribute('aria-label')) {
+          console.log('Button found, adding aria-label');
+          button.setAttribute('aria-label', 'Open dropdown');
+        }
+      });
+    };
+  
+    // initial run
+    addAriaLabelToButton();
+  
+    const observer = new MutationObserver(() => {
+      addAriaLabelToButton();
+    });
+  
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  
+    return () => observer.disconnect();
+  }, []);
   
   
   useEffect(() => {

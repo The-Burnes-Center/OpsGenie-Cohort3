@@ -106,7 +106,7 @@ export default function NavigationPanel() {
 
 
   const updateItems = async (sessions) => {
-    let newItems: SideNavigationProps.Item[] = [
+    const newItems: SideNavigationProps.Item[] = [
       {
         type: "section",
         text: "Session History",
@@ -154,12 +154,6 @@ export default function NavigationPanel() {
   }
     setItems(newItems);
   };
-
-  // adds aria label to collapse button. Sadly most efficient way to do this
-  useEffect(() => {
-    // const arrow = document.querySelector('.awsui_navigation-close_1fj9k_ghfh2_17');
-    // arrow.setAttribute('aria-label', 'Click to collapse navigation panel');
-  }, []);
 
   const onChange = ({
     detail,

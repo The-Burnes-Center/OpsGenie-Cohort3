@@ -61,7 +61,7 @@ export class EvaluationsClient {
     const result = await response.json();
     return result;
   }
-  async startNewEvaluation(evaluationName: string, testCaseFile: String) {
+  async startNewEvaluation(evaluationName: string, testCaseFile: string) {
     const auth = await Utils.authenticate();
     const body: any = {
       // operation: "start_new_evaluation",

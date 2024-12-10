@@ -60,8 +60,8 @@ export class UserFeedbackClient {
   async getUserFeedback(topic : string, startTime? : string, endTime? : string, nextPageToken? : string) {
     
     const auth = await Utils.authenticate();
-    let params = new URLSearchParams({topic,startTime,endTime,nextPageToken});
-    let keysForDel = [];
+    const params = new URLSearchParams({topic,startTime,endTime,nextPageToken});
+    const keysForDel = [];
     params.forEach((value, key) => {
       if (value === undefined || value == "undefined") {
         keysForDel.push(key);
@@ -85,7 +85,7 @@ export class UserFeedbackClient {
 
   async deleteFeedback(topic : string, createdAt : string) {
     const auth = await Utils.authenticate();
-    let params = new URLSearchParams({topic, createdAt});
+    const params = new URLSearchParams({topic, createdAt});
     await fetch(this.API + '/user-feedback?' + params.toString(), {
       method: 'DELETE',
       headers: {

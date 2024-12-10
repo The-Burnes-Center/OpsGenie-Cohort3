@@ -79,7 +79,7 @@ export class MetricClient {
     try {
       const auth = await Utils.authenticate();
       //console.log("Parameters: " + {startTime,endTime,nextPageToken});
-      let params = new URLSearchParams();
+      const params = new URLSearchParams();
       if (startTime) params.append("startTime", startTime);
       console.log(startTime)
       if (endTime) params.append("endTime", endTime);
@@ -104,7 +104,7 @@ export class MetricClient {
   async deleteChatbotUses(timestamp: string) {
     try {
       const auth = await Utils.authenticate();
-      let params = new URLSearchParams({Timestamp: timestamp});
+      const params = new URLSearchParams({Timestamp: timestamp});
       await fetch(this.API + '/chatbot-use?' + params.toString(), {
         method: 'DELETE',
         headers: {
@@ -192,7 +192,7 @@ export class MetricClient {
   async getDailyLogins(startDate? : string, endDate? : string) {
     try {
       const auth = await Utils.authenticate();
-      let params = new URLSearchParams();
+      const params = new URLSearchParams();
       if (startDate) params.append("startDate", startDate);
       if (endDate) params.append("endDate", endDate);
 

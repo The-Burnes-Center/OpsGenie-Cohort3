@@ -170,12 +170,12 @@ import {
         <Container header={<h3>Test Case File Format Requirements</h3>}>
             <SpaceBetween size="xxs">
             <p>Please ensure that your test case files follow the format below:</p>
-            {/* <ul> */}
+            <ul>
                 <li>File must be in CSV format with a .csv extension.</li>
                 <li>File must include a header in the first row with the columns <strong>question</strong>, <strong>expectedResponse</strong></li>
                 <li>Each subsequent row should represent a single test case, with appropriate values in each column.</li>
                 <li>File size should not exceed 100MB.</li>
-            {/* </ul> */}
+            </ul>
             </SpaceBetween>
         </Container>
           <Container>

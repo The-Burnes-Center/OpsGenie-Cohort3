@@ -67,7 +67,7 @@ export default function ChatMessage(props: ChatMessageProps) {
   const [selectedFeedbackType, setSelectedFeedbackType] = React.useState({label: "Select a Problem", value: "1"});
   const [value, setValue] = useState("");
 
-  // fix broken aria menu
+  // fix broken aria menu (From i think the generate email since it's a submit button)
   useEffect(() => {
     const fixAriaMenus = () => {
       const problematicMenus = document.querySelectorAll('ul.awsui_options-list_19gcf_1hl2l_141');
@@ -103,25 +103,23 @@ export default function ChatMessage(props: ChatMessageProps) {
     let btn;
     for (const div of divs) {
       btn = div.querySelector('button.awsui_button_vjswe_1tt9v_153');
-      if (btn) {
-        if (!btn.querySelector('.hidden-span')) {
-          const hiddenSpan = document.createElement('span');
-          hiddenSpan.className = 'hidden-span';
-          hiddenSpan.innerText = 'Copy text';
+      if (!btn.querySelector('.hidden-span')) {
+        const hiddenSpan = document.createElement('span');
+        hiddenSpan.className = 'hidden-span';
+        hiddenSpan.innerText = 'Copy text';
       
-          // makes text invisible
-          hiddenSpan.style.position = 'absolute';
-          hiddenSpan.style.width = '1px';
-          hiddenSpan.style.height = '1px';
-          hiddenSpan.style.padding = '0';
-          hiddenSpan.style.margin = '-1px';
-          hiddenSpan.style.overflow = 'hidden';
-          hiddenSpan.style.whiteSpace = 'nowrap';
-          hiddenSpan.style.border = '0';
+        // makes text invisible
+        hiddenSpan.style.position = 'absolute';
+        hiddenSpan.style.width = '1px';
+        hiddenSpan.style.height = '1px';
+        hiddenSpan.style.padding = '0';
+        hiddenSpan.style.margin = '-1px';
+        hiddenSpan.style.overflow = 'hidden';
+        hiddenSpan.style.whiteSpace = 'nowrap';
+        hiddenSpan.style.border = '0';
       
-          btn.appendChild(hiddenSpan);
+        btn.appendChild(hiddenSpan);
         }
-      }
     }
   }, []);
 
