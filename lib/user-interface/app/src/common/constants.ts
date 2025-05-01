@@ -128,4 +128,4 @@ export const KPIMetrics = [
 
 export const API = "https://u95wm1svh0.execute-api.us-east-1.amazonaws.com/test"
 
-export const CHATBOT_NAME = "MECA InsightChat powered by RAG";
+export const CHATBOT_NAME = "ITOPS Inquiry powered by RAG";

@@ -143,7 +143,7 @@ export class LambdaFunctionStack extends cdk.Stack {
       actions: [
         's3:GetObject'
       ],
-      resources: ['arn:aws:iam::807596108910:role/MECKnowledgeStack-ChatbotAPIKendraIndexRole0A5CCA00-mOwqNPZz42yg/*']
+      resources: ['arn:aws:iam::807596108910:role/ITOPSKnowledgeStack-ChatbotAPIKendraIndexRole0A5CCA00-mOwqNPZz42yg/*']
     }));
         
     this.chatFunction = websocketAPIFunction;

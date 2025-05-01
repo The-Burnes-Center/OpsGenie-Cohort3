@@ -31,10 +31,10 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "mectoo9c811e8f_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "itopstoo9c811e8f_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
     "sharedId": "9c811e8f",
-    "resourceName": "mectool9c811e8f",
+    "resourceName": "itopstool9c811e8f",
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "default",
     "usernameAttributes": [
