@@ -4,5 +4,7 @@ import { Table } from 'aws-cdk-lib/aws-dynamodb';
 export declare class TableStack extends Stack {
     readonly historyTable: Table;
     readonly feedbackTable: Table;
+    readonly evalResultsTable: Table;
+    readonly evalSummaryTable: Table;
     constructor(scope: Construct, id: string, props?: StackProps);
 }

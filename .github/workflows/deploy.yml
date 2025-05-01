@@ -49,11 +49,11 @@ jobs:
       run: npx cdk bootstrap
     # Step 7: Deploy the CDK stack (from the root folder)
     - name: Deploy CDK stack
-      run: npx cdk deploy ITOPSKnowledgeStack --require-approval never  # Replace "My stack name" with your actual stack name
+      run: npx cdk deploy ITOPSRAGStack --require-approval never  # Replace "My stack name" with your actual stack name
     # Step 8: Fetch CloudFormation outputs and save to a file
     - name: Fetch CloudFormation Outputs
       run: |
-        aws cloudformation describe-stacks --stack-name ITOPSKnowledgeStack --query "Stacks[0].Outputs" > stack-outputs.json
+        aws cloudformation describe-stacks --stack-name ITOPSRAGStack --query "Stacks[0].Outputs" > stack-outputs.json
         cat stack-outputs.json  # Just to verify in logs if needed
     # Step 9: Upload the output file as an artifact (optional)
     - name: Upload Outputs as Artifact
