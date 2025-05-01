@@ -1,28 +1,28 @@
 {
   "version": "36.0.0",
   "artifacts": {
-    "GenAiChatStackmassHealthChatbotAPITableStack6933BBE9.assets": {
+    "ITOPSRAGStackChatbotAPITableStack58B603CB.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "GenAiChatStackmassHealthChatbotAPITableStack6933BBE9.assets.json",
+        "file": "ITOPSRAGStackChatbotAPITableStack58B603CB.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "GenAiChatStackmassHealthChatbotAPITableStack6933BBE9": {
+    "ITOPSRAGStackChatbotAPITableStack58B603CB": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://unknown-account/unknown-region",
       "properties": {
-        "templateFile": "GenAiChatStackmassHealthChatbotAPITableStack6933BBE9.template.json",
+        "templateFile": "ITOPSRAGStackChatbotAPITableStack58B603CB.template.json",
         "terminationProtection": false,
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/189e1d3fedda00f3b73cfdbc990db7879c72f8b632c8e10581c7d4edb97c93d6.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/8eecc877cbd9959b897f167fdc8b7ee09fc6c771029de2d72a07e2d80ba828a7.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "GenAiChatStackmassHealthChatbotAPITableStack6933BBE9.assets"
+          "ITOPSRAGStackChatbotAPITableStack58B603CB.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
@@ -31,58 +31,58 @@
         }
       },
       "dependencies": [
-        "GenAiChatStackmassHealthChatbotAPITableStack6933BBE9.assets"
+        "ITOPSRAGStackChatbotAPITableStack58B603CB.assets"
       ],
       "metadata": {
-        "/GenAiChatStack-massHealth/ChatbotAPI/TableStack/CDKMetadata/Default": [
+        "/ITOPSRAGStack/ChatbotAPI/TableStack/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/TableStack/CDKMetadata/Condition": [
+        "/ITOPSRAGStack/ChatbotAPI/TableStack/CDKMetadata/Condition": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadataAvailable"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/TableStack/BootstrapVersion": [
+        "/ITOPSRAGStack/ChatbotAPI/TableStack/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/TableStack/CheckBootstrapVersion": [
+        "/ITOPSRAGStack/ChatbotAPI/TableStack/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "GenAiChatStack-massHealth/ChatbotAPI/TableStack"
+      "displayName": "ITOPSRAGStack/ChatbotAPI/TableStack"
     },
-    "GenAiChatStackmassHealthChatbotAPIBucketStack29B5F4DF.assets": {
+    "ITOPSRAGStackChatbotAPIBucketStackA20283EE.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "GenAiChatStackmassHealthChatbotAPIBucketStack29B5F4DF.assets.json",
+        "file": "ITOPSRAGStackChatbotAPIBucketStackA20283EE.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "GenAiChatStackmassHealthChatbotAPIBucketStack29B5F4DF": {
+    "ITOPSRAGStackChatbotAPIBucketStackA20283EE": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://unknown-account/unknown-region",
       "properties": {
-        "templateFile": "GenAiChatStackmassHealthChatbotAPIBucketStack29B5F4DF.template.json",
+        "templateFile": "ITOPSRAGStackChatbotAPIBucketStackA20283EE.template.json",
         "terminationProtection": false,
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/0e2722ec02f2be86657384f03c88bfc51dece193af533373570bdbf339c12c16.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/36d4e7031ef2c926fa9bca790c10db9ab74c9ac5588428c5863202a0e7ab0da6.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "GenAiChatStackmassHealthChatbotAPIBucketStack29B5F4DF.assets"
+          "ITOPSRAGStackChatbotAPIBucketStackA20283EE.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
@@ -91,58 +91,58 @@
         }
       },
       "dependencies": [
-        "GenAiChatStackmassHealthChatbotAPIBucketStack29B5F4DF.assets"
+        "ITOPSRAGStackChatbotAPIBucketStackA20283EE.assets"
       ],
       "metadata": {
-        "/GenAiChatStack-massHealth/ChatbotAPI/BucketStack/CDKMetadata/Default": [
+        "/ITOPSRAGStack/ChatbotAPI/BucketStack/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/BucketStack/CDKMetadata/Condition": [
+        "/ITOPSRAGStack/ChatbotAPI/BucketStack/CDKMetadata/Condition": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadataAvailable"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/BucketStack/BootstrapVersion": [
+        "/ITOPSRAGStack/ChatbotAPI/BucketStack/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/BucketStack/CheckBootstrapVersion": [
+        "/ITOPSRAGStack/ChatbotAPI/BucketStack/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "GenAiChatStack-massHealth/ChatbotAPI/BucketStack"
+      "displayName": "ITOPSRAGStack/ChatbotAPI/BucketStack"
     },
-    "GenAiChatStackmassHealthChatbotAPIKendraStack3E71E168.assets": {
+    "ITOPSRAGStackChatbotAPIKendraStackBD1868A4.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "GenAiChatStackmassHealthChatbotAPIKendraStack3E71E168.assets.json",
+        "file": "ITOPSRAGStackChatbotAPIKendraStackBD1868A4.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "GenAiChatStackmassHealthChatbotAPIKendraStack3E71E168": {
+    "ITOPSRAGStackChatbotAPIKendraStackBD1868A4": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://unknown-account/unknown-region",
       "properties": {
-        "templateFile": "GenAiChatStackmassHealthChatbotAPIKendraStack3E71E168.template.json",
+        "templateFile": "ITOPSRAGStackChatbotAPIKendraStackBD1868A4.template.json",
         "terminationProtection": false,
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/dc11f6feb1eaea38c91b12985cdf4ac9e09c74446af0a920ee91457cf7e69f5a.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c5e517689a0cc89864f97c56e00826619c3a4b3ba822640113e1dc574e2b4a0f.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "GenAiChatStackmassHealthChatbotAPIKendraStack3E71E168.assets"
+          "ITOPSRAGStackChatbotAPIKendraStackBD1868A4.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
@@ -151,58 +151,58 @@
         }
       },
       "dependencies": [
-        "GenAiChatStackmassHealthChatbotAPIKendraStack3E71E168.assets"
+        "ITOPSRAGStackChatbotAPIKendraStackBD1868A4.assets"
       ],
       "metadata": {
-        "/GenAiChatStack-massHealth/ChatbotAPI/KendraStack/CDKMetadata/Default": [
+        "/ITOPSRAGStack/ChatbotAPI/KendraStack/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/KendraStack/CDKMetadata/Condition": [
+        "/ITOPSRAGStack/ChatbotAPI/KendraStack/CDKMetadata/Condition": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadataAvailable"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/KendraStack/BootstrapVersion": [
+        "/ITOPSRAGStack/ChatbotAPI/KendraStack/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/KendraStack/CheckBootstrapVersion": [
+        "/ITOPSRAGStack/ChatbotAPI/KendraStack/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "GenAiChatStack-massHealth/ChatbotAPI/KendraStack"
+      "displayName": "ITOPSRAGStack/ChatbotAPI/KendraStack"
     },
-    "GenAiChatStackmassHealthChatbotAPILambdaFunctions6983C647.assets": {
+    "ITOPSRAGStackChatbotAPILambdaFunctionsE828647D.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "GenAiChatStackmassHealthChatbotAPILambdaFunctions6983C647.assets.json",
+        "file": "ITOPSRAGStackChatbotAPILambdaFunctionsE828647D.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "GenAiChatStackmassHealthChatbotAPILambdaFunctions6983C647": {
+    "ITOPSRAGStackChatbotAPILambdaFunctionsE828647D": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://unknown-account/unknown-region",
       "properties": {
-        "templateFile": "GenAiChatStackmassHealthChatbotAPILambdaFunctions6983C647.template.json",
+        "templateFile": "ITOPSRAGStackChatbotAPILambdaFunctionsE828647D.template.json",
         "terminationProtection": false,
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ffd2d34dfaae070826700cd86976c0bfa49a869e15faebcb4fe1bc16a4da9b0f.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/8c72b207523c8bb20b734f47550742f21dcd3c73b36f2afb01bec9b7347e5bac.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "GenAiChatStackmassHealthChatbotAPILambdaFunctions6983C647.assets"
+          "ITOPSRAGStackChatbotAPILambdaFunctionsE828647D.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
@@ -211,58 +211,58 @@
         }
       },
       "dependencies": [
-        "GenAiChatStackmassHealthChatbotAPILambdaFunctions6983C647.assets"
+        "ITOPSRAGStackChatbotAPILambdaFunctionsE828647D.assets"
       ],
       "metadata": {
-        "/GenAiChatStack-massHealth/ChatbotAPI/LambdaFunctions/CDKMetadata/Default": [
+        "/ITOPSRAGStack/ChatbotAPI/LambdaFunctions/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/LambdaFunctions/CDKMetadata/Condition": [
+        "/ITOPSRAGStack/ChatbotAPI/LambdaFunctions/CDKMetadata/Condition": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadataAvailable"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/LambdaFunctions/BootstrapVersion": [
+        "/ITOPSRAGStack/ChatbotAPI/LambdaFunctions/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/LambdaFunctions/CheckBootstrapVersion": [
+        "/ITOPSRAGStack/ChatbotAPI/LambdaFunctions/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "GenAiChatStack-massHealth/ChatbotAPI/LambdaFunctions"
+      "displayName": "ITOPSRAGStack/ChatbotAPI/LambdaFunctions"
     },
-    "GenAiChatStack-massHealth.assets": {
+    "ITOPSRAGStack.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "GenAiChatStack-massHealth.assets.json",
+        "file": "ITOPSRAGStack.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "GenAiChatStack-massHealth": {
+    "ITOPSRAGStack": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://unknown-account/unknown-region",
       "properties": {
-        "templateFile": "GenAiChatStack-massHealth.template.json",
+        "templateFile": "ITOPSRAGStack.template.json",
         "terminationProtection": false,
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4ada01b2144f97366cd02c6aebbe8ec1bb096606323841cad754dfc5f92722df.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ed607e37a786aa8cf5d4816d67cd312a3c605545f4e7992399a5cd377d5d890e.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "GenAiChatStack-massHealth.assets"
+          "ITOPSRAGStack.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
@@ -271,779 +271,1211 @@
         }
       },
       "dependencies": [
-        "GenAiChatStack-massHealth.assets"
+        "ITOPSRAGStack.assets"
       ],
       "metadata": {
-        "/GenAiChatStack-massHealth/Authorization/UserPool/smsRole/Resource": [
+        "/ITOPSRAGStack/Authorization/UserPool/smsRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AuthorizationUserPoolsmsRoleD2B0C01D"
           }
         ],
-        "/GenAiChatStack-massHealth/Authorization/UserPool/Resource": [
+        "/ITOPSRAGStack/Authorization/UserPool/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AuthorizationUserPool114F25B4"
           }
         ],
-        "/GenAiChatStack-massHealth/Authorization/UserPool/CognitoDomain/Resource": [
+        "/ITOPSRAGStack/Authorization/UserPool/CognitoDomain/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AuthorizationUserPoolCognitoDomain7EF39E06"
           }
         ],
-        "/GenAiChatStack-massHealth/Authorization/UserPoolClient/Resource": [
+        "/ITOPSRAGStack/Authorization/UserPoolClient/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AuthorizationUserPoolClient8E2989BE"
           }
         ],
-        "/GenAiChatStack-massHealth/Authorization/AuthorizationFunction/ServiceRole/Resource": [
+        "/ITOPSRAGStack/Authorization/AuthorizationFunction/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AuthorizationAuthorizationFunctionServiceRole09B7CF46"
           }
         ],
-        "/GenAiChatStack-massHealth/Authorization/AuthorizationFunction/Resource": [
+        "/ITOPSRAGStack/Authorization/AuthorizationFunction/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AuthorizationAuthorizationFunctionB35B7A4C"
           }
         ],
-        "/GenAiChatStack-massHealth/Authorization/UserPool ID": [
+        "/ITOPSRAGStack/Authorization/UserPool ID": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AuthorizationUserPoolIDA8611C6E"
           }
         ],
-        "/GenAiChatStack-massHealth/Authorization/UserPool Client ID": [
+        "/ITOPSRAGStack/Authorization/UserPool Client ID": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AuthorizationUserPoolClientIDC710EFA7"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/ChatHistoryTable/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIChatHistoryTable86F70C1D"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/UserFeedbackTable/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIUserFeedbackTableF734E54F"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/KendraSourceBucket/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/EvaluationSummariesTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvaluationSummariesTableE9B95A54"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvaluationResultsTableE72FCF7C"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/KendraSourceBucket/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIKendraSourceBucket8BA49C97"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/KendraSourceBucket/Policy/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/KendraSourceBucket/Policy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIKendraSourceBucketPolicy7CAF16DA"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/KendraSourceBucket/AutoDeleteObjectsCustomResource/Default": [
+        "/ITOPSRAGStack/ChatbotAPI/KendraSourceBucket/AutoDeleteObjectsCustomResource/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIKendraSourceBucketAutoDeleteObjectsCustomResourceE4E84308"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/FeedbackDownloadBucket/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/FeedbackDownloadBucket/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIFeedbackDownloadBucket5357D600"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/FeedbackDownloadBucket/Policy/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/FeedbackDownloadBucket/Policy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIFeedbackDownloadBucketPolicyC6BD7A68"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/FeedbackDownloadBucket/AutoDeleteObjectsCustomResource/Default": [
+        "/ITOPSRAGStack/ChatbotAPI/FeedbackDownloadBucket/AutoDeleteObjectsCustomResource/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIFeedbackDownloadBucketAutoDeleteObjectsCustomResourceF94AF4F5"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/KendraIndexRole/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/EvalResultsBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvalResultsBucketCB2F9C6D"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvalResultsBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvalResultsBucketPolicy3C2312C6"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvalResultsBucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvalResultsBucketAutoDeleteObjectsCustomResource4797A2B4"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvalTestCasesBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvalTestCasesBucket3A06FDF6"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvalTestCasesBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvalTestCasesBucketPolicy96432181"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvalTestCasesBucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvalTestCasesBucketAutoDeleteObjectsCustomResourceB58F8FD0"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RagasDependenciesBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRagasDependenciesBucket256E99F1"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RagasDependenciesBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRagasDependenciesBucketPolicy8B0BE295"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RagasDependenciesBucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRagasDependenciesBucketAutoDeleteObjectsCustomResourceBF1D698E"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/KendraIndexRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIKendraIndexRole0A5CCA00"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/KendraIndexRole/DefaultPolicy/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/KendraIndexRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIKendraIndexRoleDefaultPolicyC7F225D1"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/KendraIndex": [
+        "/ITOPSRAGStack/ChatbotAPI/KendraIndex": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIKendraIndex3CD60B23"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/KendraDataSourceRole/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/KendraDataSourceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIKendraDataSourceRole1E561811"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/KendraDataSourceRole/DefaultPolicy/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/KendraDataSourceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIKendraDataSourceRoleDefaultPolicy7AE4B1A6"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/KendraS3DataSource": [
+        "/ITOPSRAGStack/ChatbotAPI/KendraS3DataSource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIKendraS3DataSourceA8A30815"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPI6A6C7FF4"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/DefaultStage/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/DefaultStage/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIDefaultStage9780EBB8"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/GET--user-session/SessionAPIIntegration/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--user-session/SessionAPIIntegration/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIGETusersessionSessionAPIIntegration903EFC6A"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/GET--user-session/SessionAPIIntegration-Permission": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--user-session/SessionAPIIntegration-Permission": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIGETusersessionSessionAPIIntegrationPermission2A4896B9"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/GET--user-session/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--user-session/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIGETusersession89A9EE88"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/HTTPAuthorizer/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/HTTPAuthorizer/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIHTTPAuthorizerA78BC2D4"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/POST--user-session/SessionAPIIntegration-Permission": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--user-session/SessionAPIIntegration-Permission": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIPOSTusersessionSessionAPIIntegrationPermission932D0FC8"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/POST--user-session/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--user-session/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIPOSTusersessionDED62D1B"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/DELETE--user-session/SessionAPIIntegration-Permission": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/DELETE--user-session/SessionAPIIntegration-Permission": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIDELETEusersessionSessionAPIIntegrationPermissionD479EFB0"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/DELETE--user-session/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/DELETE--user-session/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIDELETEusersession9C8A3724"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/GET--user-feedback/FeedbackAPIIntegration/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--chatbot-use/KPIAPIIntegration/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIGETchatbotuseKPIAPIIntegration51194AD3"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--chatbot-use/KPIAPIIntegration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIGETchatbotuseKPIAPIIntegrationPermission6E8D0B63"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--chatbot-use/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIGETchatbotuse010BE172"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--chatbot-use/KPIAPIIntegration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTchatbotuseKPIAPIIntegrationPermissionD5B3645A"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--chatbot-use/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTchatbotuse04710446"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/DELETE--chatbot-use/KPIAPIIntegration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIDELETEchatbotuseKPIAPIIntegrationPermission9FE88A6C"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/DELETE--chatbot-use/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIDELETEchatbotuse1C220836"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--user-feedback/FeedbackAPIIntegration/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIGETuserfeedbackFeedbackAPIIntegration10D18D1C"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/GET--user-feedback/FeedbackAPIIntegration-Permission": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--user-feedback/FeedbackAPIIntegration-Permission": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIGETuserfeedbackFeedbackAPIIntegrationPermission7212A0C0"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/GET--user-feedback/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--user-feedback/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIGETuserfeedback217E4B62"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/POST--user-feedback/FeedbackAPIIntegration-Permission": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--user-feedback/FeedbackAPIIntegration-Permission": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIPOSTuserfeedbackFeedbackAPIIntegrationPermission8B121827"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/POST--user-feedback/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--user-feedback/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIPOSTuserfeedback346A2E14"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/DELETE--user-feedback/FeedbackAPIIntegration-Permission": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/DELETE--user-feedback/FeedbackAPIIntegration-Permission": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIDELETEuserfeedbackFeedbackAPIIntegrationPermissionC80E77CB"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/DELETE--user-feedback/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/DELETE--user-feedback/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIDELETEuserfeedback8987C7EB"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/POST--user-feedback--download-feedback/FeedbackDownloadAPIIntegration/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--user-feedback--download-feedback/FeedbackDownloadAPIIntegration/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIPOSTuserfeedbackdownloadfeedbackFeedbackDownloadAPIIntegrationDEBB68C3"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/POST--user-feedback--download-feedback/FeedbackDownloadAPIIntegration-Permission": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--user-feedback--download-feedback/FeedbackDownloadAPIIntegration-Permission": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIPOSTuserfeedbackdownloadfeedbackFeedbackDownloadAPIIntegrationPermissionD849BF69"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/POST--user-feedback--download-feedback/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--user-feedback--download-feedback/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIPOSTuserfeedbackdownloadfeedbackCA74A429"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/POST--s3-bucket-data/S3GetAPIIntegration/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--s3-knowledge-bucket-data/S3GetKnowledgeAPIIntegration/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ChatbotAPIRestBackendHTTPAPIPOSTs3bucketdataS3GetAPIIntegration03C2B6C6"
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTs3knowledgebucketdataS3GetKnowledgeAPIIntegration59B60CEB"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/POST--s3-bucket-data/S3GetAPIIntegration-Permission": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--s3-knowledge-bucket-data/S3GetKnowledgeAPIIntegration-Permission": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ChatbotAPIRestBackendHTTPAPIPOSTs3bucketdataS3GetAPIIntegrationPermissionA2D9087B"
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTs3knowledgebucketdataS3GetKnowledgeAPIIntegrationPermissionE44E77F5"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/POST--s3-bucket-data/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--s3-knowledge-bucket-data/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ChatbotAPIRestBackendHTTPAPIPOSTs3bucketdata067912D4"
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTs3knowledgebucketdata8DBDF102"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/POST--delete-s3-file/S3DeleteAPIIntegration/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--s3-test-cases-bucket-data/S3GetTestCasesAPIIntegration/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTs3testcasesbucketdataS3GetTestCasesAPIIntegrationE4F10991"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--s3-test-cases-bucket-data/S3GetTestCasesAPIIntegration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTs3testcasesbucketdataS3GetTestCasesAPIIntegrationPermissionBB11E9FA"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--s3-test-cases-bucket-data/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTs3testcasesbucketdata80CAB7E2"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--delete-s3-file/S3DeleteAPIIntegration/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIPOSTdeletes3fileS3DeleteAPIIntegration209DEDF2"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/POST--delete-s3-file/S3DeleteAPIIntegration-Permission": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--delete-s3-file/S3DeleteAPIIntegration-Permission": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIPOSTdeletes3fileS3DeleteAPIIntegrationPermissionD19545C0"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/POST--delete-s3-file/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--delete-s3-file/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIPOSTdeletes3fileF8907447"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/POST--signed-url/S3UploadAPIIntegration/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--signed-url-knowledge/S3UploadKnowledgeAPIIntegration/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ChatbotAPIRestBackendHTTPAPIPOSTsignedurlS3UploadAPIIntegration221CEFC3"
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTsignedurlknowledgeS3UploadKnowledgeAPIIntegration3512608F"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/POST--signed-url/S3UploadAPIIntegration-Permission": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--signed-url-knowledge/S3UploadKnowledgeAPIIntegration-Permission": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ChatbotAPIRestBackendHTTPAPIPOSTsignedurlS3UploadAPIIntegrationPermission8B68834D"
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTsignedurlknowledgeS3UploadKnowledgeAPIIntegrationPermissionEC75FC9A"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/POST--signed-url/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--signed-url-knowledge/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ChatbotAPIRestBackendHTTPAPIPOSTsignedurl08C2BD91"
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTsignedurlknowledgeE9430E82"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/GET--kendra-sync--still-syncing/KendraSyncAPIIntegration/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--kendra-sync--still-syncing/KendraSyncAPIIntegration/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIGETkendrasyncstillsyncingKendraSyncAPIIntegration2C362587"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/GET--kendra-sync--still-syncing/KendraSyncAPIIntegration-Permission": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--kendra-sync--still-syncing/KendraSyncAPIIntegration-Permission": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIGETkendrasyncstillsyncingKendraSyncAPIIntegrationPermission7EA8FB35"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/GET--kendra-sync--still-syncing/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--kendra-sync--still-syncing/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIGETkendrasyncstillsyncing1BC668A3"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/GET--kendra-sync--sync-kendra/KendraSyncAPIIntegration/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--kendra-sync--sync-kendra/KendraSyncAPIIntegration/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIGETkendrasyncsynckendraKendraSyncAPIIntegrationA62B334B"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/GET--kendra-sync--sync-kendra/KendraSyncAPIIntegration-Permission": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--kendra-sync--sync-kendra/KendraSyncAPIIntegration-Permission": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIGETkendrasyncsynckendraKendraSyncAPIIntegrationPermission4F24FBCE"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/GET--kendra-sync--sync-kendra/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--kendra-sync--sync-kendra/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIGETkendrasyncsynckendraD1418083"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/GET--chat-invocations-count/ChatInvocationsCounterAPIIntegration/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--chat-invocations-count/ChatInvocationsCounterAPIIntegration/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIGETchatinvocationscountChatInvocationsCounterAPIIntegration6D25E435"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/GET--chat-invocations-count/ChatInvocationsCounterAPIIntegration-Permission": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--chat-invocations-count/ChatInvocationsCounterAPIIntegration-Permission": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIGETchatinvocationscountChatInvocationsCounterAPIIntegrationPermissionA3E07D41"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/RestBackend/HTTP-API/GET--chat-invocations-count/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--chat-invocations-count/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIGETchatinvocationscount26D2F272"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WebsocketBackend/WS-API/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--comprehend-medical-redact/ComprehendMedicalAPIIntegration/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTcomprehendmedicalredactComprehendMedicalAPIIntegrationCB6E2407"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--comprehend-medical-redact/ComprehendMedicalAPIIntegration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTcomprehendmedicalredactComprehendMedicalAPIIntegrationPermissionBBF141F0"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--comprehend-medical-redact/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTcomprehendmedicalredactBAAF72BC"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--eval-results-handler/EvalResultsHandlerIntegration/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTevalresultshandlerEvalResultsHandlerIntegration97501E53"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--eval-results-handler/EvalResultsHandlerIntegration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTevalresultshandlerEvalResultsHandlerIntegrationPermissionB4316263"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--eval-results-handler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTevalresultshandler1101FB36"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--eval-run-handler/EvalRunHandlerIntegration/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTevalrunhandlerEvalRunHandlerIntegrationB6E3C345"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--eval-run-handler/EvalRunHandlerIntegration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTevalrunhandlerEvalRunHandlerIntegrationPermissionFE1FC54A"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--eval-run-handler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTevalrunhandlerCCFCCBCA"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--signed-url-test-cases/S3UploadTestCasesAPIIntegration/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTsignedurltestcasesS3UploadTestCasesAPIIntegration4F16E821"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--signed-url-test-cases/S3UploadTestCasesAPIIntegration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTsignedurltestcasesS3UploadTestCasesAPIIntegrationPermission889EC75F"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--signed-url-test-cases/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTsignedurltestcases884105E6"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWebsocketBackendWSAPI75718B83"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WebsocketBackend/WS-API/getChatbotResponse-Route/chatbotResponseIntegration-Permission": [
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API/getChatbotResponse-Route/chatbotResponseIntegration-Permission": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWebsocketBackendWSAPIgetChatbotResponseRoutechatbotResponseIntegrationPermission834EB9FE"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WebsocketBackend/WS-API/getChatbotResponse-Route/chatbotResponseIntegration/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API/getChatbotResponse-Route/chatbotResponseIntegration/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWebsocketBackendWSAPIgetChatbotResponseRoutechatbotResponseIntegrationFC08302B"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WebsocketBackend/WS-API/getChatbotResponse-Route/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API/getChatbotResponse-Route/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWebsocketBackendWSAPIgetChatbotResponseRoute6845E7AB"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WebsocketBackend/WS-API/$connect-Route/chatbotConnectionIntegration-Permission": [
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API/$connect-Route/chatbotConnectionIntegration-Permission": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWebsocketBackendWSAPIconnectRoutechatbotConnectionIntegrationPermissionDBFC3B32"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WebsocketBackend/WS-API/$connect-Route/chatbotConnectionIntegration/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API/$connect-Route/chatbotConnectionIntegration/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWebsocketBackendWSAPIconnectRoutechatbotConnectionIntegration0650E099"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WebsocketBackend/WS-API/$connect-Route/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API/$connect-Route/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWebsocketBackendWSAPIconnectRoute09C2A76A"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WebsocketBackend/WS-API/WebSocketAuthorizer/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API/WebSocketAuthorizer/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWebsocketBackendWSAPIWebSocketAuthorizer2C4C05F4"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WebsocketBackend/WS-API/GenAiChatStackmassHealthChatbotAPIWebsocketBackendWSAPIWebSocketAuthorizer664F35C5-Permission": [
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API/ITOPSRAGStackChatbotAPIWebsocketBackendWSAPIWebSocketAuthorizer11059A98-Permission": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ChatbotAPIWebsocketBackendWSAPIGenAiChatStackmassHealthChatbotAPIWebsocketBackendWSAPIWebSocketAuthorizer664F35C5PermissionE578B3F8"
+            "data": "ChatbotAPIWebsocketBackendWSAPIITOPSRAGStackChatbotAPIWebsocketBackendWSAPIWebSocketAuthorizer11059A98PermissionC1DF0D7F"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WebsocketBackend/WS-API/$default-Route/chatbotConnectionIntegration-Permission": [
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API/$default-Route/chatbotConnectionIntegration-Permission": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWebsocketBackendWSAPIdefaultRoutechatbotConnectionIntegrationPermission7260E6BB"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WebsocketBackend/WS-API/$default-Route/chatbotConnectionIntegration/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API/$default-Route/chatbotConnectionIntegration/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWebsocketBackendWSAPIdefaultRoutechatbotConnectionIntegrationA521DB43"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WebsocketBackend/WS-API/$default-Route/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API/$default-Route/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWebsocketBackendWSAPIdefaultRouteA292ACAE"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WebsocketBackend/WS-API/$disconnect-Route/chatbotDisconnectionIntegration-Permission": [
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API/$disconnect-Route/chatbotDisconnectionIntegration-Permission": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWebsocketBackendWSAPIdisconnectRoutechatbotDisconnectionIntegrationPermissionC12B4986"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WebsocketBackend/WS-API/$disconnect-Route/chatbotDisconnectionIntegration/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API/$disconnect-Route/chatbotDisconnectionIntegration/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWebsocketBackendWSAPIdisconnectRoutechatbotDisconnectionIntegrationA720B7D3"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WebsocketBackend/WS-API/$disconnect-Route/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API/$disconnect-Route/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWebsocketBackendWSAPIdisconnectRoute06B8C9C1"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WebsocketBackend/WS-API/generateEmail-Route/emailIntegration-Permission": [
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API/generateEmail-Route/emailIntegration-Permission": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWebsocketBackendWSAPIgenerateEmailRouteemailIntegrationPermissionD00FFC77"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WebsocketBackend/WS-API/generateEmail-Route/emailIntegration/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API/generateEmail-Route/emailIntegration/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWebsocketBackendWSAPIgenerateEmailRouteemailIntegration4C8E23CF"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WebsocketBackend/WS-API/generateEmail-Route/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API/generateEmail-Route/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWebsocketBackendWSAPIgenerateEmailRouteD46A28B4"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WebsocketBackend/WS-API-prod/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API-prod/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWebsocketBackendWSAPIprodD7F844E0"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/SessionHandlerFunction/ServiceRole/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/SessionHandlerFunction/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPISessionHandlerFunctionServiceRole9405D10E"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/SessionHandlerFunction/ServiceRole/DefaultPolicy/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/SessionHandlerFunction/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPISessionHandlerFunctionServiceRoleDefaultPolicy1844E408"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/SessionHandlerFunction/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/SessionHandlerFunction/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPISessionHandlerFunctionF969576A"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/ChatHandlerFunction/ServiceRole/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/KPIHandlerFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIKPIHandlerFunctionServiceRole0D707649"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/KPIHandlerFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIKPIHandlerFunctionServiceRoleDefaultPolicy76F4C9F9"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/KPIHandlerFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIKPIHandlerFunction377426B2"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/ChatHandlerFunction/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIChatHandlerFunctionServiceRoleF8F74DF8"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/ChatHandlerFunction/ServiceRole/DefaultPolicy/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/ChatHandlerFunction/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIChatHandlerFunctionServiceRoleDefaultPolicy1212B8E8"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/ChatHandlerFunction/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/ChatHandlerFunction/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIChatHandlerFunctionEB04457E"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/FeedbackHandlerFunction/ServiceRole/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/FeedbackHandlerFunction/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIFeedbackHandlerFunctionServiceRole4FD380A6"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/FeedbackHandlerFunction/ServiceRole/DefaultPolicy/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/FeedbackHandlerFunction/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIFeedbackHandlerFunctionServiceRoleDefaultPolicy8CD050DC"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/FeedbackHandlerFunction/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/FeedbackHandlerFunction/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIFeedbackHandlerFunction11250F31"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/DeleteS3FilesHandlerFunction/ServiceRole/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/DeleteS3FilesHandlerFunction/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIDeleteS3FilesHandlerFunctionServiceRole162C8442"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/DeleteS3FilesHandlerFunction/ServiceRole/DefaultPolicy/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/DeleteS3FilesHandlerFunction/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIDeleteS3FilesHandlerFunctionServiceRoleDefaultPolicy1AE35FEF"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/DeleteS3FilesHandlerFunction/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/DeleteS3FilesHandlerFunction/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/GetS3FilesHandlerFunction/ServiceRole/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/GetS3KnowledgeFilesHandlerFunction/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ChatbotAPIGetS3FilesHandlerFunctionServiceRole3738EA84"
+            "data": "ChatbotAPIGetS3KnowledgeFilesHandlerFunctionServiceRole6258C17D"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/GetS3FilesHandlerFunction/ServiceRole/DefaultPolicy/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/GetS3KnowledgeFilesHandlerFunction/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ChatbotAPIGetS3FilesHandlerFunctionServiceRoleDefaultPolicyD70D342E"
+            "data": "ChatbotAPIGetS3KnowledgeFilesHandlerFunctionServiceRoleDefaultPolicyAFAFB1C8"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/GetS3FilesHandlerFunction/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/GetS3KnowledgeFilesHandlerFunction/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ChatbotAPIGetS3FilesHandlerFunction92AA0BD0"
+            "data": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/SyncKendraHandlerFunction/ServiceRole/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/GetS3TestCasesFilesHandlerFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionServiceRole157AEFD4"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/GetS3TestCasesFilesHandlerFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionServiceRoleDefaultPolicy378930AA"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/GetS3TestCasesFilesHandlerFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/SyncKendraHandlerFunction/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPISyncKendraHandlerFunctionServiceRole2EA9ECFB"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/SyncKendraHandlerFunction/ServiceRole/DefaultPolicy/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/SyncKendraHandlerFunction/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPISyncKendraHandlerFunctionServiceRoleDefaultPolicy528BEDED"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/SyncKendraHandlerFunction/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/SyncKendraHandlerFunction/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/UploadS3FilesHandlerFunction/ServiceRole/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/UploadS3KnowledgeFilesHandlerFunction/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ChatbotAPIUploadS3FilesHandlerFunctionServiceRole25F0AD6D"
+            "data": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunctionServiceRoleFEF32DE4"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/UploadS3FilesHandlerFunction/ServiceRole/DefaultPolicy/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/UploadS3KnowledgeFilesHandlerFunction/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ChatbotAPIUploadS3FilesHandlerFunctionServiceRoleDefaultPolicyA8BBCCF6"
+            "data": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunctionServiceRoleDefaultPolicy0240F8C0"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/UploadS3FilesHandlerFunction/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/UploadS3KnowledgeFilesHandlerFunction/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ChatbotAPIUploadS3FilesHandlerFunction1DF92EA7"
+            "data": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/ChatInvocationsCounterFunction/ServiceRole/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/UploadS3TestCasesFilesHandlerFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionServiceRole9DE76BD4"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/UploadS3TestCasesFilesHandlerFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionServiceRoleDefaultPolicyCE0D5DE8"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/UploadS3TestCasesFilesHandlerFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvalResultsHandlerFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvalResultsHandlerFunctionServiceRole614B02E1"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvalResultsHandlerFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvalResultsHandlerFunctionServiceRoleDefaultPolicyBCE80E25"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvalResultsHandlerFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/SplitEvalTestCasesFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackSplitEvalTestCasesFunctionServiceRole4EC95522"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/SplitEvalTestCasesFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackSplitEvalTestCasesFunctionServiceRoleDefaultPolicy918B0C7F"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/SplitEvalTestCasesFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackSplitEvalTestCasesFunction39919AE2"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/LlmEvalResultsHandlerFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackLlmEvalResultsHandlerFunctionServiceRole1D8C1651"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/LlmEvalResultsHandlerFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackLlmEvalResultsHandlerFunctionServiceRoleDefaultPolicy9896FA4A"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/LlmEvalResultsHandlerFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackLlmEvalResultsHandlerFunction136BDFD9"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/GenerateResponseFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackGenerateResponseFunctionServiceRoleDB4F22D7"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/GenerateResponseFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackGenerateResponseFunctionServiceRoleDefaultPolicyC1649F34"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/GenerateResponseFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackGenerateResponseFunctionD9A0A53C"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/LlmEvaluationFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackLlmEvaluationFunctionServiceRole0CAEFAC6"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/LlmEvaluationFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackLlmEvaluationFunctionServiceRoleDefaultPolicy7A2FE1EC"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/LlmEvaluationFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackLlmEvaluationFunction10EF6290"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/AggregateEvalResultsFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackAggregateEvalResultsFunctionServiceRole965AF17A"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/AggregateEvalResultsFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackAggregateEvalResultsFunctionServiceRoleDefaultPolicy3122953F"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/AggregateEvalResultsFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackAggregateEvalResultsFunction755BD2CE"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/LlmEvalCleanupFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackLlmEvalCleanupFunctionServiceRole898CEA1E"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/LlmEvalCleanupFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackLlmEvalCleanupFunctionServiceRoleDefaultPolicy247A7932"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/LlmEvalCleanupFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackLlmEvalCleanupFunction3AF7E668"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/EvaluationStateMachine/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackEvaluationStateMachineRoleBB540967"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/EvaluationStateMachine/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackEvaluationStateMachineRoleDefaultPolicy16C22430"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/EvaluationStateMachine/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackEvaluationStateMachineD8D0972D"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/StartLlmEvalStateMachineFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunctionServiceRole5018C7CE"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/StartLlmEvalStateMachineFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunctionServiceRoleDefaultPolicy5899CB37"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/StartLlmEvalStateMachineFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/ChatInvocationsCounterFunction/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIChatInvocationsCounterFunctionServiceRoleBAAE7C12"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/ChatInvocationsCounterFunction/ServiceRole/DefaultPolicy/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/ChatInvocationsCounterFunction/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIChatInvocationsCounterFunctionServiceRoleDefaultPolicy4112833F"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/ChatInvocationsCounterFunction/Resource": [
+        "/ITOPSRAGStack/ChatbotAPI/ChatInvocationsCounterFunction/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/WS-API - apiEndpoint": [
+        "/ITOPSRAGStack/ChatbotAPI/comprehendMedicalFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIcomprehendMedicalFunctionServiceRole20B51B48"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/comprehendMedicalFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIcomprehendMedicalFunctionServiceRoleDefaultPolicy1EA9424D"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/comprehendMedicalFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/WS-API - apiEndpoint": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWSAPIapiEndpoint565B66F1"
           }
         ],
-        "/GenAiChatStack-massHealth/ChatbotAPI/HTTP-API - apiEndpoint": [
+        "/ITOPSRAGStack/ChatbotAPI/HTTP-API - apiEndpoint": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIHTTPAPIapiEndpoint8290A8FE"
           }
         ],
-        "/GenAiChatStack-massHealth/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+        "/ITOPSRAGStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
           }
         ],
-        "/GenAiChatStack-massHealth/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+        "/ITOPSRAGStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
           }
         ],
-        "/GenAiChatStack-massHealth/UserInterface/WebsiteLogsBucket/Resource": [
+        "/ITOPSRAGStack/UserInterface/WebsiteLogsBucket/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "UserInterfaceWebsiteLogsBucket54728780"
           }
         ],
-        "/GenAiChatStack-massHealth/UserInterface/WebsiteLogsBucket/Policy/Resource": [
+        "/ITOPSRAGStack/UserInterface/WebsiteLogsBucket/Policy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "UserInterfaceWebsiteLogsBucketPolicyB99816BB"
           }
         ],
-        "/GenAiChatStack-massHealth/UserInterface/WebsiteLogsBucket/AutoDeleteObjectsCustomResource/Default": [
+        "/ITOPSRAGStack/UserInterface/WebsiteLogsBucket/AutoDeleteObjectsCustomResource/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "UserInterfaceWebsiteLogsBucketAutoDeleteObjectsCustomResourceA75855B8"
           }
         ],
-        "/GenAiChatStack-massHealth/UserInterface/WebsiteBucket/Resource": [
+        "/ITOPSRAGStack/UserInterface/WebsiteBucket/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "UserInterfaceWebsiteBucket2BDEA247"
           }
         ],
-        "/GenAiChatStack-massHealth/UserInterface/WebsiteBucket/Policy/Resource": [
+        "/ITOPSRAGStack/UserInterface/WebsiteBucket/Policy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "UserInterfaceWebsiteBucketPolicyEE27C04B"
           }
         ],
-        "/GenAiChatStack-massHealth/UserInterface/WebsiteBucket/AutoDeleteObjectsCustomResource/Default": [
+        "/ITOPSRAGStack/UserInterface/WebsiteBucket/AutoDeleteObjectsCustomResource/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "UserInterfaceWebsiteBucketAutoDeleteObjectsCustomResourceD0AC653B"
           }
         ],
-        "/GenAiChatStack-massHealth/UserInterface/Website/S3OAI/Resource": [
+        "/ITOPSRAGStack/UserInterface/Website/S3OAI/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "UserInterfaceWebsiteS3OAI283F6647"
           }
         ],
-        "/GenAiChatStack-massHealth/UserInterface/Website/DistributionLogsBucket/Resource": [
+        "/ITOPSRAGStack/UserInterface/Website/DistributionLogsBucket/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "UserInterfaceWebsiteDistributionLogsBucket932D61CF"
           }
         ],
-        "/GenAiChatStack-massHealth/UserInterface/Website/DistributionLogsBucket/Policy/Resource": [
+        "/ITOPSRAGStack/UserInterface/Website/DistributionLogsBucket/Policy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "UserInterfaceWebsiteDistributionLogsBucketPolicyD3DF8844"
           }
         ],
-        "/GenAiChatStack-massHealth/UserInterface/Website/DistributionLogsBucket/AutoDeleteObjectsCustomResource/Default": [
+        "/ITOPSRAGStack/UserInterface/Website/DistributionLogsBucket/AutoDeleteObjectsCustomResource/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "UserInterfaceWebsiteDistributionLogsBucketAutoDeleteObjectsCustomResourceCBBE4A16"
           }
         ],
-        "/GenAiChatStack-massHealth/UserInterface/Website/Distribution/CFDistribution": [
+        "/ITOPSRAGStack/UserInterface/Website/Distribution/CFDistribution": [
           {
             "type": "aws:cdk:logicalId",
             "data": "UserInterfaceWebsiteDistributionCFDistributionBCE5BC0C"
           }
         ],
-        "/GenAiChatStack-massHealth/UserInterface/Website/UserInterfaceDomainName": [
+        "/ITOPSRAGStack/UserInterface/Website/UserInterfaceDomainName": [
           {
             "type": "aws:cdk:logicalId",
             "data": "UserInterfaceWebsiteUserInterfaceDomainNameE43D2FB1"
           }
         ],
-        "/GenAiChatStack-massHealth/UserInterface/UserInterfaceDeployment/AwsCliLayer/Resource": [
+        "/ITOPSRAGStack/UserInterface/UserInterfaceDeployment/AwsCliLayer/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "UserInterfaceUserInterfaceDeploymentAwsCliLayerDB546DB8"
           }
         ],
-        "/GenAiChatStack-massHealth/UserInterface/UserInterfaceDeployment/CustomResource/Default": [
+        "/ITOPSRAGStack/UserInterface/UserInterfaceDeployment/CustomResource/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "UserInterfaceUserInterfaceDeploymentCustomResource05D90D2B"
           }
         ],
-        "/GenAiChatStack-massHealth/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource": [
+        "/ITOPSRAGStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
           }
         ],
-        "/GenAiChatStack-massHealth/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource": [
+        "/ITOPSRAGStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF"
           }
         ],
-        "/GenAiChatStack-massHealth/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource": [
+        "/ITOPSRAGStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536"
           }
         ],
-        "/GenAiChatStack-massHealth/CDKMetadata/Default": [
+        "/ITOPSRAGStack/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/GenAiChatStack-massHealth/CDKMetadata/Condition": [
+        "/ITOPSRAGStack/CDKMetadata/Condition": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadataAvailable"
           }
         ],
-        "/GenAiChatStack-massHealth/BootstrapVersion": [
+        "/ITOPSRAGStack/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/GenAiChatStack-massHealth/CheckBootstrapVersion": [
+        "/ITOPSRAGStack/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "GenAiChatStack-massHealth"
+      "displayName": "ITOPSRAGStack"
     },
     "Tree": {
       "type": "cdk:tree",

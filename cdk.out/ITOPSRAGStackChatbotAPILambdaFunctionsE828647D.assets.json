@@ -1,0 +1,19 @@
+{
+  "version": "36.0.0",
+  "files": {
+    "8c72b207523c8bb20b734f47550742f21dcd3c73b36f2afb01bec9b7347e5bac": {
+      "source": {
+        "path": "ITOPSRAGStackChatbotAPILambdaFunctionsE828647D.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "8c72b207523c8bb20b734f47550742f21dcd3c73b36f2afb01bec9b7347e5bac.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}
