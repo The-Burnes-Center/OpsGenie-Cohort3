@@ -1,4 +1,11 @@
+*.js
+!jest.config.js
+*.d.ts
+!global.d.ts
 node_modules
-lib/user-interface/app/aws-exports.jsonnpm
-lib/user-interface/app/public/aws-exports.json
-aws-export.json
+*.pyc
+aws-exports.json
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
