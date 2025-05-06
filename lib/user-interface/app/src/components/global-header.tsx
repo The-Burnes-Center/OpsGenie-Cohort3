@@ -138,7 +138,7 @@ export default function GlobalHeader() {
         identity={{
           href: "/",
           logo: { src: "/images/mayflower/stateseal-white.png", alt: CHATBOT_NAME + " Logo" },
-          title: "ITOPS InsightChat",
+          title: "ITOPS Inquiry",
         }}
         utilities={[
           // {
