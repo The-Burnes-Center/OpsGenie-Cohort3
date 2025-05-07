@@ -149,37 +149,27 @@
                       "fqn": "aws-cdk-lib.aws_cognito.CfnUserPool",
                       "version": "2.140.0"
                     }
-                  },
-                  "CognitoDomain": {
-                    "id": "CognitoDomain",
-                    "path": "ITOPSRAGStack/Authorization/UserPool/CognitoDomain",
-                    "children": {
-                      "Resource": {
-                        "id": "Resource",
-                        "path": "ITOPSRAGStack/Authorization/UserPool/CognitoDomain/Resource",
-                        "attributes": {
-                          "aws:cdk:cloudformation:type": "AWS::Cognito::UserPoolDomain",
-                          "aws:cdk:cloudformation:props": {
-                            "domain": "itops-hhs-chatbot",
-                            "userPoolId": {
-                              "Ref": "AuthorizationUserPool114F25B4"
-                            }
-                          }
-                        },
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.aws_cognito.CfnUserPoolDomain",
-                          "version": "2.140.0"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_cognito.UserPoolDomain",
-                      "version": "2.140.0"
-                    }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_cognito.UserPool",
+                  "version": "2.140.0"
+                }
+              },
+              "CognitoDomain": {
+                "id": "CognitoDomain",
+                "path": "ITOPSRAGStack/Authorization/CognitoDomain",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Cognito::UserPoolDomain",
+                  "aws:cdk:cloudformation:props": {
+                    "domain": "itops-hhs-chatbot",
+                    "userPoolId": {
+                      "Ref": "AuthorizationUserPool114F25B4"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cognito.CfnUserPoolDomain",
                   "version": "2.140.0"
                 }
               },

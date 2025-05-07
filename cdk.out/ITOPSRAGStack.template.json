@@ -108,7 +108,7 @@
     "aws:cdk:path": "ITOPSRAGStack/Authorization/UserPool/Resource"
    }
   },
-  "AuthorizationUserPoolCognitoDomain7EF39E06": {
+  "AuthorizationCognitoDomain56EF13F0": {
    "Type": "AWS::Cognito::UserPoolDomain",
    "Properties": {
     "Domain": "itops-hhs-chatbot",
@@ -116,8 +116,10 @@
      "Ref": "AuthorizationUserPool114F25B4"
     }
    },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
    "Metadata": {
-    "aws:cdk:path": "ITOPSRAGStack/Authorization/UserPool/CognitoDomain/Resource"
+    "aws:cdk:path": "ITOPSRAGStack/Authorization/CognitoDomain"
    }
   },
   "AuthorizationUserPoolClient8E2989BE": {
@@ -7260,7 +7262,7 @@
      }
     ],
     "SourceObjectKeys": [
-     "213ef32c18966a2dc470d88c08c70b76de1aae33e394ec923897eb189a447728.zip",
+     "11ab1384b67aea1fbb8a217dad1a76945b584ad56305dde48748c6ac2b002c1c.zip",
      "76169626222155c41a81dbcd8a3565ccf9d50314328bcadc93ec43e5fc109843.zip"
     ],
     "SourceMarkers": [
@@ -7503,7 +7505,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/21TwW7bMAz9lt4VLc122DV1UCxAiwbxth4DWmZc1rZkSHQyT/C/D5ISxyt64nvkE2U+yit5/20pl3dwdgtV1ouGCulzBlULOLuDV6bSxEb6Xw7tzphGZEc94SvYmBZIz0uXzJVmDaHmuSBlRkHQSr83DYZijDvTkBoCTWgUDbRFCdI/9loxmXjRHO/QtuRcYBujarTbFiqcK55gQPsbbdTkpKsG2Uw9RuG+Hjw4h+zkOgRRYteYoUXN8qFXNfJmSgS19Cn7AA5FguGaC0rhNsecj6IcNLSmLKT/CUWaO4JR1KhLC9JnR73VJf4JpQ0w5Ka3CkcBHVXAeIbhtJL+B3O37iiIQgg0Z6hiwwRCam96TmirGSsLV0s+0Jtu3fObsfQXbWx9Y69Y5MFeDtdNJB2c6Lzt7cAnTeInjgKVPVycn+0uLQGVlXvsjCM2doheO8bueFmbOzC42smn+Dy2+mTqDwLpn6ETOQPjM6g30ldzJj4K1Zi+PFqjWfoXSxXptVLo3LZEzcRxgVnQPAbN54qp/IrFhhxbKvqrsXM+jmKPLm5TxBGDCaSroHvpuetZZL1j006qsJkJ/1faWXOiEm20Jf0hhyY88wOcnWpIrs8uayi+/DiD0SWl165NifLdfTmtlvL+u1zevTuihe01U4tyn+I/Oc2sHhoEAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/21TwW7bMAz9lt4VLc122DV1UCxAiwbxth4DWmZc1rZkSHQyT/C/D5Iaxyty4nvkE2U+yit5/20pl3dwdgtV1ouGCulzBlULOLuDV6bSxEb6Xw7tzphGZEd9C29MC6TFhWYNoea5IGVGQdBKvzcNhmKMO9OQGgJNaBQNtEUJ0j/2WjEZHWpzvEPbknOBbYyq0W5bqHCueIIB7W+0UZOTrhpkM/UYhft68OAcspPrEESJXWOGFjXLh17VyJspEdTSp+wDOBQJhms+UArXOeZ8FOWgoTVlIf1PKNLcEYyiRl1akD476q0u8U8obYAhN71VOAroqALGMwynlfQ/mLt1R0EUQqA5QxUbJhBSe9NzQlvNWFm4WPKJXnXrnt+Mpb9oY+sre8UiD/ZyuG4i6eBE522vB240iZ84ClT28OH8bHdpCais3GNnHLGxQ/TaMXbHj7W5A4OrnXyKz2OrT6b+JJD+GTqRMzA+g3ojfTFn4qNQjenLozWapX+xVJFeK4XObUvUTBwXmAXNY9DcVkzlVyw25NhS0V+MnfNxFHt0cZsijhhMIF0F3UvPXc8i6x2bdlKFzUz4v9LOmhOVaKMt6Q85NOGZH+DsVENyfXZZQ/HlxxmMLim9dm1KlO/uy2m1lPff5fLu3REtbK+ZWpT7FP8BpK3BNwsEAAA="
    },
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/CDKMetadata/Default"
