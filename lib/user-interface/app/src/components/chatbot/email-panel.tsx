@@ -33,13 +33,16 @@ export default function EmailPanel(props: EmailPanelProps) {
       await Auth.currentAuthenticatedUser().then((value) => username = value.username);
       if (!username) return;
 
-      const TEST_URL = 'wss://caoyb4x42c.execute-api.us-east-1.amazonaws.com/test/';
+      // Get WebSocket URL from aws-exports.json (the proper way to access the API URL)
+      const response = await fetch('/aws-exports.json');
+      const configData = await response.json();
+      const WS_URL = configData.wsEndpoint;
 
       // Create a new WebSocket connection
       const TOKEN = (await Auth.currentSession()).getAccessToken().getJwtToken()
 
       // console.log(TOKEN)
-      const wsUrl = TEST_URL + '?Authorization=' + TOKEN;
+      const wsUrl = WS_URL + '?Authorization=' + TOKEN;
       const ws = new WebSocket(wsUrl);
       let recieved = '';
       ws.addEventListener('open', function open() {
