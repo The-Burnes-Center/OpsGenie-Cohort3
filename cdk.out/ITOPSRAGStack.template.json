@@ -3989,7 +3989,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "e6e5cf448abb86b4ef82b4f6df849fa4285bed9480d85a310ce7dc161f48c78e.zip"
+     "S3Key": "9c70a6b5bc9dc0da9d0437ef4be254b10aeef36f29ecb98402b257701f91afe3.zip"
     },
     "Environment": {
      "Variables": {
@@ -4040,7 +4040,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/ChatHandlerFunction/Resource",
-    "aws:asset:path": "asset.e6e5cf448abb86b4ef82b4f6df849fa4285bed9480d85a310ce7dc161f48c78e",
+    "aws:asset:path": "asset.9c70a6b5bc9dc0da9d0437ef4be254b10aeef36f29ecb98402b257701f91afe3",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -7262,7 +7262,7 @@
      }
     ],
     "SourceObjectKeys": [
-     "1480d7210145661dbc2eade09b2caa38130a36bf6d055bd5b9133c4909ac757f.zip",
+     "80fe595408bcd3fb5b918dcfaa59564107a95d69e8b647c442973e603ffa9cc6.zip",
      "76169626222155c41a81dbcd8a3565ccf9d50314328bcadc93ec43e5fc109843.zip"
     ],
     "SourceMarkers": [
