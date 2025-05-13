@@ -45,7 +45,7 @@ export default function Playground() {
       info={
         <HelpPanel header={<Header variant="h3">Using the chat</Header>}>
           <p>
-            This chatbot application allows users to ask questions about the MassHealth Enrollment Center.
+            This chatbot application allows users to ask questions about data in the PAL Sharepoint.
           </p>
           <h3>Session history</h3>
           <p>
