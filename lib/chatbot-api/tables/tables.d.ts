@@ -6,5 +6,7 @@ export declare class TableStack extends Stack {
     readonly feedbackTable: Table;
     readonly evalResultsTable: Table;
     readonly evalSummaryTable: Table;
+    readonly kpiLogsTable: Table;
+    readonly dailyLoginTable: Table;
     constructor(scope: Construct, id: string, props?: StackProps);
 }

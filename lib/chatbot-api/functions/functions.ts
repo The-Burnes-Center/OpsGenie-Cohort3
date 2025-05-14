@@ -23,6 +23,8 @@ interface LambdaFunctionStackProps {
   readonly evalSummariesTable : Table;
   readonly evalResutlsTable : Table;
   readonly evalTestCasesBucket : s3.Bucket;
+  readonly kpiLogsTable: Table;
+  readonly dailyLoginTable: Table;
   //readonly kpiTable : Table;
 }
 
@@ -58,11 +60,12 @@ export class LambdaFunctionStack extends cdk.Stack {
     });
 
     const kpiAPIHandlerFunction = new lambda.Function(scope, 'KPIHandlerFunction', {
-      runtime: lambda.Runtime.NODEJS_20_X, // Choose any supported Node.js runtime
+      runtime: lambda.Runtime.PYTHON_3_12, // Choose any supported Node.js runtime
       code: lambda.Code.fromAsset(path.join(__dirname, 'kpi-handler')), // Points to the lambda directory
-      handler: 'index.handler', // Points to the 'hello' file in the lambda directory
+      handler: 'lambda_function.lambda_handler', // Points to the 'hello' file in the lambda directory
       environment: {
-        //"DDB_TABLE_NAME" : props.sessionTable.tableName
+        "INTERACTION_TABLE": props.kpiLogsTable.tableName,
+        "DAILY_LOGIN_TABLE": props.dailyLoginTable.tableName
       },
       timeout: cdk.Duration.seconds(30)
     });
@@ -77,8 +80,12 @@ export class LambdaFunctionStack extends cdk.Stack {
         'dynamodb:Query',
         'dynamodb:Scan'
       ],
-      resources: ['arn:aws:dynamodb:us-east-1:807596108910:table/itops-chatbot-logs',
-        'arn:aws:dynamodb:us-east-1:807596108910:table/itops-chatbot-logs' + "/index/*"]
+      resources: [
+        props.kpiLogsTable.tableArn, 
+        props.kpiLogsTable.tableArn + "/index/*",
+        props.dailyLoginTable.tableArn,
+        props.dailyLoginTable.tableArn + "/index/*"
+      ]
     }));
 
     this.kpiFunction = kpiAPIHandlerFunction;

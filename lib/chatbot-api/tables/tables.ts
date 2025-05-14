@@ -7,6 +7,8 @@ export class TableStack extends Stack {
   public readonly feedbackTable : Table;
   public readonly evalResultsTable : Table;
   public readonly evalSummaryTable : Table;
+  public readonly kpiLogsTable : Table;
+  public readonly dailyLoginTable : Table;
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
@@ -66,6 +68,18 @@ export class TableStack extends Stack {
       projectionType: ProjectionType.ALL,
     });
     this.evalResultsTable = evalResultsTable;
+
+    const kpiLogsTable = new Table(scope, 'KPILogsTable', {
+      partitionKey: { name: 'Username', type: AttributeType.STRING },
+      sortKey: { name: 'Timestamp', type: AttributeType.STRING },
+    });
+
+    const dailyLoginTable = new Table(scope, 'DailyLoginTable', {
+      partitionKey: { name: 'Timestamp', type: AttributeType.STRING },
+    });
+
+    this.kpiLogsTable = kpiLogsTable;
+    this.dailyLoginTable = dailyLoginTable;
 
   }
 }

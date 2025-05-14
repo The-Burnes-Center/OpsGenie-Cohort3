@@ -16,6 +16,8 @@ interface LambdaFunctionStackProps {
     readonly evalSummariesTable: Table;
     readonly evalResutlsTable: Table;
     readonly evalTestCasesBucket: s3.Bucket;
+    readonly kpiLogsTable: Table;
+    readonly dailyLoginTable: Table;
 }
 export declare class LambdaFunctionStack extends cdk.Stack {
     readonly chatFunction: lambda.Function;

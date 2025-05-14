@@ -60,7 +60,8 @@ export class ChatBotApi extends Construct {
         evalSummariesTable : tables.evalSummaryTable,
         evalResutlsTable : tables.evalResultsTable,
         evalTestCasesBucket : buckets.evalTestCasesBucket,
-
+        kpiLogsTable: tables.kpiLogsTable,
+        dailyLoginTable: tables.dailyLoginTable,
       })
 
     const wsAuthorizer = new WebSocketLambdaAuthorizer('WebSocketAuthorizer', props.authentication.lambdaAuthorizer, {identitySource: ['route.request.querystring.Authorization']});
@@ -105,6 +106,14 @@ export class ChatBotApi extends Construct {
     restBackend.restAPI.addRoutes({
       path: "/chatbot-use",
       methods: [apigwv2.HttpMethod.GET, apigwv2.HttpMethod.POST, apigwv2.HttpMethod.DELETE],
+      integration: kpiAPIIntegration,
+      authorizer: httpAuthorizer,
+    })
+
+    // Add routes for daily logins
+    restBackend.restAPI.addRoutes({
+      path: "/daily-logins",
+      methods: [apigwv2.HttpMethod.GET, apigwv2.HttpMethod.POST],
       integration: kpiAPIIntegration,
       authorizer: httpAuthorizer,
     })
@@ -280,11 +289,6 @@ export class ChatBotApi extends Construct {
     // api.grantMutation(realtimeBackend.resolvers.outgoingMessageHandler);
 
     // // Prints out URL
-    // new cdk.CfnOutput(this, "GraphqlAPIURL", {
-    //   value: api.graphqlUrl,
-    // });
-
-    // // Prints out the AppSync GraphQL API key to the terminal
     new cdk.CfnOutput(this, "WS-API - apiEndpoint", {
       value: websocketBackend.wsAPI.apiEndpoint || "",
     });
