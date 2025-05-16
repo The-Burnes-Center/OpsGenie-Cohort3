@@ -258,7 +258,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/7f4ad99de0ded9c2de549391f78097a96ae01794a3e293af9421b09dae3af45b.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e1f23d451fca6c2b68d591da9b104935bb91feb1ca76002460275736fdf4a04b.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -344,6 +344,18 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIEvaluationResultsTableE72FCF7C"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/KPILogsTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIKPILogsTableA8BB2B72"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/DailyLoginTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIDailyLoginTable0DBFC91F"
           }
         ],
         "/ITOPSRAGStack/ChatbotAPI/KendraSourceBucket/Resource": [
@@ -572,6 +584,30 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIRestBackendHTTPAPIDELETEchatbotuse1C220836"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--daily-logins/KPIAPIIntegration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIGETdailyloginsKPIAPIIntegrationPermission05098695"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--daily-logins/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIGETdailylogins12281D6B"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--daily-logins/KPIAPIIntegration-Permission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTdailyloginsKPIAPIIntegrationPermissionD7A840EC"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--daily-logins/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHTTPAPIPOSTdailyloginsA27DC4D0"
           }
         ],
         "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--user-feedback/FeedbackAPIIntegration/Resource": [
@@ -1322,6 +1358,18 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/DailyLoginRule/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIDailyLoginRule786354F8"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/DailyLoginRule/AllowEventRuleITOPSRAGStackChatbotAPIKPIHandlerFunction36B68FE9": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIDailyLoginRuleAllowEventRuleITOPSRAGStackChatbotAPIKPIHandlerFunction36B68FE92725101F"
           }
         ],
         "/ITOPSRAGStack/ChatbotAPI/WS-API - apiEndpoint": [

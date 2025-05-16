@@ -736,6 +736,108 @@
                   "version": "2.140.0"
                 }
               },
+              "KPILogsTable": {
+                "id": "KPILogsTable",
+                "path": "ITOPSRAGStack/ChatbotAPI/KPILogsTable",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ITOPSRAGStack/ChatbotAPI/KPILogsTable/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                      "aws:cdk:cloudformation:props": {
+                        "attributeDefinitions": [
+                          {
+                            "attributeName": "Username",
+                            "attributeType": "S"
+                          },
+                          {
+                            "attributeName": "Timestamp",
+                            "attributeType": "S"
+                          }
+                        ],
+                        "keySchema": [
+                          {
+                            "attributeName": "Username",
+                            "keyType": "HASH"
+                          },
+                          {
+                            "attributeName": "Timestamp",
+                            "keyType": "RANGE"
+                          }
+                        ],
+                        "provisionedThroughput": {
+                          "readCapacityUnits": 5,
+                          "writeCapacityUnits": 5
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
+                      "version": "2.140.0"
+                    }
+                  },
+                  "ScalingRole": {
+                    "id": "ScalingRole",
+                    "path": "ITOPSRAGStack/ChatbotAPI/KPILogsTable/ScalingRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.140.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_dynamodb.Table",
+                  "version": "2.140.0"
+                }
+              },
+              "DailyLoginTable": {
+                "id": "DailyLoginTable",
+                "path": "ITOPSRAGStack/ChatbotAPI/DailyLoginTable",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ITOPSRAGStack/ChatbotAPI/DailyLoginTable/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                      "aws:cdk:cloudformation:props": {
+                        "attributeDefinitions": [
+                          {
+                            "attributeName": "Timestamp",
+                            "attributeType": "S"
+                          }
+                        ],
+                        "keySchema": [
+                          {
+                            "attributeName": "Timestamp",
+                            "keyType": "HASH"
+                          }
+                        ],
+                        "provisionedThroughput": {
+                          "readCapacityUnits": 5,
+                          "writeCapacityUnits": 5
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
+                      "version": "2.140.0"
+                    }
+                  },
+                  "ScalingRole": {
+                    "id": "ScalingRole",
+                    "path": "ITOPSRAGStack/ChatbotAPI/DailyLoginTable/ScalingRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.140.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_dynamodb.Table",
+                  "version": "2.140.0"
+                }
+              },
               "BucketStack": {
                 "id": "BucketStack",
                 "path": "ITOPSRAGStack/ChatbotAPI/BucketStack",
@@ -2553,6 +2655,180 @@
                                   "Ref": "ChatbotAPIRestBackendHTTPAPIHTTPAuthorizerA78BC2D4"
                                 },
                                 "routeKey": "DELETE /chatbot-use",
+                                "target": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "integrations/",
+                                      {
+                                        "Ref": "ChatbotAPIRestBackendHTTPAPIGETchatbotuseKPIAPIIntegration51194AD3"
+                                      }
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnRoute",
+                              "version": "2.140.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.HttpRoute",
+                          "version": "2.140.0"
+                        }
+                      },
+                      "GET--daily-logins": {
+                        "id": "GET--daily-logins",
+                        "path": "ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--daily-logins",
+                        "children": {
+                          "KPIAPIIntegration-Permission": {
+                            "id": "KPIAPIIntegration-Permission",
+                            "path": "ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--daily-logins/KPIAPIIntegration-Permission",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "ChatbotAPIKPIHandlerFunction377426B2",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "ChatbotAPIRestBackendHTTPAPI6A6C7FF4"
+                                      },
+                                      "/*/*/daily-logins"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.140.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--daily-logins/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Route",
+                              "aws:cdk:cloudformation:props": {
+                                "apiId": {
+                                  "Ref": "ChatbotAPIRestBackendHTTPAPI6A6C7FF4"
+                                },
+                                "authorizationType": "JWT",
+                                "authorizerId": {
+                                  "Ref": "ChatbotAPIRestBackendHTTPAPIHTTPAuthorizerA78BC2D4"
+                                },
+                                "routeKey": "GET /daily-logins",
+                                "target": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "integrations/",
+                                      {
+                                        "Ref": "ChatbotAPIRestBackendHTTPAPIGETchatbotuseKPIAPIIntegration51194AD3"
+                                      }
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnRoute",
+                              "version": "2.140.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.HttpRoute",
+                          "version": "2.140.0"
+                        }
+                      },
+                      "POST--daily-logins": {
+                        "id": "POST--daily-logins",
+                        "path": "ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--daily-logins",
+                        "children": {
+                          "KPIAPIIntegration-Permission": {
+                            "id": "KPIAPIIntegration-Permission",
+                            "path": "ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--daily-logins/KPIAPIIntegration-Permission",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "ChatbotAPIKPIHandlerFunction377426B2",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "ChatbotAPIRestBackendHTTPAPI6A6C7FF4"
+                                      },
+                                      "/*/*/daily-logins"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.140.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--daily-logins/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Route",
+                              "aws:cdk:cloudformation:props": {
+                                "apiId": {
+                                  "Ref": "ChatbotAPIRestBackendHTTPAPI6A6C7FF4"
+                                },
+                                "authorizationType": "JWT",
+                                "authorizerId": {
+                                  "Ref": "ChatbotAPIRestBackendHTTPAPIHTTPAuthorizerA78BC2D4"
+                                },
+                                "routeKey": "POST /daily-logins",
                                 "target": {
                                   "Fn::Join": [
                                     "",
@@ -5500,8 +5776,46 @@
                                       ],
                                       "Effect": "Allow",
                                       "Resource": [
-                                        "arn:aws:dynamodb:us-east-1:807596108910:table/itops-chatbot-logs",
-                                        "arn:aws:dynamodb:us-east-1:807596108910:table/itops-chatbot-logs/index/*"
+                                        {
+                                          "Fn::GetAtt": [
+                                            "ChatbotAPIDailyLoginTable0DBFC91F",
+                                            "Arn"
+                                          ]
+                                        },
+                                        {
+                                          "Fn::GetAtt": [
+                                            "ChatbotAPIKPILogsTableA8BB2B72",
+                                            "Arn"
+                                          ]
+                                        },
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              {
+                                                "Fn::GetAtt": [
+                                                  "ChatbotAPIDailyLoginTable0DBFC91F",
+                                                  "Arn"
+                                                ]
+                                              },
+                                              "/index/*"
+                                            ]
+                                          ]
+                                        },
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              {
+                                                "Fn::GetAtt": [
+                                                  "ChatbotAPIKPILogsTableA8BB2B72",
+                                                  "Arn"
+                                                ]
+                                              },
+                                              "/index/*"
+                                            ]
+                                          ]
+                                        }
                                       ]
                                     }
                                   ],
@@ -5568,16 +5882,26 @@
                           "s3Bucket": {
                             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                           },
-                          "s3Key": "8adf272dfeecd076077b46c76fd10a6c3354ac1c5754e9ed89debdb2a08b9c2a.zip"
+                          "s3Key": "4e992063ac32ac3b71a7d557194884aa5e8bb42c7b6753c0448a15b741f79883.zip"
                         },
-                        "handler": "index.handler",
+                        "environment": {
+                          "variables": {
+                            "INTERACTION_TABLE": {
+                              "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
+                            },
+                            "DAILY_LOGIN_TABLE": {
+                              "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
+                            }
+                          }
+                        },
+                        "handler": "lambda_function.lambda_handler",
                         "role": {
                           "Fn::GetAtt": [
                             "ChatbotAPIKPIHandlerFunctionServiceRole0D707649",
                             "Arn"
                           ]
                         },
-                        "runtime": "nodejs20.x",
+                        "runtime": "python3.12",
                         "timeout": 30
                       }
                     },
@@ -5784,7 +6108,7 @@
                           "s3Bucket": {
                             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                           },
-                          "s3Key": "9c70a6b5bc9dc0da9d0437ef4be254b10aeef36f29ecb98402b257701f91afe3.zip"
+                          "s3Key": "34747802e1621a31c72e95ec56ce40b98116f2ffbfbaf63b667961f032237dbd.zip"
                         },
                         "environment": {
                           "variables": {
@@ -9574,6 +9898,71 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_lambda.Function",
+                  "version": "2.140.0"
+                }
+              },
+              "DailyLoginRule": {
+                "id": "DailyLoginRule",
+                "path": "ITOPSRAGStack/ChatbotAPI/DailyLoginRule",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ITOPSRAGStack/ChatbotAPI/DailyLoginRule/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Events::Rule",
+                      "aws:cdk:cloudformation:props": {
+                        "description": "Trigger daily login count calculation for KPI dashboard",
+                        "scheduleExpression": "cron(0 23 * * ? *)",
+                        "state": "ENABLED",
+                        "targets": [
+                          {
+                            "id": "Target0",
+                            "arn": {
+                              "Fn::GetAtt": [
+                                "ChatbotAPIKPIHandlerFunction377426B2",
+                                "Arn"
+                              ]
+                            },
+                            "input": "{\"routeKey\":\"POST /daily-logins\"}"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_events.CfnRule",
+                      "version": "2.140.0"
+                    }
+                  },
+                  "AllowEventRuleITOPSRAGStackChatbotAPIKPIHandlerFunction36B68FE9": {
+                    "id": "AllowEventRuleITOPSRAGStackChatbotAPIKPIHandlerFunction36B68FE9",
+                    "path": "ITOPSRAGStack/ChatbotAPI/DailyLoginRule/AllowEventRuleITOPSRAGStackChatbotAPIKPIHandlerFunction36B68FE9",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                      "aws:cdk:cloudformation:props": {
+                        "action": "lambda:InvokeFunction",
+                        "functionName": {
+                          "Fn::GetAtt": [
+                            "ChatbotAPIKPIHandlerFunction377426B2",
+                            "Arn"
+                          ]
+                        },
+                        "principal": "events.amazonaws.com",
+                        "sourceArn": {
+                          "Fn::GetAtt": [
+                            "ChatbotAPIDailyLoginRule786354F8",
+                            "Arn"
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                      "version": "2.140.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_events.Rule",
                   "version": "2.140.0"
                 }
               },

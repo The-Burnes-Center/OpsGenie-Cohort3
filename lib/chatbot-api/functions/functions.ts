@@ -1,6 +1,8 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as path from 'path';
+import * as events from 'aws-cdk-lib/aws-events';
+import * as targets from 'aws-cdk-lib/aws-events-targets';
 
 // Import Lambda L2 construct
 import * as lambda from 'aws-cdk-lib/aws-lambda';
@@ -372,6 +374,18 @@ export class LambdaFunctionStack extends cdk.Stack {
     }));
     
 
+    // Create an EventBridge rule to trigger the KPI handler daily
+    const dailyLoginRule = new events.Rule(scope, 'DailyLoginRule', {
+      schedule: events.Schedule.cron({ minute: '0', hour: '23', day: '*', month: '*', year: '*' }), // Daily at 11 PM UTC
+      description: 'Trigger daily login count calculation for KPI dashboard',
+    });
+
+    // Add target to the rule pointing to the KPI handler function
+    dailyLoginRule.addTarget(new targets.LambdaFunction(kpiAPIHandlerFunction, {
+      event: events.RuleTargetInput.fromObject({
+        routeKey: "POST /daily-logins"
+      })
+    }));
 
   }
 }

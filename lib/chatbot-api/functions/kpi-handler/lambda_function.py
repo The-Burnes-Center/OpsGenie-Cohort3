@@ -48,7 +48,14 @@ class DecimalEncoder(json.JSONEncoder):
     
 
 def lambda_handler(event, context):
-    # Determine the type of HTTP method
+    # First, check if this is an EventBridge scheduled event for daily logins
+    http_method = event.get('routeKey')
+    if http_method == "POST /daily-logins" and "requestContext" not in event:
+        # If it's a scheduled event without requestContext, bypass auth
+        print("Processing scheduled daily login update from EventBridge")
+        return increment_login(event)
+    
+    # Continue with normal API Gateway request processing
     admin = False
     try:
         claims = event["requestContext"]["authorizer"]["jwt"]["claims"]
@@ -66,7 +73,7 @@ def lambda_handler(event, context):
                 'headers': {'Access-Control-Allow-Origin': '*'},
                 'body': json.dumps('Unable to check user role, please ensure you have Cognito configured correctly with a custom:role attribute.')
             }
-    http_method = event.get('routeKey')
+    
     if http_method == "POST /daily-logins":
         return increment_login(event)
     elif http_method == "GET /daily-logins": 

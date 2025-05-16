@@ -450,6 +450,66 @@
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/Resource"
    }
   },
+  "ChatbotAPIKPILogsTableA8BB2B72": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "Username",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "Timestamp",
+      "AttributeType": "S"
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "Username",
+      "KeyType": "HASH"
+     },
+     {
+      "AttributeName": "Timestamp",
+      "KeyType": "RANGE"
+     }
+    ],
+    "ProvisionedThroughput": {
+     "ReadCapacityUnits": 5,
+     "WriteCapacityUnits": 5
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/KPILogsTable/Resource"
+   }
+  },
+  "ChatbotAPIDailyLoginTable0DBFC91F": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "Timestamp",
+      "AttributeType": "S"
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "Timestamp",
+      "KeyType": "HASH"
+     }
+    ],
+    "ProvisionedThroughput": {
+     "ReadCapacityUnits": 5,
+     "WriteCapacityUnits": 5
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/DailyLoginTable/Resource"
+   }
+  },
   "ChatbotAPIKendraSourceBucket8BA49C97": {
    "Type": "AWS::S3::Bucket",
    "Properties": {
@@ -1789,6 +1849,140 @@
    },
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/DELETE--chatbot-use/Resource"
+   }
+  },
+  "ChatbotAPIRestBackendHTTPAPIGETdailyloginsKPIAPIIntegrationPermission05098695": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "ChatbotAPIKPIHandlerFunction377426B2",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "ChatbotAPIRestBackendHTTPAPI6A6C7FF4"
+       },
+       "/*/*/daily-logins"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--daily-logins/KPIAPIIntegration-Permission"
+   }
+  },
+  "ChatbotAPIRestBackendHTTPAPIGETdailylogins12281D6B": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": {
+     "Ref": "ChatbotAPIRestBackendHTTPAPI6A6C7FF4"
+    },
+    "AuthorizationType": "JWT",
+    "AuthorizerId": {
+     "Ref": "ChatbotAPIRestBackendHTTPAPIHTTPAuthorizerA78BC2D4"
+    },
+    "RouteKey": "GET /daily-logins",
+    "Target": {
+     "Fn::Join": [
+      "",
+      [
+       "integrations/",
+       {
+        "Ref": "ChatbotAPIRestBackendHTTPAPIGETchatbotuseKPIAPIIntegration51194AD3"
+       }
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/GET--daily-logins/Resource"
+   }
+  },
+  "ChatbotAPIRestBackendHTTPAPIPOSTdailyloginsKPIAPIIntegrationPermissionD7A840EC": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "ChatbotAPIKPIHandlerFunction377426B2",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "ChatbotAPIRestBackendHTTPAPI6A6C7FF4"
+       },
+       "/*/*/daily-logins"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--daily-logins/KPIAPIIntegration-Permission"
+   }
+  },
+  "ChatbotAPIRestBackendHTTPAPIPOSTdailyloginsA27DC4D0": {
+   "Type": "AWS::ApiGatewayV2::Route",
+   "Properties": {
+    "ApiId": {
+     "Ref": "ChatbotAPIRestBackendHTTPAPI6A6C7FF4"
+    },
+    "AuthorizationType": "JWT",
+    "AuthorizerId": {
+     "Ref": "ChatbotAPIRestBackendHTTPAPIHTTPAuthorizerA78BC2D4"
+    },
+    "RouteKey": "POST /daily-logins",
+    "Target": {
+     "Fn::Join": [
+      "",
+      [
+       "integrations/",
+       {
+        "Ref": "ChatbotAPIRestBackendHTTPAPIGETchatbotuseKPIAPIIntegration51194AD3"
+       }
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/POST--daily-logins/Resource"
    }
   },
   "ChatbotAPIRestBackendHTTPAPIGETuserfeedbackFeedbackAPIIntegration10D18D1C": {
@@ -3820,8 +4014,46 @@
        ],
        "Effect": "Allow",
        "Resource": [
-        "arn:aws:dynamodb:us-east-1:807596108910:table/itops-chatbot-logs",
-        "arn:aws:dynamodb:us-east-1:807596108910:table/itops-chatbot-logs/index/*"
+        {
+         "Fn::GetAtt": [
+          "ChatbotAPIDailyLoginTable0DBFC91F",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "ChatbotAPIKPILogsTableA8BB2B72",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "ChatbotAPIDailyLoginTable0DBFC91F",
+             "Arn"
+            ]
+           },
+           "/index/*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "ChatbotAPIKPILogsTableA8BB2B72",
+             "Arn"
+            ]
+           },
+           "/index/*"
+          ]
+         ]
+        }
        ]
       }
      ],
@@ -3845,16 +4077,26 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "8adf272dfeecd076077b46c76fd10a6c3354ac1c5754e9ed89debdb2a08b9c2a.zip"
+     "S3Key": "4e992063ac32ac3b71a7d557194884aa5e8bb42c7b6753c0448a15b741f79883.zip"
     },
-    "Handler": "index.handler",
+    "Environment": {
+     "Variables": {
+      "INTERACTION_TABLE": {
+       "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
+      },
+      "DAILY_LOGIN_TABLE": {
+       "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
+      }
+     }
+    },
+    "Handler": "lambda_function.lambda_handler",
     "Role": {
      "Fn::GetAtt": [
       "ChatbotAPIKPIHandlerFunctionServiceRole0D707649",
       "Arn"
      ]
     },
-    "Runtime": "nodejs20.x",
+    "Runtime": "python3.12",
     "Timeout": 30
    },
    "DependsOn": [
@@ -3863,7 +4105,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/KPIHandlerFunction/Resource",
-    "aws:asset:path": "asset.8adf272dfeecd076077b46c76fd10a6c3354ac1c5754e9ed89debdb2a08b9c2a",
+    "aws:asset:path": "asset.4e992063ac32ac3b71a7d557194884aa5e8bb42c7b6753c0448a15b741f79883",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -3989,7 +4231,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "9c70a6b5bc9dc0da9d0437ef4be254b10aeef36f29ecb98402b257701f91afe3.zip"
+     "S3Key": "34747802e1621a31c72e95ec56ce40b98116f2ffbfbaf63b667961f032237dbd.zip"
     },
     "Environment": {
      "Variables": {
@@ -4040,7 +4282,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/ChatHandlerFunction/Resource",
-    "aws:asset:path": "asset.9c70a6b5bc9dc0da9d0437ef4be254b10aeef36f29ecb98402b257701f91afe3",
+    "aws:asset:path": "asset.34747802e1621a31c72e95ec56ce40b98116f2ffbfbaf63b667961f032237dbd",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -6452,6 +6694,51 @@
     "aws:asset:property": "Code"
    }
   },
+  "ChatbotAPIDailyLoginRule786354F8": {
+   "Type": "AWS::Events::Rule",
+   "Properties": {
+    "Description": "Trigger daily login count calculation for KPI dashboard",
+    "ScheduleExpression": "cron(0 23 * * ? *)",
+    "State": "ENABLED",
+    "Targets": [
+     {
+      "Arn": {
+       "Fn::GetAtt": [
+        "ChatbotAPIKPIHandlerFunction377426B2",
+        "Arn"
+       ]
+      },
+      "Id": "Target0",
+      "Input": "{\"routeKey\":\"POST /daily-logins\"}"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/DailyLoginRule/Resource"
+   }
+  },
+  "ChatbotAPIDailyLoginRuleAllowEventRuleITOPSRAGStackChatbotAPIKPIHandlerFunction36B68FE92725101F": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "ChatbotAPIKPIHandlerFunction377426B2",
+      "Arn"
+     ]
+    },
+    "Principal": "events.amazonaws.com",
+    "SourceArn": {
+     "Fn::GetAtt": [
+      "ChatbotAPIDailyLoginRule786354F8",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/DailyLoginRule/AllowEventRuleITOPSRAGStackChatbotAPIKPIHandlerFunction36B68FE9"
+   }
+  },
   "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092": {
    "Type": "AWS::IAM::Role",
    "Properties": {
@@ -7262,7 +7549,7 @@
      }
     ],
     "SourceObjectKeys": [
-     "31c44493ca0270f7ee14e75dd77e197c472870b68bb0b5df3aaf25c3d7da909f.zip",
+     "d79fbdb90d269e727dd916191cb61c3dbb080f7eb54321cdd848d2c9a2844df1.zip",
      "76169626222155c41a81dbcd8a3565ccf9d50314328bcadc93ec43e5fc109843.zip"
     ],
     "SourceMarkers": [
@@ -7505,7 +7792,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/21TwW7bMAz9lt4VLc122DV1UCxAiwbxth4DWmZc1rZkSHQyT/C/D5Iaxyty4nvkE2U+yit5/20pl3dwdgtV1ouGCulzBlULOLuDV6bSxEb6Xw7tzphGZEd9C29MC6TFhWYNoea5IGVGQdBKvzcNhmKMO9OQGgJNaBQNtEUJ0j/2WjEZHWpzvEPbknOBbYyq0W5bqHCueIIB7W+0UZOTrhpkM/UYhft68OAcspPrEESJXWOGFjXLh17VyJspEdTSp+wDOBQJhms+UArXOeZ8FOWgoTVlIf1PKNLcEYyiRl1akD476q0u8U8obYAhN71VOAroqALGMwynlfQ/mLt1R0EUQqA5QxUbJhBSe9NzQlvNWFm4WPKJXnXrnt+Mpb9oY+sre8UiD/ZyuG4i6eBE522vB240iZ84ClT28OH8bHdpCais3GNnHLGxQ/TaMXbHj7W5A4OrnXyKz2OrT6b+JJD+GTqRMzA+g3ojfTFn4qNQjenLozWapX+xVJFeK4XObUvUTBwXmAXNY9DcVkzlVyw25NhS0V+MnfNxFHt0cZsijhhMIF0F3UvPXc8i6x2bdlKFzUz4v9LOmhOVaKMt6Q85NOGZH+DsVENyfXZZQ/HlxxmMLim9dm1KlO/uy2m1lPff5fLu3REtbK+ZWpT7FP8BpK3BNwsEAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/21TwW7bMAz9lt5VLc122DVNUCxAiwbOth4DWmZc1rZkSFSyTPC/D5ISxyty4nvkEyU9SnP58G0mZ3dwdPeqau5bKmXYMqhGwNHtgjK1JjYy/HJoN8a0YrnXt/DKdEBaXOiyJdQ8FeTMIAg6GQrTYiymuDEtqVOkGQ2iha6sQIYnrxWT0bE2xRu0HTkX2cqoBu26gxqnimc4of2NNmm2pOsW2Yw9BuG+7gI4h+zkIgZRYd+aU4ea5aNXDfJqTES1DDn7CA5FhnGbM8rheo8pH0R10tCZqpThJ5T53gkMokFdWZBhuddrXeGfWFoBw9Z4q3AQ0FMNjEc4HeYy/GDuFz1FUQyRbhnq1DCDmCqM54zWmrG2cLHkE73qFp7fjaW/aFPrK3vDchvt5bjdSPLCkU7bXhfcaJKOOAhUdnd2fjK7PARUVhbYG0ds7Cl57Rj7/XlsbsfgGief0/NY64NpPglkeIFebBkYX0C9k76YM/JB4AE1OxkKf36DPo5CtcZXe2s0y/BqqSa9UAqdW1eomTiNdRk1T1FzWzGW37BckWNLpb/YPeXDIAp0acYiXTxaQ7qOulfPvWex9I5NN6riMUf8X2ljzYEqtMms/G92bXz8Ozg61ZJcHN2ypfQf0h2Mrij/AW0qlB/uy2E+kw/f5ezuwxHdW6+ZOpRFjv8ABT36XiEEAAA="
    },
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/CDKMetadata/Default"
