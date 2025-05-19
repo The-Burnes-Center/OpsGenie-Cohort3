@@ -1,7 +1,7 @@
 {
   "version": "36.0.0",
   "files": {
-    "36d4e7031ef2c926fa9bca790c10db9ab74c9ac5588428c5863202a0e7ab0da6": {
+    "8679a61a5413788d09072a34399333aeb08ce0043f1b56d49c1fdd9b67dc970f": {
       "source": {
         "path": "ITOPSRAGStackChatbotAPIBucketStackA20283EE.template.json",
         "packaging": "file"
@@ -9,7 +9,7 @@
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "36d4e7031ef2c926fa9bca790c10db9ab74c9ac5588428c5863202a0e7ab0da6.json",
+          "objectKey": "8679a61a5413788d09072a34399333aeb08ce0043f1b56d49c1fdd9b67dc970f.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }

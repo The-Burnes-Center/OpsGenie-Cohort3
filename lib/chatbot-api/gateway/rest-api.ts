@@ -18,13 +18,20 @@ import { readFileSync } from "fs";
 import * as s3 from "aws-cdk-lib/aws-s3";
 
 export interface RestBackendAPIProps {
-
+  readonly logWriteRole?: iam.Role;
 }
 
 export class RestBackendAPI extends Construct {
   public readonly restAPI: apigwv2.HttpApi;
   constructor(scope: Construct, id: string, props: RestBackendAPIProps) {
     super(scope, id);
+
+    // Create the HTTP API with optional logging
+    const logGroup = props.logWriteRole ? 
+      new logs.LogGroup(this, 'HttpApiLogs', {
+        retention: logs.RetentionDays.ONE_WEEK,
+        logGroupName: `/aws/apigateway/${id}-http-api`
+      }) : undefined;
 
     const httpApi = new apigwv2.HttpApi(this, 'HTTP-API', {
       corsPreflight: {
@@ -39,7 +46,34 @@ export class RestBackendAPI extends Construct {
         allowOrigins: ['*'],
         maxAge: Duration.days(10),
       },
+      // Configure logging if logWriteRole is provided
+      ...(props.logWriteRole && logGroup ? {
+        defaultStageOptions: {
+          accessLogSettings: {
+            destinationArn: logGroup.logGroupArn,
+            format: JSON.stringify({
+              requestId: '$context.requestId',
+              ip: '$context.identity.sourceIp',
+              requestTime: '$context.requestTime',
+              httpMethod: '$context.httpMethod',
+              path: '$context.path',
+              routeKey: '$context.routeKey',
+              status: '$context.status',
+              protocol: '$context.protocol',
+              responseLength: '$context.responseLength',
+              integrationError: '$context.integrationErrorMessage',
+              authError: '$context.authorizer.error',
+            }),
+          },
+        }
+      } : {})
     });
+
+    // Grant permissions for API Gateway to write to the log group
+    if (props.logWriteRole && logGroup) {
+      logGroup.grantWrite(props.logWriteRole);
+    }
+
     this.restAPI = httpApi;
     /*const appSyncLambdaResolver = new lambda.Function(
       this,

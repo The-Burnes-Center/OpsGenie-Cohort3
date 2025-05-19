@@ -110,6 +110,15 @@
                           "SMS_MFA"
                         ],
                         "mfaConfiguration": "OPTIONAL",
+                        "policies": {
+                          "passwordPolicy": {
+                            "minimumLength": 12,
+                            "requireLowercase": true,
+                            "requireUppercase": true,
+                            "requireNumbers": true,
+                            "requireSymbols": true
+                          }
+                        },
                         "schema": [
                           {
                             "name": "role",
@@ -198,6 +207,12 @@
                         "callbackUrLs": [
                           "https://example.com"
                         ],
+                        "explicitAuthFlows": [
+                          "ALLOW_USER_PASSWORD_AUTH",
+                          "ALLOW_USER_SRP_AUTH",
+                          "ALLOW_REFRESH_TOKEN_AUTH"
+                        ],
+                        "preventUserExistenceErrors": "ENABLED",
                         "supportedIdentityProviders": [
                           "COGNITO"
                         ],
@@ -271,6 +286,48 @@
                           "fqn": "aws-cdk-lib.aws_iam.CfnRole",
                           "version": "2.140.0"
                         }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "ITOPSRAGStack/Authorization/AuthorizationFunction/ServiceRole/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "ITOPSRAGStack/Authorization/AuthorizationFunction/ServiceRole/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "xray:PutTelemetryRecords",
+                                        "xray:PutTraceSegments"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": "*"
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "AuthorizationAuthorizationFunctionServiceRoleDefaultPolicyCFC6EA8D",
+                                "roles": [
+                                  {
+                                    "Ref": "AuthorizationAuthorizationFunctionServiceRole09B7CF46"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                              "version": "2.140.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Policy",
+                          "version": "2.140.0"
+                        }
                       }
                     },
                     "constructInfo": {
@@ -314,7 +371,7 @@
                           "s3Bucket": {
                             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                           },
-                          "s3Key": "b098fc2ae50a09438eee446d595984f795dc8f1d4e4aafe229c95cf35504061c.zip"
+                          "s3Key": "13d74e986a335f613f29a6b8efd4fd95e830fdee4530226c2985f1b7152e8806.zip"
                         },
                         "environment": {
                           "variables": {
@@ -327,6 +384,7 @@
                           }
                         },
                         "handler": "lambda_function.lambda_handler",
+                        "memorySize": 256,
                         "role": {
                           "Fn::GetAtt": [
                             "AuthorizationAuthorizationFunctionServiceRole09B7CF46",
@@ -334,11 +392,35 @@
                           ]
                         },
                         "runtime": "python3.12",
-                        "timeout": 30
+                        "timeout": 30,
+                        "tracingConfig": {
+                          "mode": "Active"
+                        }
                       }
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                      "version": "2.140.0"
+                    }
+                  },
+                  "AllowApiGatewayInvocation": {
+                    "id": "AllowApiGatewayInvocation",
+                    "path": "ITOPSRAGStack/Authorization/AuthorizationFunction/AllowApiGatewayInvocation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                      "aws:cdk:cloudformation:props": {
+                        "action": "lambda:InvokeFunction",
+                        "functionName": {
+                          "Fn::GetAtt": [
+                            "AuthorizationAuthorizationFunctionB35B7A4C",
+                            "Arn"
+                          ]
+                        },
+                        "principal": "apigateway.amazonaws.com"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
                       "version": "2.140.0"
                     }
                   }
@@ -842,6 +924,123 @@
                 "id": "BucketStack",
                 "path": "ITOPSRAGStack/ChatbotAPI/BucketStack",
                 "children": {
+                  "KendraS3DataSourceRole": {
+                    "id": "KendraS3DataSourceRole",
+                    "path": "ITOPSRAGStack/ChatbotAPI/BucketStack/KendraS3DataSourceRole",
+                    "children": {
+                      "ImportKendraS3DataSourceRole": {
+                        "id": "ImportKendraS3DataSourceRole",
+                        "path": "ITOPSRAGStack/ChatbotAPI/BucketStack/KendraS3DataSourceRole/ImportKendraS3DataSourceRole",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.Resource",
+                          "version": "2.140.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ITOPSRAGStack/ChatbotAPI/BucketStack/KendraS3DataSourceRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "kendra.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "description": "IAM role for Kendra to access S3 bucket"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.140.0"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "ITOPSRAGStack/ChatbotAPI/BucketStack/KendraS3DataSourceRole/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "ITOPSRAGStack/ChatbotAPI/BucketStack/KendraS3DataSourceRole/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "kendra:BatchDeleteDocument",
+                                        "kendra:BatchPutDocument"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::Join": [
+                                          "",
+                                          [
+                                            "arn:aws:kendra:",
+                                            {
+                                              "Ref": "AWS::Region"
+                                            },
+                                            ":",
+                                            {
+                                              "Ref": "AWS::AccountId"
+                                            },
+                                            ":index/*"
+                                          ]
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "KendraS3DataSourceRoleDefaultPolicy5865DBCF",
+                                "roles": [
+                                  {
+                                    "Ref": "KendraS3DataSourceRole132CF829"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                              "version": "2.140.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Policy",
+                          "version": "2.140.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.140.0"
+                    }
+                  },
+                  "KendraS3RoleName": {
+                    "id": "KendraS3RoleName",
+                    "path": "ITOPSRAGStack/ChatbotAPI/BucketStack/KendraS3RoleName",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.140.0"
+                    }
+                  },
+                  "KendraS3RoleArn": {
+                    "id": "KendraS3RoleArn",
+                    "path": "ITOPSRAGStack/ChatbotAPI/BucketStack/KendraS3RoleArn",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.140.0"
+                    }
+                  },
                   "CDKMetadata": {
                     "id": "CDKMetadata",
                     "path": "ITOPSRAGStack/ChatbotAPI/BucketStack/CDKMetadata",
@@ -859,6 +1058,24 @@
                         "path": "ITOPSRAGStack/ChatbotAPI/BucketStack/CDKMetadata/Condition",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.CfnCondition",
+                          "version": "2.140.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.3.0"
+                    }
+                  },
+                  "Exports": {
+                    "id": "Exports",
+                    "path": "ITOPSRAGStack/ChatbotAPI/BucketStack/Exports",
+                    "children": {
+                      "Output{\"Fn::GetAtt\":[\"KendraS3DataSourceRole132CF829\",\"Arn\"]}": {
+                        "id": "Output{\"Fn::GetAtt\":[\"KendraS3DataSourceRole132CF829\",\"Arn\"]}",
+                        "path": "ITOPSRAGStack/ChatbotAPI/BucketStack/Exports/Output{\"Fn::GetAtt\":[\"KendraS3DataSourceRole132CF829\",\"Arn\"]}",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CfnOutput",
                           "version": "2.140.0"
                         }
                       }
@@ -890,16 +1107,463 @@
                   "version": "2.140.0"
                 }
               },
-              "KendraSourceBucket": {
-                "id": "KendraSourceBucket",
-                "path": "ITOPSRAGStack/ChatbotAPI/KendraSourceBucket",
+              "CloudTrailBucket": {
+                "id": "CloudTrailBucket",
+                "path": "ITOPSRAGStack/ChatbotAPI/CloudTrailBucket",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "ITOPSRAGStack/ChatbotAPI/KendraSourceBucket/Resource",
+                    "path": "ITOPSRAGStack/ChatbotAPI/CloudTrailBucket/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
                       "aws:cdk:cloudformation:props": {
+                        "bucketEncryption": {
+                          "serverSideEncryptionConfiguration": [
+                            {
+                              "serverSideEncryptionByDefault": {
+                                "sseAlgorithm": "aws:kms"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
+                      "version": "2.140.0"
+                    }
+                  },
+                  "Policy": {
+                    "id": "Policy",
+                    "path": "ITOPSRAGStack/ChatbotAPI/CloudTrailBucket/Policy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ITOPSRAGStack/ChatbotAPI/CloudTrailBucket/Policy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::S3::BucketPolicy",
+                          "aws:cdk:cloudformation:props": {
+                            "bucket": {
+                              "Ref": "ChatbotAPICloudTrailBucketD3543B87"
+                            },
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "s3:*",
+                                  "Condition": {
+                                    "Bool": {
+                                      "aws:SecureTransport": "false"
+                                    }
+                                  },
+                                  "Effect": "Deny",
+                                  "Principal": {
+                                    "AWS": "*"
+                                  },
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "ChatbotAPICloudTrailBucketD3543B87",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          {
+                                            "Fn::GetAtt": [
+                                              "ChatbotAPICloudTrailBucketD3543B87",
+                                              "Arn"
+                                            ]
+                                          },
+                                          "/*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "Action": "s3:GetBucketAcl",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "cloudtrail.amazonaws.com"
+                                  },
+                                  "Resource": {
+                                    "Fn::GetAtt": [
+                                      "ChatbotAPICloudTrailBucketD3543B87",
+                                      "Arn"
+                                    ]
+                                  }
+                                },
+                                {
+                                  "Action": "s3:PutObject",
+                                  "Condition": {
+                                    "StringEquals": {
+                                      "s3:x-amz-acl": "bucket-owner-full-control"
+                                    }
+                                  },
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "cloudtrail.amazonaws.com"
+                                  },
+                                  "Resource": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "ChatbotAPICloudTrailBucketD3543B87",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/AWSLogs/",
+                                        {
+                                          "Ref": "AWS::AccountId"
+                                        },
+                                        "/*"
+                                      ]
+                                    ]
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.CfnBucketPolicy",
+                          "version": "2.140.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketPolicy",
+                      "version": "2.140.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3.Bucket",
+                  "version": "2.140.0"
+                }
+              },
+              "CloudTrailKey": {
+                "id": "CloudTrailKey",
+                "path": "ITOPSRAGStack/ChatbotAPI/CloudTrailKey",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ITOPSRAGStack/ChatbotAPI/CloudTrailKey/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::KMS::Key",
+                      "aws:cdk:cloudformation:props": {
+                        "enableKeyRotation": true,
+                        "keyPolicy": {
+                          "Statement": [
+                            {
+                              "Action": "kms:*",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "AWS": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":iam::",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":root"
+                                    ]
+                                  ]
+                                }
+                              },
+                              "Resource": "*"
+                            },
+                            {
+                              "Action": [
+                                "kms:Decrypt",
+                                "kms:Encrypt",
+                                "kms:GenerateDataKey*",
+                                "kms:ReEncrypt*"
+                              ],
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "cloudtrail.amazonaws.com"
+                              },
+                              "Resource": "*"
+                            },
+                            {
+                              "Action": [
+                                "kms:Encrypt",
+                                "kms:GenerateDataKey*",
+                                "kms:ReEncrypt*"
+                              ],
+                              "Condition": {
+                                "StringEquals": {
+                                  "kms:ViaService": "s3.amazonaws.com"
+                                }
+                              },
+                              "Effect": "Allow",
+                              "Principal": {
+                                "AWS": "*"
+                              },
+                              "Resource": "*"
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_kms.CfnKey",
+                      "version": "2.140.0"
+                    }
+                  },
+                  "Alias": {
+                    "id": "Alias",
+                    "path": "ITOPSRAGStack/ChatbotAPI/CloudTrailKey/Alias",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ITOPSRAGStack/ChatbotAPI/CloudTrailKey/Alias/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::KMS::Alias",
+                          "aws:cdk:cloudformation:props": {
+                            "aliasName": "alias/ITOPSRAGStackChatbotAPIBucketStackA20283EECloudTrailKey",
+                            "targetKeyId": {
+                              "Fn::GetAtt": [
+                                "ChatbotAPICloudTrailKey4EACC2B1",
+                                "Arn"
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_kms.CfnAlias",
+                          "version": "2.140.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_kms.Alias",
+                      "version": "2.140.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_kms.Key",
+                  "version": "2.140.0"
+                }
+              },
+              "DataEventTrailLogGroup": {
+                "id": "DataEventTrailLogGroup",
+                "path": "ITOPSRAGStack/ChatbotAPI/DataEventTrailLogGroup",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ITOPSRAGStack/ChatbotAPI/DataEventTrailLogGroup/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "retentionInDays": 731
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_logs.CfnLogGroup",
+                      "version": "2.140.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_logs.LogGroup",
+                  "version": "2.140.0"
+                }
+              },
+              "DataEventTrail": {
+                "id": "DataEventTrail",
+                "path": "ITOPSRAGStack/ChatbotAPI/DataEventTrail",
+                "children": {
+                  "LogsRole": {
+                    "id": "LogsRole",
+                    "path": "ITOPSRAGStack/ChatbotAPI/DataEventTrail/LogsRole",
+                    "children": {
+                      "ImportLogsRole": {
+                        "id": "ImportLogsRole",
+                        "path": "ITOPSRAGStack/ChatbotAPI/DataEventTrail/LogsRole/ImportLogsRole",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.Resource",
+                          "version": "2.140.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ITOPSRAGStack/ChatbotAPI/DataEventTrail/LogsRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "cloudtrail.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.140.0"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "ITOPSRAGStack/ChatbotAPI/DataEventTrail/LogsRole/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "ITOPSRAGStack/ChatbotAPI/DataEventTrail/LogsRole/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "logs:CreateLogStream",
+                                        "logs:PutLogEvents"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::GetAtt": [
+                                          "ChatbotAPIDataEventTrailLogGroupB7F753B3",
+                                          "Arn"
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "ChatbotAPIDataEventTrailLogsRoleDefaultPolicyB22E54FB",
+                                "roles": [
+                                  {
+                                    "Ref": "ChatbotAPIDataEventTrailLogsRole87E96C38"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                              "version": "2.140.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Policy",
+                          "version": "2.140.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.140.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ITOPSRAGStack/ChatbotAPI/DataEventTrail/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::CloudTrail::Trail",
+                      "aws:cdk:cloudformation:props": {
+                        "cloudWatchLogsLogGroupArn": {
+                          "Fn::GetAtt": [
+                            "ChatbotAPIDataEventTrailLogGroupB7F753B3",
+                            "Arn"
+                          ]
+                        },
+                        "cloudWatchLogsRoleArn": {
+                          "Fn::GetAtt": [
+                            "ChatbotAPIDataEventTrailLogsRole87E96C38",
+                            "Arn"
+                          ]
+                        },
+                        "enableLogFileValidation": true,
+                        "eventSelectors": [
+                          {
+                            "dataResources": [
+                              {
+                                "type": "AWS::S3::Object",
+                                "values": [
+                                  {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":s3:::"
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              }
+                            ],
+                            "includeManagementEvents": false
+                          }
+                        ],
+                        "includeGlobalServiceEvents": true,
+                        "isLogging": true,
+                        "isMultiRegionTrail": true,
+                        "kmsKeyId": {
+                          "Fn::GetAtt": [
+                            "ChatbotAPICloudTrailKey4EACC2B1",
+                            "Arn"
+                          ]
+                        },
+                        "s3BucketName": {
+                          "Ref": "ChatbotAPICloudTrailBucketD3543B87"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudtrail.CfnTrail",
+                      "version": "2.140.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudtrail.Trail",
+                  "version": "2.140.0"
+                }
+              },
+              "LoggingBucket": {
+                "id": "LoggingBucket",
+                "path": "ITOPSRAGStack/ChatbotAPI/LoggingBucket",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ITOPSRAGStack/ChatbotAPI/LoggingBucket/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                      "aws:cdk:cloudformation:props": {
+                        "bucketEncryption": {
+                          "serverSideEncryptionConfiguration": [
+                            {
+                              "serverSideEncryptionByDefault": {
+                                "sseAlgorithm": "aws:kms"
+                              }
+                            }
+                          ]
+                        },
                         "corsConfiguration": {
                           "corsRules": [
                             {
@@ -917,6 +1581,409 @@
                               ]
                             }
                           ]
+                        },
+                        "tags": [
+                          {
+                            "key": "aws-cdk:auto-delete-objects",
+                            "value": "true"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
+                      "version": "2.140.0"
+                    }
+                  },
+                  "Policy": {
+                    "id": "Policy",
+                    "path": "ITOPSRAGStack/ChatbotAPI/LoggingBucket/Policy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ITOPSRAGStack/ChatbotAPI/LoggingBucket/Policy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::S3::BucketPolicy",
+                          "aws:cdk:cloudformation:props": {
+                            "bucket": {
+                              "Ref": "ChatbotAPILoggingBucketC6088026"
+                            },
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "s3:*",
+                                  "Condition": {
+                                    "Bool": {
+                                      "aws:SecureTransport": "false"
+                                    }
+                                  },
+                                  "Effect": "Deny",
+                                  "Principal": {
+                                    "AWS": "*"
+                                  },
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "ChatbotAPILoggingBucketC6088026",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          {
+                                            "Fn::GetAtt": [
+                                              "ChatbotAPILoggingBucketC6088026",
+                                              "Arn"
+                                            ]
+                                          },
+                                          "/*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "Action": [
+                                    "s3:DeleteObject*",
+                                    "s3:GetBucket*",
+                                    "s3:List*",
+                                    "s3:PutBucketPolicy"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "AWS": {
+                                      "Fn::GetAtt": [
+                                        "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+                                        "Arn"
+                                      ]
+                                    }
+                                  },
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "ChatbotAPILoggingBucketC6088026",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          {
+                                            "Fn::GetAtt": [
+                                              "ChatbotAPILoggingBucketC6088026",
+                                              "Arn"
+                                            ]
+                                          },
+                                          "/*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "Action": [
+                                    "s3:Abort*",
+                                    "s3:DeleteObject*",
+                                    "s3:GetBucket*",
+                                    "s3:GetObject*",
+                                    "s3:List*",
+                                    "s3:PutObject",
+                                    "s3:PutObjectLegalHold",
+                                    "s3:PutObjectRetention",
+                                    "s3:PutObjectTagging",
+                                    "s3:PutObjectVersionTagging"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "logs.amazonaws.com"
+                                  },
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "ChatbotAPILoggingBucketC6088026",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          {
+                                            "Fn::GetAtt": [
+                                              "ChatbotAPILoggingBucketC6088026",
+                                              "Arn"
+                                            ]
+                                          },
+                                          "/*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "Action": "s3:PutObject",
+                                  "Condition": {
+                                    "ArnLike": {
+                                      "aws:SourceArn": {
+                                        "Fn::GetAtt": [
+                                          "ChatbotAPIKendraSourceBucket8BA49C97",
+                                          "Arn"
+                                        ]
+                                      }
+                                    },
+                                    "StringEquals": {
+                                      "aws:SourceAccount": {
+                                        "Ref": "AWS::AccountId"
+                                      }
+                                    }
+                                  },
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "logging.s3.amazonaws.com"
+                                  },
+                                  "Resource": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "ChatbotAPILoggingBucketC6088026",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/*"
+                                      ]
+                                    ]
+                                  }
+                                },
+                                {
+                                  "Action": "s3:PutObject",
+                                  "Condition": {
+                                    "ArnLike": {
+                                      "aws:SourceArn": {
+                                        "Fn::GetAtt": [
+                                          "ChatbotAPIFeedbackDownloadBucket5357D600",
+                                          "Arn"
+                                        ]
+                                      }
+                                    },
+                                    "StringEquals": {
+                                      "aws:SourceAccount": {
+                                        "Ref": "AWS::AccountId"
+                                      }
+                                    }
+                                  },
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "logging.s3.amazonaws.com"
+                                  },
+                                  "Resource": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "ChatbotAPILoggingBucketC6088026",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/*"
+                                      ]
+                                    ]
+                                  }
+                                },
+                                {
+                                  "Action": "s3:PutObject",
+                                  "Condition": {
+                                    "ArnLike": {
+                                      "aws:SourceArn": {
+                                        "Fn::GetAtt": [
+                                          "ChatbotAPIEvalResultsBucketCB2F9C6D",
+                                          "Arn"
+                                        ]
+                                      }
+                                    },
+                                    "StringEquals": {
+                                      "aws:SourceAccount": {
+                                        "Ref": "AWS::AccountId"
+                                      }
+                                    }
+                                  },
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "logging.s3.amazonaws.com"
+                                  },
+                                  "Resource": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "ChatbotAPILoggingBucketC6088026",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/*"
+                                      ]
+                                    ]
+                                  }
+                                },
+                                {
+                                  "Action": "s3:PutObject",
+                                  "Condition": {
+                                    "ArnLike": {
+                                      "aws:SourceArn": {
+                                        "Fn::GetAtt": [
+                                          "ChatbotAPIEvalTestCasesBucket3A06FDF6",
+                                          "Arn"
+                                        ]
+                                      }
+                                    },
+                                    "StringEquals": {
+                                      "aws:SourceAccount": {
+                                        "Ref": "AWS::AccountId"
+                                      }
+                                    }
+                                  },
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "logging.s3.amazonaws.com"
+                                  },
+                                  "Resource": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "ChatbotAPILoggingBucketC6088026",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/*"
+                                      ]
+                                    ]
+                                  }
+                                },
+                                {
+                                  "Action": "s3:PutObject",
+                                  "Condition": {
+                                    "ArnLike": {
+                                      "aws:SourceArn": {
+                                        "Fn::GetAtt": [
+                                          "ChatbotAPIRagasDependenciesBucket256E99F1",
+                                          "Arn"
+                                        ]
+                                      }
+                                    },
+                                    "StringEquals": {
+                                      "aws:SourceAccount": {
+                                        "Ref": "AWS::AccountId"
+                                      }
+                                    }
+                                  },
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "logging.s3.amazonaws.com"
+                                  },
+                                  "Resource": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "ChatbotAPILoggingBucketC6088026",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/*"
+                                      ]
+                                    ]
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.CfnBucketPolicy",
+                          "version": "2.140.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketPolicy",
+                      "version": "2.140.0"
+                    }
+                  },
+                  "AutoDeleteObjectsCustomResource": {
+                    "id": "AutoDeleteObjectsCustomResource",
+                    "path": "ITOPSRAGStack/ChatbotAPI/LoggingBucket/AutoDeleteObjectsCustomResource",
+                    "children": {
+                      "Default": {
+                        "id": "Default",
+                        "path": "ITOPSRAGStack/ChatbotAPI/LoggingBucket/AutoDeleteObjectsCustomResource/Default",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CfnResource",
+                          "version": "2.140.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CustomResource",
+                      "version": "2.140.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3.Bucket",
+                  "version": "2.140.0"
+                }
+              },
+              "KendraSourceBucket": {
+                "id": "KendraSourceBucket",
+                "path": "ITOPSRAGStack/ChatbotAPI/KendraSourceBucket",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ITOPSRAGStack/ChatbotAPI/KendraSourceBucket/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                      "aws:cdk:cloudformation:props": {
+                        "bucketEncryption": {
+                          "serverSideEncryptionConfiguration": [
+                            {
+                              "serverSideEncryptionByDefault": {
+                                "sseAlgorithm": "aws:kms"
+                              }
+                            }
+                          ]
+                        },
+                        "corsConfiguration": {
+                          "corsRules": [
+                            {
+                              "allowedHeaders": [
+                                "*"
+                              ],
+                              "allowedMethods": [
+                                "GET",
+                                "POST",
+                                "PUT",
+                                "DELETE"
+                              ],
+                              "allowedOrigins": [
+                                "*"
+                              ]
+                            }
+                          ]
+                        },
+                        "loggingConfiguration": {
+                          "destinationBucketName": {
+                            "Ref": "ChatbotAPILoggingBucketC6088026"
+                          }
                         },
                         "tags": [
                           {
@@ -950,6 +2017,40 @@
                             "policyDocument": {
                               "Statement": [
                                 {
+                                  "Action": "s3:*",
+                                  "Condition": {
+                                    "Bool": {
+                                      "aws:SecureTransport": "false"
+                                    }
+                                  },
+                                  "Effect": "Deny",
+                                  "Principal": {
+                                    "AWS": "*"
+                                  },
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "ChatbotAPIKendraSourceBucket8BA49C97",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          {
+                                            "Fn::GetAtt": [
+                                              "ChatbotAPIKendraSourceBucket8BA49C97",
+                                              "Arn"
+                                            ]
+                                          },
+                                          "/*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
                                   "Action": [
                                     "s3:DeleteObject*",
                                     "s3:GetBucket*",
@@ -963,6 +2064,40 @@
                                         "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
                                         "Arn"
                                       ]
+                                    }
+                                  },
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "ChatbotAPIKendraSourceBucket8BA49C97",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          {
+                                            "Fn::GetAtt": [
+                                              "ChatbotAPIKendraSourceBucket8BA49C97",
+                                              "Arn"
+                                            ]
+                                          },
+                                          "/*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "Action": [
+                                    "s3:GetObject",
+                                    "s3:ListBucket"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "AWS": {
+                                      "Fn::ImportValue": "ITOPSRAGStackChatbotAPIBucketStackA20283EE:ExportsOutputFnGetAttKendraS3DataSourceRole132CF829ArnFE32655A"
                                     }
                                   },
                                   "Resource": [
@@ -1038,6 +2173,15 @@
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
                       "aws:cdk:cloudformation:props": {
+                        "bucketEncryption": {
+                          "serverSideEncryptionConfiguration": [
+                            {
+                              "serverSideEncryptionByDefault": {
+                                "sseAlgorithm": "aws:kms"
+                              }
+                            }
+                          ]
+                        },
                         "corsConfiguration": {
                           "corsRules": [
                             {
@@ -1055,6 +2199,11 @@
                               ]
                             }
                           ]
+                        },
+                        "loggingConfiguration": {
+                          "destinationBucketName": {
+                            "Ref": "ChatbotAPILoggingBucketC6088026"
+                          }
                         },
                         "tags": [
                           {
@@ -1087,6 +2236,40 @@
                             },
                             "policyDocument": {
                               "Statement": [
+                                {
+                                  "Action": "s3:*",
+                                  "Condition": {
+                                    "Bool": {
+                                      "aws:SecureTransport": "false"
+                                    }
+                                  },
+                                  "Effect": "Deny",
+                                  "Principal": {
+                                    "AWS": "*"
+                                  },
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "ChatbotAPIFeedbackDownloadBucket5357D600",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          {
+                                            "Fn::GetAtt": [
+                                              "ChatbotAPIFeedbackDownloadBucket5357D600",
+                                              "Arn"
+                                            ]
+                                          },
+                                          "/*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                },
                                 {
                                   "Action": [
                                     "s3:DeleteObject*",
@@ -1176,6 +2359,15 @@
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
                       "aws:cdk:cloudformation:props": {
+                        "bucketEncryption": {
+                          "serverSideEncryptionConfiguration": [
+                            {
+                              "serverSideEncryptionByDefault": {
+                                "sseAlgorithm": "aws:kms"
+                              }
+                            }
+                          ]
+                        },
                         "corsConfiguration": {
                           "corsRules": [
                             {
@@ -1193,6 +2385,11 @@
                               ]
                             }
                           ]
+                        },
+                        "loggingConfiguration": {
+                          "destinationBucketName": {
+                            "Ref": "ChatbotAPILoggingBucketC6088026"
+                          }
                         },
                         "tags": [
                           {
@@ -1225,6 +2422,40 @@
                             },
                             "policyDocument": {
                               "Statement": [
+                                {
+                                  "Action": "s3:*",
+                                  "Condition": {
+                                    "Bool": {
+                                      "aws:SecureTransport": "false"
+                                    }
+                                  },
+                                  "Effect": "Deny",
+                                  "Principal": {
+                                    "AWS": "*"
+                                  },
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "ChatbotAPIEvalResultsBucketCB2F9C6D",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          {
+                                            "Fn::GetAtt": [
+                                              "ChatbotAPIEvalResultsBucketCB2F9C6D",
+                                              "Arn"
+                                            ]
+                                          },
+                                          "/*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                },
                                 {
                                   "Action": [
                                     "s3:DeleteObject*",
@@ -1314,6 +2545,15 @@
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
                       "aws:cdk:cloudformation:props": {
+                        "bucketEncryption": {
+                          "serverSideEncryptionConfiguration": [
+                            {
+                              "serverSideEncryptionByDefault": {
+                                "sseAlgorithm": "aws:kms"
+                              }
+                            }
+                          ]
+                        },
                         "corsConfiguration": {
                           "corsRules": [
                             {
@@ -1331,6 +2571,11 @@
                               ]
                             }
                           ]
+                        },
+                        "loggingConfiguration": {
+                          "destinationBucketName": {
+                            "Ref": "ChatbotAPILoggingBucketC6088026"
+                          }
                         },
                         "tags": [
                           {
@@ -1363,6 +2608,40 @@
                             },
                             "policyDocument": {
                               "Statement": [
+                                {
+                                  "Action": "s3:*",
+                                  "Condition": {
+                                    "Bool": {
+                                      "aws:SecureTransport": "false"
+                                    }
+                                  },
+                                  "Effect": "Deny",
+                                  "Principal": {
+                                    "AWS": "*"
+                                  },
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "ChatbotAPIEvalTestCasesBucket3A06FDF6",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          {
+                                            "Fn::GetAtt": [
+                                              "ChatbotAPIEvalTestCasesBucket3A06FDF6",
+                                              "Arn"
+                                            ]
+                                          },
+                                          "/*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                },
                                 {
                                   "Action": [
                                     "s3:DeleteObject*",
@@ -1452,6 +2731,15 @@
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
                       "aws:cdk:cloudformation:props": {
+                        "bucketEncryption": {
+                          "serverSideEncryptionConfiguration": [
+                            {
+                              "serverSideEncryptionByDefault": {
+                                "sseAlgorithm": "aws:kms"
+                              }
+                            }
+                          ]
+                        },
                         "corsConfiguration": {
                           "corsRules": [
                             {
@@ -1469,6 +2757,11 @@
                               ]
                             }
                           ]
+                        },
+                        "loggingConfiguration": {
+                          "destinationBucketName": {
+                            "Ref": "ChatbotAPILoggingBucketC6088026"
+                          }
                         },
                         "tags": [
                           {
@@ -1501,6 +2794,40 @@
                             },
                             "policyDocument": {
                               "Statement": [
+                                {
+                                  "Action": "s3:*",
+                                  "Condition": {
+                                    "Bool": {
+                                      "aws:SecureTransport": "false"
+                                    }
+                                  },
+                                  "Effect": "Deny",
+                                  "Principal": {
+                                    "AWS": "*"
+                                  },
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "ChatbotAPIRagasDependenciesBucket256E99F1",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          {
+                                            "Fn::GetAtt": [
+                                              "ChatbotAPIRagasDependenciesBucket256E99F1",
+                                              "Arn"
+                                            ]
+                                          },
+                                          "/*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                },
                                 {
                                   "Action": [
                                     "s3:DeleteObject*",
@@ -1978,10 +3305,224 @@
                   "version": "2.140.0"
                 }
               },
+              "ApiGWLogRole": {
+                "id": "ApiGWLogRole",
+                "path": "ITOPSRAGStack/ChatbotAPI/ApiGWLogRole",
+                "children": {
+                  "ImportApiGWLogRole": {
+                    "id": "ImportApiGWLogRole",
+                    "path": "ITOPSRAGStack/ChatbotAPI/ApiGWLogRole/ImportApiGWLogRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.140.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ITOPSRAGStack/ChatbotAPI/ApiGWLogRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "apigateway.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "description": "Role for API Gateway to write logs to CloudWatch"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.140.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "ITOPSRAGStack/ChatbotAPI/ApiGWLogRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ITOPSRAGStack/ChatbotAPI/ApiGWLogRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "logs:CreateLogGroup",
+                                    "logs:CreateLogStream",
+                                    "logs:DescribeLogGroups",
+                                    "logs:DescribeLogStreams",
+                                    "logs:FilterLogEvents",
+                                    "logs:GetLogEvents",
+                                    "logs:PutLogEvents"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": "*"
+                                },
+                                {
+                                  "Action": [
+                                    "logs:CreateLogStream",
+                                    "logs:PutLogEvents"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "ChatbotAPIRestBackendHttpApiLogsA9A80762",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::GetAtt": [
+                                        "ChatbotAPIWebsocketBackendWebSocketApiLogs55245978",
+                                        "Arn"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "ChatbotAPIApiGWLogRoleDefaultPolicy480F5400",
+                            "roles": [
+                              {
+                                "Ref": "ChatbotAPIApiGWLogRoleFB296517"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.140.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.140.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.140.0"
+                }
+              },
+              "ApiGWAccountLogRole": {
+                "id": "ApiGWAccountLogRole",
+                "path": "ITOPSRAGStack/ChatbotAPI/ApiGWAccountLogRole",
+                "children": {
+                  "ImportApiGWAccountLogRole": {
+                    "id": "ImportApiGWAccountLogRole",
+                    "path": "ITOPSRAGStack/ChatbotAPI/ApiGWAccountLogRole/ImportApiGWAccountLogRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.140.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ITOPSRAGStack/ChatbotAPI/ApiGWAccountLogRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "apigateway.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "description": "Role for API Gateway account settings to push logs to CloudWatch",
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.140.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.140.0"
+                }
+              },
+              "Account": {
+                "id": "Account",
+                "path": "ITOPSRAGStack/ChatbotAPI/Account",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::Account",
+                  "aws:cdk:cloudformation:props": {
+                    "cloudWatchRoleArn": {
+                      "Fn::GetAtt": [
+                        "ChatbotAPIApiGWAccountLogRoleD6766E6D",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.CfnAccount",
+                  "version": "2.140.0"
+                }
+              },
               "RestBackend": {
                 "id": "RestBackend",
                 "path": "ITOPSRAGStack/ChatbotAPI/RestBackend",
                 "children": {
+                  "HttpApiLogs": {
+                    "id": "HttpApiLogs",
+                    "path": "ITOPSRAGStack/ChatbotAPI/RestBackend/HttpApiLogs",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ITOPSRAGStack/ChatbotAPI/RestBackend/HttpApiLogs/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
+                          "aws:cdk:cloudformation:props": {
+                            "logGroupName": "/aws/apigateway/RestBackend-http-api",
+                            "retentionInDays": 7
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_logs.CfnLogGroup",
+                          "version": "2.140.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_logs.LogGroup",
+                      "version": "2.140.0"
+                    }
+                  },
                   "HTTP-API": {
                     "id": "HTTP-API",
                     "path": "ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API",
@@ -5414,6 +6955,31 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_apigatewayv2.WebSocketApi",
+                      "version": "2.140.0"
+                    }
+                  },
+                  "WebSocketApiLogs": {
+                    "id": "WebSocketApiLogs",
+                    "path": "ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WebSocketApiLogs",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WebSocketApiLogs/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
+                          "aws:cdk:cloudformation:props": {
+                            "logGroupName": "/aws/apigateway/WebsocketBackend-websocket-api",
+                            "retentionInDays": 7
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_logs.CfnLogGroup",
+                          "version": "2.140.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_logs.LogGroup",
                       "version": "2.140.0"
                     }
                   },

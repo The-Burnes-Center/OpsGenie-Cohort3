@@ -5,6 +5,7 @@ import { UserPool, UserPoolIdentityProviderOidc, UserPoolClient, UserPoolClientI
 import * as cognito from "aws-cdk-lib/aws-cognito";
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as path from 'path';
+import * as fs from 'fs';
 
 export class AuthorizationStack extends Construct {
   public readonly lambdaAuthorizer : lambda.Function;
@@ -28,6 +29,13 @@ export class AuthorizationStack extends Construct {
       autoVerify: { email: true, phone: true },
       signInAliases: {
         email: true,
+      },
+      passwordPolicy: {
+        minLength: 12,
+        requireDigits: true,
+        requireLowercase: true,
+        requireUppercase: true,
+        requireSymbols: true
       },
       customAttributes : {
         'role' : new cognito.StringAttribute({ minLen: 0, maxLen: 30, mutable: true })
@@ -82,21 +90,71 @@ export class AuthorizationStack extends Construct {
     // });
 
     const userPoolClient = new UserPoolClient(this, 'UserPoolClient', {
-      userPool,      
+      userPool,
+      authFlows: {
+        userPassword: true,
+        userSrp: true
+      },
+      preventUserExistenceErrors: true,
       // supportedIdentityProviders: [UserPoolClientIdentityProvider.custom(azureProvider.providerName)],
     });
 
     this.userPoolClient = userPoolClient;
 
+    // Create requirements.txt file for Lambda dependencies if it doesn't exist
+    const requirementsFilePath = path.join(__dirname, 'websocket-api-authorizer', 'requirements.txt');
+    if (!fs.existsSync(requirementsFilePath)) {
+      fs.writeFileSync(requirementsFilePath, 
+`python-jose==3.3.0
+requests==2.31.0
+urllib3==2.2.1
+`);
+    }
+
     const authorizerHandlerFunction = new lambda.Function(this, 'AuthorizationFunction', {
-      runtime: lambda.Runtime.PYTHON_3_12, // Choose any supported Node.js runtime
-      code: lambda.Code.fromAsset(path.join(__dirname, 'websocket-api-authorizer')), // Points to the lambda directory
-      handler: 'lambda_function.lambda_handler', // Points to the 'hello' file in the lambda directory
+      runtime: lambda.Runtime.PYTHON_3_12,
+      code: lambda.Code.fromAsset(path.join(__dirname, 'websocket-api-authorizer'), {
+        bundling: {
+          image: lambda.Runtime.PYTHON_3_12.bundlingImage,
+          user: '0:0',
+          command: [
+            'bash', '-c', [
+              // Use only verified binary packages to prevent supply chain attacks
+              'pip install --platform manylinux2014_x86_64 --implementation cp --only-binary=:all: --require-hashes -r requirements.txt -t /asset-output',
+              // Copy only necessary files, excluding any potential malicious scripts
+              'find . -type f -name "*.py" -exec cp {} /asset-output \\;',
+              // Set secure permissions
+              'chmod -R 755 /asset-output'
+            ].join(' && ')
+          ],
+          securityOpt: 'no-new-privileges',  // Prevent privilege escalation
+          volumes: [
+            {
+              hostPath: '/tmp',
+              containerPath: '/tmp'
+            }
+          ],
+          environment: {
+            'PIP_NO_CACHE_DIR': 'true',       // Don't cache packages
+            'PIP_DISABLE_PIP_VERSION_CHECK': 'true', // Don't check for pip updates
+            'PYTHONDONTWRITEBYTECODE': '1'    // Don't create .pyc files
+          },
+        },
+      }),
+      handler: 'lambda_function.lambda_handler',
       environment: {
-        "USER_POOL_ID" : userPool.userPoolId,
-        "APP_CLIENT_ID" : userPoolClient.userPoolClientId
+        "USER_POOL_ID": userPool.userPoolId,
+        "APP_CLIENT_ID": userPoolClient.userPoolClientId
       },
-      timeout: cdk.Duration.seconds(30)
+      timeout: cdk.Duration.seconds(30),
+      memorySize: 256,
+      tracing: lambda.Tracing.ACTIVE,  // Enable X-Ray tracing
+    });
+
+    // Add resource-based policy to prevent unauthorized invocations
+    authorizerHandlerFunction.addPermission('AllowApiGatewayInvocation', {
+      principal: new cdk.aws_iam.ServicePrincipal('apigateway.amazonaws.com'),
+      action: 'lambda:InvokeFunction'
     });
 
     this.lambdaAuthorizer = authorizerHandlerFunction;

@@ -6,6 +6,7 @@ import * as ssm from "aws-cdk-lib/aws-ssm";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as cdk from "aws-cdk-lib";
 import * as path from "path";
+import * as logs from "aws-cdk-lib/aws-logs";
 
 import { AuthorizationStack } from '../authorization'
 
@@ -20,6 +21,7 @@ import { WebSocketLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integra
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import { WebSocketLambdaAuthorizer, HttpUserPoolAuthorizer, HttpJwtAuthorizer  } from 'aws-cdk-lib/aws-apigatewayv2-authorizers';
 import { aws_apigatewayv2 as apigwv2 } from "aws-cdk-lib";
+import { aws_apigateway as apig } from "aws-cdk-lib";
 import { Construct } from "constructs";
 
 // import { NagSuppressions } from "cdk-nag";
@@ -43,10 +45,50 @@ export class ChatBotApi extends Construct {
     const buckets = new S3BucketStack(this, "BucketStack");
     const kendra = new KendraIndexStack(this, "KendraStack", { s3Bucket: buckets.kendraBucket });
 
-    const restBackend = new RestBackendAPI(this, "RestBackend", {})
+    // Create IAM roles for API Gateway CloudWatch logging
+    const logWriteRole = new iam.Role(this, 'ApiGWLogRole', {
+      assumedBy: new iam.ServicePrincipal('apigateway.amazonaws.com'),
+      description: 'Role for API Gateway to write logs to CloudWatch',
+    });
+    
+    // Add policy for writing logs
+    const logPolicy = new iam.PolicyStatement({
+      actions: [
+        'logs:CreateLogGroup',
+        'logs:CreateLogStream',
+        'logs:DescribeLogGroups',
+        'logs:DescribeLogStreams',
+        'logs:PutLogEvents',
+        'logs:GetLogEvents',
+        'logs:FilterLogEvents'
+      ],
+      resources: ['*']
+    });
+    
+    logWriteRole.addToPolicy(logPolicy);
+    
+    // Create role with AWS managed policy for API Gateway account settings
+    const cloudWatchWriteRole = new iam.Role(this, 'ApiGWAccountLogRole', {
+      assumedBy: new iam.ServicePrincipal('apigateway.amazonaws.com'),
+      managedPolicies: [iam.ManagedPolicy.fromAwsManagedPolicyName('service-role/AmazonAPIGatewayPushToCloudWatchLogs')],
+      description: 'Role for API Gateway account settings to push logs to CloudWatch',
+    });
+
+    // Configure API Gateway account settings to use CloudWatch logs
+    const cloudWatchAccount = new apig.CfnAccount(this, "Account", {
+      cloudWatchRoleArn: cloudWatchWriteRole.roleArn,
+    });
+
+    // Pass logWriteRole to API implementations
+    const restBackend = new RestBackendAPI(this, "RestBackend", { logWriteRole: logWriteRole });
     this.httpAPI = restBackend;
-    const websocketBackend = new WebsocketBackendAPI(this, "WebsocketBackend", {})
+    
+    const websocketBackend = new WebsocketBackendAPI(this, "WebsocketBackend", { logWriteRole: logWriteRole });
     this.wsAPI = websocketBackend;
+
+    // Set up dependencies to ensure CloudWatch account is configured before APIs
+    restBackend.node.addDependency(cloudWatchAccount);
+    websocketBackend.node.addDependency(cloudWatchAccount);
 
     const lambdaFunctions = new LambdaFunctionStack(this, "LambdaFunctions",
       {
@@ -236,82 +278,12 @@ export class ChatBotApi extends Construct {
       authorizer: httpAuthorizer,
     })
 
-      // this.wsAPI = websocketBackend.wsAPI;
-
-
-
-
-    // const api = new appsync.GraphqlApi(this, "ChatbotApi", {
-    //   name: "ChatbotGraphqlApi",
-    //   definition: appsync.Definition.fromFile(
-    //     path.join(__dirname, "schema/schema.graphql")
-    //   ),
-    //   authorizationConfig: {
-    //     additionalAuthorizationModes: [
-    //       {
-    //         authorizationType: appsync.AuthorizationType.IAM,
-    //       },
-    //       {
-    //         authorizationType: appsync.AuthorizationType.USER_POOL,
-    //         userPoolConfig: {
-    //           userPool: props.userPool,
-    //         },
-    //       },
-    //     ],
-    //   },
-    //   logConfig: {
-    //     fieldLogLevel: appsync.FieldLogLevel.ALL,
-    //     retention: RetentionDays.ONE_WEEK,
-    //     role: loggingRole,
-    //   },
-    //   xrayEnabled: true,
-    //   visibility: props.config.privateWebsite ? appsync.Visibility.PRIVATE : appsync.Visibility.GLOBAL
-    // });
-
-    // new ApiResolvers(this, "RestApi", {
-    //   ...props,
-    //   sessionsTable: chatTables.sessionsTable,
-    //   byUserIdIndex: chatTables.byUserIdIndex,
-    //   api,
-    //   userFeedbackBucket: chatBuckets.userFeedbackBucket,
-    // });
-
-    // const realtimeBackend = new RealtimeGraphqlApiBackend(this, "Realtime", {
-    //   ...props,
-    //   api,
-    // });
-
-    // realtimeBackend.resolvers.outgoingMessageHandler.addEnvironment(
-    //   "GRAPHQL_ENDPOINT",
-    //   api.graphqlUrl
-    // );
-
-    // api.grantMutation(realtimeBackend.resolvers.outgoingMessageHandler);
-
-    // // Prints out URL
+    // Output API endpoints
     new cdk.CfnOutput(this, "WS-API - apiEndpoint", {
       value: websocketBackend.wsAPI.apiEndpoint || "",
     });
     new cdk.CfnOutput(this, "HTTP-API - apiEndpoint", {
       value: restBackend.restAPI.apiEndpoint || "",
     });
-
-    // this.messagesTopic = realtimeBackend.messagesTopic;
-    // this.sessionsTable = chatTables.sessionsTable;
-    // this.byUserIdIndex = chatTables.byUserIdIndex;
-    // this.userFeedbackBucket = chatBuckets.userFeedbackBucket;
-    // this.filesBucket = chatBuckets.filesBucket;
-    // this.graphqlApi = api;
-
-    /**
-     * CDK NAG suppression
-     */
-    // NagSuppressions.addResourceSuppressions(loggingRole, [
-    //   {
-    //     id: "AwsSolutions-IAM5",
-    //     reason:
-    //       "Access to all log groups required for CloudWatch log group creation.",
-    //   },
-    // ]);
   }
 }

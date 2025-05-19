@@ -78,7 +78,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/36d4e7031ef2c926fa9bca790c10db9ab74c9ac5588428c5863202a0e7ab0da6.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/8679a61a5413788d09072a34399333aeb08ce0043f1b56d49c1fdd9b67dc970f.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -94,6 +94,30 @@
         "ITOPSRAGStackChatbotAPIBucketStackA20283EE.assets"
       ],
       "metadata": {
+        "/ITOPSRAGStack/ChatbotAPI/BucketStack/KendraS3DataSourceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KendraS3DataSourceRole132CF829"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/BucketStack/KendraS3DataSourceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KendraS3DataSourceRoleDefaultPolicy5865DBCF"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/BucketStack/KendraS3RoleName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KendraS3RoleName"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/BucketStack/KendraS3RoleArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KendraS3RoleArn"
+          }
+        ],
         "/ITOPSRAGStack/ChatbotAPI/BucketStack/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
@@ -104,6 +128,12 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/BucketStack/Exports/Output{\"Fn::GetAtt\":[\"KendraS3DataSourceRole132CF829\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttKendraS3DataSourceRole132CF829ArnFE32655A"
           }
         ],
         "/ITOPSRAGStack/ChatbotAPI/BucketStack/BootstrapVersion": [
@@ -258,7 +288,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e1f23d451fca6c2b68d591da9b104935bb91feb1ca76002460275736fdf4a04b.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1251f70da33b8b65e612d710652aadcc59c9d1ff3c932371951f30fdac4c94a2.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -271,6 +301,7 @@
         }
       },
       "dependencies": [
+        "ITOPSRAGStackChatbotAPIBucketStackA20283EE",
         "ITOPSRAGStack.assets"
       ],
       "metadata": {
@@ -304,10 +335,22 @@
             "data": "AuthorizationAuthorizationFunctionServiceRole09B7CF46"
           }
         ],
+        "/ITOPSRAGStack/Authorization/AuthorizationFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthorizationAuthorizationFunctionServiceRoleDefaultPolicyCFC6EA8D"
+          }
+        ],
         "/ITOPSRAGStack/Authorization/AuthorizationFunction/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AuthorizationAuthorizationFunctionB35B7A4C"
+          }
+        ],
+        "/ITOPSRAGStack/Authorization/AuthorizationFunction/AllowApiGatewayInvocation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthorizationAuthorizationFunctionAllowApiGatewayInvocationE1A1AEF9"
           }
         ],
         "/ITOPSRAGStack/Authorization/UserPool ID": [
@@ -356,6 +399,72 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIDailyLoginTable0DBFC91F"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/CloudTrailBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPICloudTrailBucketD3543B87"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/CloudTrailBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPICloudTrailBucketPolicy196CD99B"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/CloudTrailKey/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPICloudTrailKey4EACC2B1"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/CloudTrailKey/Alias/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPICloudTrailKeyAlias3CD23135"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/DataEventTrailLogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIDataEventTrailLogGroupB7F753B3"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/DataEventTrail/LogsRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIDataEventTrailLogsRole87E96C38"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/DataEventTrail/LogsRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIDataEventTrailLogsRoleDefaultPolicyB22E54FB"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/DataEventTrail/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIDataEventTrailFC839B17"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/LoggingBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPILoggingBucketC6088026"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/LoggingBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPILoggingBucketPolicy2B2884F7"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/LoggingBucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPILoggingBucketAutoDeleteObjectsCustomResourceA604400D"
           }
         ],
         "/ITOPSRAGStack/ChatbotAPI/KendraSourceBucket/Resource": [
@@ -482,6 +591,36 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIKendraS3DataSourceA8A30815"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/ApiGWLogRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIApiGWLogRoleFB296517"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/ApiGWLogRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIApiGWLogRoleDefaultPolicy480F5400"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/ApiGWAccountLogRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIApiGWAccountLogRoleD6766E6D"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/Account": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIAccount4892B89C"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/RestBackend/HttpApiLogs/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIRestBackendHttpApiLogsA9A80762"
           }
         ],
         "/ITOPSRAGStack/ChatbotAPI/RestBackend/HTTP-API/Resource": [
@@ -974,6 +1113,12 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIWebsocketBackendWSAPIgenerateEmailRouteD46A28B4"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WebSocketApiLogs/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIWebsocketBackendWebSocketApiLogs55245978"
           }
         ],
         "/ITOPSRAGStack/ChatbotAPI/WebsocketBackend/WS-API-prod/Resource": [

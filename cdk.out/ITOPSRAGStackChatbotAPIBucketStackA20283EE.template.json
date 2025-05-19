@@ -1,14 +1,105 @@
 {
  "Resources": {
+  "KendraS3DataSourceRole132CF829": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "kendra.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Description": "IAM role for Kendra to access S3 bucket"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/BucketStack/KendraS3DataSourceRole/Resource"
+   }
+  },
+  "KendraS3DataSourceRoleDefaultPolicy5865DBCF": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "kendra:BatchDeleteDocument",
+        "kendra:BatchPutDocument"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:aws:kendra:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":index/*"
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "KendraS3DataSourceRoleDefaultPolicy5865DBCF",
+    "Roles": [
+     {
+      "Ref": "KendraS3DataSourceRole132CF829"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/BucketStack/KendraS3DataSourceRole/DefaultPolicy/Resource"
+   }
+  },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSMzQx0DNQTCwv1k1OydbNyUzSqw4uSUzO1nFOywtKLc4vLUpOBbGd8/NSMksy8/NqdfLyU1L1sor1y4wM9Awt9AwUs4ozM3WLSvNKMnNT9YIgNAD0SzU5WgAAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/02KQQ6CMBBFz8K+HQtx4Z4DaOoBSG1rMlA6hplKDOHuxrJx9f5/eR20ZwOmcStrHyad8AHbXZyflFt5QDfDZilF1T9z5Y0S+s/vHmtXNjKVxdfkWuRVpMZ/tqccUJDyrjKFCCOf3p2B9gKmGRlRLyULzhHswS9mKqtslQAAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/BucketStack/CDKMetadata/Default"
    },
    "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Outputs": {
+  "KendraS3RoleName": {
+   "Description": "Kendra S3 data source role name for stack ITOPSRAGStackChatbotAPIBucketStackA20283EE",
+   "Value": {
+    "Ref": "KendraS3DataSourceRole132CF829"
+   }
+  },
+  "KendraS3RoleArn": {
+   "Description": "Kendra S3 data source role ARN for stack ITOPSRAGStackChatbotAPIBucketStackA20283EE",
+   "Value": {
+    "Fn::GetAtt": [
+     "KendraS3DataSourceRole132CF829",
+     "Arn"
+    ]
+   }
+  },
+  "ExportsOutputFnGetAttKendraS3DataSourceRole132CF829ArnFE32655A": {
+   "Value": {
+    "Fn::GetAtt": [
+     "KendraS3DataSourceRole132CF829",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "ITOPSRAGStackChatbotAPIBucketStackA20283EE:ExportsOutputFnGetAttKendraS3DataSourceRole132CF829ArnFE32655A"
+   }
   }
  },
  "Conditions": {
