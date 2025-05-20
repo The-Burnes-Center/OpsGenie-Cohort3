@@ -45,7 +45,7 @@ jobs:
 
     # Step 7: Deploy the CDK stack (from the root folder)
     - name: Deploy CDK stack
-      run: cdk deploy ITOPSRAGStack --require-approval never  # Replace "My stack name" with your actual stack name
+      run: cdk deploy ITOPSRAGStack --require-approval never  
 
     # Step 8: Fetch CloudFormation outputs and save to a file
     - name: Fetch CloudFormation Outputs
