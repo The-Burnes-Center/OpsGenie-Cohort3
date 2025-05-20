@@ -7187,7 +7187,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "e0981895fcb1095eb639c7ca95221fc88a70893fcc8aa3d39f9cb7062f1414df.zip"
+     "S3Key": "9382f137652b74533cfd473f49ffd8cbc12a5c9fae2b6246b104e98c6099e8e8.zip"
     },
     "Environment": {
      "Variables": {
@@ -7216,7 +7216,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/GenerateResponseFunction/Resource",
-    "aws:asset:path": "asset.e0981895fcb1095eb639c7ca95221fc88a70893fcc8aa3d39f9cb7062f1414df",
+    "aws:asset:path": "asset.9382f137652b74533cfd473f49ffd8cbc12a5c9fae2b6246b104e98c6099e8e8",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -7346,7 +7346,7 @@
    "Properties": {
     "Code": {
      "ImageUri": {
-      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:d241777a51ebed09594d0dd69bdf6c0bc985bda805f8e121aae5cf4a21ded1d5"
+      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:fa50afa1afa5877dbd5624f67ecf05d377bd8c9ec209075a265970aab5b5d5fb"
      }
     },
     "Environment": {
@@ -7376,7 +7376,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/LlmEvaluationFunction/Resource",
-    "aws:asset:path": "asset.d241777a51ebed09594d0dd69bdf6c0bc985bda805f8e121aae5cf4a21ded1d5",
+    "aws:asset:path": "asset.fa50afa1afa5877dbd5624f67ecf05d377bd8c9ec209075a265970aab5b5d5fb",
     "aws:asset:dockerfile-path": "Dockerfile",
     "aws:asset:property": "Code.ImageUri"
    }
