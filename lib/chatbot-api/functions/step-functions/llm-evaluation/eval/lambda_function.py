@@ -170,7 +170,11 @@ def evaluate_with_ragas(question, expected_response, actual_response):
 
         # Load LLM and embeddings
         region_name = 'us-east-1'
-        bedrock_model = BedrockChat(region_name=region_name, endpoint_url=f"https://bedrock-runtime.{region_name}.amazonaws.com", model_id=BEDROCK_MODEL_ID)
+        bedrock_model = BedrockChat(region_name=region_name, 
+                                    endpoint_url=f"https://bedrock-runtime.{region_name}.amazonaws.com", 
+                                    model_id=BEDROCK_MODEL_ID,
+                                    model_kwargs={"max_tokens": 4096})
+        
         bedrock_embeddings = BedrockEmbeddings(region_name=region_name, model_id='amazon.titan-embed-text-v1')
 
         # Evaluate
