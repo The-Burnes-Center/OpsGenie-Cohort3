@@ -72,6 +72,12 @@ export default function BaseAppLayout(
   return (
     <SessionRefreshContext.Provider value={{needsRefresh,setNeedsRefresh}}>
       <NotificationProvider>
+    <div className="skip-link">
+      <a href="#main-content" className="visually-hidden">
+        Skip to main content
+      </a>
+    </div>
+    <div id="main-content">
     <AppLayout
       headerSelector="#awsui-top-navigation"
       navigation={<NavigationPanel />}
@@ -87,6 +93,7 @@ export default function BaseAppLayout(
       onToolsChange={({ detail }) => setToolsOpen(detail.open)}
       {...props}
     />
+    </div>
     </NotificationProvider>
     </SessionRefreshContext.Provider>
   );

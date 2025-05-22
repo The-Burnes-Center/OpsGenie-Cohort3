@@ -6,18 +6,18 @@ import {
 import { useNotifications } from "./notif-manager";
 
 export default function NotificationBar() {
-
-  const { notifications, addNotification } = useNotifications();
+  const { notifications } = useNotifications();
   
-
   return (  
-    <div>
-    <Flashbar  items={notifications.map(notif => ({
+    <div aria-live="polite" aria-atomic="true">
+      <Flashbar items={notifications.map(notif => ({
         content: notif.content,
         dismissible: notif.dismissible,
         onDismiss: () => notif.onDismiss(),
-        type: notif.type
+        type: notif.type,
+        ariaRole: 'alert',
+        statusIconAriaLabel: `${notif.type} notification`
       }))} />    
-      </div>  
+    </div>  
   );
 }

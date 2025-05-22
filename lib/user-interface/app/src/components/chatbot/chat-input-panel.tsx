@@ -357,27 +357,24 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
   return (
     <SpaceBetween direction="vertical" size="l">
       <Container>
-        <div className={styles.input_textarea_container}>
-          <SpaceBetween size="xs" direction="horizontal" alignItems="center">
-          </SpaceBetween>
+        <div className={styles.inputContainer}>
+          <label htmlFor="chat-input" className="visually-hidden">
+            Type a message
+          </label>
           <TextareaAutosize
-            className={styles.input_textarea}
-            maxRows={6}
-            minRows={1}
-            spellCheck={true}
-            autoFocus
-            onChange={(e) =>
-              setState((state) => ({ ...state, value: e.target.value }))
-            }
+            id="chat-input"
+            className={styles.chatInput}
+            placeholder="Type a message"
+            aria-label="Message to send"
+            value={state.value}
+            onChange={(e) => setState({ ...state, value: e.target.value })}
             onKeyDown={(e) => {
-              if (e.key == "Enter" && !e.shiftKey) {
+              if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
                 handleSendMessage();
               }
             }}
-            value={state.value}
-            placeholder={"Send a message"}
-            aria-label="Message to send"
+            maxRows={5}
           />
           <div style={{ marginLeft: "8px" }}>
             <Button
@@ -401,6 +398,14 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
               )}
             </Button>
           </div>
+          {browserSupportsSpeechRecognition && (
+            <Button
+              iconName={listening ? "microphone-off" : "microphone"}
+              variant="icon"
+              onClick={listening ? SpeechRecognition.stopListening : SpeechRecognition.startListening}
+              aria-label={listening ? "Stop voice input" : "Start voice input"}
+            />
+          )}
         </div>
       </Container>
       <div className={styles.input_controls}>

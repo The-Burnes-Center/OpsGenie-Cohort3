@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useEffect } from 'react';
-import { Box, Cards, ColumnLayout, Container, ContentLayout, ExpandableSection, Header, Link, SpaceBetween, SplitPanel, TextContent, } from '@cloudscape-design/components';
+import { Box, Cards, ColumnLayout, Container, ContentLayout, ExpandableSection, Header, Link, SpaceBetween, SplitPanel, TextContent, Button } from '@cloudscape-design/components';
 import { Auth } from 'aws-amplify';
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -92,6 +92,22 @@ export default function EmailPanel(props: FeedbackPanelProps) {
           </Container>
         </ColumnLayout>
       </SplitPanel>
+      <div className={styles.feedbackSection} aria-live="polite">
+        <SpaceBetween direction="horizontal" size="xs">
+          <Button
+            iconName="thumbs-up"
+            variant="icon"
+            onClick={() => console.log('Positive feedback')}
+            aria-label="Provide positive feedback"
+          />
+          <Button
+            iconName="thumbs-down"
+            variant="icon"
+            onClick={() => console.log('Negative feedback')}
+            aria-label="Provide negative feedback"
+          />
+        </SpaceBetween>
+      </div>
     </div>
   );
 }

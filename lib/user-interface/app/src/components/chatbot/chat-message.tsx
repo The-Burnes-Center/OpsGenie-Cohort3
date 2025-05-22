@@ -283,35 +283,6 @@ export default function ChatMessage(props: ChatMessageProps) {
         <Container
           footer={
             showSources && (
-              // <ExpandableSection variant="footer" headerText="Sources">
-              //   <Cards
-              //     cardDefinition={{
-              //       header: item => (
-              //         <Link href={item.uri} fontSize="body-s">
-              //           {item.title}
-              //         </Link>
-              //       ),
-              //     }}
-              //     cardsPerRow={[
-              //       { cards: 1 },
-              //       { minWidth: 500, cards: 3 }
-              //     ]}
-              //     items={props.message.metadata.Sources as any[]}
-              //     loadingText="Loading sources..."
-              //     empty={
-              //       <Box
-              //         margin={{ vertical: "xs" }}
-              //         textAlign="center"
-              //         color="inherit"
-              //       >
-              //         <SpaceBetween size="m">
-              //           <b>No resources</b>
-              //           <Button>Create resource</Button>
-              //         </SpaceBetween>
-              //       </Box>
-              //     }
-              //   />
-              // </ExpandableSection>
               <SpaceBetween direction="horizontal" size="s">
               <ButtonDropdown
               items={(props.message.metadata.Sources as any[]).map((item) => { return {id: "id", disabled: false, text : item.title, href : item.uri, external : true, externalIconAriaLabel: "(opens in new tab)"}})}
@@ -348,48 +319,56 @@ export default function ChatMessage(props: ChatMessageProps) {
                   onClick={() => {
                     navigator.clipboard.writeText(props.message.content);
                   }}
+                  aria-label="Copy message content to clipboard"
                 />
               </Popover>
             </div>
           ) : null}
-          <ReactMarkdown
-            children={content}
-            remarkPlugins={[remarkGfm]}
-            components={{
-              pre(props) {
-                const { children, ...rest } = props;
-                return (
-                  <pre {...rest} className={styles.codeMarkdown}>
-                    {children}
-                  </pre>
-                );
-              },
-              table(props) {
-                const { children, ...rest } = props;
-                return (
-                  <table {...rest} className={styles.markdownTable}>
-                    {children}
-                  </table>
-                );
-              },
-              th(props) {
-                const { children, ...rest } = props;
-                return (
-                  <th {...rest} className={styles.markdownTableCell}>
-                    {children}
-                  </th>
-                );
-              },
-              td(props) {
-                const { children, ...rest } = props;
-                return (
-                  <td {...rest} className={styles.markdownTableCell}>
-                    {children}
-                  </td>
-                );
-              },
-            }}
-          />
+          <div 
+            className={`${styles.message} ${styles.ai}`}
+            role="region"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            <ReactMarkdown
+              children={content}
+              remarkPlugins={[remarkGfm]}
+              components={{
+                pre(props) {
+                  const { children, ...rest } = props;
+                  return (
+                    <pre {...rest} className={styles.codeMarkdown}>
+                      {children}
+                    </pre>
+                  );
+                },
+                table(props) {
+                  const { children, ...rest } = props;
+                  return (
+                    <table {...rest} className={styles.markdownTable}>
+                      {children}
+                    </table>
+                  );
+                },
+                th(props) {
+                  const { children, ...rest } = props;
+                  return (
+                    <th {...rest} className={styles.markdownTableCell} scope="col">
+                      {children}
+                    </th>
+                  );
+                },
+                td(props) {
+                  const { children, ...rest } = props;
+                  return (
+                    <td {...rest} className={styles.markdownTableCell}>
+                      {children}
+                    </td>
+                  );
+                },
+              }}
+            />
+          </div>
           <div className={styles.thumbsContainer}>
             {(selectedIcon === 1 || selectedIcon === null) && (
               <Button
@@ -402,6 +381,7 @@ export default function ChatMessage(props: ChatMessageProps) {
                   Utils.delay(3000).then(() => removeNotification(id));
                   setSelectedIcon(1);
                 }}
+                aria-label="Give positive feedback"
               />
             )}
             {(selectedIcon === 0 || selectedIcon === null) && (
@@ -415,6 +395,7 @@ export default function ChatMessage(props: ChatMessageProps) {
                   // setSelectedIcon(0);
                   setModalVisible(true);
                 }}
+                aria-label="Give negative feedback"
               />
             )}
           </div>
@@ -434,19 +415,23 @@ export default function ChatMessage(props: ChatMessageProps) {
               target="_blank"
               rel="noreferrer"
               style={{ marginLeft: "5px", marginRight: "5px" }}
+              aria-label={`View attached image ${idx + 1}`}
             >
               <img
                 src={file.url as string}
                 className={styles.img_chabot_message}
+                alt={`Attached image ${idx + 1}`}
               />
             </a>
           ))}
         </>
       )}
       {props.message?.type === ChatBotMessageType.Human && (
-        <TextContent>
-          <strong>{props.message.content}</strong>
-        </TextContent>
+        <div className={`${styles.message} ${styles.human}`} role="region">
+          <TextContent>
+            <strong>{props.message.content}</strong>
+          </TextContent>
+        </div>
       )}
     </div>
   );

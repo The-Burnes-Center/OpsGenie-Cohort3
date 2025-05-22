@@ -1,15 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { Box, Link, Modal, TextContent } from "@cloudscape-design/components";
+import React, { useEffect, useState, useRef } from "react";
+import { Box, Link, Modal, TextContent, Button } from "@cloudscape-design/components";
 
 export function TruncatedTextCell({ text, maxLength = 50 }) {
   const [showModal, setShowModal] = useState(false);
+  const previousFocus = useRef(null);
 
   const handleShowMore = () => {
+    previousFocus.current = document.activeElement;
     setShowModal(true);
   };
 
   const handleClose = () => {
     setShowModal(false);
+    if (previousFocus.current) {
+      setTimeout(() => {
+        if (previousFocus.current) {
+          previousFocus.current.focus();
+        }
+      }, 0);
+    }
   };
 
   const truncatedText = text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
@@ -31,13 +40,35 @@ export function TruncatedTextCell({ text, maxLength = 50 }) {
   
     return () => clearInterval(interval);
   }, []);
+
+  // Focus trap for modal
+  useEffect(() => {
+    if (showModal) {
+      // Focus the first focusable element in the modal
+      const modal = document.querySelector('.awsui_dialog_1q96c_1qpdf_93');
+      if (modal) {
+        const focusableElements = modal.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusableElements.length > 0) {
+          (focusableElements[0] as HTMLElement).focus();
+        }
+      }
+    }
+  }, [showModal]);
   
   return (
     <>
       <Box>
         <TextContent>{truncatedText}</TextContent>
         {text.length > maxLength && (
-          <Link onFollow={handleShowMore}>Show More</Link>
+          <Button
+            onClick={handleShowMore}
+            aria-haspopup="dialog"
+            aria-label="View full text"
+          >
+            Show More
+          </Button>
         )}
       </Box>
       <Modal
@@ -46,7 +77,7 @@ export function TruncatedTextCell({ text, maxLength = 50 }) {
         header="Full Text"
         footer={
           <Box float="right">
-            <Link onFollow={handleClose}>Close</Link>
+            <Button variant="primary" onClick={handleClose}>Close</Button>
           </Box>
         }
       >

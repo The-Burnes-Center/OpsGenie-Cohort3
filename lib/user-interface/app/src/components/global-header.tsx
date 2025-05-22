@@ -134,40 +134,42 @@ export default function GlobalHeader() {
       style={{ zIndex: 1002, top: 0, left: 0, right: 0, position: "fixed" }}
       id="awsui-top-navigation"
     >
-      <TopNavigation
-        identity={{
-          href: "/",
-          logo: { src: "/images/mayflower/stateseal-white.png", alt: CHATBOT_NAME + " Logo" },
-          title: "ITOPS Inquiry",
-        }}
-        utilities={[
-          // {
-          //   type: "button",
-          //   text: "for internal use only- testing stage",
-          // },
-          {
-            type: "button",
-            text: theme === Mode.Dark ? "Light Mode" : "Dark Mode",
-            onClick: onChangeThemeClick,
-          },
-  
-          {
-            type: "menu-dropdown",
-            ariaLabel: "Click to open user profile dropdown menu",
-            description: userName ?? "",
-            iconName: "user-profile",
-            onItemClick: onUserProfileClick,
-            items: [
-              {
-                id: "signout",
-                text: "Sign out",
-                ariaLabel: "Sign out option"
-              },
-            ],
-            onItemFollow: onFollow,
-          },
-        ]}
-      />
+      <nav role="navigation" aria-label="Top navigation">
+        <TopNavigation
+          identity={{
+            href: "/",
+            logo: { src: "/images/mayflower/stateseal-white.png", alt: CHATBOT_NAME + " Logo" },
+            title: "ITOPS Inquiry",
+          }}
+          utilities={[
+            // {
+            //   type: "button",
+            //   text: "for internal use only- testing stage",
+            // },
+            {
+              type: "button",
+              text: theme === Mode.Dark ? "Light Mode" : "Dark Mode",
+              onClick: onChangeThemeClick,
+            },
+    
+            {
+              type: "menu-dropdown",
+              ariaLabel: "Click to open user profile dropdown menu",
+              description: userName ?? "",
+              iconName: "user-profile",
+              onItemClick: onUserProfileClick,
+              items: [
+                {
+                  id: "signout",
+                  text: "Sign out",
+                  ariaLabel: "Sign out option"
+                },
+              ],
+              onItemFollow: onFollow,
+            },
+          ]}
+        />
+      </nav>
     </div>
   );
 }

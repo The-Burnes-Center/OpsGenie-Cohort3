@@ -10,7 +10,8 @@
 
 @media (min-width: 466px) {
   .chat_container {
-    min-height: calc(100vh - 104px);
+    width: 95%;
+    max-width: 800px;
   }
 }
 
@@ -28,13 +29,15 @@
 
 @media (min-width: 689px) {
   .chat_container {
-    min-height: calc(100vh - 60px);
+    width: 85%;
+    max-width: 900px;
   }
 }
 
 @media (min-width: 913px) {
   .chat_container {
-    min-height: calc(100vh - 68px);
+    width: 80%;
+    max-width: 1000px;
   }
 }
 
@@ -130,6 +133,17 @@
   }
 }
 
+@media (max-width: 480px) {
+  .input_container {
+    padding: 10px 5px;
+  }
+  
+  .chatInput {
+    min-height: 60px;
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+}
+
 @container (max-width: 689px) {
   .input_controls {
     display: grid;
@@ -202,4 +216,48 @@
 .thumbsIcon.selected {
   opacity: 1 !important;
   pointer-events: none; /* Disable pointer events for the selected icon */
+}
+
+.message {
+  &.human {
+    background-color: var(--message-human-bg, #f0f0f0);
+    color: var(--message-human-text, #000);
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin: 5px 0;
+  }
+  
+  &.ai {
+    background-color: var(--message-ai-bg, #f9f9f9);
+    color: var(--message-ai-text, #000);
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border-left: 3px solid var(--focus-color, #0972d3);
+  }
+}
+
+.chatInput {
+  border: 1px solid var(--border-color, #d1d5db);
+  border-radius: 4px;
+  padding: 10px 12px;
+  width: 100%;
+  font-size: 16px;
+  transition: border-color 0.2s ease;
+  
+  &:focus {
+    border-color: var(--focus-color, #0972d3);
+    box-shadow: 0 0 0 2px rgba(9, 114, 211, 0.2);
+    outline: none;
+  }
+}
+
+.feedbackSection {
+  margin-top: 15px;
+  padding: 5px;
+  
+  button:focus-visible {
+    outline: 2px solid var(--focus-color, #0972d3);
+    outline-offset: 2px;
+  }
 }
