@@ -375,14 +375,15 @@ export default function ChatMessage(props: ChatMessageProps) {
                 variant="icon"
                 iconName={selectedIcon === 1 ? "thumbs-up-filled" : "thumbs-up"}
                 onClick={() => {
-                  // console.log("pressed thumbs up!")
                   props.onThumbsUp();
                   const id = addNotification("success","Thank you for your valuable feedback!")
                   Utils.delay(3000).then(() => removeNotification(id));
                   setSelectedIcon(1);
                 }}
                 aria-label="Give positive feedback"
-              />
+              >
+                <span className="visually-hidden">Give positive feedback</span>
+              </Button>
             )}
             {(selectedIcon === 0 || selectedIcon === null) && (
               <Button
@@ -391,12 +392,12 @@ export default function ChatMessage(props: ChatMessageProps) {
                 }
                 variant="icon"
                 onClick={() => {
-                  // props.onThumbsDown();
-                  // setSelectedIcon(0);
                   setModalVisible(true);
                 }}
                 aria-label="Give negative feedback"
-              />
+              >
+                <span className="visually-hidden">Give negative feedback</span>
+              </Button>
             )}
           </div>
         </Container>

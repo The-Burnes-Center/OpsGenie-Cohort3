@@ -404,7 +404,11 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
               variant="icon"
               onClick={listening ? SpeechRecognition.stopListening : SpeechRecognition.startListening}
               aria-label={listening ? "Stop voice input" : "Start voice input"}
-            />
+            >
+              <span className="visually-hidden">
+                {listening ? "Stop voice input" : "Start voice input"}
+              </span>
+            </Button>
           )}
         </div>
       </Container>
