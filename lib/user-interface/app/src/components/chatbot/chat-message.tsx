@@ -382,7 +382,7 @@ export default function ChatMessage(props: ChatMessageProps) {
                 }}
                 aria-label="Give positive feedback"
               >
-                <span className="visually-hidden">Give positive feedback</span>
+                Give positive feedback
               </Button>
             )}
             {(selectedIcon === 0 || selectedIcon === null) && (
@@ -396,7 +396,7 @@ export default function ChatMessage(props: ChatMessageProps) {
                 }}
                 aria-label="Give negative feedback"
               >
-                <span className="visually-hidden">Give negative feedback</span>
+                Give negative feedback
               </Button>
             )}
           </div>
