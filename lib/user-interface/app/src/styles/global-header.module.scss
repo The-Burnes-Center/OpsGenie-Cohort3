@@ -15,7 +15,7 @@
 }
 
 /* Fix for the header title to prevent clipping */
-[id="awsui-top-navigation"] a[href="/"] {
+[id="awsui-top-navigation"] a[href="#"] {
   display: flex !important;
   align-items: center !important;
   text-decoration: none !important;

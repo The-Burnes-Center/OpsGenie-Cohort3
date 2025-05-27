@@ -386,7 +386,6 @@ export default function ChatMessage(props: ChatMessageProps) {
                   setSelectedIcon(1);
                 }}
                 aria-label="Give thumbs up"
-                title="Give thumbs up"
               >
                 <span className={styles.visually_hidden}>Give thumbs up feedback</span>
               </Button>
@@ -401,7 +400,6 @@ export default function ChatMessage(props: ChatMessageProps) {
                   setModalVisible(true);
                 }}
                 aria-label="Give thumbs down"
-                title="Give thumbs down"
               >
                 <span className={styles.visually_hidden}>Give thumbs down feedback</span>
               </Button>
