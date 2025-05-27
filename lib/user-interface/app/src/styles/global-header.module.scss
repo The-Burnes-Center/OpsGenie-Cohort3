@@ -8,4 +8,17 @@
 /* Target only the dynamically generated class based on the prefix awsui_title */
 [id="awsui-top-navigation"] .awsui_title {
   font-size: 12px !important;
+  padding-right: 8px !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  letter-spacing: normal !important;
+}
+
+/* Fix for the header title to prevent clipping */
+[id="awsui-top-navigation"] a[href="/"] {
+  display: flex !important;
+  align-items: center !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  overflow: visible !important;
 }

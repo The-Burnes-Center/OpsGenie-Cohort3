@@ -51,8 +51,8 @@
 .input_container {
   position: sticky;
   bottom: 0;
-  padding-bottom: awsui.$space-scaled-l;
-  padding-top: awsui.$space-scaled-xxl;
+  padding-bottom: awsui.$space-scaled-xs;
+  padding-top: awsui.$space-scaled-l;
   background: linear-gradient(
     to bottom,
     transparent 0%,
@@ -74,7 +74,7 @@
 .input_wrapper {
   display: flex;
   width: 100%;
-  align-items: flex-end; /* Align items at the bottom */
+  align-items: center;
   gap: 8px;
   position: relative;
   flex-wrap: nowrap;
@@ -110,8 +110,9 @@
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: minmax(300px, 800px) minmax(180px, auto);
-  gap: awsui.$space-scaled-xs;
+  gap: awsui.$space-scaled-xxs;
   align-items: center;
+  margin-top: 2px;
 
   .input_controls_selects_2 {
     width: 100%;
@@ -165,19 +166,28 @@
   }
   
   .input_wrapper {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .voice_input_button {
+    order: 1;
+    margin-right: 4px;
   }
   
   .input_buttons_wrapper {
+    order: 3;
     justify-content: flex-end;
     margin-top: 8px;
+    width: 100%;
   }
   
   .chatInput {
+    order: 2;
     min-height: 60px;
     font-size: 16px; /* Prevents iOS zoom on focus */
-    width: 100%;
+    width: calc(100% - 52px); /* Account for voice button width + margin */
     flex: 1 1 auto; /* Allow the input to grow and shrink */
   }
 }
@@ -363,4 +373,14 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Add a specific class for the voice input button */
+.voice_input_button {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }

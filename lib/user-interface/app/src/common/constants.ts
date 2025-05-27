@@ -117,6 +117,7 @@ export const feedbackTypes = [
   {label: "Relevance", value:"relevance", disabled: false},
   {label: "Clarity", value:"clarity", disabled: false},
   {label: "Formatting", value:"completeness", disabled: false},
+  {label: "Missing", value:"missing", disabled: false},
   {label: "Other", value:"other", disabled: false}
 ]
 
@@ -127,4 +128,4 @@ export const KPIMetrics = [
 
 export const API = "https://u95wm1svh0.execute-api.us-east-1.amazonaws.com/test"
 
-export const CHATBOT_NAME = "Ops Genie powered by RAG";
+export const CHATBOT_NAME = "Ops Genie";

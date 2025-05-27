@@ -359,6 +359,19 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
       <Container>
         <div className={styles.inputContainer}>
           <div className={styles.input_wrapper}>
+            {browserSupportsSpeechRecognition && (
+              <Button
+                iconName={listening ? "microphone-off" : "microphone"}
+                variant="icon"
+                onClick={listening ? SpeechRecognition.stopListening : SpeechRecognition.startListening}
+                aria-label={listening ? "Stop voice input" : "Start voice input"}
+                className={styles.voice_input_button}
+              >
+                <span className="visually-hidden">
+                  {listening ? "Stop voice input" : "Start voice input"}
+                </span>
+              </Button>
+            )}
             <div style={{ width: '100%', position: 'relative' }}>
               <label htmlFor="chat-input" className="visually-hidden">
                 Type a message
@@ -381,18 +394,6 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
               />
             </div>
             <div className={styles.input_buttons_wrapper}>
-              {browserSupportsSpeechRecognition && (
-                <Button
-                  iconName={listening ? "microphone-off" : "microphone"}
-                  variant="icon"
-                  onClick={listening ? SpeechRecognition.stopListening : SpeechRecognition.startListening}
-                  aria-label={listening ? "Stop voice input" : "Start voice input"}
-                >
-                  <span className="visually-hidden">
-                    {listening ? "Stop voice input" : "Start voice input"}
-                  </span>
-                </Button>
-              )}
               <Button
                 disabled={
                   readyState !== ReadyState.OPEN ||

@@ -137,7 +137,7 @@ export default function GlobalHeader() {
       <nav role="navigation" aria-label="Top navigation">
         <TopNavigation
           identity={{
-            href: "/",
+            href: "#",
             logo: { src: "/images/mayflower/stateseal-white.png", alt: CHATBOT_NAME + " Logo" },
             title: "Ops Genie",
           }}
