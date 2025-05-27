@@ -51,8 +51,8 @@
 .input_container {
   position: sticky;
   bottom: 0;
-  padding-bottom: awsui.$space-scaled-xs;
-  padding-top: awsui.$space-scaled-l;
+  padding-bottom: 4px;
+  padding-top: awsui.$space-scaled-m;
   background: linear-gradient(
     to bottom,
     transparent 0%,
@@ -67,8 +67,8 @@
   flex-wrap: wrap;
   gap: 8px;
   width: 100%;
-  box-sizing: border-box; /* Ensure padding is included in width */
-  flex: 1 1 auto; /* Allow flex item to grow and shrink */
+  box-sizing: border-box;
+  flex: 1 1 auto;
 }
 
 .input_wrapper {
@@ -110,9 +110,10 @@
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: minmax(300px, 800px) minmax(180px, auto);
-  gap: awsui.$space-scaled-xxs;
+  gap: 4px;
   align-items: center;
   margin-top: 2px;
+  margin-bottom: 0;
 
   .input_controls_selects_2 {
     width: 100%;
@@ -160,7 +161,7 @@
 
 @media (max-width: 480px) {
   .input_container {
-    padding: 10px 5px;
+    padding: 8px 5px 4px; /* Further reduced padding */
     flex-direction: column;
     align-items: stretch;
   }
@@ -189,6 +190,11 @@
     font-size: 16px; /* Prevents iOS zoom on focus */
     width: calc(100% - 52px); /* Account for voice button width + margin */
     flex: 1 1 auto; /* Allow the input to grow and shrink */
+  }
+
+  .input_controls {
+    gap: 2px;
+    margin-top: 1px;
   }
 }
 
@@ -363,7 +369,7 @@
 }
 
 /* Accessibility helper class */
-.visually-hidden, :global(.visually-hidden), .visually_hidden {
+.visually-hidden, :global(.visually-hidden), .visually_hidden, :global(.sr-only) {
   position: absolute;
   width: 1px;
   height: 1px;

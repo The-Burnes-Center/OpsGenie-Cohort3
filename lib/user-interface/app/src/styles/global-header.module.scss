@@ -8,17 +8,28 @@
 /* Target only the dynamically generated class based on the prefix awsui_title */
 [id="awsui-top-navigation"] .awsui_title {
   font-size: 12px !important;
-  padding-right: 8px !important;
+  padding-right: 10px !important;
+  padding-left: 5px !important;
   white-space: nowrap !important;
   overflow: visible !important;
   letter-spacing: normal !important;
+  line-height: 1.2 !important; /* Better line height */
+  display: inline-block !important; /* Ensure text is properly contained */
 }
 
-/* Fix for the header title to prevent clipping */
-[id="awsui-top-navigation"] a[href="#"] {
+/* Fix for the title container to ensure proper display */
+[id="awsui-top-navigation"] .awsui_title-container {
   display: flex !important;
   align-items: center !important;
+  cursor: default !important; /* Not a clickable element */
   text-decoration: none !important;
-  cursor: pointer !important;
-  overflow: visible !important;
+  color: inherit !important;
+}
+
+/* Override any link styling */
+[id="awsui-top-navigation"] span.awsui_title, 
+[id="awsui-top-navigation"] div.awsui_title {
+  color: inherit !important;
+  cursor: default !important;
+  text-decoration: none !important;
 }

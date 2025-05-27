@@ -387,7 +387,7 @@ export default function ChatMessage(props: ChatMessageProps) {
                 }}
                 aria-label="Give thumbs up"
               >
-                <span className={styles.visually_hidden}>Give thumbs up feedback</span>
+                <span className="sr-only">Give thumbs up</span>
               </Button>
             )}
             {(selectedIcon === 0 || selectedIcon === null) && (
@@ -401,7 +401,7 @@ export default function ChatMessage(props: ChatMessageProps) {
                 }}
                 aria-label="Give thumbs down"
               >
-                <span className={styles.visually_hidden}>Give thumbs down feedback</span>
+                <span className="sr-only">Give thumbs down</span>
               </Button>
             )}
           </div>
