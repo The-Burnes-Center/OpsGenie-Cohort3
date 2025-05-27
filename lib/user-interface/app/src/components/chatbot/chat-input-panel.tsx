@@ -358,67 +358,67 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
     <SpaceBetween direction="vertical" size="l">
       <Container>
         <div className={styles.inputContainer}>
-          <label htmlFor="chat-input" className="visually-hidden">
-            Type a message
-          </label>
-          <TextareaAutosize
-            id="chat-input"
-            className={styles.chatInput}
-            placeholder="Type a message"
-            aria-label="Message to send"
-            value={state.value}
-            onChange={(e) => setState({ ...state, value: e.target.value })}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                handleSendMessage();
-              }
-            }}
-            maxRows={5}
-            style={{ width: '100%', boxSizing: 'border-box', resize: 'none' }}
-          />
-          <div style={{ marginLeft: "8px" }}>
-            <Button
-              disabled={
-                readyState !== ReadyState.OPEN ||
-                props.running ||
-                state.value.trim().length === 0 ||
-                props.session.loading
-              }
-              onClick={handleSendMessage}
-              ariaLabel="Send message"
-              variant="primary"
-            >
-              {props.running ? (
-                <>
-                  Loading&nbsp;&nbsp;
-                  <Spinner />
-                </>
-              ) : (
-                "Send"
+          <div className={styles.input_wrapper}>
+            <div style={{ width: '100%', position: 'relative' }}>
+              <label htmlFor="chat-input" className="visually-hidden">
+                Type a message
+              </label>
+              <TextareaAutosize
+                id="chat-input"
+                className={styles.chatInput}
+                placeholder="Type a message"
+                aria-label="Message to send"
+                value={state.value}
+                onChange={(e) => setState({ ...state, value: e.target.value })}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSendMessage();
+                  }
+                }}
+                maxRows={5}
+                style={{ width: '100%', boxSizing: 'border-box', resize: 'none' }}
+              />
+            </div>
+            <div className={styles.input_buttons_wrapper}>
+              {browserSupportsSpeechRecognition && (
+                <Button
+                  iconName={listening ? "microphone-off" : "microphone"}
+                  variant="icon"
+                  onClick={listening ? SpeechRecognition.stopListening : SpeechRecognition.startListening}
+                  aria-label={listening ? "Stop voice input" : "Start voice input"}
+                >
+                  <span className="visually-hidden">
+                    {listening ? "Stop voice input" : "Start voice input"}
+                  </span>
+                </Button>
               )}
-            </Button>
+              <Button
+                disabled={
+                  readyState !== ReadyState.OPEN ||
+                  props.running ||
+                  state.value.trim().length === 0 ||
+                  props.session.loading
+                }
+                onClick={handleSendMessage}
+                aria-label="Send message"
+                variant="primary"
+              >
+                {props.running ? (
+                  <>
+                    Loading&nbsp;&nbsp;
+                    <Spinner />
+                  </>
+                ) : (
+                  "Send"
+                )}
+              </Button>
+            </div>
           </div>
-          {browserSupportsSpeechRecognition && (
-            <Button
-              iconName={listening ? "microphone-off" : "microphone"}
-              variant="icon"
-              onClick={listening ? SpeechRecognition.stopListening : SpeechRecognition.startListening}
-              aria-label={listening ? "Stop voice input" : "Start voice input"}
-            >
-              {listening ? "Stop voice input" : "Start voice input"}
-            </Button>
-          )}
         </div>
       </Container>
       <div className={styles.input_controls}>
-        <div
-        // className={
-        //   appContext?.config.rag_enabled
-        //     ? styles.input_controls_selects_2
-        //     : styles.input_controls_selects_1
-        // }
-        >
+        <div>
           {/* <Select
             disabled={props.running}
             statusType={state.modelsStatus}
@@ -504,6 +504,7 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
                     ? "in-progress"
                     : "error"
               }
+              aria-label={`Connection status: ${connectionStatus}`}
             >
               {readyState === ReadyState.OPEN ? "Connected" : connectionStatus}
             </StatusIndicator>

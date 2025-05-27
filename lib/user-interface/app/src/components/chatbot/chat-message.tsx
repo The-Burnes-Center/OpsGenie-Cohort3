@@ -286,11 +286,14 @@ export default function ChatMessage(props: ChatMessageProps) {
               <SpaceBetween direction="horizontal" size="s">
               <ButtonDropdown
               items={(props.message.metadata.Sources as any[]).map((item) => { return {id: "id", disabled: false, text : item.title, href : item.uri, external : true, externalIconAriaLabel: "(opens in new tab)"}})}
-        
+              aria-label="View source documents"
               >Sources</ButtonDropdown>
-              <Button onClick={() => {
+              <Button 
+              onClick={() => {
                    props.onSendEmail()
-                  }}>Generate Email</Button>
+                  }}
+              aria-label="Generate email based on this conversation"
+              >Generate Email</Button>
               </SpaceBetween>
             )
           }
@@ -320,7 +323,9 @@ export default function ChatMessage(props: ChatMessageProps) {
                     navigator.clipboard.writeText(props.message.content);
                   }}
                   aria-label="Copy message content to clipboard"
-                />
+                >
+                  <span className={styles.visually_hidden}>Copy message content to clipboard</span>
+                </Button>
               </Popover>
             </div>
           ) : null}
