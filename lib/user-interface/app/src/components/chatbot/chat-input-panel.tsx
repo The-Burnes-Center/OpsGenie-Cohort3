@@ -375,6 +375,7 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
               }
             }}
             maxRows={5}
+            style={{ width: '100%', boxSizing: 'border-box', resize: 'none' }}
           />
           <div style={{ marginLeft: "8px" }}>
             <Button
