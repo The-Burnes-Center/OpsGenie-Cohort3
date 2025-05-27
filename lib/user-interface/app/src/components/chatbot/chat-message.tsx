@@ -432,6 +432,7 @@ export default function ChatMessage(props: ChatMessageProps) {
           <TextContent>
             <strong>{props.message.content}</strong>
           </TextContent>
+          <div style={{ clear: 'both' }}></div>
         </div>
       )}
     </div>

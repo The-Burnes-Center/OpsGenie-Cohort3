@@ -136,7 +136,7 @@ export default function Chat(props: { sessionId?: string, updateEmailFunction : 
 
   return (
     <div className={styles.chat_container}> 
-      <SpaceBetween direction="vertical" size="m">
+      <SpaceBetween direction="vertical" size="m" className={styles.messages_container}>
         
       {messageHistory.length == 0 && !session?.loading && (
        <Alert
@@ -144,7 +144,7 @@ export default function Chat(props: { sessionId?: string, updateEmailFunction : 
           header=""
        >
         <Box textAlign="center">
-            This is an AI tool that may not always be accurate. Verify key information using the tool’s provided sources before responding to questions.
+            This is an AI tool that may not always be accurate. Verify key information using the tool's provided sources before responding to questions.
             <br />
             <br />
             Please refrain from sending sensitive member information.
