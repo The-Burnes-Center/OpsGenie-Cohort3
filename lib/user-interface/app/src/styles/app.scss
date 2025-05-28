@@ -168,35 +168,4 @@ button, a {
   border: 0;
 }
 
-/* Calendar weekday header fixes - fix for "Mon" label wrapping */
-[data-test-id="calendar-weekday"],
-.awsui-calendar-weekday-heading,
-.awsui_weekday-heading_1xfs5_1i1lk_197,
-div[class*="calendar_"] div[class*="weekday-heading_"] {
-  white-space: nowrap !important;
-  min-width: 40px !important;
-  text-align: center !important;
-  padding: 0 !important;
-  line-height: 1.2 !important;
-  flex: 1 1 0 !important;
-  display: inline-block !important;
-  overflow: visible !important;
-  letter-spacing: -0.2px !important;
-}
-
-/* Calendar weekday container - ensure equal distribution */
-div[class*="weekday-headings_"],
-div[class*="calendar_"] > div:first-child {
-  display: flex !important;
-  justify-content: space-between !important;
-  width: 100% !important;
-}
-
-/* Calendar day cells - ensure equal width */
-div[class*="day-container_"],
-td[class*="calendar-day_"] {
-  min-width: 40px !important;
-  text-align: center !important;
-}
-
 
