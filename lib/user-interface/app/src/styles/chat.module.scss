@@ -369,7 +369,7 @@
 }
 
 /* Accessibility helper class */
-.visually-hidden, :global(.visually-hidden), .visually_hidden {
+.visually-hidden, :global(.visually-hidden), .visually_hidden, :global(.sr-only) {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -379,24 +379,6 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-}
-
-/* Fix for date picker day headers to prevent wrapping */
-:global(.awsui_calendar-day-header_1clum_1rcsr_1) {
-  min-width: 35px !important;
-}
-
-:global(.awsui_calendar-day-header-cell_1clum_1rcsr_9) {
-  white-space: nowrap !important;
-}
-
-/* Wider date range picker to prevent day header wrapping */
-:global(.awsui_calendar_1clum_1rcsr_1) {
-  min-width: 280px !important;
-}
-
-:global(.awsui_calendar-grid_1clum_1rcsr_146) {
-  min-width: 280px !important;
 }
 
 /* Add a specific class for the voice input button */

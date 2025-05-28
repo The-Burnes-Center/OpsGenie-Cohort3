@@ -466,7 +466,11 @@ export default function KPIsTab(props: KPIsTabProps) {
                           console.log("not an AbsoluteValue");
                       }
                     }}
-                    value={value as DateRangePickerProps.AbsoluteValue}
+                    value={{
+                      ...value,
+                      startDate: value.startDate.split("T")[0],
+                      endDate: value.endDate.split("T")[0],
+                    } as DateRangePickerProps.AbsoluteValue}
                     relativeOptions={[
                       {
                         key: "previous-5-minutes",
@@ -524,29 +528,7 @@ export default function KPIsTab(props: KPIsTabProps) {
                       }
                       return { valid: true };
                     }}
-                    i18nStrings={{
-                      todayAriaLabel: "Today",
-                      nextMonthAriaLabel: "Next month",
-                      previousMonthAriaLabel: "Previous month",
-                      customRelativeRangeDurationLabel: "Duration",
-                      customRelativeRangeDurationPlaceholder: "Enter duration",
-                      customRelativeRangeOptionLabel: "Custom range",
-                      customRelativeRangeOptionDescription: "Set a custom range in the past",
-                      customRelativeRangeUnitLabel: "Unit of time",
-                      dateTimeConstraintText: "For date, use YYYY/MM/DD. For time, use 24 hr format.",
-                      relativeModeTitle: "Relative range",
-                      absoluteModeTitle: "Absolute range",
-                      relativeRangeSelectionHeading: "Choose a range",
-                      startDateLabel: "Start date",
-                      endDateLabel: "End date",
-                      startTimeLabel: "Start time",
-                      endTimeLabel: "End time",
-                      clearButtonLabel: "Clear and dismiss",
-                      cancelButtonLabel: "Cancel",
-                      applyButtonLabel: "Apply",
-                      formatRelativeRange: (e) => `${e.amount} ${e.unit}${e.amount !== 1 ? "s" : ""} ago`,
-                      formatUnit: (e, n) => e === "hour" ? n === 1 ? "hour" : "hours" : e === "day" ? n === 1 ? "day" : "days" : e === "week" ? n === 1 ? "week" : "weeks" : e === "month" ? n === 1 ? "month" : "months" : n === 1 ? "year" : "years"
-                    }}
+                    i18nStrings={{}}
                     placeholder="Filter by a date and time range"
                     showClearButton={false}
                     timeInputFormat="hh:mm:ss"
@@ -703,29 +685,7 @@ export default function KPIsTab(props: KPIsTabProps) {
                       }
                       return { valid: true };
                     }}
-                    i18nStrings={{
-                      todayAriaLabel: "Today",
-                      nextMonthAriaLabel: "Next month",
-                      previousMonthAriaLabel: "Previous month",
-                      customRelativeRangeDurationLabel: "Duration",
-                      customRelativeRangeDurationPlaceholder: "Enter duration",
-                      customRelativeRangeOptionLabel: "Custom range",
-                      customRelativeRangeOptionDescription: "Set a custom range in the past",
-                      customRelativeRangeUnitLabel: "Unit of time",
-                      dateTimeConstraintText: "For date, use YYYY/MM/DD. For time, use 24 hr format.",
-                      relativeModeTitle: "Relative range",
-                      absoluteModeTitle: "Absolute range",
-                      relativeRangeSelectionHeading: "Choose a range",
-                      startDateLabel: "Start date",
-                      endDateLabel: "End date",
-                      startTimeLabel: "Start time",
-                      endTimeLabel: "End time",
-                      clearButtonLabel: "Clear and dismiss",
-                      cancelButtonLabel: "Cancel",
-                      applyButtonLabel: "Apply",
-                      formatRelativeRange: (e) => `${e.amount} ${e.unit}${e.amount !== 1 ? "s" : ""} ago`,
-                      formatUnit: (e, n) => e === "hour" ? n === 1 ? "hour" : "hours" : e === "day" ? n === 1 ? "day" : "days" : e === "week" ? n === 1 ? "week" : "weeks" : e === "month" ? n === 1 ? "month" : "months" : n === 1 ? "year" : "years"
-                    }}
+                    i18nStrings={{}}
                     placeholder="Filter by a date and time range"
                     showClearButton={false}
                     timeInputFormat="hh:mm:ss"
