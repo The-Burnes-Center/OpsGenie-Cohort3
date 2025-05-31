@@ -76,13 +76,13 @@ export default function AppConfigured() {
             Auth.federatedSignIn();
           }
         } catch (error) {
-          // however, just in case, we’ll add another try catch
+          // however, just in case, we'll add another try catch
           setError(true);
         }
       }
     })();
   }, []);
-  // whenever the authentication state changes, if it’s changed to un-authenticated, re-verify
+  // whenever the authentication state changes, if it's changed to un-authenticated, re-verify
   useEffect(() => {
     if (!authenticated && configured) {
       console.log("No authenticated user, initiating sign-in.");
@@ -178,18 +178,51 @@ export default function AppConfigured() {
         },
 
         // Primary Button Styling
-        colorTextButtonPrimaryDefault: '#ffffff', 
+        colorTextButtonPrimaryDefault: {
+          light: '#ffffff',
+          dark: '#ffffff', // Ensure white text in dark mode for maximum readability
+        },
         colorBackgroundButtonPrimaryDefault: {
           light: '#0055a5', // Mayflower's primary blue color for buttons
-//          dark: '#66b3ff',
+          dark: '#0E3C64', // 30% Bay Blue shade for dark mode accessibility
         },
         colorBackgroundButtonPrimaryHover: {
           light: '#004080', // darker blue for hover effect
-//          dark: '#004080',
+          dark: '#1A4F7A', // Lighter hover state in dark mode for better contrast
         },
         colorBackgroundButtonPrimaryActive: {
           light: '#003C61', // Active state for primary button in light mode
-//          dark: '#002A44', 
+          dark: '#0A2F4A', // Darker active state for dark mode
+        },
+
+        // Secondary/Normal Button Styling for dark mode accessibility
+        colorTextButtonNormalDefault: {
+          light: '#0055a5',
+          dark: '#ffffff', // White text for better contrast in dark mode
+        },
+        colorBackgroundButtonNormalDefault: {
+          light: 'transparent',
+          dark: 'transparent',
+        },
+        colorBorderButtonNormalDefault: {
+          light: '#0055a5',
+          dark: '#0E3C64', // Use consistent blue in dark mode
+        },
+        colorBackgroundButtonNormalHover: {
+          light: '#f2f3f3',
+          dark: 'rgba(14, 60, 100, 0.2)', // Subtle blue tint for hover in dark mode
+        },
+
+        // Link Button Styling for dark mode accessibility
+        colorTextLinkButtonNormalDefault: {
+          light: '#0055a5',
+          dark: '#4DA6DA', // Lighter blue for better contrast in dark mode
+        },
+
+        // Focus indicator styling for accessibility
+        colorBorderItemFocused: {
+          light: '#0972d3',
+          dark: '#4DA6DA', // Lighter blue for focus indicator in dark mode
         },
 
         borderRadiusButton: '4px', // slightly rounded corners for Mayflower style
