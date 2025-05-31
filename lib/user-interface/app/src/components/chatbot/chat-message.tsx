@@ -385,6 +385,7 @@ export default function ChatMessage(props: ChatMessageProps) {
                   Utils.delay(3000).then(() => removeNotification(id));
                   setSelectedIcon(1);
                 }}
+                aria-label="Give thumbs up feedback"
               >
                 <span className={styles.visually_hidden}>Give thumbs up feedback</span>
               </Button>
@@ -398,6 +399,7 @@ export default function ChatMessage(props: ChatMessageProps) {
                 onClick={() => {
                   setModalVisible(true);
                 }}
+                aria-label="Give thumbs down feedback"
               >
                 <span className={styles.visually_hidden}>Give thumbs down feedback</span>
               </Button>
