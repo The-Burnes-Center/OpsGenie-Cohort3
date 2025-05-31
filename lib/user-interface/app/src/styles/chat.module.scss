@@ -51,24 +51,10 @@
 .input_container {
   position: sticky;
   bottom: 0;
-  padding-bottom: 2px;
-  padding-top: 4px;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    awsui.$color-background-container-content 20%
-  );
-  margin-left: -8px;
-  margin-right: -8px;
-  container-type: inline-size;
-  container-name: input_container;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
+  padding: 8px;
+  background: awsui.$color-background-container-content;
   width: 100%;
   box-sizing: border-box;
-  flex: 1 1 auto;
 }
 
 .input_wrapper {
@@ -77,15 +63,13 @@
   align-items: center;
   gap: 8px;
   position: relative;
-  flex-wrap: nowrap;
 }
 
 .input_buttons_wrapper {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex-shrink: 0; /* Prevent buttons from shrinking */
-  justify-content: flex-end; /* Align buttons to the right */
+  flex-shrink: 0;
 }
 
 .input_textarea_container {
@@ -107,11 +91,10 @@
 }
 
 .input_controls {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 4px;
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
-  margin-top: 0px;
+  margin-top: 8px;
   margin-bottom: 0;
 
   .input_controls_selects_2 {
@@ -159,40 +142,22 @@
 
 @media (max-width: 480px) {
   .input_container {
-    padding: 4px 5px 1px; /* Further reduced padding for mobile */
-    flex-direction: column;
-    align-items: stretch;
+    padding: 8px;
   }
   
   .input_wrapper {
     flex-direction: row;
     align-items: center;
-    flex-wrap: wrap;
-  }
-  
-  .voice_input_button {
-    order: 1;
-    margin-right: 4px;
-  }
-  
-  .input_buttons_wrapper {
-    order: 3;
-    justify-content: flex-end;
-    margin-top: 8px;
-    width: 100%;
   }
   
   .chatInput {
-    order: 2;
-    min-height: 60px;
+    min-height: 48px;
     font-size: 16px; /* Prevents iOS zoom on focus */
-    width: calc(100% - 52px); /* Account for voice button width + margin */
-    flex: 1 1 auto; /* Allow the input to grow and shrink */
   }
 
   .input_controls {
-    gap: 2px;
-    margin-top: 1px;
+    gap: 4px;
+    margin-top: 8px;
   }
 }
 

@@ -356,68 +356,66 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
 
   return (
     <SpaceBetween direction="vertical" size="s">
-      <Container>
-        <div className={styles.input_container}>
-          <div className={styles.input_wrapper}>
-            {browserSupportsSpeechRecognition && (
-              <Button
-                iconName={listening ? "microphone-off" : "microphone"}
-                variant="icon"
-                onClick={listening ? SpeechRecognition.stopListening : SpeechRecognition.startListening}
-                aria-label={listening ? "Stop voice input" : "Start voice input"}
-                className={styles.voice_input_button}
-              >
-                <span className={styles.visually_hidden}>
-                  {listening ? "Stop voice input" : "Start voice input"}
-                </span>
-              </Button>
-            )}
-            <div style={{ width: '100%', position: 'relative' }}>
-              <label htmlFor="chat-input" className="visually-hidden">
-                Type a message
-              </label>
-              <TextareaAutosize
-                id="chat-input"
-                className={styles.chatInput}
-                placeholder="Type a message"
-                aria-label="Message to send"
-                value={state.value}
-                onChange={(e) => setState({ ...state, value: e.target.value })}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    handleSendMessage();
-                  }
-                }}
-                maxRows={5}
-                style={{ width: '100%', boxSizing: 'border-box', resize: 'none' }}
-              />
-            </div>
-            <div className={styles.input_buttons_wrapper}>
-              <Button
-                disabled={
-                  readyState !== ReadyState.OPEN ||
-                  props.running ||
-                  state.value.trim().length === 0 ||
-                  props.session.loading
+      <div className={styles.input_container}>
+        <div className={styles.input_wrapper}>
+          {browserSupportsSpeechRecognition && (
+            <Button
+              iconName={listening ? "microphone-off" : "microphone"}
+              variant="icon"
+              onClick={listening ? SpeechRecognition.stopListening : SpeechRecognition.startListening}
+              aria-label={listening ? "Stop voice input" : "Start voice input"}
+              className={styles.voice_input_button}
+            >
+              <span className={styles.visually_hidden}>
+                {listening ? "Stop voice input" : "Start voice input"}
+              </span>
+            </Button>
+          )}
+          <div style={{ width: '100%', position: 'relative', flex: '1 1 auto' }}>
+            <label htmlFor="chat-input" className="visually-hidden">
+              Type a message
+            </label>
+            <TextareaAutosize
+              id="chat-input"
+              className={styles.chatInput}
+              placeholder="Type a message"
+              aria-label="Message to send"
+              value={state.value}
+              onChange={(e) => setState({ ...state, value: e.target.value })}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSendMessage();
                 }
-                onClick={handleSendMessage}
-                aria-label="Send message"
-                variant="primary"
-              >
-                {props.running ? (
-                  <>
-                    Loading&nbsp;&nbsp;
-                    <Spinner />
-                  </>
-                ) : (
-                  "Send"
-                )}
-              </Button>
-            </div>
+              }}
+              maxRows={5}
+              style={{ width: '100%', boxSizing: 'border-box', resize: 'none' }}
+            />
+          </div>
+          <div className={styles.input_buttons_wrapper}>
+            <Button
+              disabled={
+                readyState !== ReadyState.OPEN ||
+                props.running ||
+                state.value.trim().length === 0 ||
+                props.session.loading
+              }
+              onClick={handleSendMessage}
+              aria-label="Send message"
+              variant="primary"
+            >
+              {props.running ? (
+                <>
+                  Loading&nbsp;&nbsp;
+                  <Spinner />
+                </>
+              ) : (
+                "Send"
+              )}
+            </Button>
           </div>
         </div>
-      </Container>
+      </div>
       <div className={styles.input_controls}>
         <div>
           {/* <Select
