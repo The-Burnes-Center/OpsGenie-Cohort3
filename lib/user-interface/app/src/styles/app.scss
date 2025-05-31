@@ -168,4 +168,122 @@ button, a {
   border: 0;
 }
 
+/* End of main app styles */
+
+/* Calendar weekday header fixes for DateRangePicker components */
+/* Fix for "Mon" text wrapping to second line in calendar headers */
+
+/* Target Cloudscape DateRangePicker calendar weekday headers */
+.awsui_calendar_header_day_label_with_text,
+.awsui_calendar_weekday_header, 
+.awsui_calendar_header_day_label,
+[class*="awsui"][class*="calendar"][class*="header"] [class*="day"],
+[class*="awsui"][class*="calendar"][class*="weekday"],
+[data-testid*="calendar"] [class*="header"] [class*="day"],
+.awsui_calendar_1cbzg_1zpu5_265 .awsui_header_1cbzg_1zpu5_271 .awsui_day_1cbzg_1zpu5_283,
+.awsui_calendar_1cbzg_1zpu5_265 .awsui_header_1cbzg_1zpu5_271 th {
+  white-space: nowrap !important;
+  min-width: 30px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-size: 12px !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
+/* Universal fallback selectors for any calendar weekday headers */
+/* This will catch any table-based calendar structure */
+[class*="awsui"] table thead th,
+[class*="awsui"] [role="grid"] [role="columnheader"],
+[class*="awsui"] [class*="picker"] table th,
+[class*="awsui"] [class*="picker"] thead th,
+[aria-label*="calendar"] thead th,
+[aria-label*="date"] thead th {
+  white-space: nowrap !important;
+  min-width: 30px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  text-align: center !important;
+  font-size: 12px !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure calendar header uses proper grid/flex layout */
+[class*="awsui"][class*="calendar"] thead tr,
+[class*="awsui"][class*="calendar"][class*="header"],
+.awsui_calendar_1cbzg_1zpu5_265 .awsui_header_1cbzg_1zpu5_271 {
+  display: flex !important;
+  width: 100% !important;
+}
+
+[class*="awsui"][class*="calendar"] thead th,
+[class*="awsui"][class*="calendar"][class*="header"] [class*="day"],
+.awsui_calendar_1cbzg_1zpu5_265 .awsui_header_1cbzg_1zpu5_271 .awsui_day_1cbzg_1zpu5_283,
+.awsui_calendar_1cbzg_1zpu5_265 .awsui_header_1cbzg_1zpu5_271 th {
+  flex: 1 1 auto !important;
+  min-width: 30px !important;
+  max-width: 50px !important;
+  text-align: center !important;
+}
+
+/* Additional targeting for different Cloudscape component states */
+[class*="awsui"][class*="date-picker"] [class*="calendar"] [class*="weekday"],
+[class*="awsui"][class*="date-range-picker"] [class*="calendar"] [class*="weekday"],
+.awsui_calendar_1cbzg_1zpu5_265 .awsui_weekday_1cbzg_1zpu5_295 {
+  white-space: nowrap !important;
+  min-width: 30px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  flex-shrink: 0 !important;
+}
+
+/* More specific targeting for common calendar structures */
+.awsui_date_range_picker table thead th,
+.awsui_date_picker table thead th,
+.awsui_calendar table thead th {
+  white-space: nowrap !important;
+  min-width: 30px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Alternative approach using attribute selectors for any calendar component */
+[class*="awsui"][class*="date"] table th,
+[class*="awsui"][class*="picker"] table th,
+[data-awsui*="date"] table th,
+[data-awsui*="calendar"] table th {
+  white-space: nowrap !important;
+  min-width: 30px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Ensure responsive behavior across all screen sizes and zoom levels */
+@media screen and (max-width: 768px) {
+  [class*="awsui"][class*="calendar"] [class*="header"] [class*="day"],
+  [class*="awsui"][class*="calendar"] [class*="weekday"],
+  .awsui_calendar_1cbzg_1zpu5_265 .awsui_header_1cbzg_1zpu5_271 .awsui_day_1cbzg_1zpu5_283 {
+    min-width: 28px !important;
+    font-size: 11px !important;
+  }
+}
+
+/* High zoom level adjustments */
+@media screen and (min-resolution: 150dpi) {
+  [class*="awsui"][class*="calendar"] [class*="header"] [class*="day"],
+  [class*="awsui"][class*="calendar"] [class*="weekday"] {
+    min-width: 32px !important;
+  }
+}
+
+/* Dark mode compatibility - ensure the fixes work in both themes */
+body.awsui-dark-mode [class*="awsui"][class*="calendar"] [class*="header"] [class*="day"],
+body.awsui-dark-mode [class*="awsui"][class*="calendar"] [class*="weekday"],
+.awsui-dark-mode .awsui_calendar_1cbzg_1zpu5_265 .awsui_header_1cbzg_1zpu5_271 .awsui_day_1cbzg_1zpu5_283 {
+  white-space: nowrap !important;
+  min-width: 30px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
 
