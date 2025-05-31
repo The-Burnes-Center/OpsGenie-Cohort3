@@ -367,7 +367,7 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
                 aria-label={listening ? "Stop voice input" : "Start voice input"}
                 className={styles.voice_input_button}
               >
-                <span className="visually-hidden">
+                <span className={styles.visually_hidden}>
                   {listening ? "Stop voice input" : "Start voice input"}
                 </span>
               </Button>

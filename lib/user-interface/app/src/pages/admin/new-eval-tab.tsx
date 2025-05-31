@@ -335,7 +335,7 @@ import {
               header={
                 <Header
                   actions={
-                    <Button iconName="refresh" onClick={refreshPage} />
+                    <Button iconName="refresh" onClick={refreshPage} aria-label="Refresh files" />
                   }
                   description="Please select a test case file for your next evaluation. Press the refresh button to see the latest test case files."
                 >

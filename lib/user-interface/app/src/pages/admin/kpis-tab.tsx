@@ -550,7 +550,7 @@ export default function KPIsTab(props: KPIsTabProps) {
                     />
                   {/* </FormField> */}
 
-                  <Button iconName="refresh" onClick={refreshPage} ariaLabel="Refresh page"/>
+                  <Button iconName="refresh" onClick={refreshPage} aria-label="Refresh KPI metrics"/>
                   <Button 
                     variant="primary"
                     onClick={() => {
@@ -706,7 +706,7 @@ export default function KPIsTab(props: KPIsTabProps) {
                     />
                   {/* </FormField> */}
 
-                  <Button iconName="refresh" onClick={refreshPage} ariaLabel="Refresh page"/>
+                  <Button iconName="refresh" onClick={refreshPage} aria-label="Refresh KPI metrics"/>
                   <Button 
                     variant="primary"
                     onClick={async () => {

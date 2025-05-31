@@ -181,7 +181,7 @@ export default function PastEvalsTab(props: PastEvalsTabProps) {
         <Header
           actions={
             <SpaceBetween direction="horizontal" size="xs">
-              <Button iconName="refresh" onClick={() => getEvaluations({ pageIndex: currentPageIndex })} />
+              <Button iconName="refresh" onClick={() => getEvaluations({ pageIndex: currentPageIndex })} aria-label="Refresh past evaluations" />
             </SpaceBetween>
           }
         >

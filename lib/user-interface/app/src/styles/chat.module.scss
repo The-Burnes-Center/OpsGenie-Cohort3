@@ -51,7 +51,7 @@
 .input_container {
   position: sticky;
   bottom: 0;
-  padding-bottom: 8px;
+  padding-bottom: 2px;
   padding-top: awsui.$space-scaled-s;
   background: linear-gradient(
     to bottom,
@@ -161,7 +161,7 @@
 
 @media (max-width: 480px) {
   .input_container {
-    padding: 8px 5px 4px; /* Further reduced padding */
+    padding: 4px 5px 1px; /* Further reduced padding for mobile */
     flex-direction: column;
     align-items: stretch;
   }

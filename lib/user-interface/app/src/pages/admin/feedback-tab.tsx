@@ -521,7 +521,7 @@ export default function FeedbackTab(props: FeedbackTabProps) {
                     />
                   {/* </FormField> */}
 
-                  <Button iconName="refresh" onClick={refreshPage} ariaLabel="Refresh page" />
+                  <Button iconName="refresh" onClick={refreshPage} aria-label="Refresh feedback" />
                   <Button 
                 variant="primary"
                 onClick={() => {
