@@ -355,7 +355,7 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
   }[readyState];
 
   return (
-    <SpaceBetween direction="vertical" size="l">
+    <SpaceBetween direction="vertical" size="xs">
       <Container>
         <div className={styles.inputContainer}>
           <div className={styles.input_wrapper}>
