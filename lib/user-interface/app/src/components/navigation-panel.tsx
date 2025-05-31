@@ -34,6 +34,8 @@ export default function NavigationPanel() {
   const [activeHref, setActiveHref] = useState(
     window.location.pathname
   );
+  const [showAllSessions, setShowAllSessions] = useState(false);
+  const [allSessions, setAllSessions] = useState([]);
 
   // add button text to sidebar nav collapse button
   useEffect(() => {
@@ -67,6 +69,7 @@ export default function NavigationPanel() {
     if (username && needsRefresh) {
       // let's wait for about half a second before refreshing the sessions      
       const fetchedSessions = await apiClient.sessions.getSessions(username);  
+      setAllSessions(fetchedSessions);
       await updateItems(fetchedSessions);
       console.log("fetched sessions")
       // console.log(fetchedSessions);
@@ -104,20 +107,75 @@ export default function NavigationPanel() {
     Utils.delay(3000).then(() => removeNotification(id))
   };
 
+  // Update items when showAllSessions state changes
+  useEffect(() => {
+    if (allSessions.length > 0) {
+      updateItems(allSessions);
+    }
+  }, [showAllSessions]);
 
   const updateItems = async (sessions) => {
+    // Determine which sessions to show
+    const sessionsToShow = showAllSessions ? sessions : sessions.slice(0, 7);
+    const hasMoreSessions = sessions.length > 7;
+    
+    // Create session items
+    const sessionItems = sessionsToShow.map(session => ({
+      type: "link",
+      text: `${session.title}`,
+      href: `/chatbot/playground/${session.session_id}`,
+    }));
+
+    // Add "See More" button if needed
+    const additionalItems = [];
+    if (!showAllSessions && hasMoreSessions) {
+      additionalItems.push({
+        type: "link",
+        info: <Box margin="xxs" textAlign="center">
+          <Button 
+            onClick={() => setShowAllSessions(true)} 
+            iconName="caret-down-filled" 
+            variant="link"
+          >
+            See All Sessions ({sessions.length})
+          </Button>
+        </Box>
+      });
+    } else if (showAllSessions && hasMoreSessions) {
+      additionalItems.push({
+        type: "link",
+        info: <Box margin="xxs" textAlign="center">
+          <Button 
+            onClick={() => setShowAllSessions(false)} 
+            iconName="caret-up-filled" 
+            variant="link"
+          >
+            Show Less
+          </Button>
+        </Box>
+      });
+    }
+
+    // Add reload button
+    additionalItems.push({
+      type: "link",
+      info: <Box margin="xxs" textAlign="center">
+        <Button 
+          onClick={onReloadClick} 
+          iconName="refresh" 
+          loading={loadingSessions} 
+          variant="link"
+        >
+          Reload Sessions
+        </Button>
+      </Box>
+    });
+
     const newItems: SideNavigationProps.Item[] = [
       {
         type: "section",
         text: "Session History",
-        items: sessions.map(session => ({
-          type: "link",
-          text: `${session.title}`,
-          href: `/chatbot/playground/${session.session_id}`,
-        })).concat([{
-          type: "link",
-          info: <Box margin="xxs" textAlign="center" ><Button onClick={onReloadClick} iconName="refresh" loading={loadingSessions} variant="link">Reload Sessions</Button></Box>
-        }]),
+        items: [...sessionItems, ...additionalItems],
       },      
     ];
     try {
