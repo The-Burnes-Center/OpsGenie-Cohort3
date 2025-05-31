@@ -136,7 +136,7 @@ export default function Chat(props: { sessionId?: string, updateEmailFunction : 
 
   return (
     <div className={styles.chat_container}> 
-      <SpaceBetween direction="vertical" size="m" className={styles.messages_container}>
+      <SpaceBetween direction="vertical" size="s" className={styles.messages_container}>
         
       {messageHistory.length == 0 && !session?.loading && (
        <Alert

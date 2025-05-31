@@ -385,9 +385,8 @@ export default function ChatMessage(props: ChatMessageProps) {
                   Utils.delay(3000).then(() => removeNotification(id));
                   setSelectedIcon(1);
                 }}
-                aria-label="Give thumbs up"
               >
-                <span className="sr-only">Give thumbs up</span>
+                <span className={styles.visually_hidden}>Give thumbs up feedback</span>
               </Button>
             )}
             {(selectedIcon === 0 || selectedIcon === null) && (
@@ -399,9 +398,8 @@ export default function ChatMessage(props: ChatMessageProps) {
                 onClick={() => {
                   setModalVisible(true);
                 }}
-                aria-label="Give thumbs down"
               >
-                <span className="sr-only">Give thumbs down</span>
+                <span className={styles.visually_hidden}>Give thumbs down feedback</span>
               </Button>
             )}
           </div>
