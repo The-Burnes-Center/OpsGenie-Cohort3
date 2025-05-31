@@ -7,14 +7,15 @@
 
 /* Target only the dynamically generated class based on the prefix awsui_title */
 [id="awsui-top-navigation"] .awsui_title {
-  font-size: 12px !important;
+  font-size: 14px !important;
   padding-right: 10px !important;
   padding-left: 5px !important;
   white-space: nowrap !important;
   overflow: visible !important;
   letter-spacing: normal !important;
-  line-height: 1.2 !important; /* Better line height */
+  line-height: 1.5 !important; /* Better line height to prevent cutoff */
   display: inline-block !important; /* Ensure text is properly contained */
+  padding-bottom: 2px !important; /* Add bottom padding to prevent cutoff */
 }
 
 /* Fix for the title container to ensure proper display */
@@ -24,12 +25,20 @@
   cursor: default !important; /* Not a clickable element */
   text-decoration: none !important;
   color: inherit !important;
+  pointer-events: none !important; /* Make it completely non-clickable */
 }
 
 /* Override any link styling */
 [id="awsui-top-navigation"] span.awsui_title, 
 [id="awsui-top-navigation"] div.awsui_title {
   color: inherit !important;
+  cursor: default !important;
+  text-decoration: none !important;
+}
+
+/* Make the entire title area non-clickable */
+[id="awsui-top-navigation"] a[href="#"] {
+  pointer-events: none !important;
   cursor: default !important;
   text-decoration: none !important;
 }
