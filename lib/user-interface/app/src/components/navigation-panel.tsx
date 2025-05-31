@@ -137,7 +137,7 @@ export default function NavigationPanel() {
             iconName="caret-down-filled" 
             variant="link"
           >
-            See All Sessions ({sessions.length})
+            See All Sessions
           </Button>
         </Box>
       });
