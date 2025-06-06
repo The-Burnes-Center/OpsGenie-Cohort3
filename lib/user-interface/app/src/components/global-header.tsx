@@ -124,9 +124,9 @@ export default function GlobalHeader() {
     detail: ButtonDropdownProps.ItemClickDetails;
   }) => {
     if (detail.id === "signout") {
-      // Set flag to prevent automatic re-sign-in
-      sessionStorage.setItem('userSignedOut', 'true');
-      console.log('User intentionally signed out');
+      // Set flag to prevent automatic re-sign-in (use localStorage to persist across reloads)
+      localStorage.setItem('userSignedOut', 'true');
+      console.log('User intentionally signed out - flag set');
       Auth.signOut();
     }
   };
