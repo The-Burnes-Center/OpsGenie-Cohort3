@@ -5,11 +5,13 @@
 :root {
   --app-color-scheme: light;
   color-scheme: var(--app-color-scheme);
-  --focus-color: #0972d3;
-  --message-human-bg: #f0f0f0;
-  --message-human-text: #000000;
-  --message-ai-bg: #f9f9f9;
-  --message-ai-text: #000000;
+  --focus-color: #14558F;
+  --message-human-bg: #EEEEEE;
+  --message-human-text: #535353;
+  --message-ai-bg: #DDDDDD;
+  --message-ai-text: #535353;
+  --message-system-bg: #F5F5F5;
+  --message-system-text: #535353;
 }
 
 html,
@@ -21,7 +23,7 @@ div[data-amplify-theme] {
 }
 
 body {
-  background-color: #ffffff;
+  background-color: #F5F5F5;
   overflow-y: scroll;
 }
 
@@ -35,6 +37,8 @@ body.awsui-dark-mode {
   --message-human-text: #ffffff;
   --message-ai-bg: #1e2a3a;
   --message-ai-text: #ffffff;
+  --message-system-bg: #243447;
+  --message-system-text: #ffffff;
   
   background-color: #0e1b2a;
 }

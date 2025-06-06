@@ -240,8 +240,8 @@
   margin-bottom: 8px;
   
   &.human {
-    background-color: var(--message-human-bg, #f0f0f0);
-    color: var(--message-human-text, #000);
+    background-color: var(--message-human-bg, #EEEEEE); /* Updated to 90% Granite Gray tint */
+    color: var(--message-human-text, #535353); /* Updated to Granite Gray base for AA contrast */
     border-radius: 8px;
     padding: 10px 15px;
     margin: 5px 0 15px auto; /* Right-aligned */
@@ -252,12 +252,12 @@
   }
   
   &.ai {
-    background-color: var(--message-ai-bg, #f9f9f9);
-    color: var(--message-ai-text, #000);
+    background-color: var(--message-ai-bg, #DDDDDD); /* Updated to 80% Granite Gray tint for contrast */
+    color: var(--message-ai-text, #535353); /* Updated to Granite Gray base for AA contrast */
     border-radius: 8px;
     padding: 10px 15px;
     margin: 5px 0 15px 0; /* Left-aligned with zero left margin */
-    border-left: 3px solid var(--focus-color, #0972d3);
+    border-left: 3px solid var(--focus-color, #14558F); /* Updated to Bay Blue */
     border-bottom-left-radius: 2px;
     text-align: left;
     align-self: flex-start;
@@ -267,8 +267,8 @@
 
   /* System message class might be added in the future */
   &.system {
-    background-color: var(--message-system-bg, #f5f5f5);
-    color: var(--message-system-text, #333);
+    background-color: var(--message-system-bg, #F5F5F5); /* Updated to very light gray */
+    color: var(--message-system-text, #535353); /* Updated to Granite Gray base for AA contrast */
     border-radius: 8px;
     padding: 10px 15px;
     margin: 5px 0 15px 0; /* Left-aligned with zero left margin */
@@ -295,8 +295,8 @@
   box-sizing: border-box; /* Include padding and border in the element's width */
   
   &:focus {
-    border-color: var(--focus-color, #0972d3);
-    box-shadow: 0 0 0 2px rgba(9, 114, 211, 0.2);
+    border-color: var(--focus-color, #14558F); /* Updated to Bay Blue */
+    box-shadow: 0 0 0 2px rgba(20, 85, 143, 0.2); /* Updated to Bay Blue with transparency */
     outline: none;
   }
 }
