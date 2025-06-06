@@ -169,11 +169,11 @@ export default function AppConfigured() {
       tokens: {
         // Background Colors
         colorBackgroundLayoutMain: {
-          light: '#F5F5F5', // Changed from white to very light gray
+          light: 'white',
 //          dark: '#2a2a2a',
         },
         colorBackgroundContainerContent: {
-          light: '#EEEEEE', // Changed to 90% Granite Gray tint for cards/containers
+          light: '#f7f8f9',
 //          dark: '#333333',
         },
 
@@ -183,21 +183,21 @@ export default function AppConfigured() {
           dark: '#ffffff', // Ensure white text in dark mode for maximum readability
         },
         colorBackgroundButtonPrimaryDefault: {
-          light: '#14558F', // Changed to preserve Bay Blue for buttons
+          light: '#0055a5', // Mayflower's primary blue color for buttons
           dark: '#0E3C64', // 30% Bay Blue shade for dark mode accessibility
         },
         colorBackgroundButtonPrimaryHover: {
-          light: '#0E3C64', // darker blue for hover effect
+          light: '#004080', // darker blue for hover effect
           dark: '#1A4F7A', // Lighter hover state in dark mode for better contrast
         },
         colorBackgroundButtonPrimaryActive: {
-          light: '#0A2F4A', // Active state for primary button in light mode
+          light: '#003C61', // Active state for primary button in light mode
           dark: '#0A2F4A', // Darker active state for dark mode
         },
 
         // Secondary/Normal Button Styling for dark mode accessibility
         colorTextButtonNormalDefault: {
-          light: '#14558F', // Changed to Bay Blue for consistency
+          light: '#0055a5',
           dark: '#ffffff', // White text for better contrast in dark mode
         },
         colorBackgroundButtonNormalDefault: {
@@ -205,23 +205,23 @@ export default function AppConfigured() {
           dark: 'transparent',
         },
         colorBorderButtonNormalDefault: {
-          light: '#14558F', // Changed to Bay Blue for consistency
+          light: '#0055a5',
           dark: '#0E3C64', // Use consistent blue in dark mode
         },
         colorBackgroundButtonNormalHover: {
-          light: '#DDDDDD', // Changed to 80% Granite Gray tint for hover effect
+          light: '#f2f3f3',
           dark: 'rgba(14, 60, 100, 0.2)', // Subtle blue tint for hover in dark mode
         },
 
         // Link Button Styling for dark mode accessibility
         colorTextLinkButtonNormalDefault: {
-          light: '#14558F', // Changed to Bay Blue for consistency
+          light: '#0055a5',
           dark: '#4DA6DA', // Lighter blue for better contrast in dark mode
         },
 
         // Focus indicator styling for accessibility
         colorBorderItemFocused: {
-          light: '#14558F', // Changed to Bay Blue for consistency
+          light: '#0972d3',
           dark: '#4DA6DA', // Lighter blue for focus indicator in dark mode
         },
 
@@ -243,15 +243,15 @@ export default function AppConfigured() {
         
         // Text Colors
         colorTextBodyDefault: {
-          light: '#535353', // Changed to Granite Gray base for better consistency
+          light: '#333333',
 //          dark: '#eaeaea',
         },
         colorTextHeadingDefault: {
-          light: '#535353', // Changed to Granite Gray base for consistency
+          light: '#1a1a1a',
 //          dark: '#ffffff',
         },
         colorTextLinkDefault: {
-          light: '#14558F', // Changed to Bay Blue for links
+          light: '#0055a5',
 //            dark: '#66b3ff',
         },
 
