@@ -83,6 +83,8 @@ export default function AppConfigured() {
     })();
   }, []);
   // whenever the authentication state changes, if it's changed to un-authenticated, re-verify
+  // COMMENTED OUT: This was causing automatic re-sign-in after logout
+  /*
   useEffect(() => {
     if (!authenticated && configured) {
       console.log("No authenticated user, initiating sign-in.");
@@ -93,6 +95,7 @@ export default function AppConfigured() {
       }
     }
   }, [authenticated, configured]);
+  */
   // dark/light theme
   useEffect(() => {
     const observer = new MutationObserver((mutations) => {
