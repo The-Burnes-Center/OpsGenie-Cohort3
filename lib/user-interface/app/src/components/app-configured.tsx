@@ -173,7 +173,7 @@ export default function AppConfigured() {
 //          dark: '#2a2a2a',
         },
         colorBackgroundContainerContent: {
-          light: '#D0DDE9', // Changed from #f7f8f9 to 80% Bay Blue tint
+          light: '#f7f8f9',
 //          dark: '#333333',
         },
 
@@ -209,7 +209,7 @@ export default function AppConfigured() {
           dark: '#0E3C64', // Use consistent blue in dark mode
         },
         colorBackgroundButtonNormalHover: {
-          light: '#B9CCDD', // Changed from #f2f3f3 to 70% Bay Blue tint for hover effect
+          light: '#f2f3f3',
           dark: 'rgba(14, 60, 100, 0.2)', // Subtle blue tint for hover in dark mode
         },
 
