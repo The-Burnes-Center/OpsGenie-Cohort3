@@ -55,15 +55,6 @@ export default function AppConfigured() {
   useEffect(() => {
     (async () => {
       let currentConfig: AppConfig;
-      
-      // Check immediately if user has signed out (synchronous check)
-      const userSignedOut = sessionStorage.getItem('userSignedOut') === 'true' || localStorage.getItem('userSignedOut') === 'true';
-      if (userSignedOut) {
-        console.log('Detected user signed out flag, skipping auto sign-in');
-        setHasSignedOut(true);
-        return; // Exit early, don't attempt any auth
-      }
-      
       try {
         const result = await fetch("/aws-exports.json");
         const awsExports = await result.json();
@@ -80,9 +71,8 @@ export default function AppConfigured() {
         // but that is very unlikely
         console.error("Authentication check error:", e);
         
-        // Double-check the sign-out flag before attempting federated sign-in
-        const stillSignedOut = sessionStorage.getItem('userSignedOut') === 'true' || localStorage.getItem('userSignedOut') === 'true';
-        if (!stillSignedOut && !hasSignedOut) {
+        // Only attempt federated sign-in if user hasn't intentionally signed out
+        if (!hasSignedOut) {
           try {
             if (currentConfig.federatedSignInProvider != "") {
               Auth.federatedSignIn({ customProvider: currentConfig.federatedSignInProvider });
@@ -93,12 +83,10 @@ export default function AppConfigured() {
             // however, just in case, we'll add another try catch
             setError(true);
           }
-        } else {
-          console.log('Skipping auto sign-in due to sign-out flag');
         }
       }
     })();
-  }, []); // Remove hasSignedOut dependency to prevent loops
+  }, [hasSignedOut]); // Add hasSignedOut to dependency array
   // whenever the authentication state changes, if it's changed to un-authenticated, re-verify
   // COMMENTED OUT: This was causing automatic re-sign-in after logout
   /*
@@ -143,18 +131,16 @@ export default function AppConfigured() {
   // Listen for auth events to track sign-out
   useEffect(() => {
     // Check if user has signed out in this session
-    const signedOut = sessionStorage.getItem('userSignedOut') === 'true' || localStorage.getItem('userSignedOut') === 'true';
-    if (signedOut) {
+    const signedOut = sessionStorage.getItem('userSignedOut');
+    if (signedOut === 'true') {
       setHasSignedOut(true);
     }
 
-    // Clean up the flag after some time (extended to handle SSO redirects)
+    // Clean up the flag after some time (optional)
     const cleanup = setTimeout(() => {
       sessionStorage.removeItem('userSignedOut');
-      localStorage.removeItem('userSignedOut');
       setHasSignedOut(false);
-      console.log('Sign-out flag cleared, normal auth flow restored');
-    }, 30000); // Reset after 30 seconds to handle slower SSO redirects
+    }, 5000); // Reset after 5 seconds
 
     return () => clearTimeout(cleanup);
   }, []);
