@@ -6275,6 +6275,20 @@
           "ChatbotAPIKendraS3DataSourceA8A30815",
           "Arn"
          ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "ChatbotAPIKendraIndex3CD60B23",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
         }
        ]
       }
@@ -6299,19 +6313,13 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "062f7a44bb67c1b57e9daf895ad22849cec589ea4061988f85246ebfe6f5e5ef.zip"
+     "S3Key": "5587348be5192ebb6332385c5afcca5098f66f1f161a4afcf6a26006df1883a7.zip"
     },
     "Environment": {
      "Variables": {
       "KENDRA": {
        "Fn::GetAtt": [
         "ChatbotAPIKendraIndex3CD60B23",
-        "Id"
-       ]
-      },
-      "SOURCE": {
-       "Fn::GetAtt": [
-        "ChatbotAPIKendraS3DataSourceA8A30815",
         "Id"
        ]
       }
@@ -6333,7 +6341,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/SyncKendraHandlerFunction/Resource",
-    "aws:asset:path": "asset.062f7a44bb67c1b57e9daf895ad22849cec589ea4061988f85246ebfe6f5e5ef",
+    "aws:asset:path": "asset.5587348be5192ebb6332385c5afcca5098f66f1f161a4afcf6a26006df1883a7",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -7187,7 +7195,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "9382f137652b74533cfd473f49ffd8cbc12a5c9fae2b6246b104e98c6099e8e8.zip"
+     "S3Key": "e0981895fcb1095eb639c7ca95221fc88a70893fcc8aa3d39f9cb7062f1414df.zip"
     },
     "Environment": {
      "Variables": {
@@ -7216,7 +7224,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/GenerateResponseFunction/Resource",
-    "aws:asset:path": "asset.9382f137652b74533cfd473f49ffd8cbc12a5c9fae2b6246b104e98c6099e8e8",
+    "aws:asset:path": "asset.e0981895fcb1095eb639c7ca95221fc88a70893fcc8aa3d39f9cb7062f1414df",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -7346,7 +7354,7 @@
    "Properties": {
     "Code": {
      "ImageUri": {
-      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:fa50afa1afa5877dbd5624f67ecf05d377bd8c9ec209075a265970aab5b5d5fb"
+      "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:c00aaf52b0567837658adda99ecb8a4e522b592d5c4bd91bff995929795bbbcf"
      }
     },
     "Environment": {
@@ -7376,7 +7384,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/LlmEvaluationFunction/Resource",
-    "aws:asset:path": "asset.fa50afa1afa5877dbd5624f67ecf05d377bd8c9ec209075a265970aab5b5d5fb",
+    "aws:asset:path": "asset.c00aaf52b0567837658adda99ecb8a4e522b592d5c4bd91bff995929795bbbcf",
     "aws:asset:dockerfile-path": "Dockerfile",
     "aws:asset:property": "Code.ImageUri"
    }
@@ -8983,8 +8991,8 @@
      }
     ],
     "SourceObjectKeys": [
-     "d79fbdb90d269e727dd916191cb61c3dbb080f7eb54321cdd848d2c9a2844df1.zip",
-     "76169626222155c41a81dbcd8a3565ccf9d50314328bcadc93ec43e5fc109843.zip"
+     "590f6c8959aba3043e9b56973adc251edf96f76e7f42f93f04487c7683918fa9.zip",
+     "c1c1567d07b050015ce337e85cad5fca81097b646486ebe0c7d0f83cd2a82aab.zip"
     ],
     "SourceMarkers": [
      {},

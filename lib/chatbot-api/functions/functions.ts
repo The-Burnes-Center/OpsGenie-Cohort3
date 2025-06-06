@@ -254,8 +254,7 @@ export class LambdaFunctionStack extends cdk.Stack {
       code: lambda.Code.fromAsset(path.join(__dirname, 'knowledge-management/kendra-sync')), // Points to the lambda directory
       handler: 'lambda_function.lambda_handler', // Points to the 'hello' file in the lambda directory
       environment: {
-        "KENDRA" : props.kendraIndex.attrId,      
-        "SOURCE" : props.kendraSource.attrId  
+        "KENDRA" : props.kendraIndex.attrId      
       },
       timeout: cdk.Duration.seconds(30)
     });
@@ -265,7 +264,11 @@ export class LambdaFunctionStack extends cdk.Stack {
       actions: [
         'kendra:*'
       ],
-      resources: [props.kendraIndex.attrArn, props.kendraSource.attrArn]
+      resources: [
+        props.kendraIndex.attrArn, 
+        `${props.kendraIndex.attrArn}/*`,  // Allow access to all data sources under this index
+        props.kendraSource.attrArn  // Keep existing S3 source for backward compatibility
+      ]
     }));
     this.syncKendraFunction = kendraSyncAPIHandlerFunction;
 
