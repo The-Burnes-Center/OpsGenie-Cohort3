@@ -18,6 +18,7 @@ export default function AppConfigured() {
   const [authenticated, setAuthenticated] = useState<boolean>(null);
   const [theme, setTheme] = useState(StorageHelper.getTheme());
   const [configured, setConfigured] = useState<boolean>(false);
+  const [hasSignedOut, setHasSignedOut] = useState<boolean>(false);
   // trigger authentication state when needed
 
   useEffect(() => { // this might be an issue
@@ -69,19 +70,23 @@ export default function AppConfigured() {
         // technically it is possible that loading aws-exports.json failed too or some other step
         // but that is very unlikely
         console.error("Authentication check error:", e);
-        try {
-          if (currentConfig.federatedSignInProvider != "") {
-            Auth.federatedSignIn({ customProvider: currentConfig.federatedSignInProvider });
-          } else {
-            Auth.federatedSignIn();
+        
+        // Only attempt federated sign-in if user hasn't intentionally signed out
+        if (!hasSignedOut) {
+          try {
+            if (currentConfig.federatedSignInProvider != "") {
+              Auth.federatedSignIn({ customProvider: currentConfig.federatedSignInProvider });
+            } else {
+              Auth.federatedSignIn();
+            }
+          } catch (error) {
+            // however, just in case, we'll add another try catch
+            setError(true);
           }
-        } catch (error) {
-          // however, just in case, we'll add another try catch
-          setError(true);
         }
       }
     })();
-  }, []);
+  }, [hasSignedOut]); // Add hasSignedOut to dependency array
   // whenever the authentication state changes, if it's changed to un-authenticated, re-verify
   // COMMENTED OUT: This was causing automatic re-sign-in after logout
   /*
@@ -123,6 +128,22 @@ export default function AppConfigured() {
       observer.disconnect();
     };
   }, [theme]);
+  // Listen for auth events to track sign-out
+  useEffect(() => {
+    // Check if user has signed out in this session
+    const signedOut = sessionStorage.getItem('userSignedOut');
+    if (signedOut === 'true') {
+      setHasSignedOut(true);
+    }
+
+    // Clean up the flag after some time (optional)
+    const cleanup = setTimeout(() => {
+      sessionStorage.removeItem('userSignedOut');
+      setHasSignedOut(false);
+    }, 5000); // Reset after 5 seconds
+
+    return () => clearTimeout(cleanup);
+  }, []);
   // display a loading screen while waiting for the config file to load
   if (!config) {
     if (error) {
