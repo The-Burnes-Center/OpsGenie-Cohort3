@@ -17,6 +17,7 @@ import UserFeedbackPage from "./pages/admin/user-feedback";
 import SessionPage from "./pages/chatbot/sessions/sessions"
 import LlmEvaluationPage from "./pages/admin/llm-evaluation-page.tsx"; 
 import DetailedEvaluationPage from "./pages/admin/detailed-evaluation-page.tsx";
+import Welcome from "./pages/welcome";
 import { v4 as uuidv4 } from "uuid";
 import "./styles/app.scss";
 import KPIsPage from "./pages/admin/kpis";
@@ -38,6 +39,7 @@ function App() {
                 path="/"
                 element={<Navigate to={`/chatbot/playground/${uuidv4()}`} replace />}
             />            
+            <Route path="/welcome" element={<Welcome />} />
             <Route path="/chatbot" element={<Outlet />}>
               <Route path="playground/:sessionId" element={<Playground />} />
               <Route path="sessions" element={<SessionPage />} />              
