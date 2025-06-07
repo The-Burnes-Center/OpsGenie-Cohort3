@@ -124,15 +124,10 @@ export default function GlobalHeader() {
     detail: ButtonDropdownProps.ItemClickDetails;
   }) => {
     if (detail.id === "signout") {
-      console.log('User signing out, redirecting to welcome page');
-      Auth.signOut().then(() => {
-        // Redirect to welcome page after successful logout
-        window.location.href = '/welcome';
-      }).catch((error) => {
-        console.error('Error during sign out:', error);
-        // Redirect anyway to break the loop
-        window.location.href = '/welcome';
-      });
+      // Set flag to prevent automatic re-sign-in
+      sessionStorage.setItem('userSignedOut', 'true');
+      console.log('User intentionally signed out');
+      Auth.signOut();
     }
   };
 
