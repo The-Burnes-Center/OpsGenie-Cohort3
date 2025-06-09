@@ -137,7 +137,7 @@ import {
               <Header
                 variant="h1"
               >
-                Llm Evaluation Dashboard
+                Evaluation Dashboard
               </Header>
             }
           >

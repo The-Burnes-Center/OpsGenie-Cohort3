@@ -226,11 +226,10 @@ import {
                     { title: "Similarity", type: "line", data: similarityData },
                   ]}
                   xDomain={[
-                    Math.min(...items.map(i => new Date(i.Timestamp).getTime())), 
-                    Math.max(...items.map(i => new Date(i.Timestamp).getTime()))
+                    Math.min(...[...accuracyData, ...relevancyData, ...similarityData].map(d => d.x)),
+                    Math.max(...[...accuracyData, ...relevancyData, ...similarityData].map(d => d.x))
                   ]}
-                  yDomain={[50, 100]}// Adjust based on the data range
-                  //xTickValues={[1, 2, 3, 4, 5]}
+                  yDomain={[0, 100]}
                   i18nStrings={{
                     legendAriaLabel: "Legend",
                     chartAriaRoleDescription: "line chart",

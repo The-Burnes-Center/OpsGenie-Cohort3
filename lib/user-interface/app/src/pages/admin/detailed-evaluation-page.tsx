@@ -95,7 +95,7 @@ function DetailedEvaluationPage(props: DetailedEvalProps) {
   };
 
   const breadcrumbItems = [
-    { text: "LLM Evaluation", href: "/admin/llm-evaluation" },
+    { text: "Evaluation", href: "/admin/llm-evaluation" },
     // text should be Evaluation {evaluation name}
     // { text: `Evaluation ${evaluationName}`, href: "#" },
     { text: `Evaluation ${evaluationDetails}`, href: "#" },
