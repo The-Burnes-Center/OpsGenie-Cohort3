@@ -14,6 +14,7 @@ import { WebsocketBackendAPI } from "./gateway/websocket-api"
 import { RestBackendAPI } from "./gateway/rest-api"
 import { LambdaFunctionStack } from "./functions/functions"
 import { TableStack } from "./tables/tables"
+import { BackupStack } from "./backup/backup-stack"
 import { KendraIndexStack } from "./kendra/kendra"
 import { S3BucketStack } from "./buckets/buckets"
 
@@ -44,6 +45,18 @@ export class ChatBotApi extends Construct {
     const tables = new TableStack(this, "TableStack");
     const buckets = new S3BucketStack(this, "BucketStack");
     const kendra = new KendraIndexStack(this, "KendraStack", { s3Bucket: buckets.kendraBucket });
+
+    // Create backup stack for FedRAMP compliance
+    const backupStack = new BackupStack(this, "BackupStack", {
+      tables: [
+        tables.historyTable,
+        tables.feedbackTable,
+        tables.evalResultsTable,
+        tables.evalSummaryTable,
+        tables.kpiLogsTable,
+        tables.dailyLoginTable
+      ]
+    });
 
     // Create IAM roles for API Gateway CloudWatch logging
     const logWriteRole = new iam.Role(this, 'ApiGWLogRole', {
