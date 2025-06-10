@@ -339,12 +339,264 @@
     "ProvisionedThroughput": {
      "ReadCapacityUnits": 5,
      "WriteCapacityUnits": 5
-    }
+    },
+    "Tags": [
+     {
+      "Key": "BackupRequired",
+      "Value": "true"
+     },
+     {
+      "Key": "ComplianceLevel",
+      "Value": "FedRAMP"
+     },
+     {
+      "Key": "DataClassification",
+      "Value": "Sensitive"
+     },
+     {
+      "Key": "Environment",
+      "Value": "Production"
+     }
+    ]
    },
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/Resource"
+   }
+  },
+  "ChatbotAPIChatHistoryTableReadScalingTargetAD57E62B": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
+       }
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:table:ReadCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/ReadScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIChatHistoryTableReadScalingTargetTracking39C649A8": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIChatHistoryTableReadScalingTargetTracking36A7F170",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIChatHistoryTableReadScalingTargetAD57E62B"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBReadCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/ReadScaling/Target/Tracking/Resource"
+   }
+  },
+  "ChatbotAPIChatHistoryTableWriteScalingTarget69E6CDDE": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
+       }
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:table:WriteCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/WriteScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIChatHistoryTableWriteScalingTargetTrackingF39F16DF": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIChatHistoryTableWriteScalingTargetTrackingD6D5D879",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIChatHistoryTableWriteScalingTarget69E6CDDE"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBWriteCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/WriteScaling/Target/Tracking/Resource"
+   }
+  },
+  "ChatbotAPIChatHistoryTableTimeIndexReadScalingTarget91C061B7": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
+       },
+       "/index/TimeIndex"
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:index:ReadCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/TimeIndexReadScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIChatHistoryTableTimeIndexReadScalingTargetTrackingFD8C3853": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIChatHistoryTableTimeIndexReadScalingTargetTrackingF5004C8C",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIChatHistoryTableTimeIndexReadScalingTarget91C061B7"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBReadCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/TimeIndexReadScaling/Target/Tracking/Resource"
+   }
+  },
+  "ChatbotAPIChatHistoryTableTimeIndexWriteScalingTargetD43735E1": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
+       },
+       "/index/TimeIndex"
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:index:WriteCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/TimeIndexWriteScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIChatHistoryTableTimeIndexWriteScalingTargetTracking58176505": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIChatHistoryTableTimeIndexWriteScalingTargetTrackingEAF105DE",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIChatHistoryTableTimeIndexWriteScalingTargetD43735E1"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBWriteCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/TimeIndexWriteScaling/Target/Tracking/Resource"
    }
   },
   "ChatbotAPIUserFeedbackTableF734E54F": {
@@ -415,12 +667,382 @@
     "ProvisionedThroughput": {
      "ReadCapacityUnits": 5,
      "WriteCapacityUnits": 5
-    }
+    },
+    "Tags": [
+     {
+      "Key": "BackupRequired",
+      "Value": "true"
+     },
+     {
+      "Key": "ComplianceLevel",
+      "Value": "FedRAMP"
+     },
+     {
+      "Key": "DataClassification",
+      "Value": "Sensitive"
+     },
+     {
+      "Key": "Environment",
+      "Value": "Production"
+     }
+    ]
    },
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/Resource"
+   }
+  },
+  "ChatbotAPIUserFeedbackTableReadScalingTarget508BC59F": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
+       }
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:table:ReadCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/ReadScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIUserFeedbackTableReadScalingTargetTrackingB0BE41E8": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIUserFeedbackTableReadScalingTargetTrackingC5F2FBBC",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIUserFeedbackTableReadScalingTarget508BC59F"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBReadCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/ReadScaling/Target/Tracking/Resource"
+   }
+  },
+  "ChatbotAPIUserFeedbackTableWriteScalingTarget4D0EB025": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
+       }
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:table:WriteCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/WriteScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIUserFeedbackTableWriteScalingTargetTracking365B1EED": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIUserFeedbackTableWriteScalingTargetTracking17A4E47F",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIUserFeedbackTableWriteScalingTarget4D0EB025"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBWriteCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/WriteScaling/Target/Tracking/Resource"
+   }
+  },
+  "ChatbotAPIUserFeedbackTableCreatedAtIndexReadScalingTarget6BBB4292": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
+       },
+       "/index/CreatedAtIndex"
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:index:ReadCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/CreatedAtIndexReadScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIUserFeedbackTableCreatedAtIndexReadScalingTargetTracking99B41FFE": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIUserFeedbackTableCreatedAtIndexReadScalingTargetTracking8013A49A",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIUserFeedbackTableCreatedAtIndexReadScalingTarget6BBB4292"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBReadCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/CreatedAtIndexReadScaling/Target/Tracking/Resource"
+   }
+  },
+  "ChatbotAPIUserFeedbackTableCreatedAtIndexWriteScalingTarget57BE1CB3": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
+       },
+       "/index/CreatedAtIndex"
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:index:WriteCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/CreatedAtIndexWriteScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIUserFeedbackTableCreatedAtIndexWriteScalingTargetTrackingBBED42DA": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIUserFeedbackTableCreatedAtIndexWriteScalingTargetTracking13D7EB75",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIUserFeedbackTableCreatedAtIndexWriteScalingTarget57BE1CB3"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBWriteCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/CreatedAtIndexWriteScaling/Target/Tracking/Resource"
+   }
+  },
+  "ChatbotAPIUserFeedbackTableAnyIndexReadScalingTarget89F7C1B3": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
+       },
+       "/index/AnyIndex"
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:index:ReadCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/AnyIndexReadScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIUserFeedbackTableAnyIndexReadScalingTargetTracking11C34A86": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIUserFeedbackTableAnyIndexReadScalingTargetTrackingF0C92F75",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIUserFeedbackTableAnyIndexReadScalingTarget89F7C1B3"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBReadCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/AnyIndexReadScaling/Target/Tracking/Resource"
+   }
+  },
+  "ChatbotAPIUserFeedbackTableAnyIndexWriteScalingTargetA04AEF90": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
+       },
+       "/index/AnyIndex"
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:index:WriteCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/AnyIndexWriteScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIUserFeedbackTableAnyIndexWriteScalingTargetTracking0F1B008D": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIUserFeedbackTableAnyIndexWriteScalingTargetTrackingC734623C",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIUserFeedbackTableAnyIndexWriteScalingTargetA04AEF90"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBWriteCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/AnyIndexWriteScaling/Target/Tracking/Resource"
    }
   },
   "ChatbotAPIEvaluationSummariesTableE9B95A54": {
@@ -449,12 +1071,146 @@
     "ProvisionedThroughput": {
      "ReadCapacityUnits": 5,
      "WriteCapacityUnits": 5
-    }
+    },
+    "Tags": [
+     {
+      "Key": "BackupRequired",
+      "Value": "true"
+     },
+     {
+      "Key": "ComplianceLevel",
+      "Value": "FedRAMP"
+     },
+     {
+      "Key": "DataClassification",
+      "Value": "Sensitive"
+     },
+     {
+      "Key": "Environment",
+      "Value": "Production"
+     }
+    ]
    },
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/EvaluationSummariesTable/Resource"
+   }
+  },
+  "ChatbotAPIEvaluationSummariesTableReadScalingTarget28035084": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
+       }
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:table:ReadCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/EvaluationSummariesTable/ReadScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIEvaluationSummariesTableReadScalingTargetTracking64744936": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIEvaluationSummariesTableReadScalingTargetTrackingD1B38827",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIEvaluationSummariesTableReadScalingTarget28035084"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBReadCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/EvaluationSummariesTable/ReadScaling/Target/Tracking/Resource"
+   }
+  },
+  "ChatbotAPIEvaluationSummariesTableWriteScalingTarget5DF7E557": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
+       }
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:table:WriteCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/EvaluationSummariesTable/WriteScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIEvaluationSummariesTableWriteScalingTargetTracking8271490F": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIEvaluationSummariesTableWriteScalingTargetTracking6C5D1F6B",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIEvaluationSummariesTableWriteScalingTarget5DF7E557"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBWriteCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/EvaluationSummariesTable/WriteScaling/Target/Tracking/Resource"
    }
   },
   "ChatbotAPIEvaluationResultsTableE72FCF7C": {
@@ -505,12 +1261,264 @@
     "ProvisionedThroughput": {
      "ReadCapacityUnits": 5,
      "WriteCapacityUnits": 5
-    }
+    },
+    "Tags": [
+     {
+      "Key": "BackupRequired",
+      "Value": "true"
+     },
+     {
+      "Key": "ComplianceLevel",
+      "Value": "FedRAMP"
+     },
+     {
+      "Key": "DataClassification",
+      "Value": "Sensitive"
+     },
+     {
+      "Key": "Environment",
+      "Value": "Production"
+     }
+    ]
    },
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/Resource"
+   }
+  },
+  "ChatbotAPIEvaluationResultsTableReadScalingTarget2B28AC8A": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
+       }
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:table:ReadCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/ReadScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIEvaluationResultsTableReadScalingTargetTracking0D201A10": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIEvaluationResultsTableReadScalingTargetTracking5858E09F",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIEvaluationResultsTableReadScalingTarget2B28AC8A"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBReadCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/ReadScaling/Target/Tracking/Resource"
+   }
+  },
+  "ChatbotAPIEvaluationResultsTableWriteScalingTargetABD145BB": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
+       }
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:table:WriteCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/WriteScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIEvaluationResultsTableWriteScalingTargetTracking3B371B2E": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIEvaluationResultsTableWriteScalingTargetTrackingDF5E5D4E",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIEvaluationResultsTableWriteScalingTargetABD145BB"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBWriteCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/WriteScaling/Target/Tracking/Resource"
+   }
+  },
+  "ChatbotAPIEvaluationResultsTableQuestionIndexReadScalingTarget9F68A4EC": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
+       },
+       "/index/QuestionIndex"
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:index:ReadCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/QuestionIndexReadScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIEvaluationResultsTableQuestionIndexReadScalingTargetTracking11231909": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIEvaluationResultsTableQuestionIndexReadScalingTargetTracking99EEDF13",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIEvaluationResultsTableQuestionIndexReadScalingTarget9F68A4EC"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBReadCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/QuestionIndexReadScaling/Target/Tracking/Resource"
+   }
+  },
+  "ChatbotAPIEvaluationResultsTableQuestionIndexWriteScalingTargetECC3F707": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
+       },
+       "/index/QuestionIndex"
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:index:WriteCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/QuestionIndexWriteScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIEvaluationResultsTableQuestionIndexWriteScalingTargetTrackingBF9D20D6": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIEvaluationResultsTableQuestionIndexWriteScalingTargetTracking88FD4FD3",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIEvaluationResultsTableQuestionIndexWriteScalingTargetECC3F707"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBWriteCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/QuestionIndexWriteScaling/Target/Tracking/Resource"
    }
   },
   "ChatbotAPIKPILogsTableA8BB2B72": {
@@ -539,12 +1547,146 @@
     "ProvisionedThroughput": {
      "ReadCapacityUnits": 5,
      "WriteCapacityUnits": 5
-    }
+    },
+    "Tags": [
+     {
+      "Key": "BackupRequired",
+      "Value": "true"
+     },
+     {
+      "Key": "ComplianceLevel",
+      "Value": "FedRAMP"
+     },
+     {
+      "Key": "DataClassification",
+      "Value": "Sensitive"
+     },
+     {
+      "Key": "Environment",
+      "Value": "Production"
+     }
+    ]
    },
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/KPILogsTable/Resource"
+   }
+  },
+  "ChatbotAPIKPILogsTableReadScalingTarget360CCAEF": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
+       }
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:table:ReadCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/KPILogsTable/ReadScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIKPILogsTableReadScalingTargetTracking4386AC99": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIKPILogsTableReadScalingTargetTracking754689C1",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIKPILogsTableReadScalingTarget360CCAEF"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBReadCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/KPILogsTable/ReadScaling/Target/Tracking/Resource"
+   }
+  },
+  "ChatbotAPIKPILogsTableWriteScalingTarget61E62F6D": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
+       }
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:table:WriteCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/KPILogsTable/WriteScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIKPILogsTableWriteScalingTargetTracking31E085F2": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIKPILogsTableWriteScalingTargetTrackingF0AD8C64",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIKPILogsTableWriteScalingTarget61E62F6D"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBWriteCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/KPILogsTable/WriteScaling/Target/Tracking/Resource"
    }
   },
   "ChatbotAPIDailyLoginTable0DBFC91F": {
@@ -565,12 +1707,146 @@
     "ProvisionedThroughput": {
      "ReadCapacityUnits": 5,
      "WriteCapacityUnits": 5
-    }
+    },
+    "Tags": [
+     {
+      "Key": "BackupRequired",
+      "Value": "true"
+     },
+     {
+      "Key": "ComplianceLevel",
+      "Value": "FedRAMP"
+     },
+     {
+      "Key": "DataClassification",
+      "Value": "Sensitive"
+     },
+     {
+      "Key": "Environment",
+      "Value": "Production"
+     }
+    ]
    },
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/DailyLoginTable/Resource"
+   }
+  },
+  "ChatbotAPIDailyLoginTableReadScalingTarget1284F358": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
+       }
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:table:ReadCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/DailyLoginTable/ReadScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIDailyLoginTableReadScalingTargetTrackingAAC4568E": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIDailyLoginTableReadScalingTargetTracking994B2DC2",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIDailyLoginTableReadScalingTarget1284F358"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBReadCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/DailyLoginTable/ReadScaling/Target/Tracking/Resource"
+   }
+  },
+  "ChatbotAPIDailyLoginTableWriteScalingTarget8D765497": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 100,
+    "MinCapacity": 5,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "table/",
+       {
+        "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
+       }
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+      ]
+     ]
+    },
+    "ScalableDimension": "dynamodb:table:WriteCapacityUnits",
+    "ServiceNamespace": "dynamodb"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/DailyLoginTable/WriteScaling/Target/Resource"
+   }
+  },
+  "ChatbotAPIDailyLoginTableWriteScalingTargetTracking8346E92E": {
+   "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+   "Properties": {
+    "PolicyName": "ITOPSRAGStackChatbotAPIDailyLoginTableWriteScalingTargetTrackingE25F1756",
+    "PolicyType": "TargetTrackingScaling",
+    "ScalingTargetId": {
+     "Ref": "ChatbotAPIDailyLoginTableWriteScalingTarget8D765497"
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+     "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "DynamoDBWriteCapacityUtilization"
+     },
+     "TargetValue": 70
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/DailyLoginTable/WriteScaling/Target/Tracking/Resource"
    }
   },
   "ChatbotAPICloudTrailBucketD3543B87": {
@@ -8991,7 +10267,7 @@
      }
     ],
     "SourceObjectKeys": [
-     "590f6c8959aba3043e9b56973adc251edf96f76e7f42f93f04487c7683918fa9.zip",
+     "56d1b3f9240bf1893a860de3abf853b6644395d5f11bbf5f4323f7ecfd51199d.zip",
      "c1c1567d07b050015ce337e85cad5fca81097b646486ebe0c7d0f83cd2a82aab.zip"
     ],
     "SourceMarkers": [
@@ -9234,7 +10510,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/21TwW7bMAz9lt4VLc122DVN0C1YiwZJtx4DWmZc1rJkSFSyTPC/D5ITxy164nvkE0WK1EzefpvK6Q0c/USV9URTIeOWQdUCjn4Xla0MsZXxt0e3tlaLxd58hpe2ATLiQhea0PBY0Hs6QdDIuLEaUzDbtdWkTon2qBMamqIEGe+DUUzWpNgYr9E15H1iS6tqdKsGKhwrHuCE7g+6rNmSqTSyHXJ0wn/dRfAe2ct5MqLEVttTg4blXVA18nJwJLWMvfcOPIoepmvOqDfXPsa8E+XJQGPLQsZnKPq+M+hE3XgZf2E+k8xcE/hEMuiEtpWX8cFWP5wNbe7rjDuhtA0lOyAt43MyOW8CnajRlA5kXOzNypT4N4WWwLC1wSnsBLRUAeMRTjJdppQNhkfew0zGn8ztvKVcTUsi0S1DlcvvQXJtbOAerQxj5eAygA/0qpsHfrWO/qHLqa/sBYttGian6wbSHxzoOO31wCdJcomdQOV25zmPNqUfOSonN9haT2zdKU/WM7b785L4HYOvvXzIy7gyB1t/EMj4CK3YMjA+gnolc3mcgXcCD2jYy7gJ540PafB5eHtnDcv45KiiNAT0flWiYeK8EIukuU+azxVD+AWLJXl2VITLc49514kN+jx5kRtPT0OmSrqnwG1gsQiebTOoUpkDfhdaO3ugEl1+rP6X7nT6ajs4eqVJzo9+oSn/vtyDNSX1P87YEuWb/3KYTeXtdzm9efNEExcMU4Ny09v/0V17QI8EAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/21UwW7bMAz9lt5VLc122DVN0C1YiwZxth4DRmZc1rJkSHSyTPC/D5ISxy164nvks0RSpKfy7ttETm7g6G9VWd9q2slQMKhawNFvg7KVIbYy/PboVtZqMd+bz/DCNkBGXOhcExoeC7KnFwSNDGurMQaTXVlN6hRpRr3Q0OxKkOGhM4rJmhgb4xW6hryPbGFVjW7ZQIVjxSOc0P1BlzQFmUoj2+GMXviv2wDeI3s5i0aU2Gp7atCwvO9UjbwYHFEtQ/beg0eRYbzmjLK51jHmvShPBhpb7mTYwC7XnUAvoG01KYgpQcfWK9BkKhniLYUCHVUzZke7jlFcPBtwVb7+gyebjQNVk6mKfNo1q3eOXtSNl+EXplA0M03gI0mgF9pWXoZHW/1wtmtTU8+4F0rbrmQHpGXYRJOKiqAXNZrSgQzzvVmaEv/G0AIYCts5lYqmChiPcJLxMqVsZ3jkPUxl+MnczlpK2bQkIi0YqtS7DKJrbWNbIloaxsrB5fU/0Ktu1vGrdfQPXTr6yl5wV8RJ4njdQPKHAx0fe/3gk0NSir1A5bbnIRuNaZ43VE6usbWe2LpTGivP2O7PE+q3DL728jFtwtIcbP1BIMMTtKJgYHwC9Urm0pyB9wIPaNjLsO7O69bFqUuPt3fWsAzPjiqKj4DeL0s0TJwGYh41D1HzuWIIv+BuQT6P6LndY973Yo0+vbxIhcfWkKmi7rnjtmMx7zzbZlDFNAf8LrRy9kAlutSs/IvY6rjnWzh6pUnOjn6uKa1+qsGakvK6G1uifPNfDtOJvPsuJzdvnujWdYapQbnO9j9frooVDAUAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/CDKMetadata/Default"
@@ -9283,6 +10559,72 @@
       }
      ]
     ]
+   }
+  },
+  "ExportsOutputFnGetAttChatbotAPIChatHistoryTable86F70C1DArn66A8D990": {
+   "Value": {
+    "Fn::GetAtt": [
+     "ChatbotAPIChatHistoryTable86F70C1D",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputFnGetAttChatbotAPIChatHistoryTable86F70C1DArn66A8D990"
+   }
+  },
+  "ExportsOutputFnGetAttChatbotAPIUserFeedbackTableF734E54FArnEBB71A27": {
+   "Value": {
+    "Fn::GetAtt": [
+     "ChatbotAPIUserFeedbackTableF734E54F",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputFnGetAttChatbotAPIUserFeedbackTableF734E54FArnEBB71A27"
+   }
+  },
+  "ExportsOutputFnGetAttChatbotAPIEvaluationResultsTableE72FCF7CArnFD019094": {
+   "Value": {
+    "Fn::GetAtt": [
+     "ChatbotAPIEvaluationResultsTableE72FCF7C",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputFnGetAttChatbotAPIEvaluationResultsTableE72FCF7CArnFD019094"
+   }
+  },
+  "ExportsOutputFnGetAttChatbotAPIEvaluationSummariesTableE9B95A54ArnB92FF044": {
+   "Value": {
+    "Fn::GetAtt": [
+     "ChatbotAPIEvaluationSummariesTableE9B95A54",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputFnGetAttChatbotAPIEvaluationSummariesTableE9B95A54ArnB92FF044"
+   }
+  },
+  "ExportsOutputFnGetAttChatbotAPIKPILogsTableA8BB2B72Arn0B4FCE77": {
+   "Value": {
+    "Fn::GetAtt": [
+     "ChatbotAPIKPILogsTableA8BB2B72",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputFnGetAttChatbotAPIKPILogsTableA8BB2B72Arn0B4FCE77"
+   }
+  },
+  "ExportsOutputFnGetAttChatbotAPIDailyLoginTable0DBFC91FArn5241FF15": {
+   "Value": {
+    "Fn::GetAtt": [
+     "ChatbotAPIDailyLoginTable0DBFC91F",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputFnGetAttChatbotAPIDailyLoginTable0DBFC91FArn5241FF15"
    }
   }
  },

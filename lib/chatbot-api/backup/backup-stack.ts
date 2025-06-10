@@ -3,6 +3,7 @@ import { Construct } from 'constructs';
 import * as backup from 'aws-cdk-lib/aws-backup';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
+import * as events from 'aws-cdk-lib/aws-events';
 
 export interface BackupStackProps extends StackProps {
   readonly tables: dynamodb.Table[];
@@ -12,31 +13,10 @@ export class BackupStack extends Stack {
   constructor(scope: Construct, id: string, props: BackupStackProps) {
     super(scope, id, props);
 
-    // Create a backup vault for storing backups
+    // Create a backup vault for storing backups with simplified configuration
     const backupVault = new backup.BackupVault(this, 'DynamoDBBackupVault', {
-      backupVaultName: 'dynamodb-backup-vault',
+      backupVaultName: `dynamodb-backup-vault-${Date.now()}`,
       encryptionKey: undefined, // Uses default AWS managed key
-      accessPolicy: new iam.PolicyDocument({
-        statements: [
-          new iam.PolicyStatement({
-            sid: 'BackupVaultAccess',
-            effect: iam.Effect.ALLOW,
-            principals: [new iam.ServicePrincipal('backup.amazonaws.com')],
-            actions: [
-              'backup:CopyIntoBackupVault',
-              'backup:CreateBackupVault',
-              'backup:DeleteBackupVault',
-              'backup:DescribeBackupVault',
-              'backup:GetBackupVaultAccessPolicy',
-              'backup:GetBackupVaultNotifications',
-              'backup:ListBackupVaults',
-              'backup:PutBackupVaultAccessPolicy',
-              'backup:PutBackupVaultNotifications'
-            ],
-            resources: ['*']
-          })
-        ]
-      })
     });
 
     // Create an IAM role for AWS Backup service
@@ -56,7 +36,7 @@ export class BackupStack extends Stack {
         // Daily backup rule
         new backup.BackupPlanRule({
           ruleName: 'DailyBackup',
-          scheduleExpression: backup.ScheduleExpression.cron({
+          scheduleExpression: events.Schedule.cron({
             hour: '2',  // 2 AM UTC
             minute: '0',
             day: '*',
@@ -71,10 +51,10 @@ export class BackupStack extends Stack {
         // Weekly backup rule for longer retention
         new backup.BackupPlanRule({
           ruleName: 'WeeklyBackup',
-          scheduleExpression: backup.ScheduleExpression.cron({
+          scheduleExpression: events.Schedule.cron({
             hour: '3',  // 3 AM UTC
             minute: '0',
-            weekDay: 'SUN', // Sunday
+            weekDay: '1', // Sunday (1 = Sunday in AWS Backup cron)
           }),
           startWindow: Duration.hours(1),
           completionWindow: Duration.hours(8),
@@ -84,7 +64,7 @@ export class BackupStack extends Stack {
         // Monthly backup rule for compliance archival
         new backup.BackupPlanRule({
           ruleName: 'MonthlyBackup',
-          scheduleExpression: backup.ScheduleExpression.cron({
+          scheduleExpression: events.Schedule.cron({
             hour: '4',  // 4 AM UTC
             minute: '0',
             day: '1',   // First day of month
@@ -108,12 +88,7 @@ export class BackupStack extends Stack {
       role: backupRole,
       resources: [
         ...tableArns.map(arn => backup.BackupResource.fromArn(arn))
-      ],
-      conditions: {
-        stringEquals: {
-          'aws:ResourceTag/BackupRequired': ['true']
-        }
-      }
+      ]
     });
 
     // Tag all tables for backup selection

@@ -211,6 +211,91 @@
       },
       "displayName": "ITOPSRAGStack/ChatbotAPI/KendraStack"
     },
+    "ITOPSRAGStackChatbotAPIBackupStack9F866E6B.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "ITOPSRAGStackChatbotAPIBackupStack9F866E6B.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "ITOPSRAGStackChatbotAPIBackupStack9F866E6B": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "ITOPSRAGStackChatbotAPIBackupStack9F866E6B.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/3340e469ae9a2ef92c1427eb211b6ec2703f5438ad3da0a81fd5507b8b743d48.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "ITOPSRAGStackChatbotAPIBackupStack9F866E6B.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "ITOPSRAGStack",
+        "ITOPSRAGStackChatbotAPIBackupStack9F866E6B.assets"
+      ],
+      "metadata": {
+        "/ITOPSRAGStack/ChatbotAPI/BackupStack/DynamoDBBackupVault/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBBackupVaultA930BCBD"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/BackupStack/BackupServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BackupServiceRole3CD57978"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/BackupStack/DynamoDBBackupPlan/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBBackupPlanAF3D283F"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/BackupStack/DynamoDBBackupSelection/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBBackupSelectionE0C03D9B"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/BackupStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/BackupStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/BackupStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/BackupStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "ITOPSRAGStack/ChatbotAPI/BackupStack"
+    },
     "ITOPSRAGStackChatbotAPILambdaFunctionsE828647D.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
@@ -288,7 +373,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/14b88de96471fe668028a62953c8e38ad9177ef7bff67a1281609e58d3e2424a.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/fcbf50845b472cefb51da91b9641ed6486fec6f868578b3e7255c45b7be72870.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -365,10 +450,70 @@
             "data": "AuthorizationUserPoolClientIDC710EFA7"
           }
         ],
+        "/ITOPSRAGStack/ChatbotAPI/ChatHistoryTable": [
+          {
+            "type": "BackupRequired",
+            "data": "true"
+          }
+        ],
         "/ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIChatHistoryTable86F70C1D"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/ReadScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIChatHistoryTableReadScalingTargetAD57E62B"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/ReadScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIChatHistoryTableReadScalingTargetTracking39C649A8"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/WriteScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIChatHistoryTableWriteScalingTarget69E6CDDE"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/WriteScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIChatHistoryTableWriteScalingTargetTrackingF39F16DF"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/TimeIndexReadScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIChatHistoryTableTimeIndexReadScalingTarget91C061B7"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/TimeIndexReadScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIChatHistoryTableTimeIndexReadScalingTargetTrackingFD8C3853"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/TimeIndexWriteScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIChatHistoryTableTimeIndexWriteScalingTargetD43735E1"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/TimeIndexWriteScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIChatHistoryTableTimeIndexWriteScalingTargetTracking58176505"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/UserFeedbackTable": [
+          {
+            "type": "BackupRequired",
+            "data": "true"
           }
         ],
         "/ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/Resource": [
@@ -377,10 +522,118 @@
             "data": "ChatbotAPIUserFeedbackTableF734E54F"
           }
         ],
+        "/ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/ReadScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIUserFeedbackTableReadScalingTarget508BC59F"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/ReadScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIUserFeedbackTableReadScalingTargetTrackingB0BE41E8"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/WriteScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIUserFeedbackTableWriteScalingTarget4D0EB025"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/WriteScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIUserFeedbackTableWriteScalingTargetTracking365B1EED"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/CreatedAtIndexReadScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIUserFeedbackTableCreatedAtIndexReadScalingTarget6BBB4292"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/CreatedAtIndexReadScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIUserFeedbackTableCreatedAtIndexReadScalingTargetTracking99B41FFE"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/CreatedAtIndexWriteScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIUserFeedbackTableCreatedAtIndexWriteScalingTarget57BE1CB3"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/CreatedAtIndexWriteScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIUserFeedbackTableCreatedAtIndexWriteScalingTargetTrackingBBED42DA"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/AnyIndexReadScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIUserFeedbackTableAnyIndexReadScalingTarget89F7C1B3"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/AnyIndexReadScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIUserFeedbackTableAnyIndexReadScalingTargetTracking11C34A86"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/AnyIndexWriteScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIUserFeedbackTableAnyIndexWriteScalingTargetA04AEF90"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/AnyIndexWriteScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIUserFeedbackTableAnyIndexWriteScalingTargetTracking0F1B008D"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvaluationSummariesTable": [
+          {
+            "type": "BackupRequired",
+            "data": "true"
+          }
+        ],
         "/ITOPSRAGStack/ChatbotAPI/EvaluationSummariesTable/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIEvaluationSummariesTableE9B95A54"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvaluationSummariesTable/ReadScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvaluationSummariesTableReadScalingTarget28035084"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvaluationSummariesTable/ReadScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvaluationSummariesTableReadScalingTargetTracking64744936"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvaluationSummariesTable/WriteScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvaluationSummariesTableWriteScalingTarget5DF7E557"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvaluationSummariesTable/WriteScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvaluationSummariesTableWriteScalingTargetTracking8271490F"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable": [
+          {
+            "type": "BackupRequired",
+            "data": "true"
           }
         ],
         "/ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/Resource": [
@@ -389,16 +642,124 @@
             "data": "ChatbotAPIEvaluationResultsTableE72FCF7C"
           }
         ],
+        "/ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/ReadScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvaluationResultsTableReadScalingTarget2B28AC8A"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/ReadScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvaluationResultsTableReadScalingTargetTracking0D201A10"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/WriteScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvaluationResultsTableWriteScalingTargetABD145BB"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/WriteScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvaluationResultsTableWriteScalingTargetTracking3B371B2E"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/QuestionIndexReadScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvaluationResultsTableQuestionIndexReadScalingTarget9F68A4EC"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/QuestionIndexReadScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvaluationResultsTableQuestionIndexReadScalingTargetTracking11231909"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/QuestionIndexWriteScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvaluationResultsTableQuestionIndexWriteScalingTargetECC3F707"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/QuestionIndexWriteScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIEvaluationResultsTableQuestionIndexWriteScalingTargetTrackingBF9D20D6"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/KPILogsTable": [
+          {
+            "type": "BackupRequired",
+            "data": "true"
+          }
+        ],
         "/ITOPSRAGStack/ChatbotAPI/KPILogsTable/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIKPILogsTableA8BB2B72"
           }
         ],
+        "/ITOPSRAGStack/ChatbotAPI/KPILogsTable/ReadScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIKPILogsTableReadScalingTarget360CCAEF"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/KPILogsTable/ReadScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIKPILogsTableReadScalingTargetTracking4386AC99"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/KPILogsTable/WriteScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIKPILogsTableWriteScalingTarget61E62F6D"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/KPILogsTable/WriteScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIKPILogsTableWriteScalingTargetTracking31E085F2"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/DailyLoginTable": [
+          {
+            "type": "BackupRequired",
+            "data": "true"
+          }
+        ],
         "/ITOPSRAGStack/ChatbotAPI/DailyLoginTable/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIDailyLoginTable0DBFC91F"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/DailyLoginTable/ReadScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIDailyLoginTableReadScalingTarget1284F358"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/DailyLoginTable/ReadScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIDailyLoginTableReadScalingTargetTrackingAAC4568E"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/DailyLoginTable/WriteScaling/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIDailyLoginTableWriteScalingTarget8D765497"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/DailyLoginTable/WriteScaling/Target/Tracking/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIDailyLoginTableWriteScalingTargetTracking8346E92E"
           }
         ],
         "/ITOPSRAGStack/ChatbotAPI/CloudTrailBucket/Resource": [
@@ -1653,6 +2014,42 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/ITOPSRAGStack/Exports/Output{\"Fn::GetAtt\":[\"ChatbotAPIChatHistoryTable86F70C1D\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttChatbotAPIChatHistoryTable86F70C1DArn66A8D990"
+          }
+        ],
+        "/ITOPSRAGStack/Exports/Output{\"Fn::GetAtt\":[\"ChatbotAPIUserFeedbackTableF734E54F\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttChatbotAPIUserFeedbackTableF734E54FArnEBB71A27"
+          }
+        ],
+        "/ITOPSRAGStack/Exports/Output{\"Fn::GetAtt\":[\"ChatbotAPIEvaluationResultsTableE72FCF7C\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttChatbotAPIEvaluationResultsTableE72FCF7CArnFD019094"
+          }
+        ],
+        "/ITOPSRAGStack/Exports/Output{\"Fn::GetAtt\":[\"ChatbotAPIEvaluationSummariesTableE9B95A54\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttChatbotAPIEvaluationSummariesTableE9B95A54ArnB92FF044"
+          }
+        ],
+        "/ITOPSRAGStack/Exports/Output{\"Fn::GetAtt\":[\"ChatbotAPIKPILogsTableA8BB2B72\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttChatbotAPIKPILogsTableA8BB2B72Arn0B4FCE77"
+          }
+        ],
+        "/ITOPSRAGStack/Exports/Output{\"Fn::GetAtt\":[\"ChatbotAPIDailyLoginTable0DBFC91F\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttChatbotAPIDailyLoginTable0DBFC91FArn5241FF15"
           }
         ],
         "/ITOPSRAGStack/BootstrapVersion": [
