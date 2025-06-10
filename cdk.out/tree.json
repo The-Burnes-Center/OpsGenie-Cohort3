@@ -5395,7 +5395,7 @@
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Backup::BackupVault",
                           "aws:cdk:cloudformation:props": {
-                            "backupVaultName": "dynamodb-backup-vault-1749590843774"
+                            "backupVaultName": "dynamodb-backup-vault-1749594339634"
                           }
                         },
                         "constructInfo": {

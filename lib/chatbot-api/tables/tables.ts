@@ -9,6 +9,7 @@ export class TableStack extends Stack {
   public readonly evalSummaryTable : Table;
   public readonly kpiLogsTable : Table;
   public readonly dailyLoginTable : Table;
+
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
@@ -69,7 +70,7 @@ export class TableStack extends Stack {
 
     this.historyTable = chatHistoryTable;
 
-    // Define the user feedback table with auto-scaling
+    // User feedback table (keeping original structure)
     const userFeedbackTable = new Table(scope, 'UserFeedbackTable', {
       partitionKey: { name: 'Topic', type: AttributeType.STRING },
       sortKey: { name: 'CreatedAt', type: AttributeType.STRING },
@@ -84,7 +85,7 @@ export class TableStack extends Stack {
     Tags.of(userFeedbackTable).add('ComplianceLevel', 'FedRAMP');
     Tags.of(userFeedbackTable).add('DataClassification', 'Sensitive');
 
-    // Add autoscaling for main table
+    // Add autoscaling for user feedback table
     userFeedbackTable.autoScaleReadCapacity({
       minCapacity: 5,
       maxCapacity: 100,
@@ -99,7 +100,6 @@ export class TableStack extends Stack {
       targetUtilizationPercent: 70,
     });
 
-    // Add a global secondary index to UserFeedbackTable with partition key CreatedAt
     userFeedbackTable.addGlobalSecondaryIndex({
       indexName: 'CreatedAtIndex',
       partitionKey: { name: 'CreatedAt', type: AttributeType.STRING },
@@ -295,6 +295,5 @@ export class TableStack extends Stack {
 
     this.kpiLogsTable = kpiLogsTable;
     this.dailyLoginTable = dailyLoginTable;
-
   }
 }

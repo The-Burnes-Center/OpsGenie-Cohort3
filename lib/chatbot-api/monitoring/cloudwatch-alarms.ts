@@ -6,7 +6,6 @@ import * as sns from 'aws-cdk-lib/aws-sns';
 import * as snsSubscriptions from 'aws-cdk-lib/aws-sns-subscriptions';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
-import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 
 export interface CloudWatchAlarmsStackProps extends StackProps {
   readonly lambdaFunctions: lambda.Function[];

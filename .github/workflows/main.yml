@@ -43,17 +43,49 @@ jobs:
     - name: Bootstrap AWS environment
       run: cdk bootstrap
 
-    # Step 7: Deploy the CDK stack (from the root folder)
-    - name: Deploy CDK stack
-      run: cdk deploy ITOPSRAGStack --require-approval never  
+    # Step 7: Build the project
+    - name: Build project
+      run: npm run build
 
-    # Step 8: Fetch CloudFormation outputs and save to a file
+    # Step 8: Deploy main CDK stack
+    - name: Deploy main CDK stack
+      run: cdk deploy ITOPSRAGStack --require-approval never
+
+    # Step 9: FedRAMP Compliance - Fix DynamoDB Autoscaling Alarms
+    - name: Ensure FedRAMP Compliance for Autoscaling Alarms
+      run: |
+        # Get SNS topic ARN for alarm notifications
+        TOPIC_ARN=$(aws sns list-topics --query "Topics[?contains(TopicArn, 'fedramp-compliance-alarms')].TopicArn" --output text)
+        
+        if [ -z "$TOPIC_ARN" ]; then
+          echo "ERROR: FedRAMP compliance SNS topic not found!"
+          exit 1
+        fi
+        
+        # Check for non-compliant TargetTracking alarms and fix them
+        NON_COMPLIANT_ALARMS=$(aws cloudwatch describe-alarms \
+          --query "MetricAlarms[?contains(AlarmName, 'TargetTracking-') && length(AlarmActions||[]) == \`0\`].AlarmName" \
+          --output text)
+        
+        if [ ! -z "$NON_COMPLIANT_ALARMS" ]; then
+          echo "Applying FedRAMP compliance to autoscaling alarms..."
+          echo "$NON_COMPLIANT_ALARMS" | while read alarm; do
+            if [ ! -z "$alarm" ]; then
+              aws cloudwatch put-metric-alarm \
+                --alarm-name "$alarm" \
+                --alarm-actions "$TOPIC_ARN" \
+                --ok-actions "$TOPIC_ARN" \
+                --insufficient-data-actions "$TOPIC_ARN"
+            fi
+          done
+        fi
+
+    # Step 10: Fetch CloudFormation outputs and save to a file
     - name: Fetch CloudFormation Outputs
       run: |
         aws cloudformation describe-stacks --stack-name ITOPSRAGStack --query "Stacks[0].Outputs" > stack-outputs.json
-        cat stack-outputs.json  # Just to verify in logs if needed
         
-    # Step 9: Upload the output file as an artifact (optional)
+    # Step 11: Upload the output file as an artifact
     - name: Upload Outputs as Artifact
       uses: actions/upload-artifact@v4
       with:
