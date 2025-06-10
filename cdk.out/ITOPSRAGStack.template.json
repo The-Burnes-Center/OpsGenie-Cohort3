@@ -10626,6 +10626,182 @@
    "Export": {
     "Name": "ITOPSRAGStack:ExportsOutputFnGetAttChatbotAPIDailyLoginTable0DBFC91FArn5241FF15"
    }
+  },
+  "ExportsOutputRefChatbotAPIChatHandlerFunctionEB04457EC162BE30": {
+   "Value": {
+    "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHandlerFunctionEB04457EC162BE30"
+   }
+  },
+  "ExportsOutputRefChatbotAPISessionHandlerFunctionF969576AAB44E1C1": {
+   "Value": {
+    "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPISessionHandlerFunctionF969576AAB44E1C1"
+   }
+  },
+  "ExportsOutputRefChatbotAPIFeedbackHandlerFunction11250F317E3C3742": {
+   "Value": {
+    "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIFeedbackHandlerFunction11250F317E3C3742"
+   }
+  },
+  "ExportsOutputRefChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97CC81678C4": {
+   "Value": {
+    "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97CC81678C4"
+   }
+  },
+  "ExportsOutputRefChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016035CDE6E": {
+   "Value": {
+    "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016035CDE6E"
+   }
+  },
+  "ExportsOutputRefChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32887B2875": {
+   "Value": {
+    "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32887B2875"
+   }
+  },
+  "ExportsOutputRefChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF495F014AC": {
+   "Value": {
+    "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF495F014AC"
+   }
+  },
+  "ExportsOutputRefChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA8CE11974": {
+   "Value": {
+    "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA8CE11974"
+   }
+  },
+  "ExportsOutputRefChatbotAPISyncKendraHandlerFunctionED8FB020A4968155": {
+   "Value": {
+    "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPISyncKendraHandlerFunctionED8FB020A4968155"
+   }
+  },
+  "ExportsOutputRefChatbotAPIChatInvocationsCounterFunction0AD6F7D4A071DFFD": {
+   "Value": {
+    "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatInvocationsCounterFunction0AD6F7D4A071DFFD"
+   }
+  },
+  "ExportsOutputRefChatbotAPIcomprehendMedicalFunction7DBD41DD0335764F": {
+   "Value": {
+    "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIcomprehendMedicalFunction7DBD41DD0335764F"
+   }
+  },
+  "ExportsOutputRefChatbotAPIKPIHandlerFunction377426B241851B05": {
+   "Value": {
+    "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPIHandlerFunction377426B241851B05"
+   }
+  },
+  "ExportsOutputRefChatbotAPIEvalResultsHandlerFunction3A0AF1AA8A7E495D": {
+   "Value": {
+    "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvalResultsHandlerFunction3A0AF1AA8A7E495D"
+   }
+  },
+  "ExportsOutputRefChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E41DFAE51": {
+   "Value": {
+    "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E41DFAE51"
+   }
+  },
+  "ExportsOutputRefChatbotAPIChatHistoryTable86F70C1D231DFDEB": {
+   "Value": {
+    "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHistoryTable86F70C1D231DFDEB"
+   }
+  },
+  "ExportsOutputRefChatbotAPIUserFeedbackTableF734E54F7B54995E": {
+   "Value": {
+    "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUserFeedbackTableF734E54F7B54995E"
+   }
+  },
+  "ExportsOutputRefChatbotAPIEvaluationResultsTableE72FCF7C09DE719F": {
+   "Value": {
+    "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationResultsTableE72FCF7C09DE719F"
+   }
+  },
+  "ExportsOutputRefChatbotAPIEvaluationSummariesTableE9B95A54CCBA01F4": {
+   "Value": {
+    "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationSummariesTableE9B95A54CCBA01F4"
+   }
+  },
+  "ExportsOutputRefChatbotAPIKPILogsTableA8BB2B7256F24DD7": {
+   "Value": {
+    "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPILogsTableA8BB2B7256F24DD7"
+   }
+  },
+  "ExportsOutputRefChatbotAPIDailyLoginTable0DBFC91F3DA44E64": {
+   "Value": {
+    "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDailyLoginTable0DBFC91F3DA44E64"
+   }
+  },
+  "ExportsOutputRefChatbotAPIRestBackendHTTPAPI6A6C7FF42DEDF6C9": {
+   "Value": {
+    "Ref": "ChatbotAPIRestBackendHTTPAPI6A6C7FF4"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIRestBackendHTTPAPI6A6C7FF42DEDF6C9"
+   }
+  },
+  "ExportsOutputRefChatbotAPIWebsocketBackendWSAPI75718B83A945CA6D": {
+   "Value": {
+    "Ref": "ChatbotAPIWebsocketBackendWSAPI75718B83"
+   },
+   "Export": {
+    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIWebsocketBackendWSAPI75718B83A945CA6D"
+   }
   }
  },
  "Conditions": {

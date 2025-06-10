@@ -15,6 +15,7 @@ import { RestBackendAPI } from "./gateway/rest-api"
 import { LambdaFunctionStack } from "./functions/functions"
 import { TableStack } from "./tables/tables"
 import { BackupStack } from "./backup/backup-stack"
+import { CloudWatchAlarmsStack } from "./monitoring/cloudwatch-alarms"
 import { KendraIndexStack } from "./kendra/kendra"
 import { S3BucketStack } from "./buckets/buckets"
 
@@ -290,6 +291,36 @@ export class ChatBotApi extends Construct {
       integration: s3UploadTestCasesAPIIntegration,
       authorizer: httpAuthorizer,
     })
+
+    // Create CloudWatch alarms for FedRAMP compliance
+    const monitoringStack = new CloudWatchAlarmsStack(this, "MonitoringStack", {
+      lambdaFunctions: [
+        lambdaFunctions.chatFunction,
+        lambdaFunctions.sessionFunction,
+        lambdaFunctions.feedbackFunction,
+        lambdaFunctions.deleteS3Function,
+        lambdaFunctions.getS3KnowledgeFunction,
+        lambdaFunctions.getS3TestCasesFunction,
+        lambdaFunctions.uploadS3KnowledgeFunction,
+        lambdaFunctions.uploadS3TestCasesFunction,
+        lambdaFunctions.syncKendraFunction,
+        lambdaFunctions.chatInvocationsCounterFunction,
+        lambdaFunctions.comprehendMedicalFunction,
+        lambdaFunctions.kpiFunction,
+        lambdaFunctions.handleEvalResultsFunction,
+        lambdaFunctions.stepFunctionsStack.startLlmEvalStateMachineFunction
+      ],
+      dynamoTables: [
+        tables.historyTable,
+        tables.feedbackTable,
+        tables.evalResultsTable,
+        tables.evalSummaryTable,
+        tables.kpiLogsTable,
+        tables.dailyLoginTable
+      ],
+      restApiId: restBackend.restAPI.httpApiId,
+      websocketApiId: websocketBackend.wsAPI.apiId,
+    });
 
     // Output API endpoints
     new cdk.CfnOutput(this, "WS-API - apiEndpoint", {
