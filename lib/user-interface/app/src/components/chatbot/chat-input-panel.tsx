@@ -221,17 +221,39 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
 
       let incomingMetadata: boolean = false;
       let sources = {};
+      let lastDataReceived = Date.now();
+      let progressTimeout: NodeJS.Timeout;
 
-      setTimeout(() => {if (receivedData == '') {
-        ws.close()
-        messageHistoryRef.current.pop();
-        messageHistoryRef.current.push({
-          type: ChatBotMessageType.AI,
-          tokens: [],
-          content: 'Response timed out!',
-          metadata: {},
-        })
-      }},60000)
+      // Smart timeout that resets when data is received
+      const resetProgressTimeout = () => {
+        if (progressTimeout) {
+          clearTimeout(progressTimeout);
+        }
+        progressTimeout = setTimeout(() => {
+          if (receivedData == '') {
+            // Log timeout details for pattern analysis
+            console.warn('Timeout occurred:', {
+              messageLength: messageToSend.length,
+              messagePreview: messageToSend.substring(0, 100),
+              sessionId: props.session.id,
+              timestamp: new Date().toISOString()
+            });
+            
+            ws.close()
+            messageHistoryRef.current.pop();
+            messageHistoryRef.current.push({
+              type: ChatBotMessageType.AI,
+              tokens: [],
+              content: 'Response timed out! The query may be too complex. Please try rephrasing or breaking it into smaller questions.',
+              metadata: {},
+            })
+            props.setMessageHistory(messageHistoryRef.current);
+          }
+        }, 90000); // Increased to 90 seconds for complex queries
+      };
+
+      // Initial timeout setup
+      resetProgressTimeout();
 
       // Event listener for when the connection is open
       ws.addEventListener('open', function open() {
@@ -270,9 +292,18 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
         }
         if (!incomingMetadata) {
           receivedData += data.data;
+          resetProgressTimeout(); // Reset timeout when data is received
         } else {
-          sources = { "Sources": JSON.parse(data.data) }
-          console.log(sources);
+          // Robust source parsing with error handling
+          try {
+            const parsedSources = JSON.parse(data.data);
+            sources = { "Sources": parsedSources };
+            console.log("Sources successfully parsed:", sources);
+          } catch (error) {
+            console.error("Failed to parse sources:", error, "Raw data:", data.data);
+            // Keep sources as empty object if parsing fails, but don't break the flow
+            sources = { "Sources": [] };
+          }
         }
 
         
@@ -311,6 +342,11 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
       });
       // Handle WebSocket closure
       ws.addEventListener('close', async function close() {
+        // Clear any remaining timeouts
+        if (progressTimeout) {
+          clearTimeout(progressTimeout);
+        }
+        
         // await apiClient.sessions.updateSession("0", props.session.id, messageHistoryRef.current);
         if (firstTime) {   
           // console.log("first time!", firstTime)
@@ -329,7 +365,7 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
           BotMessage: receivedData,
           UserPrompt: messageToSend,
           ResponseTime: responseTime,
-          //Flagged: responseTime >= 20,
+          //Flagged: responseTime >= 30,
         }
 
         apiClient.metrics.saveChatInteraction(interactionData);

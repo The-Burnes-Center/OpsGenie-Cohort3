@@ -57,7 +57,7 @@ export default function KPIsTab(props: KPIsTabProps) {
   const [showTextModal, setShowTextModal] = useState(false);
   const [modalText, setModalText] = useState("");
 
-  const FLAG_RESPONSE = 20; // chatbot interactions with response times longer than this will be flagged
+  const FLAG_RESPONSE = 30; // chatbot interactions with response times longer than this will be flagged
   
   // make table accessible by adding text to checkbox column
   useEffect(() => {
