@@ -6,19 +6,20 @@ import * as sns from 'aws-cdk-lib/aws-sns';
 import * as snsSubscriptions from 'aws-cdk-lib/aws-sns-subscriptions';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
+import * as cdk from 'aws-cdk-lib';
 
-export interface CloudWatchAlarmsStackProps extends StackProps {
+export interface CloudWatchAlarmsStackProps {
   readonly lambdaFunctions: lambda.Function[];
   readonly dynamoTables: dynamodb.Table[];
   readonly restApiId?: string;
   readonly websocketApiId?: string;
 }
 
-export class CloudWatchAlarmsStack extends Stack {
+export class CloudWatchAlarmsStack extends Construct {
   public readonly alarmTopic: sns.Topic;
 
   constructor(scope: Construct, id: string, props: CloudWatchAlarmsStackProps) {
-    super(scope, id, props);
+    super(scope, id);
 
     // Create SNS topic for alarm notifications (FedRAMP compliance requirement)
     this.alarmTopic = new sns.Topic(this, 'AlarmNotificationTopic', {
@@ -49,6 +50,12 @@ export class CloudWatchAlarmsStack extends Stack {
     if (props.websocketApiId) {
       this.createApiGatewayAlarms(props.websocketApiId, 'WebSocket');
     }
+
+    // Add CloudFormation output for the SNS topic ARN
+    new cdk.CfnOutput(this, 'AlarmTopicARN', {
+      value: this.alarmTopic.topicArn,
+      description: 'The ARN of the alarm topic',
+    });
   }
 
   private createLambdaAlarms(lambdaFunction: lambda.Function, index: number): void {

@@ -5395,7 +5395,7 @@
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Backup::BackupVault",
                           "aws:cdk:cloudformation:props": {
-                            "backupVaultName": "dynamodb-backup-vault-1749616738063"
+                            "backupVaultName": "dynamodb-backup-vault-1749619437024"
                           }
                         },
                         "constructInfo": {
@@ -13931,7 +13931,7 @@
                                 "endpoint": "itops-admin@example.com",
                                 "protocol": "email",
                                 "topicArn": {
-                                  "Ref": "AlarmNotificationTopic58BFACC9"
+                                  "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                                 }
                               }
                             },
@@ -13964,7 +13964,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -13973,7 +13973,7 @@
                                 [
                                   "High error rate detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHandlerFunctionEB04457EC162BE30"
+                                    "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
                                   }
                                 ]
                               ]
@@ -13983,7 +13983,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHandlerFunctionEB04457EC162BE30"
+                                    "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -13994,21 +13994,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHandlerFunctionEB04457EC162BE30"
+                                  "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Errors",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -14040,7 +14040,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -14049,7 +14049,7 @@
                                 [
                                   "High duration detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHandlerFunctionEB04457EC162BE30"
+                                    "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
                                   }
                                 ]
                               ]
@@ -14059,7 +14059,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHandlerFunctionEB04457EC162BE30"
+                                    "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
                                   },
                                   "-HighDuration"
                                 ]
@@ -14070,21 +14070,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHandlerFunctionEB04457EC162BE30"
+                                  "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Duration",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -14116,7 +14116,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -14125,7 +14125,7 @@
                                 [
                                   "Throttles detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHandlerFunctionEB04457EC162BE30"
+                                    "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
                                   }
                                 ]
                               ]
@@ -14135,7 +14135,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHandlerFunctionEB04457EC162BE30"
+                                    "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
                                   },
                                   "-Throttles"
                                 ]
@@ -14146,21 +14146,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHandlerFunctionEB04457EC162BE30"
+                                  "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Throttles",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -14192,7 +14192,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -14201,7 +14201,7 @@
                                 [
                                   "High error rate detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPISessionHandlerFunctionF969576AAB44E1C1"
+                                    "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
                                   }
                                 ]
                               ]
@@ -14211,7 +14211,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPISessionHandlerFunctionF969576AAB44E1C1"
+                                    "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -14222,21 +14222,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPISessionHandlerFunctionF969576AAB44E1C1"
+                                  "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Errors",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -14268,7 +14268,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -14277,7 +14277,7 @@
                                 [
                                   "High duration detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPISessionHandlerFunctionF969576AAB44E1C1"
+                                    "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
                                   }
                                 ]
                               ]
@@ -14287,7 +14287,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPISessionHandlerFunctionF969576AAB44E1C1"
+                                    "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
                                   },
                                   "-HighDuration"
                                 ]
@@ -14298,21 +14298,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPISessionHandlerFunctionF969576AAB44E1C1"
+                                  "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Duration",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -14344,7 +14344,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -14353,7 +14353,7 @@
                                 [
                                   "Throttles detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPISessionHandlerFunctionF969576AAB44E1C1"
+                                    "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
                                   }
                                 ]
                               ]
@@ -14363,7 +14363,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPISessionHandlerFunctionF969576AAB44E1C1"
+                                    "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
                                   },
                                   "-Throttles"
                                 ]
@@ -14374,21 +14374,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPISessionHandlerFunctionF969576AAB44E1C1"
+                                  "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Throttles",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -14420,7 +14420,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -14429,7 +14429,7 @@
                                 [
                                   "High error rate detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIFeedbackHandlerFunction11250F317E3C3742"
+                                    "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
                                   }
                                 ]
                               ]
@@ -14439,7 +14439,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIFeedbackHandlerFunction11250F317E3C3742"
+                                    "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -14450,21 +14450,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIFeedbackHandlerFunction11250F317E3C3742"
+                                  "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Errors",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -14496,7 +14496,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -14505,7 +14505,7 @@
                                 [
                                   "High duration detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIFeedbackHandlerFunction11250F317E3C3742"
+                                    "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
                                   }
                                 ]
                               ]
@@ -14515,7 +14515,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIFeedbackHandlerFunction11250F317E3C3742"
+                                    "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
                                   },
                                   "-HighDuration"
                                 ]
@@ -14526,21 +14526,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIFeedbackHandlerFunction11250F317E3C3742"
+                                  "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Duration",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -14572,7 +14572,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -14581,7 +14581,7 @@
                                 [
                                   "Throttles detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIFeedbackHandlerFunction11250F317E3C3742"
+                                    "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
                                   }
                                 ]
                               ]
@@ -14591,7 +14591,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIFeedbackHandlerFunction11250F317E3C3742"
+                                    "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
                                   },
                                   "-Throttles"
                                 ]
@@ -14602,21 +14602,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIFeedbackHandlerFunction11250F317E3C3742"
+                                  "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Throttles",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -14648,7 +14648,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -14657,7 +14657,7 @@
                                 [
                                   "High error rate detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97CC81678C4"
+                                    "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
                                   }
                                 ]
                               ]
@@ -14667,7 +14667,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97CC81678C4"
+                                    "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -14678,21 +14678,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97CC81678C4"
+                                  "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Errors",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -14724,7 +14724,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -14733,7 +14733,7 @@
                                 [
                                   "High duration detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97CC81678C4"
+                                    "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
                                   }
                                 ]
                               ]
@@ -14743,7 +14743,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97CC81678C4"
+                                    "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
                                   },
                                   "-HighDuration"
                                 ]
@@ -14754,21 +14754,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97CC81678C4"
+                                  "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Duration",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -14800,7 +14800,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -14809,7 +14809,7 @@
                                 [
                                   "Throttles detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97CC81678C4"
+                                    "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
                                   }
                                 ]
                               ]
@@ -14819,7 +14819,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97CC81678C4"
+                                    "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
                                   },
                                   "-Throttles"
                                 ]
@@ -14830,21 +14830,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97CC81678C4"
+                                  "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Throttles",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -14876,7 +14876,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -14885,7 +14885,7 @@
                                 [
                                   "High error rate detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016035CDE6E"
+                                    "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
                                   }
                                 ]
                               ]
@@ -14895,7 +14895,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016035CDE6E"
+                                    "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -14906,21 +14906,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016035CDE6E"
+                                  "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Errors",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -14952,7 +14952,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -14961,7 +14961,7 @@
                                 [
                                   "High duration detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016035CDE6E"
+                                    "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
                                   }
                                 ]
                               ]
@@ -14971,7 +14971,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016035CDE6E"
+                                    "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
                                   },
                                   "-HighDuration"
                                 ]
@@ -14982,21 +14982,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016035CDE6E"
+                                  "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Duration",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -15028,7 +15028,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -15037,7 +15037,7 @@
                                 [
                                   "Throttles detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016035CDE6E"
+                                    "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
                                   }
                                 ]
                               ]
@@ -15047,7 +15047,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016035CDE6E"
+                                    "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
                                   },
                                   "-Throttles"
                                 ]
@@ -15058,21 +15058,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016035CDE6E"
+                                  "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Throttles",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -15104,7 +15104,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -15113,7 +15113,7 @@
                                 [
                                   "High error rate detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32887B2875"
+                                    "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
                                   }
                                 ]
                               ]
@@ -15123,7 +15123,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32887B2875"
+                                    "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -15134,21 +15134,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32887B2875"
+                                  "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Errors",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -15180,7 +15180,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -15189,7 +15189,7 @@
                                 [
                                   "High duration detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32887B2875"
+                                    "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
                                   }
                                 ]
                               ]
@@ -15199,7 +15199,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32887B2875"
+                                    "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
                                   },
                                   "-HighDuration"
                                 ]
@@ -15210,21 +15210,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32887B2875"
+                                  "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Duration",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -15256,7 +15256,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -15265,7 +15265,7 @@
                                 [
                                   "Throttles detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32887B2875"
+                                    "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
                                   }
                                 ]
                               ]
@@ -15275,7 +15275,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32887B2875"
+                                    "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
                                   },
                                   "-Throttles"
                                 ]
@@ -15286,21 +15286,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32887B2875"
+                                  "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Throttles",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -15332,7 +15332,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -15341,7 +15341,7 @@
                                 [
                                   "High error rate detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF495F014AC"
+                                    "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
                                   }
                                 ]
                               ]
@@ -15351,7 +15351,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF495F014AC"
+                                    "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -15362,21 +15362,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF495F014AC"
+                                  "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Errors",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -15408,7 +15408,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -15417,7 +15417,7 @@
                                 [
                                   "High duration detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF495F014AC"
+                                    "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
                                   }
                                 ]
                               ]
@@ -15427,7 +15427,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF495F014AC"
+                                    "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
                                   },
                                   "-HighDuration"
                                 ]
@@ -15438,21 +15438,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF495F014AC"
+                                  "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Duration",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -15484,7 +15484,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -15493,7 +15493,7 @@
                                 [
                                   "Throttles detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF495F014AC"
+                                    "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
                                   }
                                 ]
                               ]
@@ -15503,7 +15503,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF495F014AC"
+                                    "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
                                   },
                                   "-Throttles"
                                 ]
@@ -15514,21 +15514,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF495F014AC"
+                                  "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Throttles",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -15560,7 +15560,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -15569,7 +15569,7 @@
                                 [
                                   "High error rate detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA8CE11974"
+                                    "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
                                   }
                                 ]
                               ]
@@ -15579,7 +15579,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA8CE11974"
+                                    "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -15590,21 +15590,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA8CE11974"
+                                  "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Errors",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -15636,7 +15636,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -15645,7 +15645,7 @@
                                 [
                                   "High duration detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA8CE11974"
+                                    "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
                                   }
                                 ]
                               ]
@@ -15655,7 +15655,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA8CE11974"
+                                    "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
                                   },
                                   "-HighDuration"
                                 ]
@@ -15666,21 +15666,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA8CE11974"
+                                  "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Duration",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -15712,7 +15712,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -15721,7 +15721,7 @@
                                 [
                                   "Throttles detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA8CE11974"
+                                    "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
                                   }
                                 ]
                               ]
@@ -15731,7 +15731,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA8CE11974"
+                                    "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
                                   },
                                   "-Throttles"
                                 ]
@@ -15742,21 +15742,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA8CE11974"
+                                  "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Throttles",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -15788,7 +15788,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -15797,7 +15797,7 @@
                                 [
                                   "High error rate detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPISyncKendraHandlerFunctionED8FB020A4968155"
+                                    "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
                                   }
                                 ]
                               ]
@@ -15807,7 +15807,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPISyncKendraHandlerFunctionED8FB020A4968155"
+                                    "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -15818,21 +15818,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPISyncKendraHandlerFunctionED8FB020A4968155"
+                                  "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Errors",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -15864,7 +15864,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -15873,7 +15873,7 @@
                                 [
                                   "High duration detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPISyncKendraHandlerFunctionED8FB020A4968155"
+                                    "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
                                   }
                                 ]
                               ]
@@ -15883,7 +15883,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPISyncKendraHandlerFunctionED8FB020A4968155"
+                                    "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
                                   },
                                   "-HighDuration"
                                 ]
@@ -15894,21 +15894,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPISyncKendraHandlerFunctionED8FB020A4968155"
+                                  "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Duration",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -15940,7 +15940,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -15949,7 +15949,7 @@
                                 [
                                   "Throttles detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPISyncKendraHandlerFunctionED8FB020A4968155"
+                                    "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
                                   }
                                 ]
                               ]
@@ -15959,7 +15959,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPISyncKendraHandlerFunctionED8FB020A4968155"
+                                    "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
                                   },
                                   "-Throttles"
                                 ]
@@ -15970,21 +15970,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPISyncKendraHandlerFunctionED8FB020A4968155"
+                                  "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Throttles",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -16016,7 +16016,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -16025,7 +16025,7 @@
                                 [
                                   "High error rate detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatInvocationsCounterFunction0AD6F7D4A071DFFD"
+                                    "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
                                   }
                                 ]
                               ]
@@ -16035,7 +16035,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatInvocationsCounterFunction0AD6F7D4A071DFFD"
+                                    "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -16046,21 +16046,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatInvocationsCounterFunction0AD6F7D4A071DFFD"
+                                  "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Errors",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -16092,7 +16092,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -16101,7 +16101,7 @@
                                 [
                                   "High duration detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatInvocationsCounterFunction0AD6F7D4A071DFFD"
+                                    "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
                                   }
                                 ]
                               ]
@@ -16111,7 +16111,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatInvocationsCounterFunction0AD6F7D4A071DFFD"
+                                    "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
                                   },
                                   "-HighDuration"
                                 ]
@@ -16122,21 +16122,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatInvocationsCounterFunction0AD6F7D4A071DFFD"
+                                  "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Duration",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -16168,7 +16168,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -16177,7 +16177,7 @@
                                 [
                                   "Throttles detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatInvocationsCounterFunction0AD6F7D4A071DFFD"
+                                    "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
                                   }
                                 ]
                               ]
@@ -16187,7 +16187,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatInvocationsCounterFunction0AD6F7D4A071DFFD"
+                                    "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
                                   },
                                   "-Throttles"
                                 ]
@@ -16198,21 +16198,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatInvocationsCounterFunction0AD6F7D4A071DFFD"
+                                  "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Throttles",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -16244,7 +16244,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -16253,7 +16253,7 @@
                                 [
                                   "High error rate detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIcomprehendMedicalFunction7DBD41DD0335764F"
+                                    "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
                                   }
                                 ]
                               ]
@@ -16263,7 +16263,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIcomprehendMedicalFunction7DBD41DD0335764F"
+                                    "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -16274,21 +16274,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIcomprehendMedicalFunction7DBD41DD0335764F"
+                                  "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Errors",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -16320,7 +16320,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -16329,7 +16329,7 @@
                                 [
                                   "High duration detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIcomprehendMedicalFunction7DBD41DD0335764F"
+                                    "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
                                   }
                                 ]
                               ]
@@ -16339,7 +16339,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIcomprehendMedicalFunction7DBD41DD0335764F"
+                                    "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
                                   },
                                   "-HighDuration"
                                 ]
@@ -16350,21 +16350,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIcomprehendMedicalFunction7DBD41DD0335764F"
+                                  "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Duration",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -16396,7 +16396,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -16405,7 +16405,7 @@
                                 [
                                   "Throttles detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIcomprehendMedicalFunction7DBD41DD0335764F"
+                                    "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
                                   }
                                 ]
                               ]
@@ -16415,7 +16415,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIcomprehendMedicalFunction7DBD41DD0335764F"
+                                    "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
                                   },
                                   "-Throttles"
                                 ]
@@ -16426,21 +16426,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIcomprehendMedicalFunction7DBD41DD0335764F"
+                                  "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Throttles",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -16472,7 +16472,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -16481,7 +16481,7 @@
                                 [
                                   "High error rate detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPIHandlerFunction377426B241851B05"
+                                    "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
                                   }
                                 ]
                               ]
@@ -16491,7 +16491,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPIHandlerFunction377426B241851B05"
+                                    "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -16502,21 +16502,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPIHandlerFunction377426B241851B05"
+                                  "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Errors",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -16548,7 +16548,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -16557,7 +16557,7 @@
                                 [
                                   "High duration detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPIHandlerFunction377426B241851B05"
+                                    "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
                                   }
                                 ]
                               ]
@@ -16567,7 +16567,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPIHandlerFunction377426B241851B05"
+                                    "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
                                   },
                                   "-HighDuration"
                                 ]
@@ -16578,21 +16578,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPIHandlerFunction377426B241851B05"
+                                  "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Duration",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -16624,7 +16624,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -16633,7 +16633,7 @@
                                 [
                                   "Throttles detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPIHandlerFunction377426B241851B05"
+                                    "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
                                   }
                                 ]
                               ]
@@ -16643,7 +16643,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPIHandlerFunction377426B241851B05"
+                                    "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
                                   },
                                   "-Throttles"
                                 ]
@@ -16654,21 +16654,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPIHandlerFunction377426B241851B05"
+                                  "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Throttles",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -16700,7 +16700,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -16709,7 +16709,7 @@
                                 [
                                   "High error rate detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvalResultsHandlerFunction3A0AF1AA8A7E495D"
+                                    "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
                                   }
                                 ]
                               ]
@@ -16719,7 +16719,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvalResultsHandlerFunction3A0AF1AA8A7E495D"
+                                    "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -16730,21 +16730,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvalResultsHandlerFunction3A0AF1AA8A7E495D"
+                                  "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Errors",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -16776,7 +16776,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -16785,7 +16785,7 @@
                                 [
                                   "High duration detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvalResultsHandlerFunction3A0AF1AA8A7E495D"
+                                    "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
                                   }
                                 ]
                               ]
@@ -16795,7 +16795,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvalResultsHandlerFunction3A0AF1AA8A7E495D"
+                                    "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
                                   },
                                   "-HighDuration"
                                 ]
@@ -16806,21 +16806,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvalResultsHandlerFunction3A0AF1AA8A7E495D"
+                                  "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Duration",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -16852,7 +16852,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -16861,7 +16861,7 @@
                                 [
                                   "Throttles detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvalResultsHandlerFunction3A0AF1AA8A7E495D"
+                                    "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
                                   }
                                 ]
                               ]
@@ -16871,7 +16871,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvalResultsHandlerFunction3A0AF1AA8A7E495D"
+                                    "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
                                   },
                                   "-Throttles"
                                 ]
@@ -16882,21 +16882,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvalResultsHandlerFunction3A0AF1AA8A7E495D"
+                                  "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Throttles",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -16928,7 +16928,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -16937,7 +16937,7 @@
                                 [
                                   "High error rate detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E41DFAE51"
+                                    "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
                                   }
                                 ]
                               ]
@@ -16947,7 +16947,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E41DFAE51"
+                                    "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -16958,21 +16958,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E41DFAE51"
+                                  "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Errors",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -17004,7 +17004,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -17013,7 +17013,7 @@
                                 [
                                   "High duration detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E41DFAE51"
+                                    "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
                                   }
                                 ]
                               ]
@@ -17023,7 +17023,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E41DFAE51"
+                                    "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
                                   },
                                   "-HighDuration"
                                 ]
@@ -17034,21 +17034,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E41DFAE51"
+                                  "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Duration",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -17080,7 +17080,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -17089,7 +17089,7 @@
                                 [
                                   "Throttles detected for Lambda function ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E41DFAE51"
+                                    "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
                                   }
                                 ]
                               ]
@@ -17099,7 +17099,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E41DFAE51"
+                                    "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
                                   },
                                   "-Throttles"
                                 ]
@@ -17110,21 +17110,21 @@
                               {
                                 "name": "FunctionName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E41DFAE51"
+                                  "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Throttles",
                             "namespace": "AWS/Lambda",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -17156,7 +17156,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -17165,7 +17165,7 @@
                                 [
                                   "Throttled requests detected for DynamoDB table ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHistoryTable86F70C1D231DFDEB"
+                                    "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
                                   }
                                 ]
                               ]
@@ -17175,7 +17175,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHistoryTable86F70C1D231DFDEB"
+                                    "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
                                   },
                                   "-ThrottledRequests"
                                 ]
@@ -17186,21 +17186,21 @@
                               {
                                 "name": "TableName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHistoryTable86F70C1D231DFDEB"
+                                  "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "SystemErrors",
                             "namespace": "AWS/DynamoDB",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -17232,7 +17232,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -17241,7 +17241,7 @@
                                 [
                                   "High error rate detected for DynamoDB table ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHistoryTable86F70C1D231DFDEB"
+                                    "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
                                   }
                                 ]
                               ]
@@ -17251,7 +17251,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHistoryTable86F70C1D231DFDEB"
+                                    "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -17262,21 +17262,21 @@
                               {
                                 "name": "TableName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHistoryTable86F70C1D231DFDEB"
+                                  "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "UserErrors",
                             "namespace": "AWS/DynamoDB",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -17308,7 +17308,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -17317,7 +17317,7 @@
                                 [
                                   "High read capacity utilization for DynamoDB table ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHistoryTable86F70C1D231DFDEB"
+                                    "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
                                   }
                                 ]
                               ]
@@ -17327,7 +17327,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHistoryTable86F70C1D231DFDEB"
+                                    "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
                                   },
                                   "-HighReadCapacityUtilization"
                                 ]
@@ -17338,21 +17338,21 @@
                               {
                                 "name": "TableName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHistoryTable86F70C1D231DFDEB"
+                                  "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "ConsumedReadCapacityUnits",
                             "namespace": "AWS/DynamoDB",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -17384,7 +17384,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -17393,7 +17393,7 @@
                                 [
                                   "Throttled requests detected for DynamoDB table ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUserFeedbackTableF734E54F7B54995E"
+                                    "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
                                   }
                                 ]
                               ]
@@ -17403,7 +17403,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUserFeedbackTableF734E54F7B54995E"
+                                    "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
                                   },
                                   "-ThrottledRequests"
                                 ]
@@ -17414,21 +17414,21 @@
                               {
                                 "name": "TableName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUserFeedbackTableF734E54F7B54995E"
+                                  "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "SystemErrors",
                             "namespace": "AWS/DynamoDB",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -17460,7 +17460,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -17469,7 +17469,7 @@
                                 [
                                   "High error rate detected for DynamoDB table ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUserFeedbackTableF734E54F7B54995E"
+                                    "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
                                   }
                                 ]
                               ]
@@ -17479,7 +17479,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUserFeedbackTableF734E54F7B54995E"
+                                    "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -17490,21 +17490,21 @@
                               {
                                 "name": "TableName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUserFeedbackTableF734E54F7B54995E"
+                                  "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "UserErrors",
                             "namespace": "AWS/DynamoDB",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -17536,7 +17536,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -17545,7 +17545,7 @@
                                 [
                                   "High read capacity utilization for DynamoDB table ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUserFeedbackTableF734E54F7B54995E"
+                                    "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
                                   }
                                 ]
                               ]
@@ -17555,7 +17555,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUserFeedbackTableF734E54F7B54995E"
+                                    "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
                                   },
                                   "-HighReadCapacityUtilization"
                                 ]
@@ -17566,21 +17566,21 @@
                               {
                                 "name": "TableName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUserFeedbackTableF734E54F7B54995E"
+                                  "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "ConsumedReadCapacityUnits",
                             "namespace": "AWS/DynamoDB",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -17612,7 +17612,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -17621,7 +17621,7 @@
                                 [
                                   "Throttled requests detected for DynamoDB table ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationResultsTableE72FCF7C09DE719F"
+                                    "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
                                   }
                                 ]
                               ]
@@ -17631,7 +17631,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationResultsTableE72FCF7C09DE719F"
+                                    "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
                                   },
                                   "-ThrottledRequests"
                                 ]
@@ -17642,21 +17642,21 @@
                               {
                                 "name": "TableName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationResultsTableE72FCF7C09DE719F"
+                                  "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "SystemErrors",
                             "namespace": "AWS/DynamoDB",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -17688,7 +17688,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -17697,7 +17697,7 @@
                                 [
                                   "High error rate detected for DynamoDB table ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationResultsTableE72FCF7C09DE719F"
+                                    "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
                                   }
                                 ]
                               ]
@@ -17707,7 +17707,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationResultsTableE72FCF7C09DE719F"
+                                    "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -17718,21 +17718,21 @@
                               {
                                 "name": "TableName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationResultsTableE72FCF7C09DE719F"
+                                  "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "UserErrors",
                             "namespace": "AWS/DynamoDB",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -17764,7 +17764,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -17773,7 +17773,7 @@
                                 [
                                   "High read capacity utilization for DynamoDB table ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationResultsTableE72FCF7C09DE719F"
+                                    "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
                                   }
                                 ]
                               ]
@@ -17783,7 +17783,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationResultsTableE72FCF7C09DE719F"
+                                    "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
                                   },
                                   "-HighReadCapacityUtilization"
                                 ]
@@ -17794,21 +17794,21 @@
                               {
                                 "name": "TableName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationResultsTableE72FCF7C09DE719F"
+                                  "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "ConsumedReadCapacityUnits",
                             "namespace": "AWS/DynamoDB",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -17840,7 +17840,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -17849,7 +17849,7 @@
                                 [
                                   "Throttled requests detected for DynamoDB table ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationSummariesTableE9B95A54CCBA01F4"
+                                    "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
                                   }
                                 ]
                               ]
@@ -17859,7 +17859,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationSummariesTableE9B95A54CCBA01F4"
+                                    "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
                                   },
                                   "-ThrottledRequests"
                                 ]
@@ -17870,21 +17870,21 @@
                               {
                                 "name": "TableName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationSummariesTableE9B95A54CCBA01F4"
+                                  "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "SystemErrors",
                             "namespace": "AWS/DynamoDB",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -17916,7 +17916,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -17925,7 +17925,7 @@
                                 [
                                   "High error rate detected for DynamoDB table ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationSummariesTableE9B95A54CCBA01F4"
+                                    "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
                                   }
                                 ]
                               ]
@@ -17935,7 +17935,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationSummariesTableE9B95A54CCBA01F4"
+                                    "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -17946,21 +17946,21 @@
                               {
                                 "name": "TableName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationSummariesTableE9B95A54CCBA01F4"
+                                  "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "UserErrors",
                             "namespace": "AWS/DynamoDB",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -17992,7 +17992,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -18001,7 +18001,7 @@
                                 [
                                   "High read capacity utilization for DynamoDB table ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationSummariesTableE9B95A54CCBA01F4"
+                                    "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
                                   }
                                 ]
                               ]
@@ -18011,7 +18011,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationSummariesTableE9B95A54CCBA01F4"
+                                    "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
                                   },
                                   "-HighReadCapacityUtilization"
                                 ]
@@ -18022,21 +18022,21 @@
                               {
                                 "name": "TableName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationSummariesTableE9B95A54CCBA01F4"
+                                  "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "ConsumedReadCapacityUnits",
                             "namespace": "AWS/DynamoDB",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -18068,7 +18068,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -18077,7 +18077,7 @@
                                 [
                                   "Throttled requests detected for DynamoDB table ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPILogsTableA8BB2B7256F24DD7"
+                                    "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
                                   }
                                 ]
                               ]
@@ -18087,7 +18087,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPILogsTableA8BB2B7256F24DD7"
+                                    "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
                                   },
                                   "-ThrottledRequests"
                                 ]
@@ -18098,21 +18098,21 @@
                               {
                                 "name": "TableName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPILogsTableA8BB2B7256F24DD7"
+                                  "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "SystemErrors",
                             "namespace": "AWS/DynamoDB",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -18144,7 +18144,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -18153,7 +18153,7 @@
                                 [
                                   "High error rate detected for DynamoDB table ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPILogsTableA8BB2B7256F24DD7"
+                                    "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
                                   }
                                 ]
                               ]
@@ -18163,7 +18163,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPILogsTableA8BB2B7256F24DD7"
+                                    "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -18174,21 +18174,21 @@
                               {
                                 "name": "TableName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPILogsTableA8BB2B7256F24DD7"
+                                  "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "UserErrors",
                             "namespace": "AWS/DynamoDB",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -18220,7 +18220,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -18229,7 +18229,7 @@
                                 [
                                   "High read capacity utilization for DynamoDB table ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPILogsTableA8BB2B7256F24DD7"
+                                    "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
                                   }
                                 ]
                               ]
@@ -18239,7 +18239,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPILogsTableA8BB2B7256F24DD7"
+                                    "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
                                   },
                                   "-HighReadCapacityUtilization"
                                 ]
@@ -18250,21 +18250,21 @@
                               {
                                 "name": "TableName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPILogsTableA8BB2B7256F24DD7"
+                                  "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "ConsumedReadCapacityUnits",
                             "namespace": "AWS/DynamoDB",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -18296,7 +18296,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -18305,7 +18305,7 @@
                                 [
                                   "Throttled requests detected for DynamoDB table ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDailyLoginTable0DBFC91F3DA44E64"
+                                    "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
                                   }
                                 ]
                               ]
@@ -18315,7 +18315,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDailyLoginTable0DBFC91F3DA44E64"
+                                    "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
                                   },
                                   "-ThrottledRequests"
                                 ]
@@ -18326,21 +18326,21 @@
                               {
                                 "name": "TableName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDailyLoginTable0DBFC91F3DA44E64"
+                                  "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "SystemErrors",
                             "namespace": "AWS/DynamoDB",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -18372,7 +18372,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -18381,7 +18381,7 @@
                                 [
                                   "High error rate detected for DynamoDB table ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDailyLoginTable0DBFC91F3DA44E64"
+                                    "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
                                   }
                                 ]
                               ]
@@ -18391,7 +18391,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDailyLoginTable0DBFC91F3DA44E64"
+                                    "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
                                   },
                                   "-HighErrorRate"
                                 ]
@@ -18402,21 +18402,21 @@
                               {
                                 "name": "TableName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDailyLoginTable0DBFC91F3DA44E64"
+                                  "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "UserErrors",
                             "namespace": "AWS/DynamoDB",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -18448,7 +18448,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": {
@@ -18457,7 +18457,7 @@
                                 [
                                   "High read capacity utilization for DynamoDB table ",
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDailyLoginTable0DBFC91F3DA44E64"
+                                    "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
                                   }
                                 ]
                               ]
@@ -18467,7 +18467,7 @@
                                 "",
                                 [
                                   {
-                                    "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDailyLoginTable0DBFC91F3DA44E64"
+                                    "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
                                   },
                                   "-HighReadCapacityUtilization"
                                 ]
@@ -18478,21 +18478,21 @@
                               {
                                 "name": "TableName",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDailyLoginTable0DBFC91F3DA44E64"
+                                  "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "ConsumedReadCapacityUnits",
                             "namespace": "AWS/DynamoDB",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -18524,7 +18524,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": "High 4XX error rate detected for REST API Gateway",
@@ -18534,21 +18534,21 @@
                               {
                                 "name": "ApiId",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIRestBackendHTTPAPI6A6C7FF42DEDF6C9"
+                                  "Ref": "ChatbotAPIRestBackendHTTPAPI6A6C7FF4"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "4XXError",
                             "namespace": "AWS/ApiGateway",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -18580,7 +18580,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": "High 5XX error rate detected for REST API Gateway",
@@ -18590,21 +18590,21 @@
                               {
                                 "name": "ApiId",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIRestBackendHTTPAPI6A6C7FF42DEDF6C9"
+                                  "Ref": "ChatbotAPIRestBackendHTTPAPI6A6C7FF4"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "5XXError",
                             "namespace": "AWS/ApiGateway",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -18636,7 +18636,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": "High latency detected for REST API Gateway",
@@ -18646,21 +18646,21 @@
                               {
                                 "name": "ApiId",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIRestBackendHTTPAPI6A6C7FF42DEDF6C9"
+                                  "Ref": "ChatbotAPIRestBackendHTTPAPI6A6C7FF4"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Latency",
                             "namespace": "AWS/ApiGateway",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -18692,7 +18692,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": "High 4XX error rate detected for WebSocket API Gateway",
@@ -18702,21 +18702,21 @@
                               {
                                 "name": "ApiId",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIWebsocketBackendWSAPI75718B83A945CA6D"
+                                  "Ref": "ChatbotAPIWebsocketBackendWSAPI75718B83"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "4XXError",
                             "namespace": "AWS/ApiGateway",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -18748,7 +18748,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": "High 5XX error rate detected for WebSocket API Gateway",
@@ -18758,21 +18758,21 @@
                               {
                                 "name": "ApiId",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIWebsocketBackendWSAPI75718B83A945CA6D"
+                                  "Ref": "ChatbotAPIWebsocketBackendWSAPI75718B83"
                                 }
                               }
                             ],
                             "evaluationPeriods": 1,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "5XXError",
                             "namespace": "AWS/ApiGateway",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -18804,7 +18804,7 @@
                           "aws:cdk:cloudformation:props": {
                             "alarmActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "alarmDescription": "High latency detected for WebSocket API Gateway",
@@ -18814,21 +18814,21 @@
                               {
                                 "name": "ApiId",
                                 "value": {
-                                  "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputRefChatbotAPIWebsocketBackendWSAPI75718B83A945CA6D"
+                                  "Ref": "ChatbotAPIWebsocketBackendWSAPI75718B83"
                                 }
                               }
                             ],
                             "evaluationPeriods": 2,
                             "insufficientDataActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "metricName": "Latency",
                             "namespace": "AWS/ApiGateway",
                             "okActions": [
                               {
-                                "Ref": "AlarmNotificationTopic58BFACC9"
+                                "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
                               }
                             ],
                             "period": 300,
@@ -18848,52 +18848,18 @@
                       "version": "2.140.0"
                     }
                   },
-                  "CDKMetadata": {
-                    "id": "CDKMetadata",
-                    "path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/CDKMetadata",
-                    "children": {
-                      "Default": {
-                        "id": "Default",
-                        "path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/CDKMetadata/Default",
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.CfnResource",
-                          "version": "2.140.0"
-                        }
-                      },
-                      "Condition": {
-                        "id": "Condition",
-                        "path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/CDKMetadata/Condition",
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.CfnCondition",
-                          "version": "2.140.0"
-                        }
-                      }
-                    },
+                  "AlarmTopicARN": {
+                    "id": "AlarmTopicARN",
+                    "path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/AlarmTopicARN",
                     "constructInfo": {
-                      "fqn": "constructs.Construct",
-                      "version": "10.3.0"
-                    }
-                  },
-                  "BootstrapVersion": {
-                    "id": "BootstrapVersion",
-                    "path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/BootstrapVersion",
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.CfnParameter",
-                      "version": "2.140.0"
-                    }
-                  },
-                  "CheckBootstrapVersion": {
-                    "id": "CheckBootstrapVersion",
-                    "path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/CheckBootstrapVersion",
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.CfnRule",
+                      "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.140.0"
                     }
                   }
                 },
                 "constructInfo": {
-                  "fqn": "aws-cdk-lib.Stack",
-                  "version": "2.140.0"
+                  "fqn": "constructs.Construct",
+                  "version": "10.3.0"
                 }
               },
               "WS-API - apiEndpoint": {
@@ -20218,182 +20184,6 @@
               "Output{\"Fn::GetAtt\":[\"ChatbotAPIDailyLoginTable0DBFC91F\",\"Arn\"]}": {
                 "id": "Output{\"Fn::GetAtt\":[\"ChatbotAPIDailyLoginTable0DBFC91F\",\"Arn\"]}",
                 "path": "ITOPSRAGStack/Exports/Output{\"Fn::GetAtt\":[\"ChatbotAPIDailyLoginTable0DBFC91F\",\"Arn\"]}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIChatHandlerFunctionEB04457E\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIChatHandlerFunctionEB04457E\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIChatHandlerFunctionEB04457E\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPISessionHandlerFunctionF969576A\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPISessionHandlerFunctionF969576A\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPISessionHandlerFunctionF969576A\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIFeedbackHandlerFunction11250F31\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIFeedbackHandlerFunction11250F31\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIFeedbackHandlerFunction11250F31\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPISyncKendraHandlerFunctionED8FB020\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPISyncKendraHandlerFunctionED8FB020\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPISyncKendraHandlerFunctionED8FB020\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIChatInvocationsCounterFunction0AD6F7D4\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIChatInvocationsCounterFunction0AD6F7D4\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIChatInvocationsCounterFunction0AD6F7D4\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIcomprehendMedicalFunction7DBD41DD\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIcomprehendMedicalFunction7DBD41DD\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIcomprehendMedicalFunction7DBD41DD\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIKPIHandlerFunction377426B2\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIKPIHandlerFunction377426B2\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIKPIHandlerFunction377426B2\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIEvalResultsHandlerFunction3A0AF1AA\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIEvalResultsHandlerFunction3A0AF1AA\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIEvalResultsHandlerFunction3A0AF1AA\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIChatHistoryTable86F70C1D\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIChatHistoryTable86F70C1D\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIChatHistoryTable86F70C1D\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIUserFeedbackTableF734E54F\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIUserFeedbackTableF734E54F\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIUserFeedbackTableF734E54F\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIEvaluationResultsTableE72FCF7C\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIEvaluationResultsTableE72FCF7C\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIEvaluationResultsTableE72FCF7C\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIEvaluationSummariesTableE9B95A54\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIEvaluationSummariesTableE9B95A54\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIEvaluationSummariesTableE9B95A54\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIKPILogsTableA8BB2B72\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIKPILogsTableA8BB2B72\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIKPILogsTableA8BB2B72\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIDailyLoginTable0DBFC91F\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIDailyLoginTable0DBFC91F\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIDailyLoginTable0DBFC91F\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIRestBackendHTTPAPI6A6C7FF4\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIRestBackendHTTPAPI6A6C7FF4\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIRestBackendHTTPAPI6A6C7FF4\"}",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnOutput",
-                  "version": "2.140.0"
-                }
-              },
-              "Output{\"Ref\":\"ChatbotAPIWebsocketBackendWSAPI75718B83\"}": {
-                "id": "Output{\"Ref\":\"ChatbotAPIWebsocketBackendWSAPI75718B83\"}",
-                "path": "ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIWebsocketBackendWSAPI75718B83\"}",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnOutput",
                   "version": "2.140.0"

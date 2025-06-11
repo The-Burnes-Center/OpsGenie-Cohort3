@@ -228,7 +228,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/cb2826720bd4a2454c18cadd0dd90abab01b46257264ed1a46b924dc33f2d621.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/869351746327d6bf7c1380050684cf383793b018d4929b0268c76569fc912b72.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -356,475 +356,6 @@
       },
       "displayName": "ITOPSRAGStack/ChatbotAPI/LambdaFunctions"
     },
-    "ITOPSRAGStackChatbotAPIMonitoringStackD642846D.assets": {
-      "type": "cdk:asset-manifest",
-      "properties": {
-        "file": "ITOPSRAGStackChatbotAPIMonitoringStackD642846D.assets.json",
-        "requiresBootstrapStackVersion": 6,
-        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
-      }
-    },
-    "ITOPSRAGStackChatbotAPIMonitoringStackD642846D": {
-      "type": "aws:cloudformation:stack",
-      "environment": "aws://unknown-account/unknown-region",
-      "properties": {
-        "templateFile": "ITOPSRAGStackChatbotAPIMonitoringStackD642846D.template.json",
-        "terminationProtection": false,
-        "validateOnSynth": false,
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1c4420d562d98feba29575e027c6f070dc4e1bd2e3c8043bbfbcdb4a2c2cb38b.json",
-        "requiresBootstrapStackVersion": 6,
-        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
-        "additionalDependencies": [
-          "ITOPSRAGStackChatbotAPIMonitoringStackD642846D.assets"
-        ],
-        "lookupRole": {
-          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
-          "requiresBootstrapStackVersion": 8,
-          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
-        }
-      },
-      "dependencies": [
-        "ITOPSRAGStack",
-        "ITOPSRAGStackChatbotAPIMonitoringStackD642846D.assets"
-      ],
-      "metadata": {
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/AlarmNotificationTopic/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AlarmNotificationTopic58BFACC9"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/AlarmNotificationTopic/itops-admin@example.com/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AlarmNotificationTopicitopsadminexamplecomE51CBAFD"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-0/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaErrorRateAlarm0AD964B0A"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-0/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaDurationAlarm066477599"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-0/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaThrottleAlarm09115AFA1"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-1/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaErrorRateAlarm115DCDEDE"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-1/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaDurationAlarm1795E107A"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-1/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaThrottleAlarm19097BA3B"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-2/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaErrorRateAlarm2970D6287"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-2/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaDurationAlarm2FD65D261"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-2/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaThrottleAlarm2592598DE"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-3/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaErrorRateAlarm3E18E80FE"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-3/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaDurationAlarm3FA70CC44"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-3/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaThrottleAlarm3B4AE0685"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-4/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaErrorRateAlarm4FD0E7117"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-4/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaDurationAlarm4B7E29A2E"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-4/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaThrottleAlarm4BA41498C"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-5/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaErrorRateAlarm5A5C238CC"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-5/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaDurationAlarm571A4984F"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-5/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaThrottleAlarm501E38E72"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-6/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaErrorRateAlarm669E0C057"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-6/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaDurationAlarm64128AB25"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-6/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaThrottleAlarm6DAB07EC8"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-7/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaErrorRateAlarm71145D85D"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-7/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaDurationAlarm74268BCC6"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-7/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaThrottleAlarm70295A0AF"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-8/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaErrorRateAlarm8161B5175"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-8/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaDurationAlarm8D838FFC4"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-8/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaThrottleAlarm8D514085A"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-9/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaErrorRateAlarm9901487E5"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-9/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaDurationAlarm93299CCD8"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-9/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaThrottleAlarm9319717A1"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-10/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaErrorRateAlarm103551BF02"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-10/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaDurationAlarm10257AFCC1"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-10/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaThrottleAlarm10081BF08E"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-11/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaErrorRateAlarm11787B8F86"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-11/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaDurationAlarm1171F12B2E"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-11/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaThrottleAlarm11A6E16923"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-12/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaErrorRateAlarm1298350A9C"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-12/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaDurationAlarm12948D0CF0"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-12/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaThrottleAlarm12899E0F09"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-13/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaErrorRateAlarm13346FF855"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-13/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaDurationAlarm1372C86D63"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-13/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LambdaThrottleAlarm1396635E90"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBThrottledRequestsAlarm-0/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DynamoDBThrottledRequestsAlarm060A90980"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBErrorRateAlarm-0/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DynamoDBErrorRateAlarm01945FE8D"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBReadCapacityAlarm-0/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DynamoDBReadCapacityAlarm0A41618C5"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBThrottledRequestsAlarm-1/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DynamoDBThrottledRequestsAlarm1E78CB7DE"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBErrorRateAlarm-1/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DynamoDBErrorRateAlarm1F967B0C0"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBReadCapacityAlarm-1/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DynamoDBReadCapacityAlarm10E7DD7A5"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBThrottledRequestsAlarm-2/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DynamoDBThrottledRequestsAlarm2BEB9FF1C"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBErrorRateAlarm-2/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DynamoDBErrorRateAlarm27B19CEB3"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBReadCapacityAlarm-2/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DynamoDBReadCapacityAlarm20EE15FE1"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBThrottledRequestsAlarm-3/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DynamoDBThrottledRequestsAlarm313D0CB61"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBErrorRateAlarm-3/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DynamoDBErrorRateAlarm3315B3511"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBReadCapacityAlarm-3/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DynamoDBReadCapacityAlarm3B325B46C"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBThrottledRequestsAlarm-4/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DynamoDBThrottledRequestsAlarm434B0F683"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBErrorRateAlarm-4/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DynamoDBErrorRateAlarm4D70269F7"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBReadCapacityAlarm-4/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DynamoDBReadCapacityAlarm4FE998A4D"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBThrottledRequestsAlarm-5/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DynamoDBThrottledRequestsAlarm5B714A0D8"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBErrorRateAlarm-5/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DynamoDBErrorRateAlarm5581DEEDA"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBReadCapacityAlarm-5/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DynamoDBReadCapacityAlarm58DBFCA92"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/ApiGateway4XXErrorAlarm-REST/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ApiGateway4XXErrorAlarmREST813187B5"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/ApiGateway5XXErrorAlarm-REST/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ApiGateway5XXErrorAlarmRESTF4B9BD2C"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/ApiGatewayLatencyAlarm-REST/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ApiGatewayLatencyAlarmREST0F11CAD2"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/ApiGateway4XXErrorAlarm-WebSocket/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ApiGateway4XXErrorAlarmWebSocket3FFD2CFA"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/ApiGateway5XXErrorAlarm-WebSocket/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ApiGateway5XXErrorAlarmWebSocket7EDD0E8C"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/ApiGatewayLatencyAlarm-WebSocket/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ApiGatewayLatencyAlarmWebSocket7AB965F7"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/CDKMetadata/Default": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CDKMetadata"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/CDKMetadata/Condition": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CDKMetadataAvailable"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/BootstrapVersion": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "BootstrapVersion"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/CheckBootstrapVersion": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CheckBootstrapVersion"
-          }
-        ]
-      },
-      "displayName": "ITOPSRAGStack/ChatbotAPI/MonitoringStack"
-    },
     "ITOPSRAGStack.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
@@ -842,7 +373,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e46e44e472510872e67a224b3257cc87f1228c0bc91a30ade4279bf11b61ad2f.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a94357f06669d0ae368989deb37ebd7b2c81b7390092510222be421e205097c5.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -2347,6 +1878,420 @@
             "data": "ChatbotAPIDailyLoginRuleAllowEventRuleITOPSRAGStackChatbotAPIKPIHandlerFunction36B68FE92725101F"
           }
         ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/AlarmNotificationTopic/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/AlarmNotificationTopic/itops-admin@example.com/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackAlarmNotificationTopicitopsadminexamplecom56C80BC2"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-0/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaErrorRateAlarm0D0778723"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-0/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaDurationAlarm037750A98"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-0/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaThrottleAlarm0752FA771"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-1/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaErrorRateAlarm11784986A"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-1/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaDurationAlarm1B0A3E462"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-1/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaThrottleAlarm135A6D1C2"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-2/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaErrorRateAlarm2C1268C77"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-2/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaDurationAlarm2FA9BC904"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-2/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaThrottleAlarm233C94B09"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-3/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaErrorRateAlarm37659BE44"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-3/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaDurationAlarm3112BA473"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-3/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaThrottleAlarm3D3DDDD85"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-4/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaErrorRateAlarm4CA664CCE"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-4/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaDurationAlarm4FBF1ED7C"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-4/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaThrottleAlarm4B9D414FB"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-5/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaErrorRateAlarm513246276"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-5/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaDurationAlarm5829290A1"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-5/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaThrottleAlarm5EDCB6FF4"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-6/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaErrorRateAlarm6EF288FD2"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-6/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaDurationAlarm6A3C78EF6"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-6/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaThrottleAlarm6EE8E93A0"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-7/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaErrorRateAlarm70F74983B"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-7/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaDurationAlarm708BE3A0E"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-7/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaThrottleAlarm797E6125F"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-8/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaErrorRateAlarm89AAE2F5A"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-8/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaDurationAlarm80DD05628"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-8/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaThrottleAlarm810302179"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-9/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaErrorRateAlarm9AA06A37E"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-9/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaDurationAlarm96912065B"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-9/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaThrottleAlarm97959EBE1"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-10/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaErrorRateAlarm100ABE9179"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-10/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaDurationAlarm1031B1A101"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-10/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaThrottleAlarm10B46A65C5"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-11/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaErrorRateAlarm1181321A23"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-11/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaDurationAlarm11284CCA22"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-11/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaThrottleAlarm114A80FD25"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-12/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaErrorRateAlarm12584A6F01"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-12/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaDurationAlarm12D85763A2"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-12/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaThrottleAlarm12C8863892"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-13/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaErrorRateAlarm13FA56AD23"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-13/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaDurationAlarm13BD401FEE"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-13/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackLambdaThrottleAlarm13DE47F5F5"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBThrottledRequestsAlarm-0/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackDynamoDBThrottledRequestsAlarm01ECF1E0B"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBErrorRateAlarm-0/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackDynamoDBErrorRateAlarm033CF4575"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBReadCapacityAlarm-0/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackDynamoDBReadCapacityAlarm06E852D7D"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBThrottledRequestsAlarm-1/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackDynamoDBThrottledRequestsAlarm11A12F056"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBErrorRateAlarm-1/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackDynamoDBErrorRateAlarm1F9979F7C"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBReadCapacityAlarm-1/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackDynamoDBReadCapacityAlarm1D0D256A8"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBThrottledRequestsAlarm-2/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackDynamoDBThrottledRequestsAlarm2323BD11A"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBErrorRateAlarm-2/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackDynamoDBErrorRateAlarm2F9806627"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBReadCapacityAlarm-2/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackDynamoDBReadCapacityAlarm254D3A152"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBThrottledRequestsAlarm-3/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackDynamoDBThrottledRequestsAlarm3CE9C44E6"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBErrorRateAlarm-3/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackDynamoDBErrorRateAlarm3A7783DC4"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBReadCapacityAlarm-3/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackDynamoDBReadCapacityAlarm37D66F800"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBThrottledRequestsAlarm-4/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackDynamoDBThrottledRequestsAlarm46903E0F0"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBErrorRateAlarm-4/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackDynamoDBErrorRateAlarm435859A11"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBReadCapacityAlarm-4/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackDynamoDBReadCapacityAlarm4F70DAD9F"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBThrottledRequestsAlarm-5/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackDynamoDBThrottledRequestsAlarm527FE9F7C"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBErrorRateAlarm-5/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackDynamoDBErrorRateAlarm51FC365C2"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBReadCapacityAlarm-5/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackDynamoDBReadCapacityAlarm56F1B8556"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/ApiGateway4XXErrorAlarm-REST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackApiGateway4XXErrorAlarmREST0196B302"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/ApiGateway5XXErrorAlarm-REST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackApiGateway5XXErrorAlarmREST09E6D9A0"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/ApiGatewayLatencyAlarm-REST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackApiGatewayLatencyAlarmRESTFC37FD44"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/ApiGateway4XXErrorAlarm-WebSocket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackApiGateway4XXErrorAlarmWebSocket4EC645B7"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/ApiGateway5XXErrorAlarm-WebSocket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackApiGateway5XXErrorAlarmWebSocketAC1B0722"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/ApiGatewayLatencyAlarm-WebSocket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackApiGatewayLatencyAlarmWebSocket217D508F"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/MonitoringStack/AlarmTopicARN": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ChatbotAPIMonitoringStackAlarmTopicARN53152489"
+          }
+        ],
         "/ITOPSRAGStack/ChatbotAPI/WS-API - apiEndpoint": [
           {
             "type": "aws:cdk:logicalId",
@@ -2519,138 +2464,6 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "ExportsOutputFnGetAttChatbotAPIDailyLoginTable0DBFC91FArn5241FF15"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIChatHandlerFunctionEB04457E\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIChatHandlerFunctionEB04457EC162BE30"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPISessionHandlerFunctionF969576A\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPISessionHandlerFunctionF969576AAB44E1C1"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIFeedbackHandlerFunction11250F31\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIFeedbackHandlerFunction11250F317E3C3742"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97CC81678C4"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016035CDE6E"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32887B2875"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF495F014AC"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA8CE11974"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPISyncKendraHandlerFunctionED8FB020\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPISyncKendraHandlerFunctionED8FB020A4968155"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIChatInvocationsCounterFunction0AD6F7D4\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIChatInvocationsCounterFunction0AD6F7D4A071DFFD"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIcomprehendMedicalFunction7DBD41DD\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIcomprehendMedicalFunction7DBD41DD0335764F"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIKPIHandlerFunction377426B2\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIKPIHandlerFunction377426B241851B05"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIEvalResultsHandlerFunction3A0AF1AA\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIEvalResultsHandlerFunction3A0AF1AA8A7E495D"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E41DFAE51"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIChatHistoryTable86F70C1D\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIChatHistoryTable86F70C1D231DFDEB"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIUserFeedbackTableF734E54F\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIUserFeedbackTableF734E54F7B54995E"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIEvaluationResultsTableE72FCF7C\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIEvaluationResultsTableE72FCF7C09DE719F"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIEvaluationSummariesTableE9B95A54\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIEvaluationSummariesTableE9B95A54CCBA01F4"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIKPILogsTableA8BB2B72\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIKPILogsTableA8BB2B7256F24DD7"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIDailyLoginTable0DBFC91F\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIDailyLoginTable0DBFC91F3DA44E64"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIRestBackendHTTPAPI6A6C7FF4\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIRestBackendHTTPAPI6A6C7FF42DEDF6C9"
-          }
-        ],
-        "/ITOPSRAGStack/Exports/Output{\"Ref\":\"ChatbotAPIWebsocketBackendWSAPI75718B83\"}": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputRefChatbotAPIWebsocketBackendWSAPI75718B83A945CA6D"
           }
         ],
         "/ITOPSRAGStack/BootstrapVersion": [

@@ -9457,6 +9457,3935 @@
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/DailyLoginRule/AllowEventRuleITOPSRAGStackChatbotAPIKPIHandlerFunction36B68FE9"
    }
   },
+  "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318": {
+   "Type": "AWS::SNS::Topic",
+   "Properties": {
+    "DisplayName": "FedRAMP Compliance Alarm Notifications",
+    "TopicName": "fedramp-compliance-alarms"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/AlarmNotificationTopic/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackAlarmNotificationTopicitopsadminexamplecom56C80BC2": {
+   "Type": "AWS::SNS::Subscription",
+   "Properties": {
+    "Endpoint": "itops-admin@example.com",
+    "Protocol": "email",
+    "TopicArn": {
+     "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/AlarmNotificationTopic/itops-admin@example.com/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaErrorRateAlarm0D0778723": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Errors",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 5,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-0/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaDurationAlarm037750A98": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High duration detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
+       },
+       "-HighDuration"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Duration",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 240000,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-0/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaThrottleAlarm0752FA771": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttles detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
+       },
+       "-Throttles"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Throttles",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-0/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaErrorRateAlarm11784986A": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Errors",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 5,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-1/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaDurationAlarm1B0A3E462": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High duration detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
+       },
+       "-HighDuration"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Duration",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 24000,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-1/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaThrottleAlarm135A6D1C2": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttles detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
+       },
+       "-Throttles"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Throttles",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-1/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaErrorRateAlarm2C1268C77": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Errors",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 5,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-2/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaDurationAlarm2FA9BC904": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High duration detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
+       },
+       "-HighDuration"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Duration",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 24000,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-2/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaThrottleAlarm233C94B09": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttles detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
+       },
+       "-Throttles"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Throttles",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-2/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaErrorRateAlarm37659BE44": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Errors",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 5,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-3/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaDurationAlarm3112BA473": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High duration detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
+       },
+       "-HighDuration"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Duration",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 24000,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-3/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaThrottleAlarm3D3DDDD85": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttles detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
+       },
+       "-Throttles"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Throttles",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-3/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaErrorRateAlarm4CA664CCE": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Errors",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 5,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-4/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaDurationAlarm4FBF1ED7C": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High duration detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
+       },
+       "-HighDuration"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Duration",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 24000,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-4/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaThrottleAlarm4B9D414FB": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttles detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
+       },
+       "-Throttles"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Throttles",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-4/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaErrorRateAlarm513246276": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Errors",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 5,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-5/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaDurationAlarm5829290A1": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High duration detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
+       },
+       "-HighDuration"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Duration",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 24000,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-5/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaThrottleAlarm5EDCB6FF4": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttles detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
+       },
+       "-Throttles"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Throttles",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-5/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaErrorRateAlarm6EF288FD2": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Errors",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 5,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-6/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaDurationAlarm6A3C78EF6": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High duration detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
+       },
+       "-HighDuration"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Duration",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 24000,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-6/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaThrottleAlarm6EE8E93A0": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttles detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
+       },
+       "-Throttles"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Throttles",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-6/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaErrorRateAlarm70F74983B": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Errors",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 5,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-7/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaDurationAlarm708BE3A0E": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High duration detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
+       },
+       "-HighDuration"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Duration",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 24000,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-7/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaThrottleAlarm797E6125F": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttles detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
+       },
+       "-Throttles"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Throttles",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-7/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaErrorRateAlarm89AAE2F5A": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Errors",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 5,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-8/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaDurationAlarm80DD05628": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High duration detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
+       },
+       "-HighDuration"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Duration",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 24000,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-8/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaThrottleAlarm810302179": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttles detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
+       },
+       "-Throttles"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Throttles",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-8/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaErrorRateAlarm9AA06A37E": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Errors",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 5,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-9/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaDurationAlarm96912065B": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High duration detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
+       },
+       "-HighDuration"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Duration",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 24000,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-9/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaThrottleAlarm97959EBE1": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttles detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
+       },
+       "-Throttles"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Throttles",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-9/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaErrorRateAlarm100ABE9179": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Errors",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 5,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-10/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaDurationAlarm1031B1A101": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High duration detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
+       },
+       "-HighDuration"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Duration",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 48000,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-10/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaThrottleAlarm10B46A65C5": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttles detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
+       },
+       "-Throttles"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Throttles",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-10/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaErrorRateAlarm1181321A23": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Errors",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 5,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-11/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaDurationAlarm11284CCA22": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High duration detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
+       },
+       "-HighDuration"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Duration",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 24000,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-11/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaThrottleAlarm114A80FD25": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttles detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
+       },
+       "-Throttles"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Throttles",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-11/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaErrorRateAlarm12584A6F01": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Errors",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 5,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-12/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaDurationAlarm12D85763A2": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High duration detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
+       },
+       "-HighDuration"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Duration",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 240000,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-12/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaThrottleAlarm12C8863892": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttles detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
+       },
+       "-Throttles"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Throttles",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-12/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaErrorRateAlarm13FA56AD23": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Errors",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 5,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaErrorRateAlarm-13/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaDurationAlarm13BD401FEE": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High duration detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
+       },
+       "-HighDuration"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Duration",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 24000,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaDurationAlarm-13/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackLambdaThrottleAlarm13DE47F5F5": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttles detected for Lambda function ",
+       {
+        "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
+       },
+       "-Throttles"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "FunctionName",
+      "Value": {
+       "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Throttles",
+    "Namespace": "AWS/Lambda",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/LambdaThrottleAlarm-13/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackDynamoDBThrottledRequestsAlarm01ECF1E0B": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttled requests detected for DynamoDB table ",
+       {
+        "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
+       },
+       "-ThrottledRequests"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "TableName",
+      "Value": {
+       "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "SystemErrors",
+    "Namespace": "AWS/DynamoDB",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBThrottledRequestsAlarm-0/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackDynamoDBErrorRateAlarm033CF4575": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for DynamoDB table ",
+       {
+        "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "TableName",
+      "Value": {
+       "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "UserErrors",
+    "Namespace": "AWS/DynamoDB",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 10,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBErrorRateAlarm-0/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackDynamoDBReadCapacityAlarm06E852D7D": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High read capacity utilization for DynamoDB table ",
+       {
+        "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
+       },
+       "-HighReadCapacityUtilization"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "TableName",
+      "Value": {
+       "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "ConsumedReadCapacityUnits",
+    "Namespace": "AWS/DynamoDB",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 240,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBReadCapacityAlarm-0/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackDynamoDBThrottledRequestsAlarm11A12F056": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttled requests detected for DynamoDB table ",
+       {
+        "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
+       },
+       "-ThrottledRequests"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "TableName",
+      "Value": {
+       "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "SystemErrors",
+    "Namespace": "AWS/DynamoDB",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBThrottledRequestsAlarm-1/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackDynamoDBErrorRateAlarm1F9979F7C": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for DynamoDB table ",
+       {
+        "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "TableName",
+      "Value": {
+       "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "UserErrors",
+    "Namespace": "AWS/DynamoDB",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 10,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBErrorRateAlarm-1/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackDynamoDBReadCapacityAlarm1D0D256A8": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High read capacity utilization for DynamoDB table ",
+       {
+        "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
+       },
+       "-HighReadCapacityUtilization"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "TableName",
+      "Value": {
+       "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "ConsumedReadCapacityUnits",
+    "Namespace": "AWS/DynamoDB",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 240,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBReadCapacityAlarm-1/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackDynamoDBThrottledRequestsAlarm2323BD11A": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttled requests detected for DynamoDB table ",
+       {
+        "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
+       },
+       "-ThrottledRequests"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "TableName",
+      "Value": {
+       "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "SystemErrors",
+    "Namespace": "AWS/DynamoDB",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBThrottledRequestsAlarm-2/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackDynamoDBErrorRateAlarm2F9806627": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for DynamoDB table ",
+       {
+        "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "TableName",
+      "Value": {
+       "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "UserErrors",
+    "Namespace": "AWS/DynamoDB",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 10,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBErrorRateAlarm-2/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackDynamoDBReadCapacityAlarm254D3A152": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High read capacity utilization for DynamoDB table ",
+       {
+        "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
+       },
+       "-HighReadCapacityUtilization"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "TableName",
+      "Value": {
+       "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "ConsumedReadCapacityUnits",
+    "Namespace": "AWS/DynamoDB",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 240,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBReadCapacityAlarm-2/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackDynamoDBThrottledRequestsAlarm3CE9C44E6": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttled requests detected for DynamoDB table ",
+       {
+        "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
+       },
+       "-ThrottledRequests"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "TableName",
+      "Value": {
+       "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "SystemErrors",
+    "Namespace": "AWS/DynamoDB",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBThrottledRequestsAlarm-3/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackDynamoDBErrorRateAlarm3A7783DC4": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for DynamoDB table ",
+       {
+        "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "TableName",
+      "Value": {
+       "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "UserErrors",
+    "Namespace": "AWS/DynamoDB",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 10,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBErrorRateAlarm-3/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackDynamoDBReadCapacityAlarm37D66F800": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High read capacity utilization for DynamoDB table ",
+       {
+        "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
+       },
+       "-HighReadCapacityUtilization"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "TableName",
+      "Value": {
+       "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "ConsumedReadCapacityUnits",
+    "Namespace": "AWS/DynamoDB",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 240,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBReadCapacityAlarm-3/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackDynamoDBThrottledRequestsAlarm46903E0F0": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttled requests detected for DynamoDB table ",
+       {
+        "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
+       },
+       "-ThrottledRequests"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "TableName",
+      "Value": {
+       "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "SystemErrors",
+    "Namespace": "AWS/DynamoDB",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBThrottledRequestsAlarm-4/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackDynamoDBErrorRateAlarm435859A11": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for DynamoDB table ",
+       {
+        "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "TableName",
+      "Value": {
+       "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "UserErrors",
+    "Namespace": "AWS/DynamoDB",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 10,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBErrorRateAlarm-4/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackDynamoDBReadCapacityAlarm4F70DAD9F": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High read capacity utilization for DynamoDB table ",
+       {
+        "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
+       },
+       "-HighReadCapacityUtilization"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "TableName",
+      "Value": {
+       "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "ConsumedReadCapacityUnits",
+    "Namespace": "AWS/DynamoDB",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 240,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBReadCapacityAlarm-4/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackDynamoDBThrottledRequestsAlarm527FE9F7C": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "Throttled requests detected for DynamoDB table ",
+       {
+        "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
+       },
+       "-ThrottledRequests"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "Dimensions": [
+     {
+      "Name": "TableName",
+      "Value": {
+       "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "SystemErrors",
+    "Namespace": "AWS/DynamoDB",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 1,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBThrottledRequestsAlarm-5/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackDynamoDBErrorRateAlarm51FC365C2": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High error rate detected for DynamoDB table ",
+       {
+        "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
+       },
+       "-HighErrorRate"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "TableName",
+      "Value": {
+       "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "UserErrors",
+    "Namespace": "AWS/DynamoDB",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 10,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBErrorRateAlarm-5/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackDynamoDBReadCapacityAlarm56F1B8556": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": {
+     "Fn::Join": [
+      "",
+      [
+       "High read capacity utilization for DynamoDB table ",
+       {
+        "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
+       }
+      ]
+     ]
+    },
+    "AlarmName": {
+     "Fn::Join": [
+      "",
+      [
+       {
+        "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
+       },
+       "-HighReadCapacityUtilization"
+      ]
+     ]
+    },
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "TableName",
+      "Value": {
+       "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "ConsumedReadCapacityUnits",
+    "Namespace": "AWS/DynamoDB",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 240,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/DynamoDBReadCapacityAlarm-5/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackApiGateway4XXErrorAlarmREST0196B302": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": "High 4XX error rate detected for REST API Gateway",
+    "AlarmName": "REST-API-High4XXErrors",
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "ApiId",
+      "Value": {
+       "Ref": "ChatbotAPIRestBackendHTTPAPI6A6C7FF4"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "4XXError",
+    "Namespace": "AWS/ApiGateway",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 10,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/ApiGateway4XXErrorAlarm-REST/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackApiGateway5XXErrorAlarmREST09E6D9A0": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": "High 5XX error rate detected for REST API Gateway",
+    "AlarmName": "REST-API-High5XXErrors",
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "ApiId",
+      "Value": {
+       "Ref": "ChatbotAPIRestBackendHTTPAPI6A6C7FF4"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "5XXError",
+    "Namespace": "AWS/ApiGateway",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 5,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/ApiGateway5XXErrorAlarm-REST/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackApiGatewayLatencyAlarmRESTFC37FD44": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": "High latency detected for REST API Gateway",
+    "AlarmName": "REST-API-HighLatency",
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "ApiId",
+      "Value": {
+       "Ref": "ChatbotAPIRestBackendHTTPAPI6A6C7FF4"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Latency",
+    "Namespace": "AWS/ApiGateway",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 10000,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/ApiGatewayLatencyAlarm-REST/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackApiGateway4XXErrorAlarmWebSocket4EC645B7": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": "High 4XX error rate detected for WebSocket API Gateway",
+    "AlarmName": "WebSocket-API-High4XXErrors",
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "ApiId",
+      "Value": {
+       "Ref": "ChatbotAPIWebsocketBackendWSAPI75718B83"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "4XXError",
+    "Namespace": "AWS/ApiGateway",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 10,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/ApiGateway4XXErrorAlarm-WebSocket/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackApiGateway5XXErrorAlarmWebSocketAC1B0722": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": "High 5XX error rate detected for WebSocket API Gateway",
+    "AlarmName": "WebSocket-API-High5XXErrors",
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "ApiId",
+      "Value": {
+       "Ref": "ChatbotAPIWebsocketBackendWSAPI75718B83"
+      }
+     }
+    ],
+    "EvaluationPeriods": 1,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "5XXError",
+    "Namespace": "AWS/ApiGateway",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Sum",
+    "Threshold": 5,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/ApiGateway5XXErrorAlarm-WebSocket/Resource"
+   }
+  },
+  "ChatbotAPIMonitoringStackApiGatewayLatencyAlarmWebSocket217D508F": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "AlarmDescription": "High latency detected for WebSocket API Gateway",
+    "AlarmName": "WebSocket-API-HighLatency",
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+     {
+      "Name": "ApiId",
+      "Value": {
+       "Ref": "ChatbotAPIWebsocketBackendWSAPI75718B83"
+      }
+     }
+    ],
+    "EvaluationPeriods": 2,
+    "InsufficientDataActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "MetricName": "Latency",
+    "Namespace": "AWS/ApiGateway",
+    "OKActions": [
+     {
+      "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
+     }
+    ],
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 10000,
+    "TreatMissingData": "notBreaching"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/ApiGatewayLatencyAlarm-WebSocket/Resource"
+   }
+  },
   "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092": {
    "Type": "AWS::IAM::Role",
    "Properties": {
@@ -10510,7 +14439,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/21UwW7bMAz9lt5VLc122DVN0C1YiwZxth4DRmZc1rJkSHSyTPC/D5ISxy164nvks0RSpKfy7ttETm7g6G9VWd9q2slQMKhawNFvg7KVIbYy/PboVtZqMd+bz/DCNkBGXOhcExoeC7KnFwSNDGurMQaTXVlN6hRpRr3Q0OxKkOGhM4rJmhgb4xW6hryPbGFVjW7ZQIVjxSOc0P1BlzQFmUoj2+GMXviv2wDeI3s5i0aU2Gp7atCwvO9UjbwYHFEtQ/beg0eRYbzmjLK51jHmvShPBhpb7mTYwC7XnUAvoG01KYgpQcfWK9BkKhniLYUCHVUzZke7jlFcPBtwVb7+gyebjQNVk6mKfNo1q3eOXtSNl+EXplA0M03gI0mgF9pWXoZHW/1wtmtTU8+4F0rbrmQHpGXYRJOKiqAXNZrSgQzzvVmaEv/G0AIYCts5lYqmChiPcJLxMqVsZ3jkPUxl+MnczlpK2bQkIi0YqtS7DKJrbWNbIloaxsrB5fU/0Ktu1vGrdfQPXTr6yl5wV8RJ4njdQPKHAx0fe/3gk0NSir1A5bbnIRuNaZ43VE6usbWe2LpTGivP2O7PE+q3DL728jFtwtIcbP1BIMMTtKJgYHwC9Urm0pyB9wIPaNjLsO7O69bFqUuPt3fWsAzPjiqKj4DeL0s0TJwGYh41D1HzuWIIv+BuQT6P6LndY973Yo0+vbxIhcfWkKmi7rnjtmMx7zzbZlDFNAf8LrRy9kAlutSs/IvY6rjnWzh6pUnOjn6uKa1+qsGakvK6G1uifPNfDtOJvPsuJzdvnujWdYapQbnO9j9frooVDAUAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/21UwW7bMAz9lt5Vre122DVN0C1YiwZxth4DWmZc1rJkSHSyTPC/D5ISxy164nvksyRSz7qTt99u5M0VHPy1qpprTaUMBYNqBBz8NihbG2Irw2+PbmWtFvOd+QwvbAtkxJnONaHhqSBnBkHQyrC2GmMxxZXVpI6RZjQIDW1ZgQwPvVFM1sTaFK/QteR9ZAurGnTLFmqcKh7hiO4PuqQpyNQa2Y5rDMJ/3QbwHtnLWQyiwk7bY4uG5X2vGuTFmIhqGXL2HjyKDOM2J5TDpY8pH0R1NNDaqpRhA2XuO4FBQNdpUhCPBD1br0CTqWWIuxQKdFTNmB2VPaM4Zzbg6rz9h0wOGweqIVMXebXLqd4lBtG0XoZfmEoxzDSBjySBQWhbexkebf3D2b5LQz3hQSht+4odkJZhE0NqKoJBNGgqBzLMd2ZpKvwbSwtgKGzvVGqaamA8wFHGzZSyveFJdn8nw0/mbtZROk1HItKCoU6zyyCm1jaOJaKlYawdnG//A73oZj2/Wkf/0KWlL+wFyyI6ieN2I8kfjnS67OWDTxZJRxwEKrc9mWxi0+w3VE6usbOe2LpjspVn7HYnh/otg2+8fEx/wtLsbfNBIMMTdKJgYHwC9UrmPJyRDwL3aNjLsO5Pv1sfXefjxxvbkUq3lkDRl1456s4jm/LTdR+A1asMMw2uzTYB155qO2cNy/DsqKZ4pej9skLDxMle86h5iJrPFWP5BcsF+Wz400mmfBjEGn3ykUhjjIMmU0fdc89dz2Lee7btqIpNj/hdaeXsnip0afT5wdnq+Gps4eCVJjk7+Lmm9JCkHqypKI/D2Arlm/+yv7uRt9/lzdWbJ7p2vWFqUa5z/A8uuynnWgUAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/CDKMetadata/Default"
@@ -10527,6 +14456,12 @@
   "AuthorizationUserPoolClientIDC710EFA7": {
    "Value": {
     "Ref": "AuthorizationUserPoolClient8E2989BE"
+   }
+  },
+  "ChatbotAPIMonitoringStackAlarmTopicARN53152489": {
+   "Description": "The ARN of the alarm topic",
+   "Value": {
+    "Ref": "ChatbotAPIMonitoringStackAlarmNotificationTopic345FC318"
    }
   },
   "ChatbotAPIWSAPIapiEndpoint565B66F1": {
@@ -10625,182 +14560,6 @@
    },
    "Export": {
     "Name": "ITOPSRAGStack:ExportsOutputFnGetAttChatbotAPIDailyLoginTable0DBFC91FArn5241FF15"
-   }
-  },
-  "ExportsOutputRefChatbotAPIChatHandlerFunctionEB04457EC162BE30": {
-   "Value": {
-    "Ref": "ChatbotAPIChatHandlerFunctionEB04457E"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHandlerFunctionEB04457EC162BE30"
-   }
-  },
-  "ExportsOutputRefChatbotAPISessionHandlerFunctionF969576AAB44E1C1": {
-   "Value": {
-    "Ref": "ChatbotAPISessionHandlerFunctionF969576A"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPISessionHandlerFunctionF969576AAB44E1C1"
-   }
-  },
-  "ExportsOutputRefChatbotAPIFeedbackHandlerFunction11250F317E3C3742": {
-   "Value": {
-    "Ref": "ChatbotAPIFeedbackHandlerFunction11250F31"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIFeedbackHandlerFunction11250F317E3C3742"
-   }
-  },
-  "ExportsOutputRefChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97CC81678C4": {
-   "Value": {
-    "Ref": "ChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97C"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDeleteS3FilesHandlerFunctionAEF9C97CC81678C4"
-   }
-  },
-  "ExportsOutputRefChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016035CDE6E": {
-   "Value": {
-    "Ref": "ChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3KnowledgeFilesHandlerFunction70EEA016035CDE6E"
-   }
-  },
-  "ExportsOutputRefChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32887B2875": {
-   "Value": {
-    "Ref": "ChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIGetS3TestCasesFilesHandlerFunctionDFEB7C32887B2875"
-   }
-  },
-  "ExportsOutputRefChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF495F014AC": {
-   "Value": {
-    "Ref": "ChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF4"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3KnowledgeFilesHandlerFunction8F876BF495F014AC"
-   }
-  },
-  "ExportsOutputRefChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA8CE11974": {
-   "Value": {
-    "Ref": "ChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUploadS3TestCasesFilesHandlerFunctionFF824AEA8CE11974"
-   }
-  },
-  "ExportsOutputRefChatbotAPISyncKendraHandlerFunctionED8FB020A4968155": {
-   "Value": {
-    "Ref": "ChatbotAPISyncKendraHandlerFunctionED8FB020"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPISyncKendraHandlerFunctionED8FB020A4968155"
-   }
-  },
-  "ExportsOutputRefChatbotAPIChatInvocationsCounterFunction0AD6F7D4A071DFFD": {
-   "Value": {
-    "Ref": "ChatbotAPIChatInvocationsCounterFunction0AD6F7D4"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatInvocationsCounterFunction0AD6F7D4A071DFFD"
-   }
-  },
-  "ExportsOutputRefChatbotAPIcomprehendMedicalFunction7DBD41DD0335764F": {
-   "Value": {
-    "Ref": "ChatbotAPIcomprehendMedicalFunction7DBD41DD"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIcomprehendMedicalFunction7DBD41DD0335764F"
-   }
-  },
-  "ExportsOutputRefChatbotAPIKPIHandlerFunction377426B241851B05": {
-   "Value": {
-    "Ref": "ChatbotAPIKPIHandlerFunction377426B2"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPIHandlerFunction377426B241851B05"
-   }
-  },
-  "ExportsOutputRefChatbotAPIEvalResultsHandlerFunction3A0AF1AA8A7E495D": {
-   "Value": {
-    "Ref": "ChatbotAPIEvalResultsHandlerFunction3A0AF1AA"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvalResultsHandlerFunction3A0AF1AA8A7E495D"
-   }
-  },
-  "ExportsOutputRefChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E41DFAE51": {
-   "Value": {
-    "Ref": "ChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIStepFunctionsStackStartLlmEvalStateMachineFunction8C08028E41DFAE51"
-   }
-  },
-  "ExportsOutputRefChatbotAPIChatHistoryTable86F70C1D231DFDEB": {
-   "Value": {
-    "Ref": "ChatbotAPIChatHistoryTable86F70C1D"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIChatHistoryTable86F70C1D231DFDEB"
-   }
-  },
-  "ExportsOutputRefChatbotAPIUserFeedbackTableF734E54F7B54995E": {
-   "Value": {
-    "Ref": "ChatbotAPIUserFeedbackTableF734E54F"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIUserFeedbackTableF734E54F7B54995E"
-   }
-  },
-  "ExportsOutputRefChatbotAPIEvaluationResultsTableE72FCF7C09DE719F": {
-   "Value": {
-    "Ref": "ChatbotAPIEvaluationResultsTableE72FCF7C"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationResultsTableE72FCF7C09DE719F"
-   }
-  },
-  "ExportsOutputRefChatbotAPIEvaluationSummariesTableE9B95A54CCBA01F4": {
-   "Value": {
-    "Ref": "ChatbotAPIEvaluationSummariesTableE9B95A54"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIEvaluationSummariesTableE9B95A54CCBA01F4"
-   }
-  },
-  "ExportsOutputRefChatbotAPIKPILogsTableA8BB2B7256F24DD7": {
-   "Value": {
-    "Ref": "ChatbotAPIKPILogsTableA8BB2B72"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIKPILogsTableA8BB2B7256F24DD7"
-   }
-  },
-  "ExportsOutputRefChatbotAPIDailyLoginTable0DBFC91F3DA44E64": {
-   "Value": {
-    "Ref": "ChatbotAPIDailyLoginTable0DBFC91F"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIDailyLoginTable0DBFC91F3DA44E64"
-   }
-  },
-  "ExportsOutputRefChatbotAPIRestBackendHTTPAPI6A6C7FF42DEDF6C9": {
-   "Value": {
-    "Ref": "ChatbotAPIRestBackendHTTPAPI6A6C7FF4"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIRestBackendHTTPAPI6A6C7FF42DEDF6C9"
-   }
-  },
-  "ExportsOutputRefChatbotAPIWebsocketBackendWSAPI75718B83A945CA6D": {
-   "Value": {
-    "Ref": "ChatbotAPIWebsocketBackendWSAPI75718B83"
-   },
-   "Export": {
-    "Name": "ITOPSRAGStack:ExportsOutputRefChatbotAPIWebsocketBackendWSAPI75718B83A945CA6D"
    }
   }
  },
