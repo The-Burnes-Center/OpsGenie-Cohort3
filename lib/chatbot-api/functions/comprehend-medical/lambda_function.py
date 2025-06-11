@@ -117,6 +117,37 @@ def redact_text(prompt, entities):
         "OTHER": 0.01     
     }
     
+    # Expanded whitelists for exceptions
+    approved_names = [
+        "robin","MBY", "chaffee", "masshealth", "chafee",
+        # Add more approved names here as needed
+        "medicare", "medicaid", "cms", "hhs", "eohhs",
+        "onbase", "epic", "five9"  # Common system/platform names
+    ]
+    
+    approved_addresses = [
+        "masshealth",
+        # Add more approved addresses/locations here as needed
+        "boston", "massachusetts", "worcester", "springfield",
+        "cambridge", "lowell", "brockton", "new bedford",
+        "lynn", "quincy", "newton", "somerville"  # Common MA cities
+    ]
+    
+    # Entity types to completely skip (never redact)
+    skip_entity_types = [
+        "PROFESSION", "URL",
+        # Add more entity types to skip here as needed
+        # "PHONE_NUMBER",  # Uncomment if you want to allow phone numbers
+        # "EMAIL",         # Uncomment if you want to allow email addresses
+    ]
+    
+    # Keywords that should never be redacted regardless of PII detection
+    never_redact_keywords = [
+        "masshealth", "medicare", "medicaid", "onbase", "epic", "five9",
+        "massachusetts", "boston", "eohhs", "cms", "hhs","robin","MBY"
+        # Add more system/platform/organization names here
+    ]
+    
     redacted_text = prompt
     offset_shift = 0
     
@@ -137,10 +168,14 @@ def redact_text(prompt, entities):
         # Only redact if the confidence is greater than the threshold
         if confidence < threshold:
             continue  # Skip this entity, do not redact
+        
+        # Check if the detected text contains any never-redact keywords
+        if any(keyword.lower() in pii_text.lower() for keyword in never_redact_keywords):
+            print(f"Skipping redaction for '{pii_text}' - contains never-redact keyword")
+            continue
     
-    
-        if entity["Type"] == "PROFESSION" or entity["Type"] == "URL":
-            continue  # Skip redaction for professions and URLs
+        if entity["Type"] in skip_entity_types:
+            continue  # Skip redaction for specified entity types
 
         elif entity_type == "DATE_TIME":
             # Check if the date is year-only by confirming it has exactly four digits
@@ -171,7 +206,7 @@ def redact_text(prompt, entities):
                 else: 
                     print(f"Contains only state")
                 
-            elif address in ['masshealth']:
+            elif address in approved_addresses:
                 replacement = address
                 redacted_text = redacted_text.replace(pii_text, replacement)
                 
@@ -183,9 +218,9 @@ def redact_text(prompt, entities):
         elif entity["Type"] == "NAME":
             print(f"Found name in the message{entity}")
             
-            # check if the name is an approved work
+            # check if the name is an approved name
             name = entity.get('Text', 'Jake').lower() # Default to Jake if no name 
-            if name in ["kaileigh mulligan", "chaffee", 'masshealth', 'chafee']:
+            if name in approved_names:
                 replacement = name
                 redacted_text = redacted_text.replace(pii_text, replacement)
             else:
