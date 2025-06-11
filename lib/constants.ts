@@ -10,8 +10,3 @@ export const cognitoDomainName = "itops-hhs-chatbot"
 export const OIDCIntegrationName = "OpsGenie"
 // this MUST be unique to your account
 export const stackName = "ITOPSRAGStack"
-
-// Azure OIDC Configuration (uncomment and configure when ready to use Azure AD)
-// export const AZURE_CLIENT_ID = process.env.AZURE_CLIENT_ID || 'your-azure-client-id';
-// export const AZURE_CLIENT_SECRET = process.env.AZURE_CLIENT_SECRET || 'your-azure-client-secret';
-// export const AZURE_ISSUER_URL = process.env.AZURE_ISSUER_URL || 'https://login.microsoftonline.com/your-tenant-id/v2.0';

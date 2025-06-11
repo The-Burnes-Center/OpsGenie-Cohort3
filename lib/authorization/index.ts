@@ -1,7 +1,7 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { cognitoDomainName } from '../constants' 
-import { UserPool, UserPoolIdentityProviderOidc, UserPoolClient, UserPoolClientIdentityProvider, ProviderAttribute, CfnUserPoolDomain, CfnUserPoolGroup } from 'aws-cdk-lib/aws-cognito';
+import { UserPool, UserPoolIdentityProviderOidc, UserPoolClient, UserPoolClientIdentityProvider, ProviderAttribute, CfnUserPoolDomain } from 'aws-cdk-lib/aws-cognito';
 import * as cognito from "aws-cdk-lib/aws-cognito";
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as path from 'path';
@@ -11,8 +11,6 @@ export class AuthorizationStack extends Construct {
   public readonly lambdaAuthorizer : lambda.Function;
   public readonly userPool : UserPool;
   public readonly userPoolClient : UserPoolClient;
-  public readonly adminGroup : CfnUserPoolGroup;
-  public readonly userGroup : CfnUserPoolGroup;
 
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id);
@@ -25,7 +23,7 @@ export class AuthorizationStack extends Construct {
     // Create the Cognito User Pool
     const userPool = new UserPool(this, 'UserPool', {      
       removalPolicy: cdk.RemovalPolicy.DESTROY,
-      selfSignUpEnabled: false,  // Keep this false - only admins can create users
+      selfSignUpEnabled: false,
       mfa: cognito.Mfa.OPTIONAL,
       advancedSecurityMode: cognito.AdvancedSecurityMode.ENFORCED,
       autoVerify: { email: true, phone: true },
@@ -45,23 +43,6 @@ export class AuthorizationStack extends Construct {
       // ... other user pool configurations
     });
     this.userPool = userPool;
-
-    // Create User Pool Groups for role-based access control
-    const adminGroup = new CfnUserPoolGroup(this, 'AdminGroup', {
-      userPoolId: userPool.userPoolId,
-      groupName: 'Admin',
-      description: 'Administrators with full access to the system',
-      precedence: 0,  // Higher precedence (lower number)
-    });
-    this.adminGroup = adminGroup;
-
-    const userGroup = new CfnUserPoolGroup(this, 'UserGroup', {
-      userPoolId: userPool.userPoolId,
-      groupName: 'User',
-      description: 'Regular users with limited access to the system',
-      precedence: 10,  // Lower precedence (higher number)
-    });
-    this.userGroup = userGroup;
 
     // Create a provider attribute for mapping Azure claims
     // const providerAttribute = new ProviderAttribute({
@@ -99,11 +80,10 @@ export class AuthorizationStack extends Construct {
     //   issuerUrl: azureIssuerUrl,
     //   userPool: userPool,
     //   attributeMapping: {
-    //     // Map Azure groups to Cognito groups
     //     // email: ProviderAttribute.fromString('email'),
     //     // fullname: ProviderAttribute.fromString('name'),
     //     // custom: {
-    //     //   role: ProviderAttribute.fromString('groups'), // Map Azure groups to custom:role
+    //     //   customKey: providerAttribute,
     //     // },
     //   },
     //   // ... other optional properties
@@ -116,11 +96,7 @@ export class AuthorizationStack extends Construct {
         userSrp: true
       },
       preventUserExistenceErrors: true,
-      // When Azure is enabled, uncomment this:
-      // supportedIdentityProviders: [
-      //   UserPoolClientIdentityProvider.COGNITO,
-      //   UserPoolClientIdentityProvider.custom(azureProvider.providerName)
-      // ],
+      // supportedIdentityProviders: [UserPoolClientIdentityProvider.custom(azureProvider.providerName)],
     });
 
     this.userPoolClient = userPoolClient;
@@ -189,14 +165,6 @@ urllib3==2.2.1
 
     new cdk.CfnOutput(this, "UserPool Client ID", {
       value: userPoolClient.userPoolClientId || "",
-    });
-
-    new cdk.CfnOutput(this, "Admin Group Name", {
-      value: adminGroup.groupName || "",
-    });
-
-    new cdk.CfnOutput(this, "User Group Name", {
-      value: userGroup.groupName || "",
     });
 
     // new cdk.CfnOutput(this, "UserPool Client Name", {
