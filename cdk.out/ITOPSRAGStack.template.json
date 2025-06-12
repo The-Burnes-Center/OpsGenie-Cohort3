@@ -6941,7 +6941,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "34747802e1621a31c72e95ec56ce40b98116f2ffbfbaf63b667961f032237dbd.zip"
+     "S3Key": "39668b60602abfacc1eccb36f709d5550e219266e5c6b9780279f23c2d413fa1.zip"
     },
     "Environment": {
      "Variables": {
@@ -6992,7 +6992,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/ChatHandlerFunction/Resource",
-    "aws:asset:path": "asset.34747802e1621a31c72e95ec56ce40b98116f2ffbfbaf63b667961f032237dbd",
+    "aws:asset:path": "asset.39668b60602abfacc1eccb36f709d5550e219266e5c6b9780279f23c2d413fa1",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -8471,11 +8471,11 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "e0981895fcb1095eb639c7ca95221fc88a70893fcc8aa3d39f9cb7062f1414df.zip"
+     "S3Key": "0432ca6b703e026c396ceefa52c26aecaca40173a61882295dc6855b0cea8762.zip"
     },
     "Environment": {
      "Variables": {
-      "PROMPT": "You are a helpful AI chatbot that will answer questions based on your knowledge. \n                You have access to a search tool that you will use to look up answers to questions.",
+      "PROMPT": "You are a strict source-grounded AI assistant for IT-Operations at EOHHS/MassHealth. You MUST only provide information that is explicitly present in the retrieved documents. \n\nCRITICAL GROUNDING RULES:\n- Only answer using information explicitly stated in the provided Context\n- NEVER expand acronyms, abbreviations, or codes unless the expansion is explicitly provided in the Context\n- NEVER infer meanings, relationships, or definitions from your training data\n- If Context doesn't contain sufficient information, respond: \"I don't have enough information in the retrieved documents to answer that question\"\n- For acronyms like \"MBY\", \"EOHHS\", etc. - only use them exactly as written in source documents, do not define them unless definitions are explicitly provided\n\nIf no relevant information is found in Context, say: \"No relevant information found in the documentation.\"",
       "KB_ID": {
        "Fn::GetAtt": [
         "ChatbotAPIKendraIndex3CD60B23",
@@ -8500,7 +8500,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/StepFunctionsStack/GenerateResponseFunction/Resource",
-    "aws:asset:path": "asset.e0981895fcb1095eb639c7ca95221fc88a70893fcc8aa3d39f9cb7062f1414df",
+    "aws:asset:path": "asset.0432ca6b703e026c396ceefa52c26aecaca40173a61882295dc6855b0cea8762",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -9389,7 +9389,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "d23f41008f65e62ec1dd1baed95d1e65e1911af92fb185e51a10468eb8db35a8.zip"
+     "S3Key": "a3abe1592ad014b8e36d3399587545f84f34634ea1aef6b39a34b5f575cb784a.zip"
     },
     "Handler": "lambda_function.lambda_handler",
     "Role": {
@@ -9407,7 +9407,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/comprehendMedicalFunction/Resource",
-    "aws:asset:path": "asset.d23f41008f65e62ec1dd1baed95d1e65e1911af92fb185e51a10468eb8db35a8",
+    "aws:asset:path": "asset.a3abe1592ad014b8e36d3399587545f84f34634ea1aef6b39a34b5f575cb784a",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -14196,7 +14196,7 @@
      }
     ],
     "SourceObjectKeys": [
-     "56d1b3f9240bf1893a860de3abf853b6644395d5f11bbf5f4323f7ecfd51199d.zip",
+     "ec65bea7548ed2316d5b8d1d2f0e00e165ead7d4946c68d9524cd2a5c645b735.zip",
      "c1c1567d07b050015ce337e85cad5fca81097b646486ebe0c7d0f83cd2a82aab.zip"
     ],
     "SourceMarkers": [

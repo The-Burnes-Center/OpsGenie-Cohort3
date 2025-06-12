@@ -5395,7 +5395,7 @@
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Backup::BackupVault",
                           "aws:cdk:cloudformation:props": {
-                            "backupVaultName": "dynamodb-backup-vault-1749619437024"
+                            "backupVaultName": "dynamodb-backup-vault-1749753062971"
                           }
                         },
                         "constructInfo": {
@@ -10029,7 +10029,7 @@
                           "s3Bucket": {
                             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                           },
-                          "s3Key": "34747802e1621a31c72e95ec56ce40b98116f2ffbfbaf63b667961f032237dbd.zip"
+                          "s3Key": "39668b60602abfacc1eccb36f709d5550e219266e5c6b9780279f23c2d413fa1.zip"
                         },
                         "environment": {
                           "variables": {
@@ -12355,11 +12355,11 @@
                               "s3Bucket": {
                                 "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                               },
-                              "s3Key": "e0981895fcb1095eb639c7ca95221fc88a70893fcc8aa3d39f9cb7062f1414df.zip"
+                              "s3Key": "0432ca6b703e026c396ceefa52c26aecaca40173a61882295dc6855b0cea8762.zip"
                             },
                             "environment": {
                               "variables": {
-                                "PROMPT": "You are a helpful AI chatbot that will answer questions based on your knowledge. \n                You have access to a search tool that you will use to look up answers to questions.",
+                                "PROMPT": "You are a strict source-grounded AI assistant for IT-Operations at EOHHS/MassHealth. You MUST only provide information that is explicitly present in the retrieved documents. \n\nCRITICAL GROUNDING RULES:\n- Only answer using information explicitly stated in the provided Context\n- NEVER expand acronyms, abbreviations, or codes unless the expansion is explicitly provided in the Context\n- NEVER infer meanings, relationships, or definitions from your training data\n- If Context doesn't contain sufficient information, respond: \"I don't have enough information in the retrieved documents to answer that question\"\n- For acronyms like \"MBY\", \"EOHHS\", etc. - only use them exactly as written in source documents, do not define them unless definitions are explicitly provided\n\nIf no relevant information is found in Context, say: \"No relevant information found in the documentation.\"",
                                 "KB_ID": {
                                   "Fn::GetAtt": [
                                     "ChatbotAPIKendraIndex3CD60B23",
@@ -13806,7 +13806,7 @@
                           "s3Bucket": {
                             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                           },
-                          "s3Key": "d23f41008f65e62ec1dd1baed95d1e65e1911af92fb185e51a10468eb8db35a8.zip"
+                          "s3Key": "a3abe1592ad014b8e36d3399587545f84f34634ea1aef6b39a34b5f575cb784a.zip"
                         },
                         "handler": "lambda_function.lambda_handler",
                         "role": {
