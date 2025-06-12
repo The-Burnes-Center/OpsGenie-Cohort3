@@ -285,7 +285,17 @@ export default function ChatMessage(props: ChatMessageProps) {
             showSources && (
               <SpaceBetween direction="horizontal" size="s">
               <ButtonDropdown
-              items={(props.message.metadata.Sources as any[]).map((item) => { return {id: "id", disabled: false, text : item.title, href : item.uri, external : true, externalIconAriaLabel: "(opens in new tab)"}})}
+              items={(props.message.metadata.Sources as any[]).map((item, index) => { 
+                const title = item.id ? `[${item.id}] ${item.title}` : item.title;
+                return {
+                  id: `source-${index}`, 
+                  disabled: false, 
+                  text: title, 
+                  href: item.uri, 
+                  external: true, 
+                  externalIconAriaLabel: "(opens in new tab)"
+                }
+              })}
               aria-label="View source documents"
               >Sources</ButtonDropdown>
               <Button 
