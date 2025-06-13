@@ -36,21 +36,21 @@ export class CloudWatchAlarmsStack extends Construct {
 
     // Create alarms for Lambda functions
     props.lambdaFunctions.forEach((lambdaFunction, index) => {
-      this.createLambdaAlarms(lambdaFunction, index);
+      this.createLambdaAlarms(lambdaFunction, index, stackName);
     });
 
     // Create alarms for DynamoDB tables
     props.dynamoTables.forEach((table, index) => {
-      this.createDynamoDBAlarms(table, index);
+      this.createDynamoDBAlarms(table, index, stackName);
     });
 
     // Create API Gateway alarms if provided
     if (props.restApiId) {
-      this.createApiGatewayAlarms(props.restApiId, 'REST');
+      this.createApiGatewayAlarms(props.restApiId, 'REST', stackName);
     }
 
     if (props.websocketApiId) {
-      this.createApiGatewayAlarms(props.websocketApiId, 'WebSocket');
+      this.createApiGatewayAlarms(props.websocketApiId, 'WebSocket', stackName);
     }
 
     // Add CloudFormation output for the SNS topic ARN
@@ -60,12 +60,12 @@ export class CloudWatchAlarmsStack extends Construct {
     });
   }
 
-  private createLambdaAlarms(lambdaFunction: lambda.Function, index: number): void {
+  private createLambdaAlarms(lambdaFunction: lambda.Function, index: number, stackName: string): void {
     const functionName = lambdaFunction.functionName;
 
     // Lambda Error Rate Alarm
     const errorRateAlarm = new cloudwatch.Alarm(this, `LambdaErrorRateAlarm-${index}`, {
-      alarmName: `${functionName}-HighErrorRate`,
+      alarmName: `${stackName}-${functionName}-HighErrorRate`,
       alarmDescription: `High error rate detected for Lambda function ${functionName}`,
       metric: lambdaFunction.metricErrors({
         period: Duration.minutes(5),
@@ -84,7 +84,7 @@ export class CloudWatchAlarmsStack extends Construct {
 
     // Lambda Duration Alarm
     const durationAlarm = new cloudwatch.Alarm(this, `LambdaDurationAlarm-${index}`, {
-      alarmName: `${functionName}-HighDuration`,
+      alarmName: `${stackName}-${functionName}-HighDuration`,
       alarmDescription: `High duration detected for Lambda function ${functionName}`,
       metric: lambdaFunction.metricDuration({
         period: Duration.minutes(5),
@@ -102,7 +102,7 @@ export class CloudWatchAlarmsStack extends Construct {
 
     // Lambda Throttles Alarm
     const throttleAlarm = new cloudwatch.Alarm(this, `LambdaThrottleAlarm-${index}`, {
-      alarmName: `${functionName}-Throttles`,
+      alarmName: `${stackName}-${functionName}-Throttles`,
       alarmDescription: `Throttles detected for Lambda function ${functionName}`,
       metric: lambdaFunction.metricThrottles({
         period: Duration.minutes(5),
@@ -119,12 +119,12 @@ export class CloudWatchAlarmsStack extends Construct {
     throttleAlarm.addInsufficientDataAction(new cloudwatchActions.SnsAction(this.alarmTopic));
   }
 
-  private createDynamoDBAlarms(table: dynamodb.Table, index: number): void {
+  private createDynamoDBAlarms(table: dynamodb.Table, index: number, stackName: string): void {
     const tableName = table.tableName;
 
     // DynamoDB Throttled Requests Alarm
     const throttledRequestsAlarm = new cloudwatch.Alarm(this, `DynamoDBThrottledRequestsAlarm-${index}`, {
-      alarmName: `${tableName}-ThrottledRequests`,
+      alarmName: `${stackName}-${tableName}-ThrottledRequests`,
       alarmDescription: `Throttled requests detected for DynamoDB table ${tableName}`,
       metric: new cloudwatch.Metric({
         namespace: 'AWS/DynamoDB',
@@ -147,7 +147,7 @@ export class CloudWatchAlarmsStack extends Construct {
 
     // DynamoDB High Error Rate Alarm
     const errorRateAlarm = new cloudwatch.Alarm(this, `DynamoDBErrorRateAlarm-${index}`, {
-      alarmName: `${tableName}-HighErrorRate`,
+      alarmName: `${stackName}-${tableName}-HighErrorRate`,
       alarmDescription: `High error rate detected for DynamoDB table ${tableName}`,
       metric: new cloudwatch.Metric({
         namespace: 'AWS/DynamoDB',
@@ -170,7 +170,7 @@ export class CloudWatchAlarmsStack extends Construct {
 
     // DynamoDB Read/Write Capacity Utilization Alarms
     const readCapacityAlarm = new cloudwatch.Alarm(this, `DynamoDBReadCapacityAlarm-${index}`, {
-      alarmName: `${tableName}-HighReadCapacityUtilization`,
+      alarmName: `${stackName}-${tableName}-HighReadCapacityUtilization`,
       alarmDescription: `High read capacity utilization for DynamoDB table ${tableName}`,
       metric: new cloudwatch.Metric({
         namespace: 'AWS/DynamoDB',
@@ -192,10 +192,10 @@ export class CloudWatchAlarmsStack extends Construct {
     readCapacityAlarm.addInsufficientDataAction(new cloudwatchActions.SnsAction(this.alarmTopic));
   }
 
-  private createApiGatewayAlarms(apiId: string, apiType: string): void {
+  private createApiGatewayAlarms(apiId: string, apiType: string, stackName: string): void {
     // API Gateway 4XX Error Rate Alarm
     const clientErrorAlarm = new cloudwatch.Alarm(this, `ApiGateway4XXErrorAlarm-${apiType}`, {
-      alarmName: `${apiType}-API-High4XXErrors`,
+      alarmName: `${stackName}-${apiType}-API-High4XXErrors`,
       alarmDescription: `High 4XX error rate detected for ${apiType} API Gateway`,
       metric: new cloudwatch.Metric({
         namespace: 'AWS/ApiGateway',
@@ -218,7 +218,7 @@ export class CloudWatchAlarmsStack extends Construct {
 
     // API Gateway 5XX Error Rate Alarm
     const serverErrorAlarm = new cloudwatch.Alarm(this, `ApiGateway5XXErrorAlarm-${apiType}`, {
-      alarmName: `${apiType}-API-High5XXErrors`,
+      alarmName: `${stackName}-${apiType}-API-High5XXErrors`,
       alarmDescription: `High 5XX error rate detected for ${apiType} API Gateway`,
       metric: new cloudwatch.Metric({
         namespace: 'AWS/ApiGateway',
@@ -241,7 +241,7 @@ export class CloudWatchAlarmsStack extends Construct {
 
     // API Gateway Latency Alarm
     const latencyAlarm = new cloudwatch.Alarm(this, `ApiGatewayLatencyAlarm-${apiType}`, {
-      alarmName: `${apiType}-API-HighLatency`,
+      alarmName: `${stackName}-${apiType}-API-HighLatency`,
       alarmDescription: `High latency detected for ${apiType} API Gateway`,
       metric: new cloudwatch.Metric({
         namespace: 'AWS/ApiGateway',
