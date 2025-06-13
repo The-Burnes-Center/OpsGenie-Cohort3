@@ -116,8 +116,8 @@ export default function NavigationPanel() {
 
   const updateItems = async (sessions) => {
     // Determine which sessions to show
-    const sessionsToShow = showAllSessions ? sessions : sessions.slice(0, 7);
-    const hasMoreSessions = sessions.length > 7;
+    const sessionsToShow = showAllSessions ? sessions : sessions.slice(0, 3);
+    const hasMoreSessions = sessions.length > 3;
     
     // Create session items
     const sessionItems = sessionsToShow.map(session => ({
@@ -194,15 +194,10 @@ export default function NavigationPanel() {
           type: "section",
           text: "Admin",
           items: [
-            //{ type: "link", text: "Update Data", href: "/admin/add-data" },
             { type: "link", text: "Data", href: "/admin/data" },
             { type: "link", text: "User Feedback", href: "/admin/user-feedback" },
             { type: "link", text: "Evaluation", href: "/admin/llm-evaluation" },
             { type: "link", text: "KPIs", href: "/admin/kpis" },
-            invocationCount? { type: "link", text: `Total Message Count (past 24hrs): ${invocationCount}`, href: ""} 
-            : {type: "link", text: "Total Message Count (past 24hrs): unknown", href: ""},
-            usesPerUsers? { type: "link", text: `Avg usage per user (past 7 days): ${usesPerUsers}`, href: ""} 
-            : {type: "link", text: "Avg usage per user (past 7 days): unknown", href: ""}
           ],
         },)
       }
