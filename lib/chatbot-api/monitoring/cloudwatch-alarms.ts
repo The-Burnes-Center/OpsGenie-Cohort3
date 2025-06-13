@@ -21,9 +21,11 @@ export class CloudWatchAlarmsStack extends Construct {
   constructor(scope: Construct, id: string, props: CloudWatchAlarmsStackProps) {
     super(scope, id);
 
+    const stackName = Stack.of(this).stackName;
+
     // Create SNS topic for alarm notifications (FedRAMP compliance requirement)
     this.alarmTopic = new sns.Topic(this, 'AlarmNotificationTopic', {
-      topicName: 'fedramp-compliance-alarms',
+      topicName: `${stackName}-fedramp-compliance-alarms`,
       displayName: 'FedRAMP Compliance Alarm Notifications',
     });
 

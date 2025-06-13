@@ -1,107 +1,84 @@
-import { Stack, StackProps, Duration } from 'aws-cdk-lib';
+import { Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as backup from 'aws-cdk-lib/aws-backup';
-import * as iam from 'aws-cdk-lib/aws-iam';
-import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
+import * as cdk from 'aws-cdk-lib';
 import * as events from 'aws-cdk-lib/aws-events';
 
 export interface BackupStackProps extends StackProps {
-  readonly tables: dynamodb.Table[];
+  readonly dynamoTables: string[];
 }
 
 export class BackupStack extends Stack {
   constructor(scope: Construct, id: string, props: BackupStackProps) {
     super(scope, id, props);
 
-    // Create a backup vault for storing backups with simplified configuration
+    const stackName = Stack.of(this).stackName;
+
+    // Create a backup vault
     const backupVault = new backup.BackupVault(this, 'DynamoDBBackupVault', {
-      backupVaultName: `dynamodb-backup-vault-${Date.now()}`,
-      encryptionKey: undefined, // Uses default AWS managed key
+      backupVaultName: `${stackName}-dynamodb-backup-vault`,
+      removalPolicy: cdk.RemovalPolicy.RETAIN,
     });
 
-    // Create an IAM role for AWS Backup service
-    const backupRole = new iam.Role(this, 'BackupServiceRole', {
-      assumedBy: new iam.ServicePrincipal('backup.amazonaws.com'),
-      managedPolicies: [
-        iam.ManagedPolicy.fromAwsManagedPolicyName('service-role/AWSBackupServiceRolePolicyForBackup'),
-        iam.ManagedPolicy.fromAwsManagedPolicyName('service-role/AWSBackupServiceRolePolicyForRestores'),
-      ],
-    });
-
-    // Create backup plan for DynamoDB tables (FedRAMP compliant)
+    // Create a backup plan
     const backupPlan = new backup.BackupPlan(this, 'DynamoDBBackupPlan', {
-      backupPlanName: 'DynamoDB-FedRAMP-Compliance-Plan',
+      backupPlanName: `${stackName}-dynamodb-fedramp-compliance-plan`,
       backupVault: backupVault,
-      backupPlanRules: [
-        // Daily backup rule
-        new backup.BackupPlanRule({
-          ruleName: 'DailyBackup',
-          scheduleExpression: events.Schedule.cron({
-            hour: '2',  // 2 AM UTC
-            minute: '0',
-            day: '*',
-            month: '*',
-            year: '*'
-          }),
-          startWindow: Duration.hours(1),
-          completionWindow: Duration.hours(8),
-          deleteAfter: Duration.days(35), // Retain for 35 days
-          copyActions: []
-        }),
-        // Weekly backup rule for longer retention
-        new backup.BackupPlanRule({
-          ruleName: 'WeeklyBackup',
-          scheduleExpression: events.Schedule.cron({
-            hour: '3',  // 3 AM UTC
-            minute: '0',
-            weekDay: '1', // Sunday (1 = Sunday in AWS Backup cron)
-          }),
-          startWindow: Duration.hours(1),
-          completionWindow: Duration.hours(8),
-          deleteAfter: Duration.days(365), // Retain for 1 year
-          copyActions: []
-        }),
-        // Monthly backup rule for compliance archival
-        new backup.BackupPlanRule({
-          ruleName: 'MonthlyBackup',
-          scheduleExpression: events.Schedule.cron({
-            hour: '4',  // 4 AM UTC
-            minute: '0',
-            day: '1',   // First day of month
-            month: '*',
-            year: '*'
-          }),
-          startWindow: Duration.hours(1),
-          completionWindow: Duration.hours(8),
-          deleteAfter: Duration.days(2555), // Retain for 7 years (FedRAMP requirement)
-          copyActions: []
-        })
-      ]
     });
 
-    // Create backup selection to include all DynamoDB tables
-    const tableArns = props.tables.map(table => table.tableArn);
-    
+    // Add daily backup rule
+    backupPlan.addRule(new backup.BackupPlanRule({
+      ruleName: `${stackName}-daily-backup`,
+      completionWindow: cdk.Duration.hours(2),
+      startWindow: cdk.Duration.hours(1),
+      scheduleExpression: events.Schedule.cron({ 
+        minute: '0',
+        hour: '5',
+        day: '*',
+        month: '*',
+        year: '*'
+      }),
+      deleteAfter: cdk.Duration.days(30),
+    }));
+
+    // Add weekly backup rule
+    backupPlan.addRule(new backup.BackupPlanRule({
+      ruleName: `${stackName}-weekly-backup`,
+      completionWindow: cdk.Duration.hours(2),
+      startWindow: cdk.Duration.hours(1),
+      scheduleExpression: events.Schedule.cron({ 
+        minute: '0',
+        hour: '5',
+        day: '?',
+        month: '*',
+        year: '*',
+        weekDay: 'SUN'
+      }),
+      deleteAfter: cdk.Duration.days(90),
+    }));
+
+    // Add monthly backup rule
+    backupPlan.addRule(new backup.BackupPlanRule({
+      ruleName: `${stackName}-monthly-backup`,
+      completionWindow: cdk.Duration.hours(2),
+      startWindow: cdk.Duration.hours(1),
+      scheduleExpression: events.Schedule.cron({ 
+        minute: '0',
+        hour: '5',
+        day: '1',
+        month: '*',
+        year: '*'
+      }),
+      deleteAfter: cdk.Duration.days(365),
+    }));
+
+    // Create backup selection
     new backup.BackupSelection(this, 'DynamoDBBackupSelection', {
       backupPlan: backupPlan,
-      backupSelectionName: 'DynamoDB-Tables-Selection',
-      role: backupRole,
-      resources: [
-        ...tableArns.map(arn => backup.BackupResource.fromArn(arn))
-      ]
-    });
-
-    // Tag all tables for backup selection
-    props.tables.forEach((table, index) => {
-      table.node.addMetadata('BackupRequired', 'true');
-      
-      // Add tags using L1 construct if available
-      const cfnTable = table.node.defaultChild as dynamodb.CfnTable;
-      if (cfnTable && cfnTable.tags) {
-        cfnTable.tags.setTag('BackupRequired', 'true');
-        cfnTable.tags.setTag('Environment', 'Production');
-        cfnTable.tags.setTag('ComplianceLevel', 'FedRAMP');
-      }
+      backupSelectionName: `${stackName}-dynamodb-tables-selection`,
+      resources: props.dynamoTables.map(tableArn => 
+        backup.BackupResource.fromArn(tableArn)
+      ),
     });
   }
 } 

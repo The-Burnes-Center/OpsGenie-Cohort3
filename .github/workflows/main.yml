@@ -55,7 +55,7 @@ jobs:
     - name: Ensure FedRAMP Compliance for Autoscaling Alarms
       run: |
         # Get SNS topic ARN for alarm notifications
-        TOPIC_ARN=$(aws sns list-topics --query "Topics[?contains(TopicArn, 'fedramp-compliance-alarms')].TopicArn" --output text)
+        TOPIC_ARN=$(aws sns list-topics --query "Topics[?contains(TopicArn, 'ITOPSRMRAGStack-fedramp-compliance-alarms')].TopicArn" --output text)
         
         if [ -z "$TOPIC_ARN" ]; then
           echo "ERROR: FedRAMP compliance SNS topic not found!"
