@@ -228,7 +228,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/03a955ee8d6ea69baec4b700dba9ae523d666c0e906435330ccbbe2060fdd46c.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/6a272332dc3e31a48911e7d5186ae89a3815bec49f20a2eaa4b0e306869119b8.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -251,16 +251,16 @@
             "data": "DynamoDBBackupVaultA930BCBD"
           }
         ],
-        "/ITOPSRAGStack/ChatbotAPI/BackupStack/BackupServiceRole/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "BackupServiceRole3CD57978"
-          }
-        ],
         "/ITOPSRAGStack/ChatbotAPI/BackupStack/DynamoDBBackupPlan/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "DynamoDBBackupPlanAF3D283F"
+          }
+        ],
+        "/ITOPSRAGStack/ChatbotAPI/BackupStack/DynamoDBBackupSelection/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBBackupSelectionRoleDF6BBBDD"
           }
         ],
         "/ITOPSRAGStack/ChatbotAPI/BackupStack/DynamoDBBackupSelection/Resource": [
@@ -373,7 +373,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/02919b40dc7f09956d43104fb235bbc29948dc81a5711b3d1e575badd8d0ea82.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/eed3a30b818a42a1cc2ed3bfdddd84ce7ed63b1204771bf433644eb0116c64ef.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -450,12 +450,6 @@
             "data": "AuthorizationUserPoolClientIDC710EFA7"
           }
         ],
-        "/ITOPSRAGStack/ChatbotAPI/ChatHistoryTable": [
-          {
-            "type": "BackupRequired",
-            "data": "true"
-          }
-        ],
         "/ITOPSRAGStack/ChatbotAPI/ChatHistoryTable/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -508,12 +502,6 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIChatHistoryTableTimeIndexWriteScalingTargetTracking58176505"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/UserFeedbackTable": [
-          {
-            "type": "BackupRequired",
-            "data": "true"
           }
         ],
         "/ITOPSRAGStack/ChatbotAPI/UserFeedbackTable/Resource": [
@@ -594,12 +582,6 @@
             "data": "ChatbotAPIUserFeedbackTableAnyIndexWriteScalingTargetTracking0F1B008D"
           }
         ],
-        "/ITOPSRAGStack/ChatbotAPI/EvaluationSummariesTable": [
-          {
-            "type": "BackupRequired",
-            "data": "true"
-          }
-        ],
         "/ITOPSRAGStack/ChatbotAPI/EvaluationSummariesTable/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -628,12 +610,6 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIEvaluationSummariesTableWriteScalingTargetTracking8271490F"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable": [
-          {
-            "type": "BackupRequired",
-            "data": "true"
           }
         ],
         "/ITOPSRAGStack/ChatbotAPI/EvaluationResultsTable/Resource": [
@@ -690,12 +666,6 @@
             "data": "ChatbotAPIEvaluationResultsTableQuestionIndexWriteScalingTargetTrackingBF9D20D6"
           }
         ],
-        "/ITOPSRAGStack/ChatbotAPI/KPILogsTable": [
-          {
-            "type": "BackupRequired",
-            "data": "true"
-          }
-        ],
         "/ITOPSRAGStack/ChatbotAPI/KPILogsTable/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -724,12 +694,6 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "ChatbotAPIKPILogsTableWriteScalingTargetTracking31E085F2"
-          }
-        ],
-        "/ITOPSRAGStack/ChatbotAPI/DailyLoginTable": [
-          {
-            "type": "BackupRequired",
-            "data": "true"
           }
         ],
         "/ITOPSRAGStack/ChatbotAPI/DailyLoginTable/Resource": [

@@ -3777,7 +3777,7 @@
   "ChatbotAPIRestBackendHttpApiLogsA9A80762": {
    "Type": "AWS::Logs::LogGroup",
    "Properties": {
-    "LogGroupName": "/aws/apigateway/RestBackend-http-api",
+    "LogGroupName": "/aws/apigateway/ITOPSRAGStack-RestBackend-http-api",
     "RetentionInDays": 7
    },
    "DependsOn": [
@@ -6523,7 +6523,7 @@
   "ChatbotAPIWebsocketBackendWebSocketApiLogs55245978": {
    "Type": "AWS::Logs::LogGroup",
    "Properties": {
-    "LogGroupName": "/aws/apigateway/WebsocketBackend-websocket-api",
+    "LogGroupName": "/aws/apigateway/ITOPSRAGStack-WebsocketBackend-websocket-api",
     "RetentionInDays": 7
    },
    "DependsOn": [
@@ -9461,7 +9461,7 @@
    "Type": "AWS::SNS::Topic",
    "Properties": {
     "DisplayName": "FedRAMP Compliance Alarm Notifications",
-    "TopicName": "fedramp-compliance-alarms"
+    "TopicName": "ITOPSRAGStack-fedramp-compliance-alarms"
    },
    "Metadata": {
     "aws:cdk:path": "ITOPSRAGStack/ChatbotAPI/MonitoringStack/AlarmNotificationTopic/Resource"
@@ -14196,7 +14196,7 @@
      }
     ],
     "SourceObjectKeys": [
-     "ec65bea7548ed2316d5b8d1d2f0e00e165ead7d4946c68d9524cd2a5c645b735.zip",
+     "659cd73120920854134ed4276a9e74637ab6829f597560f1b37896a94e233017.zip",
      "c1c1567d07b050015ce337e85cad5fca81097b646486ebe0c7d0f83cd2a82aab.zip"
     ],
     "SourceMarkers": [

@@ -49,13 +49,13 @@ export class ChatBotApi extends Construct {
 
     // Create backup stack for FedRAMP compliance
     const backupStack = new BackupStack(this, "BackupStack", {
-      tables: [
-        tables.historyTable,
-        tables.feedbackTable,
-        tables.evalResultsTable,
-        tables.evalSummaryTable,
-        tables.kpiLogsTable,
-        tables.dailyLoginTable
+      dynamoTables: [
+        tables.historyTable.tableArn,
+        tables.feedbackTable.tableArn,
+        tables.evalResultsTable.tableArn,
+        tables.evalSummaryTable.tableArn,
+        tables.kpiLogsTable.tableArn,
+        tables.dailyLoginTable.tableArn
       ]
     });
 

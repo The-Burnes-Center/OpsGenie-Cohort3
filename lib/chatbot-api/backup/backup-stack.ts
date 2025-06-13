@@ -13,16 +13,17 @@ export class BackupStack extends Stack {
     super(scope, id, props);
 
     const stackName = Stack.of(this).stackName;
+    const shortStack = stackName.length > 20 ? stackName.slice(0, 20) : stackName;
 
     // Create a backup vault
     const backupVault = new backup.BackupVault(this, 'DynamoDBBackupVault', {
-      backupVaultName: `${stackName}-dynamodb-backup-vault`,
+      backupVaultName: `${shortStack}-ddb-bkp-vault`,
       removalPolicy: cdk.RemovalPolicy.RETAIN,
     });
 
     // Create a backup plan
     const backupPlan = new backup.BackupPlan(this, 'DynamoDBBackupPlan', {
-      backupPlanName: `${stackName}-dynamodb-fedramp-compliance-plan`,
+      backupPlanName: `${shortStack}-ddb-bkp-plan`,
       backupVault: backupVault,
     });
 
@@ -43,16 +44,15 @@ export class BackupStack extends Stack {
 
     // Add weekly backup rule
     backupPlan.addRule(new backup.BackupPlanRule({
-      ruleName: `${stackName}-weekly-backup`,
+      ruleName: `${shortStack}-weekly-backup`,
       completionWindow: cdk.Duration.hours(2),
       startWindow: cdk.Duration.hours(1),
       scheduleExpression: events.Schedule.cron({ 
         minute: '0',
         hour: '5',
-        day: '?',
+        weekDay: 'SUN',
         month: '*',
-        year: '*',
-        weekDay: 'SUN'
+        year: '*'
       }),
       deleteAfter: cdk.Duration.days(90),
     }));

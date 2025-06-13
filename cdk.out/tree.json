@@ -5395,7 +5395,7 @@
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Backup::BackupVault",
                           "aws:cdk:cloudformation:props": {
-                            "backupVaultName": "dynamodb-backup-vault-1749753062971"
+                            "backupVaultName": "ITOPSRAGStackChatbot-ddb-bkp-vault"
                           }
                         },
                         "constructInfo": {
@@ -5406,75 +5406,6 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_backup.BackupVault",
-                      "version": "2.140.0"
-                    }
-                  },
-                  "BackupServiceRole": {
-                    "id": "BackupServiceRole",
-                    "path": "ITOPSRAGStack/ChatbotAPI/BackupStack/BackupServiceRole",
-                    "children": {
-                      "ImportBackupServiceRole": {
-                        "id": "ImportBackupServiceRole",
-                        "path": "ITOPSRAGStack/ChatbotAPI/BackupStack/BackupServiceRole/ImportBackupServiceRole",
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.Resource",
-                          "version": "2.140.0"
-                        }
-                      },
-                      "Resource": {
-                        "id": "Resource",
-                        "path": "ITOPSRAGStack/ChatbotAPI/BackupStack/BackupServiceRole/Resource",
-                        "attributes": {
-                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
-                          "aws:cdk:cloudformation:props": {
-                            "assumeRolePolicyDocument": {
-                              "Statement": [
-                                {
-                                  "Action": "sts:AssumeRole",
-                                  "Effect": "Allow",
-                                  "Principal": {
-                                    "Service": "backup.amazonaws.com"
-                                  }
-                                }
-                              ],
-                              "Version": "2012-10-17"
-                            },
-                            "managedPolicyArns": [
-                              {
-                                "Fn::Join": [
-                                  "",
-                                  [
-                                    "arn:",
-                                    {
-                                      "Ref": "AWS::Partition"
-                                    },
-                                    ":iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup"
-                                  ]
-                                ]
-                              },
-                              {
-                                "Fn::Join": [
-                                  "",
-                                  [
-                                    "arn:",
-                                    {
-                                      "Ref": "AWS::Partition"
-                                    },
-                                    ":iam::aws:policy/service-role/AWSBackupServiceRolePolicyForRestores"
-                                  ]
-                                ]
-                              }
-                            ]
-                          }
-                        },
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
-                          "version": "2.140.0"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_iam.Role",
                       "version": "2.140.0"
                     }
                   },
@@ -5489,55 +5420,52 @@
                           "aws:cdk:cloudformation:type": "AWS::Backup::BackupPlan",
                           "aws:cdk:cloudformation:props": {
                             "backupPlan": {
-                              "backupPlanName": "DynamoDB-FedRAMP-Compliance-Plan",
+                              "backupPlanName": "ITOPSRAGStackChatbot-ddb-bkp-plan",
                               "backupPlanRule": [
                                 {
-                                  "completionWindowMinutes": 480,
+                                  "completionWindowMinutes": 120,
                                   "lifecycle": {
-                                    "deleteAfterDays": 35
+                                    "deleteAfterDays": 30
                                   },
-                                  "ruleName": "DailyBackup",
-                                  "scheduleExpression": "cron(0 2 * * ? *)",
+                                  "ruleName": "ITOPSRAGStackChatbotAPIBackupStack9F866E6B-daily-backup",
+                                  "scheduleExpression": "cron(0 5 * * ? *)",
                                   "startWindowMinutes": 60,
                                   "targetBackupVault": {
                                     "Fn::GetAtt": [
                                       "DynamoDBBackupVaultA930BCBD",
                                       "BackupVaultName"
                                     ]
-                                  },
-                                  "copyActions": []
+                                  }
                                 },
                                 {
-                                  "completionWindowMinutes": 480,
+                                  "completionWindowMinutes": 120,
+                                  "lifecycle": {
+                                    "deleteAfterDays": 90
+                                  },
+                                  "ruleName": "ITOPSRAGStackChatbot-weekly-backup",
+                                  "scheduleExpression": "cron(0 5 ? * SUN *)",
+                                  "startWindowMinutes": 60,
+                                  "targetBackupVault": {
+                                    "Fn::GetAtt": [
+                                      "DynamoDBBackupVaultA930BCBD",
+                                      "BackupVaultName"
+                                    ]
+                                  }
+                                },
+                                {
+                                  "completionWindowMinutes": 120,
                                   "lifecycle": {
                                     "deleteAfterDays": 365
                                   },
-                                  "ruleName": "WeeklyBackup",
-                                  "scheduleExpression": "cron(0 3 ? * 1 *)",
+                                  "ruleName": "ITOPSRAGStackChatbotAPIBackupStack9F866E6B-monthly-backup",
+                                  "scheduleExpression": "cron(0 5 1 * ? *)",
                                   "startWindowMinutes": 60,
                                   "targetBackupVault": {
                                     "Fn::GetAtt": [
                                       "DynamoDBBackupVaultA930BCBD",
                                       "BackupVaultName"
                                     ]
-                                  },
-                                  "copyActions": []
-                                },
-                                {
-                                  "completionWindowMinutes": 480,
-                                  "lifecycle": {
-                                    "deleteAfterDays": 2555
-                                  },
-                                  "ruleName": "MonthlyBackup",
-                                  "scheduleExpression": "cron(0 4 1 * ? *)",
-                                  "startWindowMinutes": 60,
-                                  "targetBackupVault": {
-                                    "Fn::GetAtt": [
-                                      "DynamoDBBackupVaultA930BCBD",
-                                      "BackupVaultName"
-                                    ]
-                                  },
-                                  "copyActions": []
+                                  }
                                 }
                               ]
                             }
@@ -5558,6 +5486,63 @@
                     "id": "DynamoDBBackupSelection",
                     "path": "ITOPSRAGStack/ChatbotAPI/BackupStack/DynamoDBBackupSelection",
                     "children": {
+                      "Role": {
+                        "id": "Role",
+                        "path": "ITOPSRAGStack/ChatbotAPI/BackupStack/DynamoDBBackupSelection/Role",
+                        "children": {
+                          "ImportRole": {
+                            "id": "ImportRole",
+                            "path": "ITOPSRAGStack/ChatbotAPI/BackupStack/DynamoDBBackupSelection/Role/ImportRole",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.140.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "ITOPSRAGStack/ChatbotAPI/BackupStack/DynamoDBBackupSelection/Role/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                              "aws:cdk:cloudformation:props": {
+                                "assumeRolePolicyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Principal": {
+                                        "Service": "backup.amazonaws.com"
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "managedPolicyArns": [
+                                  {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup"
+                                      ]
+                                    ]
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                              "version": "2.140.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Role",
+                          "version": "2.140.0"
+                        }
+                      },
                       "Resource": {
                         "id": "Resource",
                         "path": "ITOPSRAGStack/ChatbotAPI/BackupStack/DynamoDBBackupSelection/Resource",
@@ -5573,11 +5558,11 @@
                             "backupSelection": {
                               "iamRoleArn": {
                                 "Fn::GetAtt": [
-                                  "BackupServiceRole3CD57978",
+                                  "DynamoDBBackupSelectionRoleDF6BBBDD",
                                   "Arn"
                                 ]
                               },
-                              "selectionName": "DynamoDB-Tables-Selection",
+                              "selectionName": "ITOPSRAGStackChatbotAPIBackupStack9F866E6B-dynamodb-tables-selection",
                               "resources": [
                                 {
                                   "Fn::ImportValue": "ITOPSRAGStack:ExportsOutputFnGetAttChatbotAPIChatHistoryTable86F70C1DArn66A8D990"
@@ -5863,7 +5848,7 @@
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
                           "aws:cdk:cloudformation:props": {
-                            "logGroupName": "/aws/apigateway/RestBackend-http-api",
+                            "logGroupName": "/aws/apigateway/ITOPSRAGStack-RestBackend-http-api",
                             "retentionInDays": 7
                           }
                         },
@@ -9323,7 +9308,7 @@
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
                           "aws:cdk:cloudformation:props": {
-                            "logGroupName": "/aws/apigateway/WebsocketBackend-websocket-api",
+                            "logGroupName": "/aws/apigateway/ITOPSRAGStack-WebsocketBackend-websocket-api",
                             "retentionInDays": 7
                           }
                         },
@@ -13910,7 +13895,7 @@
                           "aws:cdk:cloudformation:type": "AWS::SNS::Topic",
                           "aws:cdk:cloudformation:props": {
                             "displayName": "FedRAMP Compliance Alarm Notifications",
-                            "topicName": "fedramp-compliance-alarms"
+                            "topicName": "ITOPSRAGStack-fedramp-compliance-alarms"
                           }
                         },
                         "constructInfo": {
