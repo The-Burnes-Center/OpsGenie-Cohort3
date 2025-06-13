@@ -28,7 +28,7 @@ export class WebsocketBackendAPI extends Construct {
     const logGroup = props.logWriteRole ? 
       new logs.LogGroup(this, 'WebSocketApiLogs', {
         retention: logs.RetentionDays.ONE_WEEK,
-        logGroupName: `/aws/apigateway/${id}-websocket-api`
+        logGroupName: `/aws/apigateway/${cdk.Stack.of(this).stackName}-${id}-websocket-api`
       }) : undefined;
 
     // Configure the WebSocket stage with logging if logWriteRole is provided

@@ -30,7 +30,7 @@ export class RestBackendAPI extends Construct {
     const logGroup = props.logWriteRole ? 
       new logs.LogGroup(this, 'HttpApiLogs', {
         retention: logs.RetentionDays.ONE_WEEK,
-        logGroupName: `/aws/apigateway/${id}-http-api`
+        logGroupName: `/aws/apigateway/${cdk.Stack.of(this).stackName}-${id}-http-api`
       }) : undefined;
 
     const httpApi = new apigwv2.HttpApi(this, 'HTTP-API', {
