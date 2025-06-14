@@ -49,13 +49,13 @@ jobs:
 
     # Step 8: Deploy main CDK stack
     - name: Deploy main CDK stack
-      run: cdk deploy ITOPSRAGStack --require-approval never
+      run: cdk deploy ITOPSOpsGenieRAGStack --require-approval never
 
     # Step 9: FedRAMP Compliance - Fix DynamoDB Autoscaling Alarms
     - name: Ensure FedRAMP Compliance for Autoscaling Alarms
       run: |
         # Get SNS topic ARN for alarm notifications
-        TOPIC_ARN=$(aws sns list-topics --query "Topics[?contains(TopicArn, 'ITOPSRAGStack-fedramp-compliance-alarms')].TopicArn" --output text)
+        TOPIC_ARN=$(aws sns list-topics --query "Topics[?contains(TopicArn, 'ITOPSOpsGenieRAGStack-fedramp-compliance-alarms')].TopicArn" --output text)
         
         if [ -z "$TOPIC_ARN" ]; then
           echo "ERROR: FedRAMP compliance SNS topic not found!"
@@ -83,7 +83,7 @@ jobs:
     # Step 10: Fetch CloudFormation outputs and save to a file
     - name: Fetch CloudFormation Outputs
       run: |
-        aws cloudformation describe-stacks --stack-name ITOPSRAGStack --query "Stacks[0].Outputs" > stack-outputs.json
+        aws cloudformation describe-stacks --stack-name ITOPSOpsGenieRAGStack --query "Stacks[0].Outputs" > stack-outputs.json
         
     # Step 11: Upload the output file as an artifact
     - name: Upload Outputs as Artifact
