@@ -6,6 +6,9 @@ on:
       
   workflow_dispatch:
   
+env:
+  AWS_REGION: us-east-1
+  
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -20,42 +23,56 @@ jobs:
       with:
         node-version: '20'
 
-    # Step 3: Install backend dependencies (from the root folder)
+    # Step 3: Extract stack name from constants.ts
+    - name: Extract Stack Name
+      id: extract-stack-name
+      run: |
+        STACK_NAME=$(grep -o "stackName = \"[^\"]*\"" lib/constants.ts | sed 's/stackName = "\(.*\)"/\1/')
+        echo "STACK_NAME=$STACK_NAME" >> $GITHUB_ENV
+        echo "Stack name extracted: $STACK_NAME"
+
+    # Step 4: Install backend dependencies (from the root folder)
     - name: Install backend dependencies
       run: npm install
 
-    # Step 4: Install frontend dependencies (in 'lib/user-interface/app')
+    # Step 5: Install frontend dependencies (in 'lib/user-interface/app')
     - name: Install frontend dependencies
       run: |
         cd lib/user-interface/app
         npm install
         npm install -g aws-cdk
 
-    # Step 5: Configure AWS credentials
+    # Step 6: Configure AWS credentials
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
+        aws-region: ${{ env.AWS_REGION }}
 
-    # Step 6: Bootstrap the AWS environment (from the root folder)
+    # Step 7: Bootstrap the AWS environment (from the root folder)
     - name: Bootstrap AWS environment
       run: cdk bootstrap
 
-    # Step 7: Build the project
+    # Step 8: Build the project
     - name: Build project
       run: npm run build
 
-    # Step 8: Deploy main CDK stack
+    # Step 9: Deploy main CDK stack
     - name: Deploy main CDK stack
-      run: cdk deploy ITOPSRAGStack --require-approval never
+      run: cdk deploy ${{ env.STACK_NAME }} --require-approval never
 
-    # Step 9: FedRAMP Compliance - Fix DynamoDB Autoscaling Alarms
+    # Step 10: FedRAMP Compliance - Fix DynamoDB Autoscaling Alarms
     - name: Ensure FedRAMP Compliance for Autoscaling Alarms
       run: |
-        # Get SNS topic ARN for alarm notifications
-        TOPIC_ARN=$(aws sns list-topics --query "Topics[?contains(TopicArn, 'ITOPSRAGStack-fedramp-compliance-alarms')].TopicArn" --output text)
+        # Get stack name from CDK outputs if available, else use env or default
+        if [ -f stack-outputs.json ]; then
+          STACK_NAME=$(jq -r 'to_entries[] | select(.key | test("StackName"; "i")) | .value' stack-outputs.json)
+        fi
+        if [ -z "$STACK_NAME" ]; then
+          STACK_NAME=${{ env.STACK_NAME }}
+        fi
+        TOPIC_ARN=$(aws sns list-topics --query "Topics[?contains(TopicArn, '${STACK_NAME}-fedramp-compliance-alarms')].TopicArn" --output text)
         
         if [ -z "$TOPIC_ARN" ]; then
           echo "ERROR: FedRAMP compliance SNS topic not found!"
@@ -80,14 +97,94 @@ jobs:
           done
         fi
 
-    # Step 10: Fetch CloudFormation outputs and save to a file
+    # Step 11: Fetch CloudFormation outputs and save to a file
     - name: Fetch CloudFormation Outputs
       run: |
-        aws cloudformation describe-stacks --stack-name ITOPSRAGStack --query "Stacks[0].Outputs" > stack-outputs.json
+        aws cloudformation describe-stacks --stack-name ${{ env.STACK_NAME }} --query "Stacks[0].Outputs" > stack-outputs.json
+
+    # Step 12: List all stack resources for cleanup reference
+    - name: List Stack Resources
+      run: |
+        echo "# Stack Resources Created by ${{ env.STACK_NAME }}" > stack-resources.md
+        echo "" >> stack-resources.md
+        echo "This file contains all AWS resources created by the CloudFormation stack." >> stack-resources.md
+        echo "Use this information for manual cleanup if needed." >> stack-resources.md
+        echo "" >> stack-resources.md
+        echo "## Stack Information" >> stack-resources.md
+        echo "- **Stack Name:** ${{ env.STACK_NAME }}" >> stack-resources.md
+        echo "- **Region:** ${{ env.AWS_REGION }}" >> stack-resources.md
+        echo "- **Deployment Date:** $(date -u)" >> stack-resources.md
+        echo "" >> stack-resources.md
         
-    # Step 11: Upload the output file as an artifact
-    - name: Upload Outputs as Artifact
+        echo "## All Stack Resources" >> stack-resources.md
+        echo "" >> stack-resources.md
+        echo "| Resource Type | Logical ID | Physical ID | Status |" >> stack-resources.md
+        echo "|---------------|------------|-------------|--------|" >> stack-resources.md
+        
+        # Get all resources in the main stack
+        aws cloudformation describe-stack-resources --stack-name ${{ env.STACK_NAME }} \
+          --query "StackResources[].[ResourceType,LogicalResourceId,PhysicalResourceId,ResourceStatus]" \
+          --output text | while read -r type logical physical status; do
+          echo "| $type | $logical | $physical | $status |" >> stack-resources.md
+        done
+        
+        echo "" >> stack-resources.md
+        echo "## Nested Stacks Resources" >> stack-resources.md
+        echo "" >> stack-resources.md
+        
+        # Get nested stacks and their resources
+        NESTED_STACKS=$(aws cloudformation describe-stack-resources --stack-name ${{ env.STACK_NAME }} \
+          --query "StackResources[?ResourceType=='AWS::CloudFormation::Stack'].PhysicalResourceId" \
+          --output text)
+        
+        if [ ! -z "$NESTED_STACKS" ]; then
+          for nested_stack in $NESTED_STACKS; do
+            echo "### Nested Stack: $nested_stack" >> stack-resources.md
+            echo "" >> stack-resources.md
+            echo "| Resource Type | Logical ID | Physical ID | Status |" >> stack-resources.md
+            echo "|---------------|------------|-------------|--------|" >> stack-resources.md
+            
+            aws cloudformation describe-stack-resources --stack-name "$nested_stack" \
+              --query "StackResources[].[ResourceType,LogicalResourceId,PhysicalResourceId,ResourceStatus]" \
+              --output text | while read -r type logical physical status; do
+              echo "| $type | $logical | $physical | $status |" >> stack-resources.md
+            done
+            echo "" >> stack-resources.md
+          done
+        else
+          echo "No nested stacks found." >> stack-resources.md
+        fi
+        
+        echo "" >> stack-resources.md
+        echo "## Cleanup Instructions" >> stack-resources.md
+        echo "" >> stack-resources.md
+        echo "### Automatic Cleanup (Recommended)" >> stack-resources.md
+        echo '```bash' >> stack-resources.md
+        echo "# Delete the main stack (this will delete most resources automatically)" >> stack-resources.md
+        echo "aws cloudformation delete-stack --stack-name ${{ env.STACK_NAME }}" >> stack-resources.md
+        echo "" >> stack-resources.md
+        echo "# Wait for deletion to complete" >> stack-resources.md
+        echo "aws cloudformation wait stack-delete-complete --stack-name ${{ env.STACK_NAME }}" >> stack-resources.md
+        echo '```' >> stack-resources.md
+        echo "" >> stack-resources.md
+        echo "### Manual Cleanup (if needed)" >> stack-resources.md
+        echo "Some resources may need manual deletion:" >> stack-resources.md
+        echo "- **S3 Buckets:** Empty buckets before stack deletion" >> stack-resources.md
+        echo "- **Log Groups:** May be retained (check CloudWatch Logs)" >> stack-resources.md
+        echo "- **Backup Vaults:** May be retained for compliance" >> stack-resources.md
+        echo "- **Custom Domains:** May need manual release" >> stack-resources.md
+        
+        # Also create a simple JSON version for programmatic use
+        aws cloudformation describe-stack-resources --stack-name ${{ env.STACK_NAME }} > stack-resources.json
+        
+        echo "Stack resources documented in stack-resources.md and stack-resources.json"
+        
+    # Step 13: Upload the output files as artifacts
+    - name: Upload Outputs as Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: stack-outputs
-        path: stack-outputs.json
+        name: stack-outputs-and-resources
+        path: |
+          stack-outputs.json
+          stack-resources.md
+          stack-resources.json
