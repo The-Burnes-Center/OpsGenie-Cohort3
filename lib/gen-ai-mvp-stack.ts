@@ -11,6 +11,12 @@ export class GenAiMvpStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
+    // Add tags to all resources in this stack
+    cdk.Tags.of(this).add('StackName', this.stackName);
+    cdk.Tags.of(this).add('Project', 'Ops Genie');
+    cdk.Tags.of(this).add('Environment', 'Pilot');
+    
+
     // The code that defines your stack goes here
 
     // example resource
