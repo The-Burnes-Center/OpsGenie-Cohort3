@@ -80,7 +80,7 @@ This project was inspired by MEC (Massachusetts Enrollment Center) initiatives.
 
 ## 👥 Authors & Acknowledgements
 
-- **Built by**: [Prasoon Raj](https://github.com/Pra-soon) and Deepikasai Mettu  
+- **Built by**: [Prasoon Raj](https://github.com/Pra-soon) and [Deepikasai Mettu  ](https://github.com/deepikasai-mettu)
 - **Organization**: Burnes Center for Social Change  
 - **Created for**: Executive Office of Health and Human Services (EOHHS), Massachusetts
 
