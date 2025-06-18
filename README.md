@@ -32,7 +32,7 @@
 
 ## 🏗️ Architecture
 
-![System Architecture](https://lucid.app/lucidchart/0d7467b5-9218-4c5f-98a3-670fc96da88a/edit?viewport_loc=-514%2C238%2C3108%2C1354%2C0_0&invitationId=inv_47165b85-e37b-4b9c-a2b4-8d5f9aee1ec3)
+[System Architecture](https://lucid.app/lucidchart/0d7467b5-9218-4c5f-98a3-670fc96da88a/edit?viewport_loc=-514%2C238%2C3108%2C1354%2C0_0&invitationId=inv_47165b85-e37b-4b9c-a2b4-8d5f9aee1ec3)
 
 ![image](https://github.com/user-attachments/assets/3136a80c-a5f7-47ce-a205-b06b19bd3201)
 
